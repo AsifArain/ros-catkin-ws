@@ -1,0 +1,1 @@
+gasbot_planning: sudo apt-get install ros-kinetic-octomap-ros

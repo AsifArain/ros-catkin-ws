@@ -1,0 +1,63 @@
+"No module named catkin_pkg.package" with Anaconda installed
+----------------------------------------------------------------------------------
+$conda install -c auto catkin_pkg
+
+https://answers.ros.org/question/204024/no-module-named-catkin_pkgpackage-on-catkin_make-w-hydro/
+
+
+
+
+
+
+catkin_make does not work even without any ros package in src folder:
+Error: "CMake Error at /opt/ros/kinetic/share/catkin/cmake/safe_execute_process.cmake:11 (message):
+  execute_process(/home/a/anaconda2/bin/python"
+==========================================================================================================
+
+Run following command:
+$pip install -U rosdep rosinstall_generator wstool rosinstall six vcstools
+
+Reference:
+https://answers.ros.org/question/247794/catkin-cmake-error-with-ros-error-code-1/
+
+Comments:
+Athough the installation was not successfully completed, and received following error 
+"Cannot remove entries from nonexistent file /home/a/anaconda2/lib/python2.7/site-packages/easy-install.pth".
+However, catkin_make worked.
+
+
+
+=============================================================================================================
+File "/opt/ros/kinetic/lib/python2.7/dist-packages/genmsg/template_tools.py", line 39, in <module>
+    import em
+ImportError: No module named em
+=============================================================================================================
+
+Install:
+$pip install empy
+
+Reference:
+https://answers.ros.org/question/257331/python-module-empy-missing-tutorials/
+
+
+
+=======================================================================================
+libpcl_common.so: undefined reference to `GOMP_parallel@GOMP_4.0'
+=======================================================================================
+
+
+
+
+
+========================================================================================
+ndt_offline 
+
+
+
+
+
+=========================================================================================
+CMake Warning at /opt/ros/kinetic/share/catkin/cmake/catkin_package.cmake:166 (message):
+  catkin_package() DEPENDS on 'libpcl-all-dev' but neither
+  'libpcl-all-dev_INCLUDE_DIRS' nor 'libpcl-all-dev_LIBRARIES' is defined.
+=========================================================================================

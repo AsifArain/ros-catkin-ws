@@ -1,0 +1,795 @@
+<?xml version="1.0"?>
+			
+			<!-- ........................................ -->			
+			<!-- ========= GASBOT Master Launch ========= -->
+			<!-- ========= @Arain, Sep 12, 2014 ========= -->
+			<!-- ........................................ -->
+
+<launch>
+
+<!-- Select one of the following tasks: -->
+
+        <!-- 1. Plan execution -->
+        <arg name="execute__Plan" 
+             value="true" />
+
+        <!-- 2. Building 2D NDT Map online -->
+        <arg name="build____NDTMapOnline"
+             value="false" />
+
+        <!-- 3. Data Recording for 2d G-Map -->
+        <arg name="record___GmapDataWithLaserScan"
+             value="false" />
+             
+        <!-- 3*. Data Recording for 2d G-Map -->
+        <arg name="record___GmapDataWithVelodyne"
+             value="false" />
+             
+        <!-- 3**. Data Recording for 2d Neutral -->
+        <arg name="record___NeutralDataWithVelodyne"
+             value="false" />             
+
+        <!-- 4. Data Recording for NDT 2d/3d Map -->
+        <arg name="record___NDTData"
+             value="false" /> <!-- -->
+
+        <!-- 5. Driving only -->
+        <arg name="just_____Drive" 		
+             value="false" />
+
+        <!-- 6. Build NDT map offline -->
+        <arg name="build____NDTMapOffline"	
+             value="false" />
+
+        <!-- 7. Testing NDT MCL offline -->
+        <arg name="run______NDTMCLOffline"	
+             value="false" />
+
+        <!-- 8. Build G-Map offline -->
+        <arg name="build____GMapOfflineWithLaser"	
+             value="false" />
+             
+        <!-- 8*. Build G-Map offline -->
+        <arg name="build____GMapOfflineWithVelodyne"
+             value="false" />             
+
+        <!-- 8**. Build G-Map offline -->
+        <arg name="build____GMapPlanningOfflineWithVelodyne"
+             value="false" />
+             
+        <!-- 9. perform__Troubleshooting -->
+        <arg name="perform__Troubleshooting"
+             value="false" />
+
+
+<!--
+        STEPS to follow for experiments record.
+        1. launch GASBOT.launch
+        2. launch move_base
+        3. record rosbag
+        4. launch historian
+        5. launch gasbot planning.
+        6. record rosparam.
+        7. run rviz (any time after step 2)
+        8. run system monitor (any time)
+-->
+
+
+<!-- INSTRUCTIONS:
+
+        STEPS to follow for experiments record
+        =======================================
+
+        1. launch GASBOT.launch
+
+        2. To build GDM online, run in the terminal $rosrun gdm_tdlas gdm_tdlas
+
+        3. launch move_base (husky_navigation/launch/gasbot_move_base.launch)
+
+        4. record rosbag (./BAG_record.sh)
+
+        5. launch historian (gasbot_historian/launch/historian.launch)
+
+        6. launch gasbot planning (gasbot_planning/launch/plan.launch)
+
+        7. record rosparam. (./CONF_record.sh)
+
+        8. run rviz (any time after step 2, see following intructions)
+
+        9. run system monitor (any time)
+
+
+        Visulatize on the remote computer (Gasbot_Network)
+        ===================================================
+        Assuming that robot/master computer IP is 192.168.200.4 and the remote computer IP is 192.168.200.5 (Asif)
+
+        At master/robot computer, run following line in each terminal
+        $ export ROS_MASTER_URI=http://192.168.200.4:11311 && export ROS_IP=192.168.200.4
+
+        At remote computer (Asif), run following line in each terminal where you want to see ros topics or rviz
+        $ export ROS_MASTER_URI=http://192.168.200.4:11311 && export ROS_IP=192.168.200.5
+        
+        
+        Visulatize on the remote computer (ORU-AASS)
+        ===================================================
+        Assuming that robot/master computer IP is 192.168.222.12 and the remote computer IP is 192.168.222.136 (Asif)
+
+        At master/robot computer, run following line in each terminal
+        $ export ROS_MASTER_URI=http://192.168.222.12:11311 && export ROS_IP=192.168.222.12
+
+        At remote computer (Asif), run following line in each terminal where you want to see ros topics or rviz
+        $ export ROS_MASTER_URI=http://192.168.222.12:11311 && export ROS_IP=192.168.222.136
+
+        Graphical access from a remote computer (Asif)
+        ===============================================
+        $ ssh -X husky@192.168.200.4
+        $ ssh -X husky@192.168.222.12
+
+-->
+
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--						1. PLAN EXECUTION + MAIN	                                  	      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg execute__Plan)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--<include file="$(find husky_base)/launch/base.launch"/>-->
+	<!--<env name="port" value="/dev/ttyUSB0" >-->
+	<!--	<include file="modules_asif/gasbot_base.launch"/> -->
+	<include file="$(find husky_base)/launch/base_gasbot.launch"/>
+        
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+        
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--<include file="$(find husky_viz)/launch/view_model.launch"/> -->
+	<!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find husky_viz)/rviz/model.rviz" />-->
+	<!--Standalone launch file to visualize the URDF Model of a Clearpath Husky A200-->
+        
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+	<!--<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />-->
+	<!--
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+	<rosparam param="source_list">[/amtec/joint_states]</rosparam>
+	</node> -->
+	<!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find husky_viz)/rviz/model.rviz" />-->
+	<!--node name="rviz" pkg="rviz" type="rviz" args="-d $(find husky_viz)/rviz/gasbot.rviz" /-->
+        
+	<!-- ================================================================================================= -->
+	<!-- 					FRONT LIDAR 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="gasbot_launch/modules_asif/gasbot_frontlidar.launch"/-->
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->
+	<!-- == Velodyne Driver / Scan == -->
+	<include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/>	
+	<!-- == Velodyne Point Cloud == -->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+	
+	
+	<!-- ================================================================================================= -->
+	<!-- 					BUT VELODYNE LASERSCAN			     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/>
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_nodelet_gasbot.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/groundmap_node_gasbot.launch"/-->
+        
+	<!-- ================================================================================================= -->
+	<!-- 					NDT MCL					     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find ndt_mcl)/launch/gasbot_2d_ndt_mcl_node.launch"/-->
+	<include file="$(find ndt_mcl)/launch/gasbot_3d_ndt_mcl_node.launch"/>
+        
+	<!-- Static Transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0 0 0 0 0 0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0 0 0 0 0 0 /mcl_pose /base_footprint 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 20" />
+        
+	<!-- ================================================================================================= -->
+	<!-- 					MAP SERVER				     		       -->
+	<!-- ================================================================================================= -->
+        
+	<!-- Lab -->
+	<!--arg name="occu_map" default="/home/husky/ROS_Bags/Lab/LabRosbag_20140617/map.yaml"/-->
+	<!--arg name="occu_map" default="/home/husky/ROS_Bags/Lab/Lab2d_NDT_20140725/map.yaml"/-->
+	<!--arg name="occu_map" default="/home/husky/ROS_bags/Lab/Lab2d_NDT_20140725/new_map_20140731/map.yaml"/-->
+	<!--arg name="occu_map" default="/home/husky/ROS_Bags/Lab/Lab_20140806_t1/map.yaml"/-->
+        <arg name="occu_map" default="/home/husky/ROS_Bags/Lab/Lab_20171011/map.yaml"/>
+        
+	<!-- AASS Student Area -->
+	<!--arg name="occu_map" default="/home/husky/ROS_Bags/AASS_StudentArea/20140803_t1/map.yaml"/-->
+	<!--arg name="occu_map" default="/home/husky/ROS_bags/AASS_StudentArea/20140804_t1/map.yaml"/-->
+	
+	<!-- Teknikhuset Indoor -->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/TeknikhusetIndoor/20140902_t1/NDTCostMap_3d_Res0_5_r2_map_R1/map.yaml" /-->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/TeknikhusetIndoor/20140902_t2/NDTCostMap_3d_Res0_5_r4_map_R2/map.yaml" /-->
+	<!--arg name="occu_map" default="$(find ndt_costmap)/maps/TeknikhusetIndoor/3d_20140902_t2_Res0_5_r2_map/map.yaml"/-->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/TeknikhusetIndoor/map_VelodyneScan2/map.yaml"/-->
+        
+	<!-- AASS Outside Fika Room -->
+	<!--node name="map_server" pkg="map_server" type="map_server" args="$(find ndt_fuser)/maps/AASS_OutsideFika/OccuMap/map.yaml"/-->
+	
+	<!-- Studentgatan Forest -->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/StudentgatanForest/20140920_t1/gMap/R4/map.yaml" /-->
+	
+	<!-- Studentgatan Forest3 -->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/StudentgatanForest3/20140926_t1/gMap/R1_VeloScan/map.yaml" /-->
+        
+        
+	<!-- Teknikhuset Entre B -->
+	<!--arg name="occu_map" default="$(find ndt_fuser)/maps/TeknikhusetEntreB/20140812_t3/NDTCostMap_3d_Res0_5_r1_map_R2/map.yaml" /-->
+	
+	<!-- Lab 2015 -->
+	<!--arg name="occu_map" default="/home/husky/Experiments_RAGT_2015/Lab_20150907/map.yaml" /-->
+	
+	<!-- Studentgatan Forest Area 2015 -->
+	<!--arg name="occu_map" default="/home/husky/Experiments_RAGT_2015/StudentgatanForest_20150908/map.yaml" /-->
+	
+	
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg occu_map)"/>
+        
+        
+	<!-- ================================================================================================= -->
+	<!-- 					MOVE BASE				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_navigation)/launch/gasbot_move_base.launch"/>
+        
+	<!-- ================================================================================================= -->
+	<!-- 					PTU 					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gasbot_launch/modules_asif/gasbot_ptu.launch"/>
+        
+	<!-- ================================================================================================= -->
+	<!-- 					RMLD 					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gasbot_launch/modules_asif/gasbot_rmld.launch"/>
+        
+	<!-- ================================================================================================= -->
+	<!-- 					GAS DETECTION LOGS 					       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find gasbot_historian)/launch/historian.launch"/-->
+	
+	<!-- ================================================================================================= -->
+	<!-- 					HUMAN EXPERT EXPLORATION				       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find human_strategy)/launch/human_plan.launch"/-->
+	
+        
+</group>
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					2. BUILDING 2D NDT MAP ONLINE                                             	      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg build____NDTMapOnline)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					FRONT LIDAR 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gasbot_launch/modules_asif/gasbot_frontlidar.launch"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="gasbot_launch/modules_asif/gasbot_velodyne_cSPP.launch" /-->
+
+	<!-- ================================================================================================= -->
+	<!-- 					BUT VELODYNE LASERSCAN			     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find but_velodyne_proc)/launch/32e_points.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/groundmap_node_gasbot.launch"/-->
+
+	<!-- ================================================================================================= -->
+	<!-- 					NDT FUSER				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find ndt_fuser)/launch/gasbot_fuser_2dlaser.launch"/>
+	<!-- Static Transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0 0 0 0 0 0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0 0 0 0 0 0 /fuser /base_footprint 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 20" />
+	
+</group>
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--						3. DATA RECORD FOR G-MAP WITH LASER SCAN                                      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg record___GmapDataWithLaserScan)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot_gmapping.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					FRONT LIDAR 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gasbot_launch/modules_asif/gasbot_frontlidar.launch"/>	
+	
+	
+
+</group>
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--						3*. DATA RECORD FOR G-MAP WITH VELODYNE                                        -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg record___GmapDataWithVelodyne)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot_gmapping.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->	
+	<!-- == Velodyne Driver / Scan == -->
+	<include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/>	
+	<!-- == Velodyne Point Cloud == -->
+	<!--include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/-->
+
+	<!-- ================================================================================================= -->
+	<!-- 					BUT VELODYNE LASERSCAN			     		       -->
+	<!-- ================================================================================================= -->
+	<!--
+	<include file="$(find but_velodyne_proc)/launch/32e_points.launch"/>
+	<include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/> 
+	-->
+	<!--include file="$(find but_velodyne_proc)/launch/groundmap_node_gasbot.launch"/-->
+	
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/--> 
+	
+
+</group>
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--						3**. DATA RECORD FOR NEUTRAL WITH VELODYNE                                        -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg record___NeutralDataWithVelodyne)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot_neutral.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->	
+	<!-- == Velodyne Driver / Scan == -->
+	<include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/>
+
+</group>
+
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					4. DATA RECORDING FOR 2D/3D NDT MAP                                           	      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg record___NDTData)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					FRONT LIDAR 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="gasbot_launch/modules_asif/gasbot_frontlidar.launch"/-->
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="gasbot_launch/modules_asif/gasbot_velodyne_cSPP.launch" /-->	
+	<!--  -->
+	<include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/>	
+
+	<!-- ================================================================================================= -->
+	<!-- 					BUT VELODYNE LASERSCAN			     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find but_velodyne_proc)/launch/32e_points.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/groundmap_node_gasbot.launch"/-->
+	
+</group>
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--						5. DRIVE ONLY 		                                          	      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg just_____Drive)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+
+</group>
+
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					6. BUILDING 2D/3D NDT MAP OFFLINE 		                                      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg build____NDTMapOffline)">
+
+	<!-- ======= sim time true ======= -->
+	<param name="/use_sim_time" value="true"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->	
+	<!-- == Velodyne Driver / Scan == -->
+	<!--include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/-->	
+	<!-- == Velodyne Point Cloud == -->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+	
+
+	<!-- ================================================================================================= -->
+	<!-- 					NDT FUSER				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find ndt_fuser)/launch/gasbot_fuser_2dlaser.launch"/-->
+	<include file="$(find ndt_fuser)/launch/gasbot_fuser_velodyne32.launch"/>
+	<!-- Static Transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0.0 0.0 0.0 0.0 0.0 0.0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0.0 0.0 0.0 0.0 0.0 0.0 /fuser /base_footprint 20" />	
+	<!--node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 100" /-->
+
+</group>
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					7. TESTING NDT MCL OFFLINE 		   	                                      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg run______NDTMCLOffline)">
+
+	<!-- ======= sim time true ======= -->
+	<param name="/use_sim_time" value="true"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->
+	<!-- start nodelet manager and driver nodelets -->
+	<!--include file="$(find velodyne_driver)/launch/nodelet_manager_gasbot.launch"/-->	
+	<!-- start cloud nodelet -->
+	<!--include file="$(find velodyne_pointcloud)/launch/cloud_nodelet_gasbot.launch"/-->
+	<!-- ==== OR ==== -->
+	<!--include file="$(find velodyne_pointcloud)/launch/32e_points_gasbot.launch"/-->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+
+	<!--include file="gasbot_launch/modules_asif/gasbot_velodyne_cSPP.launch" /-->
+	
+
+	<!-- ================================================================================================= -->
+	<!-- 					NDT MCL				     		       	       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find ndt_mcl)/launch/gasbot_2d_ndt_mcl_node.launch"/-->
+	<include file="$(find ndt_mcl)/launch/gasbot_3d_ndt_mcl_node.launch"/>
+
+	<!-- Static Transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0 0 0 0 0 0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0 0 0 0 0 0 /mcl_pose /base_footprint 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 20" />
+
+	<!-- ================================================================================================= -->
+	<!-- 					MAP SERVER				     		       -->
+	<!-- ================================================================================================= -->
+	<!--node name="map_server" pkg="map_server" type="map_server" args="$(find ndt_fuser)/maps/TeknikhusetIndoor/map_VelodyneScan2/map.yaml"/-->
+	<!--node name="map_server" pkg="map_server" type="map_server" args="$(find ndt_fuser)/maps/AASS_OutsideFika/OccuMap/map.yaml"/-->
+	<node name="map_server" pkg="map_server" type="map_server" args="/home/husky/ROS_Bags/Lab_20140806_t1/map.yaml"/>
+
+</group>
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					8. BUILDING G-MAP WITH LASER (OFFLINE) 		                                      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg build____GMapOfflineWithLaser)">
+
+	<!-- ======= sim time true ======= -->
+	<param name="/use_sim_time" value="true"/>
+	
+	
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					POIND CLOUD 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/-->
+	
+	<!-- ================================================================================================= -->
+	<!-- 					POINT CLOUD TO LASERSCAN		     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/-->
+
+	<!-- ================================================================================================= -->
+	<!-- 					GMAP					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gMap_OccupancyGridMap/gmap_laser.launch" />
+</group>
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					8*. BUILDING G-MAP WITH VELODYNE (OFFLINE)                                            -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg build____GMapOfflineWithVelodyne)">
+
+	<!-- ======= sim time true ======= -->
+	<param name="/use_sim_time" value="true"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find husky_base)/launch/base_gasbot_gmapping.launch"/-->
+	
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 				VELODYNE PACKETS TO POINT CLOUD                 	               -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/-->
+	<!-- == Velodyne Point Cloud == -->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					POINT CLOUD TO LASERSCAN		     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					GMAP					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gMap_OccupancyGridMap/gmap_velodyne.launch" />
+</group>
+
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--					8**. BUILDING G-MAP (FOR PLANNING) WITH VELODYNE (OFFLINE)                            -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg build____GMapPlanningOfflineWithVelodyne)">
+
+	<!-- ======= sim time true ======= -->
+	<param name="/use_sim_time" value="true"/>
+	
+	
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 				VELODYNE PACKETS TO POINT CLOUD                 	               -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/-->
+	<!-- == Velodyne Point Cloud == -->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					POINT CLOUD TO LASERSCAN		     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					GMAP					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gMap_OccupancyGridMap/gmap_planning_velodyne.launch" />
+</group>
+
+
+
+
+
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<!--                                                                                                                          -->
+<!--    				9. perform__Troubleshooting 		                                          	      -->
+<!--                                                                                                                          -->
+<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+<group if="$(arg perform__Troubleshooting)">
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY BASE 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_base)/launch/base_gasbot.launch"/>
+
+	<!-- ================================================================================================= -->
+	<!-- 					JOYSTICK 				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_teleop)/launch/teleop.launch"/>
+	        
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->	
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					VELODYNE				     		       -->
+	<!-- ================================================================================================= -->
+	<!-- == Velodyne Driver / Scan == -->
+	<include file="$(find velodyne_driver)/launch/velodyne_node_gasbot.launch"/>	
+	<!-- == Velodyne Point Cloud == -->
+	<include file="$(find velodyne_pointcloud)/launch/cloud_node_gasbot.launch"/>
+	
+	
+	<!-- ================================================================================================= -->
+	<!-- 					BUT VELODYNE LASERSCAN			     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_node_gasbot.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/laserscan_nodelet_gasbot.launch"/-->
+	<!--include file="$(find but_velodyne_proc)/launch/groundmap_node_gasbot.launch"/-->
+        
+        <!-- ================================================================================================= -->
+	<!-- 					PTU 					     		       -->
+	<!-- ================================================================================================= -->
+	<include file="gasbot_launch/modules_asif/gasbot_ptu.launch"/>
+	
+	<!-- ================================================================================================= -->
+	<!-- 					NDT MCL					     		       -->
+	<!-- ================================================================================================= -->
+	<!--include file="$(find ndt_mcl)/launch/gasbot_2d_ndt_mcl_node.launch"/-->
+	<include file="$(find ndt_mcl)/launch/gasbot_3d_ndt_mcl_node.launch"/>
+        
+	<!-- Static Transformations -->
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0 0 0 0 0 0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0 0 0 0 0 0 /mcl_pose /base_footprint 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 20" />
+        
+	<!-- ================================================================================================= -->
+	<!-- 					MAP SERVER				     		       -->
+	<!-- ================================================================================================= -->
+        
+	<!-- Lab -->	
+        <arg name="occu_map" default="/home/husky/ROS_Bags/Lab/Lab_20171011/map.yaml"/>        
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg occu_map)"/>
+	
+	
+	<!-- some additional stuff here -->
+		
+	<!-- ================================================================================================= -->
+	<!-- 					MOVE BASE				     		       -->
+	<!-- ================================================================================================= -->
+	<include file="$(find husky_navigation)/launch/gasbot_move_base.launch"/>
+
+	
+</group>
+
+
+
+</launch>

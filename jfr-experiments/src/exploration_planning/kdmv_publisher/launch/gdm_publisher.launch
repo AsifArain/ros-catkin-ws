@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                                                                       -->
+	    <!--                         GDM PUBLISHER                                 -->
+        <!--            (USING EXISTING KERNAL DM+V IMPLEMENTATION)                -->
+		<!--                                                                       -->
+		<!--                                                                       -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+		<!--                  @AsifArain, Nov 14, 2017                             -->
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<launch>
+
+	<node pkg="kdmv_publisher" type="gdm_publisher_node" name="gdm_publisher" output="screen">
+
+	    <!--param name="map_min_x"         value="-3.0" /-->
+		<!--param name="map_max_x"         value="17.75" /-->
+		<!--param name="map_min_y"         value="-4.5" /-->
+		<!--param name="map_max_y"         value="13.0" /-->
+		<!--param name="cell_size"         value="0.25" /-->
+		<param name="kernel_size"       value="0.5" />
+		<param name="colormap"          value="jet" />
+		<param name="max_sensor_val"    value="0.0" />
+		<param name="min_sensor_val"    value="0.0" />
+		<param name="frame_id"          value="/map" />
+		<param name="n_points"          value="2" />
+	
+
+    </node>
+</launch>
+
+
