@@ -6,7 +6,7 @@
 	
 //----- File contains poses or plan
 //============================================
-	#define	DEFAULT_PLAN_FILENAME       "plan.txt"
+	#define	DEFAULT_PLAN_FILENAME       "robot_plan.dat"
 	#define	DEFAULT_PLAN_FILEPATH       ros::package::getPath("plan_execution")
 
 

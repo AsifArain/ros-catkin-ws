@@ -1,10 +1,10 @@
 /*
 
-                     SENSOR PLACEMENTS MAP PUBLISHER NODE
+                     ENVIRONMENT MAP PUBLISHER NODE
               ____________________________________________________
 
 
-    This is main file to publish sensor placements map.
+    This is main file to publish environment map.
     
     -------------------------------------------------------------------------
     Author:  Asif Arain
@@ -27,15 +27,15 @@ using namespace std;
 
 //--- Visualization Markers
 //==========================
-visualization_msgs::Marker map_points, map_points1, map_points2;
+visualization_msgs::Marker marker_none, marker_occu, marker_free, marker_orig, marker_conf_sphere, marker_conf_arrow, marker_ar;
 
 
 //--- File Variables
 //==========================
 double cell_size;
 std::vector<double> vec_RobotOrigin;
-std::vector<int> vec_MapSize,vec_MapSensorPlacements;
-std::string FilePath, filename__MapSize, filename__CellSize, filename__RobotOrigin, filename__MapSensorPlacements;
+std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
+std::string FilePath, filename__MapSize, filename__CellSize, filename__RobotOrigin, filename__MapSensorPlacements, filename__Confs;
 
 double hard_offset_x, hard_offset_y;
 
@@ -46,7 +46,7 @@ void readEnvironmentMap(){
 
         
         ROS_INFO("Reading environment map... ");	    
-	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin;
+	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin, file__Confs;
 	    
         
         //==============================
@@ -59,7 +59,7 @@ void readEnvironmentMap(){
 	    if (file__MapSize.is_open()){
 		    while(file__MapSize >> this_size){
 			    vec_MapSize.push_back(this_size);
-			    ROS_INFO("MapSize: this_size %d",this_size);
+			    //ROS_INFO("MapSize: this_size %d",this_size);
          	}
 		    file__MapSize.close();
 	    }
@@ -67,9 +67,9 @@ void readEnvironmentMap(){
         
         	    
 	    //==============================
-	    //--- map sensor placements
+	    //--- map
 	    //==============================
-	    ROS_INFO("Sensor placements map... ");
+	    ROS_INFO("Map... ");
 	    file__MapSensorPlacements.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__MapSensorPlacements).c_str());
 	    int this_map;
@@ -79,9 +79,29 @@ void readEnvironmentMap(){
 			    vec_MapSensorPlacements.push_back(this_map);
          	}
 		    file__MapSensorPlacements.close();
-		    ROS_INFO("MapSensorPlacement: size %zd",vec_MapSensorPlacements.size());
+		    //ROS_INFO("MapSensorPlacement: size %zd",vec_MapSensorPlacements.size());
 	    }
 	    else std::cout << "Unable to open planning map file";
+	    
+	    
+	    	    
+	    //==============================
+	    //--- Conf
+	    //==============================
+	    ROS_INFO("Conf... ");
+	    file__Confs.open((FilePath+filename__Confs).c_str(), std::ios::app);
+	    //ROS_INFO("Conf file: %s",(FilePath+filename__Confs).c_str());
+	    double this_conf;
+	    vec_Confs.clear();
+	    if (file__Confs.is_open()){		    
+		    while(file__Confs >> this_conf){
+			    vec_Confs.push_back(this_conf);
+			    //ROS_INFO("Confs: this_conf %f",this_conf);
+         	}
+		    file__Confs.close();
+		    //ROS_INFO("Confs: size %zd",vec_Confs.size());
+	    }
+	    else std::cout << "Unable to open conf file";
 	    
 	    
 	    //==============================
@@ -92,7 +112,7 @@ void readEnvironmentMap(){
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
 		    file__CellSize.close();
-		    ROS_INFO("Cell size: %f",cell_size);
+		    //ROS_INFO("Cell size: %f",cell_size);
 	    }	    
 	    else std::cout << "Unable to open file for cell size";
 	    
@@ -124,7 +144,7 @@ int main( int argc, char** argv ){
 	    printf("\n=	            Environment Map Publisher Node                     ");
 	    printf("\n=================================================================\n");        
         
-        ros::init(argc, argv, "sensor_placements_map_publisher_node");
+        ros::init(argc, argv, "env_map_publisher_node");
         ros::NodeHandle n;
         
         // ####################### PARAMETERS ########################
@@ -138,6 +158,7 @@ int main( int argc, char** argv ){
 	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
+	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
     
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
@@ -163,67 +184,123 @@ int main( int argc, char** argv ){
         
         //--- Marker initialization
         //--------------------------------        
-        map_points.header.frame_id = "/map";        
-        map_points.header.stamp = ros::Time::now();
-        map_points.ns = "env_map_publisher_node";
-        map_points.action = visualization_msgs::Marker::ADD;
-        map_points.pose.orientation.w = 1.0;   
-        map_points.id = 0;      
-        map_points.type = visualization_msgs::Marker::POINTS;
-        map_points.scale.x = 0.45; //cell_size; //0.2;
-        map_points.scale.y = 0.45; //cell_size; //0.2;
-        map_points.color.r = 0.0f;
-        map_points.color.g = 0.7f;
-        map_points.color.b = 0.0f;
-        map_points.color.a = 0.25;
+        marker_none.header.frame_id = "/map";        
+        marker_none.header.stamp = ros::Time::now();
+        marker_none.ns = "env_map_publisher_node";
+        marker_none.action = visualization_msgs::Marker::ADD;
+        marker_none.pose.orientation.w = 1.0;   
+        marker_none.id = 0;      
+        marker_none.type = visualization_msgs::Marker::POINTS;
+        marker_none.scale.x = 0.45; //cell_size; //0.2;
+        marker_none.scale.y = 0.45; //cell_size; //0.2;
+        marker_none.color.r = 0.0f;
+        marker_none.color.g = 0.7f;
+        marker_none.color.b = 0.0f;
+        marker_none.color.a = 0.25;
         
         
         //--- Marker initialization (unoccupied)
         //--------------------------------
-        map_points1.header.frame_id = "/map";        
-        map_points1.header.stamp = ros::Time::now();
-        map_points1.ns = "env_map_publisher_node";
-        map_points1.action = visualization_msgs::Marker::ADD;
-        map_points1.pose.orientation.w = 1.0;   
-        map_points1.id = 1;      
-        map_points1.type = visualization_msgs::Marker::POINTS;
-        map_points1.scale.x = 0.45; //cell_size; //0.2;
-        map_points1.scale.y = 0.45; //cell_size; //0.2;
-        map_points1.color.r = 0.0f;
-        map_points1.color.g = 0.7f;
-        map_points1.color.b = 0.0f;
-        map_points1.color.a = 0.50; //0.25
+        marker_occu.header.frame_id = "/map";        
+        marker_occu.header.stamp = ros::Time::now();
+        marker_occu.ns = "env_map_publisher_node";
+        marker_occu.action = visualization_msgs::Marker::ADD;
+        marker_occu.pose.orientation.w = 1.0;   
+        marker_occu.id = 1;      
+        marker_occu.type = visualization_msgs::Marker::POINTS;
+        marker_occu.scale.x = 0.45; //cell_size; //0.2;
+        marker_occu.scale.y = 0.45; //cell_size; //0.2;
+        marker_occu.color.r = 0.0f;
+        marker_occu.color.g = 0.7f;
+        marker_occu.color.b = 0.0f;
+        marker_occu.color.a = 0.25; //0.25
         
+               
         
         //--- Marker initialization (occupied)
         //--------------------------------        
-        map_points2.header.frame_id = "/map";        
-        map_points2.header.stamp = ros::Time::now();
-        map_points2.ns = "sensor_placements_map_publisher_node";
-        map_points2.action = visualization_msgs::Marker::ADD;
-        map_points2.pose.orientation.w = 1.0;   
-        map_points2.id = 2;      
-        map_points2.type = visualization_msgs::Marker::POINTS;
-        map_points2.scale.x = 0.45; //cell_size; //0.2;
-        map_points2.scale.y = 0.45; //cell_size; //0.2;
-        map_points2.color.r = 0.7f;
-        map_points2.color.g = 0.0f;
-        map_points2.color.b = 0.0f;
-        map_points2.color.a = 0.50; //0.75
+        marker_free.header.frame_id = "/map";        
+        marker_free.header.stamp = ros::Time::now();
+        marker_free.ns = "env_map_publisher_node";
+        marker_free.action = visualization_msgs::Marker::ADD;
+        marker_free.pose.orientation.w = 1.0;   
+        marker_free.id = 2;
+        marker_free.type = visualization_msgs::Marker::POINTS;
+        marker_free.scale.x = 0.45; //cell_size; //0.2;
+        marker_free.scale.y = 0.45; //cell_size; //0.2;
+        marker_free.color.r = 0.7f;
+        marker_free.color.g = 0.0f;
+        marker_free.color.b = 0.0f;
+        marker_free.color.a = 0.25; //0.75
         
         
-        //ROS_INFO("Fill cells....");
+        //--- Marker initialization (map origin)
+        //--------------------------------        
+        marker_orig.header.frame_id = "/map";        
+        marker_orig.header.stamp = ros::Time::now();
+        marker_orig.ns = "env_map_publisher_node";
+        marker_orig.action = visualization_msgs::Marker::ADD;
+        marker_orig.pose.orientation.w = 1.0;   
+        marker_orig.id = 3;
+        marker_orig.type = visualization_msgs::Marker::POINTS;
+        marker_orig.scale.x = 0.45; //cell_size; //0.2;
+        marker_orig.scale.y = 0.45; //cell_size; //0.2;
+        marker_orig.color.r = 0.0f;
+        marker_orig.color.g = 0.0f;
+        marker_orig.color.b = 1.0f;
+        marker_orig.color.a = 1.00;
         
-        //--- Unoccupied cells
+        
+        //--- Marker initialization (confs)
+        //--------------------------------        
+        marker_conf_sphere.header.frame_id = "/map";        
+        marker_conf_sphere.header.stamp = ros::Time::now();
+        marker_conf_sphere.ns = "env_map_publisher_node";
+        marker_conf_sphere.action = visualization_msgs::Marker::ADD;
+        marker_conf_sphere.pose.orientation.w = 1.0;   
+        marker_conf_sphere.id = 4;
+        marker_conf_sphere.type = visualization_msgs::Marker::SPHERE_LIST;
+        marker_conf_sphere.scale.x = 0.25; //cell_size; //0.2;
+        marker_conf_sphere.scale.y = 0.25; //cell_size; //0.2;
+        marker_conf_sphere.scale.z = 0.25; //cell_size; //0.2;
+        marker_conf_sphere.color.r = 0.0f;
+        marker_conf_sphere.color.g = 0.0f;
+        marker_conf_sphere.color.b = 1.0f;
+        marker_conf_sphere.color.a = 1.00;
+        
+        
+        //--- Marker initialization (confs)
+        //--------------------------------        
+        marker_conf_arrow.header.frame_id = "/map";        
+        marker_conf_arrow.header.stamp = ros::Time::now();
+        marker_conf_arrow.ns = "env_map_publisher_node";
+        marker_conf_arrow.action = visualization_msgs::Marker::ADD;
+        marker_conf_arrow.pose.orientation.w = 1.0;   
+        marker_conf_arrow.id = 5;
+        marker_conf_arrow.type = visualization_msgs::Marker::ARROW;
+        marker_conf_arrow.scale.x = 0.25; //cell_size; //0.2;
+        marker_conf_arrow.scale.y = 0.25; //cell_size; //0.2;
+        marker_conf_arrow.scale.z = 0.25; //cell_size; //0.2;
+        marker_conf_arrow.color.r = 0.0f;
+        marker_conf_arrow.color.g = 0.0f;
+        marker_conf_arrow.color.b = 1.0f;
+        marker_conf_arrow.color.a = 1.00;
+        
+        
+        
+        //--------------------------------        
+        //--- map cells
         //--------------------------------
         //ROS_INFO("map size is %d,%d",vec_MapSize[0],vec_MapSize[1]);        
-        for (int i = 0; i < vec_MapSize[0]; ++i){        
-            for (int j = 0; j < vec_MapSize[1]; ++j){
+        for (int i = 0; i <= vec_MapSize[0]-1; ++i){        
+            for (int j = 0; j <= vec_MapSize[1]-1; ++j){
             
                 //float x = ((i-vec_RobotOrigin[0])*cell_size)+hard_offset_x;
                 //float y = ((j-vec_RobotOrigin[1])*cell_size)+hard_offset_y;                                        
-                float x = ((i-vec_RobotOrigin[0]+1)*cell_size)+hard_offset_x;
-                float y = ((j-vec_RobotOrigin[1]+1)*cell_size)+hard_offset_y;                                    
+                //float x = ((i-vec_RobotOrigin[0]+1)*cell_size)+hard_offset_x;
+                //float y = ((j-vec_RobotOrigin[1]+1)*cell_size)+hard_offset_y;
+                float x = ((i-vec_RobotOrigin[0]+0.5-0.0)*cell_size)+hard_offset_x;
+                float y = ((j-vec_RobotOrigin[1]+0.5-0.0)*cell_size)+hard_offset_y;
                 float z = 0.5; //0.1
                 
                 //ROS_INFO("origin are %f,%f",vec_RobotOrigin[0],vec_RobotOrigin[1]);
@@ -234,32 +311,224 @@ int main( int argc, char** argv ){
                 p.x = x;
                 p.y = y;
                 p.z = z;
-                    
-                if (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 1){                    
-                    //map_points.points.push_back(p);                    
-                    map_points1.points.push_back(p);
-                    
-                    //ros::WallDuration(0.1).sleep();
+                
+                //-- unoccupied cell
+                if (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 1){
+                    marker_occu.points.push_back(p);
                 }
+                //-- occupied cell
                 else{
-                    map_points2.points.push_back(p);
+                    marker_free.points.push_back(p);
                 }
             }
         }
+        
+        
+        //--------------------------------        
+        //--- confs
+        //--------------------------------
+        //ROS_INFO("map size is %d,%d",vec_MapSize[0],vec_MapSize[1]);        
+        for (int i = 0; i<(vec_Confs.size()/3); ++i){        
             
+            float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+            float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+            
+            //float x = vec_Confs[i*3+0]/2;
+            //float y = vec_Confs[i*3+1]/2;
+            float o = vec_Confs[i*3+2]/2;            
+            float z = 1.0;
+            
+            //ROS_INFO("this conf x,y are %f,%f",x,y);
+                                      
+            geometry_msgs::Point p;
+            p.x = x;
+            p.y = y;
+            p.z = z;
+            
+            marker_conf_sphere.points.push_back(p);
+            
+            //geometry_msgs::Point p;
+            //p.x = x;
+            //p.y = y;
+            //p.z = z;
+            
+            //marker_conf_arrow.points.push_back(p);
+            
+            
+            /*
+            geometry_msgs::Pose q;
+            
+            q.position.x = x;
+            q.position.y = y;
+            q.position.z = z;
+                       
+            q.orientation.x = 0;
+            q.orientation.y = 0;
+            q.orientation.z = 0;
+            q.orientation.w = 1;
+            
+            marker_conf_arrow.pose.push_back(q);
+            */
+            
+            /*            
+            marker.pose.position.x = 1;
+            marker.pose.position.y = 1;
+            marker.pose.position.z = 1;
+            marker.pose.orientation.x = 0.0;
+            marker.pose.orientation.y = 0.0;
+            marker.pose.orientation.z = 0.0;
+            marker.pose.orientation.w = 1.0;
+            */
+            
+            /*
+            //visualization_msgs::Marker marker_ar;
+            marker_ar.header.frame_id = "/map";
+            marker_ar.header.stamp = ros::Time();
+            marker_ar.ns = "env_map_publisher_node";
+            marker_ar.id = i;
+            marker_ar.type = visualization_msgs::Marker::ARROW;
+            marker_ar.action = visualization_msgs::Marker::ADD;
+            marker_ar.pose.position.x = x;
+            marker_ar.pose.position.y = y;
+            marker_ar.pose.position.z = z;
+            marker_ar.pose.orientation.x = 0.0;
+            marker_ar.pose.orientation.y = 0.0;
+            marker_ar.pose.orientation.z = 0.0;
+            marker_ar.pose.orientation.w = 1.0;
+            marker_ar.scale.x = 1.0;
+            marker_ar.scale.y = 0.1;
+            marker_ar.scale.z = 0.1;
+            marker_ar.color.a = 1.0;
+            marker_ar.color.r = 0.0;
+            marker_ar.color.g = 1.0;
+            marker_ar.color.b = 0.0;
+            map_marker.publish( marker_ar );
+            
+            ros::spinOnce();
+            r.sleep();
+            */
+        }
+        
+        /*
+        float xx = ((vec_Confs[(vec_Confs.size()-1)*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+        float yy = ((vec_Confs[(vec_Confs.size()-1)*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+        float zz = 1.5;
+        
+        visualization_msgs::Marker marker;
+        marker.header.frame_id = "/map";
+        marker.header.stamp = ros::Time();
+        marker.ns = "env_map_publisher_node";
+        marker.id = 0;
+        marker.type = visualization_msgs::Marker::ARROW;
+        marker.action = visualization_msgs::Marker::ADD;
+        marker.pose.position.x = xx;
+        marker.pose.position.y = yy;
+        marker.pose.position.z = zz;
+        marker.pose.orientation.x = 0.0;
+        marker.pose.orientation.y = 0.0;
+        marker.pose.orientation.z = 0.0;
+        marker.pose.orientation.w = 1.0;
+        marker.scale.x = 1.0;
+        marker.scale.y = 0.1;
+        marker.scale.z = 0.1;
+        marker.color.a = 1.0;
+        marker.color.r = 0.0;
+        marker.color.g = 1.0;
+        marker.color.b = 0.0;
+        //map_marker.publish( marker );
+        */    
+        
+        
+        //--------------------------------
+        //-- map origin (troubleshooting)
+        //--------------------------------
+        //float qr_x = 135.0, qr_y = 031.0;
+        //float qr_x = 291.0, qr_y = 63.0;
+        float qr_x = 291.0, qr_y = 63.0;
+        
+        //float or_x = 135.0, or_y = 031.0;
+        float or_x = vec_RobotOrigin[0], or_y = vec_RobotOrigin[1];
+        
+        float x = ((qr_x-or_x+0.5-0.0)*cell_size);
+        float y = ((qr_y-or_y+0.5-0.0)*cell_size);                                    
+        float z = 1.8;
+                
+        //ROS_INFO("origin vector is %f,%f",vec_RobotOrigin[0],vec_RobotOrigin[1]);
+        //ROS_INFO("x,y of origin are %f,%f",x,y);
+        geometry_msgs::Point p;
+        p.x = x;
+        p.y = y;
+        p.z = z;
+        marker_orig.points.push_back(p);
+                        
+        
+        //--------------------------------
+        //-- publish map
+        //--------------------------------
+        
         ROS_INFO("The map is being published...");
+        
+        
+        
+        
+        
+        
+            
+        for (int i = 0; i<10; ++i){        
+            
+            float x = i; //((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+            float y = 0; //((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+            float z = 1.0;
+            
+            //ROS_INFO("special arrow this conf x,y are %f,%f",x,y);
+            
+            //visualization_msgs::Marker marker_ar;
+            marker_ar.header.frame_id = "/map";
+            marker_ar.header.stamp = ros::Time();
+            marker_ar.ns = "env_map_publisher_node";
+            marker_ar.id = i;
+            marker_ar.type = visualization_msgs::Marker::ARROW;
+            marker_ar.action = visualization_msgs::Marker::ADD;
+            marker_ar.pose.position.x = x;
+            marker_ar.pose.position.y = y;
+            marker_ar.pose.position.z = z;
+            
+            marker_ar.pose.orientation.x = 0.0;
+            marker_ar.pose.orientation.y = 0.0;
+            marker_ar.pose.orientation.z = 0.0;
+            marker_ar.pose.orientation.w = 1.0;
+            marker_ar.scale.x = 1.0;
+            marker_ar.scale.y = 0.1;
+            marker_ar.scale.z = 0.1;
+            marker_ar.color.a = 1.0;
+            marker_ar.color.r = 0.0;
+            marker_ar.color.g = 1.0;
+            marker_ar.color.b = 0.0;
+            
+            
+            //map_marker.publish( marker_ar );
+            
+            //ros::spinOnce();
+            //r.sleep();
+            
+        }
+    
         
         while(ros::ok()){
         
+        
             //-- publish 
             //------------------
-            //map_marker.publish(map_points);            
-            map_marker.publish(map_points1);
-            map_marker.publish(map_points2);
-            
-            //ROS_INFO("Spinning");
+            //map_marker.publish(marker_none);            
+            map_marker.publish(marker_occu);
+            map_marker.publish(marker_free);
+            //map_marker.publish(marker_conf_sphere);
+            //map_marker.publish(marker);
+            //map_marker.publish( marker_ar );
+            //map_marker.publish(marker_orig);
+                        
             ros::spinOnce();
-            r.sleep();            
+            r.sleep();
         }
 }
 

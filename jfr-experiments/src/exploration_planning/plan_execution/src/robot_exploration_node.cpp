@@ -22,6 +22,54 @@
 #include "common_functions.h"
 
 
+//--- File Variables
+//==========================
+double cell_size;
+std::vector<double> vec_RobotOrigin;
+std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
+std::string FilePath, filename__MapSize, filename__CellSize, filename__RobotOrigin, filename__MapSensorPlacements, filename__Confs;
+
+double hard_offset_x, hard_offset_y;
+
+
+//================================================================================
+//              READ ENVIRONMENT MAP
+//================================================================================
+void readEnvironmentMap(){
+
+        
+        ROS_INFO("Reading environment map... ");	    
+	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin;
+	    
+        
+	    
+	    //==============================
+	    //--- Read Cell Size
+	    //==============================
+	    ROS_INFO("Cell size... ");
+	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
+	    if (file__CellSize.is_open()){
+         	file__CellSize >> cell_size;
+		    file__CellSize.close();
+	    }
+	    else std::cout << "Unable to open file for cell size";
+	    
+	    
+	    //==============================
+	    //--- Read Robot Origin
+	    //==============================
+	    ROS_INFO("Robot origin... ");	    
+	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
+	    double this_origin;
+	    if (file__RobotOrigin.is_open()){
+		    while(file__RobotOrigin >> this_origin){
+			    vec_RobotOrigin.push_back(this_origin);
+         	}
+		    file__RobotOrigin.close();
+	    }
+	    else std::cout << "Unable to open file robot origin cell size";
+	    	    
+}
 
 
 
@@ -37,13 +85,13 @@ void get________PlannedPosesFromFile(){
 	//std::string path = ros::package::getPath("roslib");
 	//myFile.open((ros::package::getPath("gasbot_planning")+"/POSES.txt").c_str(),std::ios::app);
 	//filePoses.open("/home/husky/ROS_CatkinWS/src/gasbot_planning/POSES.txt",std::ios::app);
-	filePoses.open((plan_FilePath+"/"+plan_FileName).c_str(), std::ios::app);
+	filePoses.open((FilePath+plan_FileName).c_str(), std::ios::app);
 	if (filePoses.is_open()){
-		std::cout << "File is open."<<std::endl;
-		ROS_INFO("A file '%s' is to be read \n",(plan_FilePath+"/"+plan_FileName).c_str());
+		//std::cout << "File is open."<<std::endl;
+		//ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
 		while(filePoses >> value){
 			vecPoses.push_back(value);
-			std::cout<<"value is "<<value<<std::endl;
+			//std::cout<<"value is "<<value<<std::endl;
  		}
 		filePoses.close();
 	}
@@ -60,6 +108,11 @@ void execute____PlannedConfigurations(){
 	//-- create log directory
     //------------------------
 	create_____LogDirectory();
+	
+	
+	//-- read environment map info
+    //------------------------
+	readEnvironmentMap();
 	
     	
 	while(ros::ok()){
@@ -86,28 +139,39 @@ void execute____PlannedConfigurations(){
 
             for (int i=conf_num;i<vecPoses.size()/4;i++){
                 move_base_msgs::MoveBaseGoal goal;
-                  
-                //we'll send a goal to the robot to move 1 meter forward
+                
+                
+                                
+                float conf_x = ((vecPoses[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size);
+                float conf_y = ((vecPoses[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size);                
+                float conf_t = vecPoses[i*3+2];
+                
+                
+                //--- goal pose
+                //--------------------
                 goal.target_pose.header.frame_id = plan_frame_name; //"/world"; //"base_link" //"base_footprint";
                 goal.target_pose.header.stamp    = ros::Time::now();
 
-                goal.target_pose.pose.position.x 	= vecPoses[(i*4)+0]; //goalX[i];
-                goal.target_pose.pose.position.y 	= vecPoses[(i*4)+1]; //goalY[i];
-                //goal.target_pose.pose.orientation.w 	= goalW[i]; //vecGoals[(i*3)+2]; //goalW[i];
-                //goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(goalO[i]*M_PI/180);
-                goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(vecPoses[(i*4)+2]*M_PI/180);
-
-                //ROS_INFO("Gasbot is moving to pose %i i.e. <%.1fm,%.1fm,%.1fdeg>.",i+1,goalX[i],goalY[i],goalO[i]); 
-                ROS_INFO("Gasbot is moving to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i,vecPoses[(i*4)+0],vecPoses[(i*4)+1],vecPoses[(i*4)+2]); 
+                goal.target_pose.pose.position.x 	= conf_x;
+                goal.target_pose.pose.position.y 	= conf_y;                
+                goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(conf_t*M_PI/180);
+                
+                                
+                //--- sending goal
+                //--------------------
+                ROS_INFO("Gasbot is moving to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i,conf_x,conf_y,conf_t); 
                 ac.sendGoal(goal);
                 ac.waitForResult();
 
                 if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
+	                
 	                ROS_INFO("Gasbot has reached to desired pose %i",i+1);
 	                //ROS_INFO("Wait for a sec....");
 	                //ros::WallDuration(1).sleep();
+	                
+	                
 	                // ============ GAS SENSING ============
-	                if (vecPoses[(i*4)+3]==1){
+	                //if (vecPoses[(i*4)+3]==1){
 	                        
                         //-- update conf num
                         //conf_num++;
@@ -146,7 +210,7 @@ void execute____PlannedConfigurations(){
                         //-- close log file
                         //------------------------
 		                close______LogFile();
-	                }
+	                //}
                 }
                 else{
                 	ROS_INFO("The Husky failed to reach desired pose.");
@@ -171,6 +235,11 @@ void execute____PlannedConfigurations(){
 
 
 int main(int argc, char** argv){
+
+        printf("\n=================================================================");
+	    printf("\n=	            Robot Exploration Node                             ");
+	    printf("\n=================================================================\n");   
+
         ros::init(argc, argv, "robot_plan_execution");
         ros::NodeHandle n;
 
@@ -193,8 +262,8 @@ int main(int argc, char** argv){
     	//============================================
 	    //----- File contains poses or plan
 	    //============================================
-	    paramHandle.param<std::string>("plan_FileName",plan_FileName,DEFAULT_PLAN_FILENAME);
-	    paramHandle.param<std::string>("plan_FilePath",plan_FilePath,ros::package::getPath("plan_execution"));	
+	    paramHandle.param<std::string>("file_plan",plan_FileName,DEFAULT_PLAN_FILENAME);
+	    //paramHandle.param<std::string>("FilePath",FilePath,ros::package::getPath("plan_execution"));	
 
 	    //============================================	
 	    //----- Navignation Parameters
@@ -214,6 +283,20 @@ int main(int argc, char** argv){
 	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,DEFAULT_EXPLORATION_STRATEGY);
 
 	    
+	    	    
+	    //============================================	
+	    //----- Map Info Parameters
+	    //============================================
+	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
+	    //paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
+	    //paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
+	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
+	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
+	    //paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
+	    
+	    
+	    
+	    
 	    
 	    //============================================	
 	    //----- ROS Topic Names
@@ -223,6 +306,10 @@ int main(int argc, char** argv){
 	    paramHandle.param<std::string>("ptu_joint_topic",   topicPTUJointStatus, DEFAULT_TOPIC_PTU_JOINT_STATUS);
 	    paramHandle.param<std::string>("rmld_topic",        topicRMLDReadings,   DEFAULT_TOPIC_RMLD_READINGS);
 	    //paramHandle.param<std::string>("current_goal_topic",topicCurrentGoal,    DEFAULT_TOPIC_CURRENT_GOAL);
+	    
+	    
+	    
+	    
         
         
         //============================================
@@ -257,7 +344,7 @@ int main(int argc, char** argv){
         ros::spin();
         //ros::spinOnce();
         //r.sleep();
-return 0;
+        return 0;
 }
 
 

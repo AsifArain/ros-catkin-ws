@@ -148,6 +148,13 @@ target_link_libraries(scan_publisher_node ${catkin_LIBRARIES} )
 add_executable(env_map_publisher_node src/env_map_publisher_node.cpp)
 target_link_libraries(env_map_publisher_node ${catkin_LIBRARIES} )
 
+
+#---- Configuaration Placements Publisher
+#=======================================
+add_executable(conf_publisher_node src/conf_publisher_node.cpp)
+target_link_libraries(conf_publisher_node ${catkin_LIBRARIES} )
+
+
 #---- Sensor Placements Map Publisher
 #=======================================
 #add_executable(sensor_placements_map_publisher_node src/sensor_placements_map_publisher_node.cpp)

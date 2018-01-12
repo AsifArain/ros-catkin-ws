@@ -68,7 +68,7 @@ void create_____LogFile(){
     
         //===== File name	
         //string filename = "measurements_"+std::to_string (conf_num)+".dat";
-        log_FileName = "measurements_"+boost::lexical_cast<std::string>(conf_num+1)+".dat";
+        log_FileName = "measurements_conf"+boost::lexical_cast<std::string>(conf_num+1)+".dat";
 
         //===== Create File
         historyFile.open((log_FilePath+log_FileName).c_str());
