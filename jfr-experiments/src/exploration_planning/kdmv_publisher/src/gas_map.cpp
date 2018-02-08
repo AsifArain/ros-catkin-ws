@@ -259,7 +259,8 @@ void gas_map::addDataPoint(double x, double y,double reading){
 	int x_cell = floor((x-this->map_min_x)/this->cell_size);
 	int y_cell = floor((y-this->map_min_y)/this->cell_size);
 
-	//ROS_INFO("Add point to map: x= %4.2f y= %4.2f r= %4.8f, cells %d,%d",x,y,reading,x_cell,y_cell); //Asif
+	//ROS_INFO("Add point to map: x= %4.2f y= %4.2f r= %4.8f, cells %d,%d",x,y,reading,x_cell,y_cell);
+    //ros::WallDuration(0.05).sleep();
 	//ROS_INFO("Confidence at cell is %f",this->confidence.at<float>(y_cell,x_cell));
 
 
@@ -287,7 +288,7 @@ void gas_map::addDataPoint(double x, double y,double reading){
 
 	//cv::Mat roi_meanMap(meanMap,cv::Rect(min_affected_x,min_affected_y,width,height));
 	//roi_meanMap = roi_confidence.mul(roi_weightedReadings/roi_weights) + (1 - roi_confidence) * global_mean;
-	this->meanMap = this->weightedReadings / this->weights; //this->confidence.mul(this->weightedReadings / this->weights)+ (1 - this->confidence) * this->global_mean; //Asif: Last eq is for Kernal DM+V
+	this->meanMap = this->confidence.mul(this->weightedReadings / this->weights) + (1 - this->confidence) * this->global_mean;
 
 	cv::Mat roi_weightedVariance(this->weightedVariance,cv::Rect(min_affected_x,min_affected_y,width,height));
 	roi_weightedVariance = roi_weightedVariance + this->kernelCoefficients * (reading - this->meanMap.at<float>(y_cell,x_cell));
@@ -325,6 +326,10 @@ void gas_map::publishMap(ros::Publisher &gdm_publisher){
 	  
   }
   
+  
+  ROS_INFO("<min,max> values are <%f,%f>",min_value,max_value);
+  
+  
  for(double i =this->map_min_y;i<=this->map_max_y;i+=((this->map_max_y-this->map_min_y)/(double(this->num_rows)-1)))
 	{
 		for(double j=this->map_min_x;j<this->map_max_x;j+=((this->map_max_x-this->map_min_x)/(double(this->num_cols)-1)))
@@ -333,18 +338,37 @@ void gas_map::publishMap(ros::Publisher &gdm_publisher){
 			if(this->min_conc == this->max_conc) {
 				conc_value=(this->meanMap.at<float>(idx_y,idx_x)-min_value)/(max_value-min_value);
 				
+				//ROS_INFO("Im here...");				
+				if (conc_value > max_value){
+                    ROS_INFO("conc_value and max_conc: %f, %f",conc_value,max_value);
+                    ros::WallDuration(2).sleep();
+                }
 			}
 			else{
 				conc_value=(this->meanMap.at<float>(idx_y,idx_x)-this->min_conc)/(this->max_conc-this->min_conc);
+				
+				
+                    
 			}
 			
 			if (conc_value < 0){
+			    
+			    //ROS_INFO("weired conc %f",conc_value);
+			    //ros::WallDuration(5).sleep();
+			
 				conc_value=0.0;
 			}
 			if (conc_value > 1.0) {
+			    
+			    //ROS_INFO("weired conc %f",conc_value);
+			    //ros::WallDuration(5).sleep();
+			    
 				conc_value=1.0;
 			}
+			
+			
 			//ROS_INFO("Got conc %f",conc_value);
+			
 			if(conc_value > 0){
 				
 				pcl::PointCloud<pcl::PointXYZRGB> temp_cloud;
@@ -361,7 +385,7 @@ void gas_map::publishMap(ros::Publisher &gdm_publisher){
 					
 		    		temp_cloud.points[ic].x += j;
 		    		temp_cloud.points[ic].y += i;
-		    		temp_cloud.points[ic].z += 0.5;//0; Asif  //-1.5;
+		    		temp_cloud.points[ic].z += 0;//-1.5;
 				}
 				
 				

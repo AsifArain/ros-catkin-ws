@@ -51,11 +51,21 @@ double posX,posY,posW;
 
 //--- ROS-topic Variables
 //==========================
-std::string topicLocalization, topicPTUSweepStatus, topicPTUJointStatus, topicRMLDReadings, topicCurrentGoal, topicRVIZGoal;
+std::string topicLocalization, \
+            topicPTUSweepStatus, \
+            topicPTUJointStatus, \
+            topicRMLDReadings, \
+            topicCurrentGoal, \
+            topicRVIZGoal;
 
 //--- PTU/Sweeping Variables
 //==========================
-double min_pan_angle, max_pan_angle, min_tilt_angle, max_tilt_angle, sample_delay, tilt_angle;
+double min_pan_angle, \
+       max_pan_angle, \
+       min_tilt_angle, \
+       max_tilt_angle, \
+       sample_delay, \
+       tilt_angle;
 int    statusPTU, num_pan_sweeps, num_tilt_sweeps;
 double sensing_range, offsetY_base_rmld, FoV;
 vector<double> vecJointState;
@@ -63,7 +73,11 @@ double anglePan,angleTilt;
 
 //--- Visualization Markers
 //==========================
-visualization_msgs::Marker conf_points, conf_spheres, fov_strip, beam_line, path_strip;
+visualization_msgs::Marker conf_points, \
+                           conf_spheres, \
+                           fov_strip, \
+                           beam_line, \
+                           path_strip;
 
 
 void callback___Localization();
@@ -140,96 +154,96 @@ void callback___PTUJointAngles(const sensor_msgs::JointState::ConstPtr& jsta){
 void publish____ScanArea(){
 
                 
-                //--- clear variables
-                fov_strip.points.clear();
-                beam_line.points.clear();
-                
+        //--- clear variables
+        fov_strip.points.clear();
+        beam_line.points.clear();
+        
 
-                if(statusPTU!=0){
-                
-                                                
-                        //--- Field of view
-                        //=========================================
-                        
-                        //-- Point at the origin
-                        geometry_msgs::Point p0;
-                        p0.x = posX+0.0;
-                        p0.y = posY+0.0;
-                        p0.z = 0.904;
-                        fov_strip.points.push_back(p0);
-                        
-                        //-- Circumference points                        
-                        for (float i = posW-(FoV/2.0); i < posW+(FoV/2.0); ++i){
-                                                        
-                            float x = posX + sensing_range * cos(i * PI/180);
-                            float y = posY + sensing_range * sin(i * PI/180);
-                            float z = 0.1;                                
-                            geometry_msgs::Point p1;
-                            p1.x = x;
-                            p1.y = y;
-                            p1.z = z;
-                            fov_strip.points.push_back(p1);                            
-                        }
-                        
-                        
-                        //-- Back to the origin
-                        fov_strip.points.push_back(p0);
-                        
-                        //--- Optical Beam
-                        //=========================================
-                        //ROS_INFO("Beam angle: %f",((posW*PI/180)+anglePan)*180/PI);
-                        
-                        //-- initial point                        
-                        float xi = posX + 0.21 * cos((posW*PI/180)+anglePan);
-                        float yi = posY + 0.21 * sin((posW*PI/180)+anglePan);
-                        float zi = 0.904;
-                        geometry_msgs::Point pi;
-                        pi.x = xi;
-                        pi.y = yi;
-                        pi.z = zi;
-                        
-                        //-- end point
-                        float xe = posX + sensing_range * cos((posW*PI/180)+anglePan);
-                        float ye = posY + sensing_range * sin((posW*PI/180)+anglePan);
-                        float ze = 0.1;
-                        geometry_msgs::Point pe;
-                        pe.x = xe;
-                        pe.y = ye;
-                        pe.z = ze;
-                                                                                                
-                        //-- beam line
-                        beam_line.points.push_back(pi);
-                        beam_line.points.push_back(pe);
-                                                                     
-                        
-                        //--- Configuration positions
-                        //=========================================
-                        
-                        //-- check that this conf is not already in the list
-                        int check_flage = 1;
-                        for (int i = 0; i < conf_points.points.size(); ++i){
-                            if (conf_points.points[i].x == posX && \
-                                conf_points.points[i].y == posY){
-                                check_flage = 0;
-                                break;
-                            }
-                        }
-                        
-                        //-- if not, add to the list
-                        if (check_flage == 1){
-                            
-                            //-- this origin
-                            geometry_msgs::Point po;
-                            po.x = posX;
-                            po.y = posY;
-                            po.z = 0.1; 
-                            conf_points.points.push_back(po);
-                            conf_spheres.points.push_back(po);
-                            path_strip.points.push_back(po);
-                        }
+        if(statusPTU!=0){
                     
+                                        
+            //--- Field of view
+            //=========================================
+            
+            //-- Point at the origin
+            geometry_msgs::Point p0;
+            p0.x = posX+0.0;
+            p0.y = posY+0.0;
+            p0.z = 0.904;
+            fov_strip.points.push_back(p0);
+            
+            //-- Circumference points                        
+            for (float i = posW-(FoV/2.0); i < posW+(FoV/2.0); ++i){
+                                            
+                float x = posX + sensing_range * cos(i * PI/180);
+                float y = posY + sensing_range * sin(i * PI/180);
+                float z = 0.1;                                
+                geometry_msgs::Point p1;
+                p1.x = x;
+                p1.y = y;
+                p1.z = z;
+                fov_strip.points.push_back(p1);                            
+            }
+            
+            
+            //-- Back to the origin
+            fov_strip.points.push_back(p0);
+            
+            //--- Optical Beam
+            //=========================================
+            //ROS_INFO("Beam angle: %f",((posW*PI/180)+anglePan)*180/PI);
+            
+            //-- initial point                        
+            float xi = posX + 0.21 * cos((posW*PI/180)+anglePan);
+            float yi = posY + 0.21 * sin((posW*PI/180)+anglePan);
+            float zi = 0.904;
+            geometry_msgs::Point pi;
+            pi.x = xi;
+            pi.y = yi;
+            pi.z = zi;
+            
+            //-- end point
+            float xe = posX + sensing_range * cos((posW*PI/180)+anglePan);
+            float ye = posY + sensing_range * sin((posW*PI/180)+anglePan);
+            float ze = 0.1;
+            geometry_msgs::Point pe;
+            pe.x = xe;
+            pe.y = ye;
+            pe.z = ze;
+                                                                                    
+            //-- beam line
+            beam_line.points.push_back(pi);
+            beam_line.points.push_back(pe);
+                                                         
+            
+            //--- Configuration positions
+            //=========================================
+            
+            //-- check that this conf is not already in the list
+            int check_flage = 1;
+            for (int i = 0; i < conf_points.points.size(); ++i){
+                if (conf_points.points[i].x == posX && \
+                    conf_points.points[i].y == posY){
+                    check_flage = 0;
+                    break;
                 }
+            }
+            
+            //-- if not, add to the list
+            if (check_flage == 1){
                 
+                //-- this origin
+                geometry_msgs::Point po;
+                po.x = posX;
+                po.y = posY;
+                po.z = 0.1; 
+                conf_points.points.push_back(po);
+                conf_spheres.points.push_back(po);
+                path_strip.points.push_back(po);
+            }
+            
+        }
+        
 }
 
 

@@ -1,14 +1,14 @@
 /*
 
-                     ENVIRONMENT MAP PUBLISHER NODE
-              ____________________________________________________
+            GAS DISTRIBUTION MAP (GDM) POINTCLOUD (PCL) PUBLISHER NODE
+          ______________________________________________________________
 
 
-    This is main file to publish environment map.
+    This is main file to publish gas distribution map using pointcloud.
     
     -------------------------------------------------------------------------
     Author:  Asif Arain
-    Date:    07-Dec-2017
+    Date:    08-Feb-2017
     Version: 0.0
     -------------------------------------------------------------------------
 
@@ -23,14 +23,20 @@
 #include <fstream>
 #include <ros/package.h>
 
+#include <pcl_ros/point_cloud.h>
+#include <pcl/point_types.h>
+
 
 using namespace std;
+
+
+typedef pcl::PointCloud<pcl::PointXYZRGB> PointCloud;
 
 //--- Visualization Markers
 //==========================
 visualization_msgs::Marker marker_none, \
-                           marker_occu, \
-                           marker_free, \
+                           marker_low, \
+                           marker_high, \
                            marker_orig, \
                            marker_conf_sphere, \
                            marker_conf_arrow, \
@@ -40,16 +46,19 @@ visualization_msgs::Marker marker_none, \
 //--- File Variables
 //==========================
 double cell_size;
-std::vector<double> vec_RobotOrigin;
-std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
+std::vector<double> vec_RobotOrigin,vec_Concentration,vec_Confs,vec_reconColorR,vec_reconColorG,vec_reconColorB;
+std::vector<int> vec_MapSize;
 std::string FilePath, \
             filename__MapSize, \
             filename__CellSize, \
             filename__RobotOrigin, \
             filename__MapSensorPlacements, \
+            filename__reconstructionColorR, \
+            filename__reconstructionColorG, \
+            filename__reconstructionColorB, \
             filename__Confs;
 
-double hard_offset_x, hard_offset_y;
+double hard_offset_x, hard_offset_y, high_t;
 
 //================================================================================
 //              READ ENVIRONMENT MAP
@@ -59,7 +68,10 @@ void readEnvironmentMap(){
         
         ROS_INFO("Reading environment map... ");	    
 	    std::ifstream file__MapSize, \
-	                  file__MapSensorPlacements, \
+	                  file__MapConcentration, \
+	                  file__reconColorR, \
+	                  file__reconColorG, \
+	                  file__reconColorB, \
 	                  file__CellSize, \
 	                  file__RobotOrigin, \
 	                  file__Confs;
@@ -83,27 +95,80 @@ void readEnvironmentMap(){
         
         	    
 	    //==============================
-	    //--- map
+	    //--- concentration map
 	    //==============================
 	    ROS_INFO("Map... ");
-	    file__MapSensorPlacements.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
+	    file__MapConcentration.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__MapSensorPlacements).c_str());
-	    int this_map;
-	    vec_MapSensorPlacements.clear();
-	    if (file__MapSensorPlacements.is_open()){		    
-		    while(file__MapSensorPlacements >> this_map){
-			    vec_MapSensorPlacements.push_back(this_map);
+	    double this_map;
+	    vec_Concentration.clear();
+	    if (file__MapConcentration.is_open()){		    
+		    while(file__MapConcentration >> this_map){
+			    vec_Concentration.push_back(this_map);
          	}
-		    file__MapSensorPlacements.close();
-		    //ROS_INFO("MapSensorPlacement: size %zd",vec_MapSensorPlacements.size());
+		    file__MapConcentration.close();
+		    //ROS_INFO("MapSensorPlacement: size %zd",vec_Concentration.size());
 	    }
 	    else std::cout << "Unable to open planning map file";
 	    
 	    
+	    //==============================
+	    //--- reconstruction color R
+	    //==============================
+	    ROS_INFO("Reconstruction Color R... ");
+	    file__reconColorR.open((FilePath+filename__reconstructionColorR).c_str(), std::ios::app);
+	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorR).c_str());
+	    int this_colR;
+	    vec_reconColorR.clear();
+	    if (file__reconColorR.is_open()){		    
+		    while(file__reconColorR >> this_colR){
+			    vec_reconColorR.push_back(this_colR);
+         	}
+		    file__reconColorR.close();
+		    //ROS_INFO("ReconstructionColorR: size %zd",vec_reconColorR.size());
+	    }
+	    else std::cout << "Unable to open reconstruction color R file";
+	    
+	    
+	    //==============================
+	    //--- reconstruction color G
+	    //==============================
+	    ROS_INFO("Reconstruction Color G... ");
+	    file__reconColorG.open((FilePath+filename__reconstructionColorG).c_str(), std::ios::app);
+	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorG).c_str());
+	    int this_colG;
+	    vec_reconColorG.clear();
+	    if (file__reconColorG.is_open()){		    
+		    while(file__reconColorG >> this_colG){
+			    vec_reconColorG.push_back(this_colG);
+         	}
+		    file__reconColorG.close();
+		    //ROS_INFO("ReconstructionColorG: size %zd",vec_reconColorG.size());
+	    }
+	    else std::cout << "Unable to open reconstruction color G file";
+	    
+	    
+	    //==============================
+	    //--- reconstruction color B
+	    //==============================
+	    ROS_INFO("Reconstruction Color B... ");
+	    file__reconColorB.open((FilePath+filename__reconstructionColorB).c_str(), std::ios::app);
+	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorB).c_str());
+	    int this_colB;
+	    vec_reconColorB.clear();
+	    if (file__reconColorB.is_open()){
+		    while(file__reconColorB >> this_colB){
+			    vec_reconColorB.push_back(this_colB);
+         	}
+		    file__reconColorB.close();
+		    //ROS_INFO("ReconstructionColorB: size %zd",vec_reconColorB.size());
+	    }
+	    else std::cout << "Unable to open reconstruction color B file";
 	    	    
 	    //==============================
 	    //--- Conf
 	    //==============================
+	    /*
 	    ROS_INFO("Conf... ");
 	    file__Confs.open((FilePath+filename__Confs).c_str(), std::ios::app);
 	    //ROS_INFO("Conf file: %s",(FilePath+filename__Confs).c_str());
@@ -118,7 +183,7 @@ void readEnvironmentMap(){
 		    //ROS_INFO("Confs: size %zd",vec_Confs.size());
 	    }
 	    else std::cout << "Unable to open conf file";
-	    
+	    */
 	    
 	    //==============================
 	    //--- Read Cell Size
@@ -157,10 +222,10 @@ int main( int argc, char** argv ){
         
         
         printf("\n=================================================================");
-	    printf("\n=	            Environment Map Publisher Node                     ");
+	    printf("\n=	            GDM PointCloud Publisher Node                      ");
 	    printf("\n=================================================================\n");        
         
-        ros::init(argc, argv, "env_map_publisher_node");
+        ros::init(argc, argv, "gdm_pcl_publisher_node");
         ros::NodeHandle n;
         
         // ####################### PARAMETERS ########################
@@ -170,24 +235,31 @@ int main( int argc, char** argv ){
 	    //----- Map Info Parameters
 	    //============================================
 	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
-	    paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
-	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
-	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
-	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
-	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
+	    paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"reconstruction.dat");
+	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"reconstruction_mapsize.dat");	    
+	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"reconstruction_cellsize.dat");
+	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"reconstruction_origin.dat");
+	    //paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
+	    paramHandle.param<std::string>("recon_color_r_file",filename__reconstructionColorR,"reconstructionColorR.dat");
+	    paramHandle.param<std::string>("recon_color_g_file",filename__reconstructionColorG,"reconstructionColorG.dat");
+	    paramHandle.param<std::string>("recon_color_b_file",filename__reconstructionColorB,"reconstructionColorB.dat");
+	    
     
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
+        
+        paramHandle.param<double>("high_threshould",high_t,500.0);
         
         
         //============================================
 	    //----- ROS Topic Publishers
         //============================================
         //ros::Publisher map_marker = n.advertise<visualization_msgs::Marker>("placement_map", 10);
-        ros::Publisher map_marker = n.advertise<visualization_msgs::Marker>("env_map", 10);
+        ros::Publisher map_marker = n.advertise<visualization_msgs::Marker>("conc_map", 10);
+        ros::Publisher map_pcl_pub = n.advertise<sensor_msgs::PointCloud2> ("gdm_pcl", 1);
         
-        ros::Rate r(30);
         
+        ros::Rate r(30);        
         
         //--- read map info
         readEnvironmentMap();
@@ -199,10 +271,11 @@ int main( int argc, char** argv ){
         
         
         //--- Marker initialization
-        //--------------------------------        
+        //--------------------------------
+        /*
         marker_none.header.frame_id = "/map";        
         marker_none.header.stamp = ros::Time::now();
-        marker_none.ns = "env_map_publisher_node";
+        marker_none.ns = "conc_map_publisher_node";
         marker_none.action = visualization_msgs::Marker::ADD;
         marker_none.pose.orientation.w = 1.0;   
         marker_none.id = 0;      
@@ -213,48 +286,49 @@ int main( int argc, char** argv ){
         marker_none.color.g = 0.7f;
         marker_none.color.b = 0.0f;
         marker_none.color.a = 0.25;
+        */
         
         
-        //--- Marker initialization (unoccupied)
-        //--------------------------------
-        marker_occu.header.frame_id = "/map";        
-        marker_occu.header.stamp = ros::Time::now();
-        marker_occu.ns = "env_map_publisher_node";
-        marker_occu.action = visualization_msgs::Marker::ADD;
-        marker_occu.pose.orientation.w = 1.0;   
-        marker_occu.id = 1;      
-        marker_occu.type = visualization_msgs::Marker::POINTS;
-        marker_occu.scale.x = 0.45; //cell_size; //0.2;
-        marker_occu.scale.y = 0.45; //cell_size; //0.2;
-        marker_occu.color.r = 0.0f;
-        marker_occu.color.g = 0.7f;
-        marker_occu.color.b = 0.0f;
-        marker_occu.color.a = 0.25; //0.25
-        
-               
-        
-        //--- Marker initialization (occupied)
+        //--- Marker high concentration
         //--------------------------------        
-        marker_free.header.frame_id = "/map";        
-        marker_free.header.stamp = ros::Time::now();
-        marker_free.ns = "env_map_publisher_node";
-        marker_free.action = visualization_msgs::Marker::ADD;
-        marker_free.pose.orientation.w = 1.0;   
-        marker_free.id = 2;
-        marker_free.type = visualization_msgs::Marker::POINTS;
-        marker_free.scale.x = 0.45; //cell_size; //0.2;
-        marker_free.scale.y = 0.45; //cell_size; //0.2;
-        marker_free.color.r = 0.7f;
-        marker_free.color.g = 0.0f;
-        marker_free.color.b = 0.0f;
-        marker_free.color.a = 0.25; //0.75
+        marker_high.header.frame_id = "/map";        
+        marker_high.header.stamp = ros::Time::now();
+        marker_high.ns = "conc_map_publisher_node";
+        marker_high.action = visualization_msgs::Marker::ADD;
+        marker_high.pose.orientation.w = 1.0;   
+        marker_high.id = 1;
+        marker_high.type = visualization_msgs::Marker::POINTS;
+        marker_high.scale.x = 0.45; //cell_size; //0.2;
+        marker_high.scale.y = 0.45; //cell_size; //0.2;
+        marker_high.color.r = 0.7f;
+        marker_high.color.g = 0.0f;
+        marker_high.color.b = 0.0f;
+        marker_high.color.a = 0.25; //0.75
+        
+        
+        //--- Marker low concentration
+        //--------------------------------
+        marker_low.header.frame_id = "/map";        
+        marker_low.header.stamp = ros::Time::now();
+        marker_low.ns = "conc_map_publisher_node";
+        marker_low.action = visualization_msgs::Marker::ADD;
+        marker_low.pose.orientation.w = 1.0;   
+        marker_low.id = 2;      
+        marker_low.type = visualization_msgs::Marker::POINTS;
+        marker_low.scale.x = 0.45; //cell_size; //0.2;
+        marker_low.scale.y = 0.45; //cell_size; //0.2;
+        marker_low.color.r = 0.0f;
+        marker_low.color.g = 0.7f;
+        marker_low.color.b = 0.0f;
+        marker_low.color.a = 0.25; //0.25
         
         
         //--- Marker initialization (map origin)
-        //--------------------------------        
+        //--------------------------------
+        /*
         marker_orig.header.frame_id = "/map";        
         marker_orig.header.stamp = ros::Time::now();
-        marker_orig.ns = "env_map_publisher_node";
+        marker_orig.ns = "conc_map_publisher_node";
         marker_orig.action = visualization_msgs::Marker::ADD;
         marker_orig.pose.orientation.w = 1.0;   
         marker_orig.id = 3;
@@ -265,13 +339,14 @@ int main( int argc, char** argv ){
         marker_orig.color.g = 0.0f;
         marker_orig.color.b = 1.0f;
         marker_orig.color.a = 1.00;
-        
+        */
         
         //--- Marker initialization (confs)
         //--------------------------------        
+        /*
         marker_conf_sphere.header.frame_id = "/map";        
         marker_conf_sphere.header.stamp = ros::Time::now();
-        marker_conf_sphere.ns = "env_map_publisher_node";
+        marker_conf_sphere.ns = "conc_map_publisher_node";
         marker_conf_sphere.action = visualization_msgs::Marker::ADD;
         marker_conf_sphere.pose.orientation.w = 1.0;   
         marker_conf_sphere.id = 4;
@@ -283,13 +358,15 @@ int main( int argc, char** argv ){
         marker_conf_sphere.color.g = 0.0f;
         marker_conf_sphere.color.b = 1.0f;
         marker_conf_sphere.color.a = 1.00;
+        */
         
         
         //--- Marker initialization (confs)
         //--------------------------------        
+        /*
         marker_conf_arrow.header.frame_id = "/map";        
         marker_conf_arrow.header.stamp = ros::Time::now();
-        marker_conf_arrow.ns = "env_map_publisher_node";
+        marker_conf_arrow.ns = "conc_map_publisher_node";
         marker_conf_arrow.action = visualization_msgs::Marker::ADD;
         marker_conf_arrow.pose.orientation.w = 1.0;   
         marker_conf_arrow.id = 5;
@@ -301,7 +378,11 @@ int main( int argc, char** argv ){
         marker_conf_arrow.color.g = 0.0f;
         marker_conf_arrow.color.b = 1.0f;
         marker_conf_arrow.color.a = 1.00;
+        */
         
+        
+        
+        PointCloud map_cloud;
         
         
         //--------------------------------        
@@ -328,21 +409,44 @@ int main( int argc, char** argv ){
                 p.y = y;
                 p.z = z;
                 
-                //-- unoccupied cell
-                if (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 1){
-                    marker_occu.points.push_back(p);
+                
+                //-- high concentration cell
+                if (vec_Concentration[(i*vec_MapSize[1])+j] > high_t){
+                    marker_high.points.push_back(p);
+                    
+                    pcl::PointXYZRGB pointToPush;
+                    
+                    pointToPush.x = x; pointToPush.y = y; pointToPush.z = z;
+                    //pointToPush.r = 255; pointToPush.g = 0.3f; pointToPush.b = 0.3f;
+                    pointToPush.r = vec_reconColorR[(i*vec_MapSize[1])+j];
+                    pointToPush.g = vec_reconColorG[(i*vec_MapSize[1])+j];
+                    pointToPush.b = vec_reconColorB[(i*vec_MapSize[1])+j];
+                    
+                    /*
+                    ROS_INFO("this <r,g,b> is <%f,%f,%f>",vec_reconColorR[(i*vec_MapSize[1])+j],\
+                                                          vec_reconColorG[(i*vec_MapSize[1])+j],\
+                                                          vec_reconColorB[(i*vec_MapSize[1])+j]);
+                    */
+                    
+                    map_cloud.points.push_back(pointToPush);
+                    
                 }
-                //-- occupied cell
+                //-- low concentration cell
                 else{
-                    marker_free.points.push_back(p);
+                    marker_low.points.push_back(p);
                 }
             }
         }
         
         
+        map_cloud.height = 1;
+        map_cloud.width = map_cloud.points.size();
+        map_cloud.header.frame_id = "/map";
+        
         //--------------------------------        
         //--- confs
         //--------------------------------
+        /*
         //ROS_INFO("map size is %d,%d",vec_MapSize[0],vec_MapSize[1]);        
         for (int i = 0; i<(vec_Confs.size()/3); ++i){        
             
@@ -362,14 +466,13 @@ int main( int argc, char** argv ){
             p.z = z;
             
             marker_conf_sphere.points.push_back(p);
-            
-            
         }
-        
+        */
                 
         //--------------------------------
         //-- map origin (troubleshooting)
         //--------------------------------
+        /*        
         //float qr_x = 135.0, qr_y = 031.0;
         //float qr_x = 291.0, qr_y = 63.0;
         float qr_x = 291.0, qr_y = 63.0;
@@ -388,7 +491,7 @@ int main( int argc, char** argv ){
         p.y = y;
         p.z = z;
         marker_orig.points.push_back(p);
-                        
+        */              
         
         //--------------------------------
         //-- publish map
@@ -398,12 +501,17 @@ int main( int argc, char** argv ){
                 
         while(ros::ok()){
         
+            ros::Time time_st = ros::Time::now ();
+            map_cloud.header.stamp = time_st.toNSec()/1e3;
+        
         
             //-- publish 
             //------------------
             
-            map_marker.publish(marker_occu);
-            map_marker.publish(marker_free);
+            map_pcl_pub.publish (map_cloud.makeShared());
+            
+            map_marker.publish(marker_low);
+            map_marker.publish(marker_high);
                                     
             ros::spinOnce();
             r.sleep();

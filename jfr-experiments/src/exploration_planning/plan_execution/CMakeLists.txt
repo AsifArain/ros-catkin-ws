@@ -11,6 +11,14 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   roslib
+  sensor_msgs 
+  nav_msgs
+  tf
+  cv_bridge
+  visualization_msgs
+  image_transport
+  geometry_msgs
+  pcl_ros
 )
 
 ## System dependencies are found with CMake's conventions
@@ -76,7 +84,7 @@ add_service_files(FILES AddTwoInts.srv ExecutedConfNum.srv)
 #   DEPENDENCIES
 #   move_base_msgs#   std_msgs
 # )
-generate_messages(DEPENDENCIES std_msgs)
+generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
 ###################################
 ## catkin specific configuration ##
@@ -90,9 +98,12 @@ generate_messages(DEPENDENCIES std_msgs)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES ${PROJECT_NAME}
-  CATKIN_DEPENDS actionlib move_base_msgs roscpp rospy std_msgs roslib
-  DEPENDS system_lib
+  CATKIN_DEPENDS actionlib move_base_msgs roscpp rospy std_msgs roslib pcl_ros
+  DEPENDS system_lib libpcl-all-dev
 )
+
+
+
 
 ###########
 ## Build ##
@@ -159,6 +170,24 @@ target_link_libraries(conf_publisher_node ${catkin_LIBRARIES} )
 #=======================================
 #add_executable(sensor_placements_map_publisher_node src/sensor_placements_map_publisher_node.cpp)
 #target_link_libraries(sensor_placements_map_publisher_node ${catkin_LIBRARIES} )
+
+
+#---- GDM Grid Publisher
+#=======================================
+add_executable(gdm_grid_publisher_node src/gdm_grid_publisher_node.cpp)
+target_link_libraries(gdm_grid_publisher_node ${catkin_LIBRARIES} )
+
+
+#---- GDM Pointcloud Publisher
+#=======================================
+add_executable(gdm_pcl_publisher_node src/gdm_pcl_publisher_node.cpp)
+target_link_libraries(gdm_pcl_publisher_node ${catkin_LIBRARIES} )
+
+
+#---- Exploration GDM Publisher
+#=======================================
+add_executable(exploration_gdm_publisher_node src/exploration_gdm_publisher_node.cpp)
+target_link_libraries(exploration_gdm_publisher_node ${catkin_LIBRARIES} )
 
 
 

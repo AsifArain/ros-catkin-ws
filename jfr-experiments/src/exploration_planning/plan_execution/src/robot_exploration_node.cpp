@@ -26,8 +26,16 @@
 //==========================
 double cell_size;
 std::vector<double> vec_RobotOrigin;
-std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
-std::string FilePath, filename__MapSize, filename__CellSize, filename__RobotOrigin, filename__MapSensorPlacements, filename__Confs;
+std::vector<int> vec_MapSize,\
+                 vec_MapSensorPlacements,\
+                 vec_Confs;
+                 
+std::string FilePath, \
+            filename__MapSize, \
+            filename__CellSize, \
+            filename__RobotOrigin, \
+            filename__MapSensorPlacements, \
+            filename__Confs;
 
 double hard_offset_x, hard_offset_y;
 
@@ -39,7 +47,10 @@ void readEnvironmentMap(){
 
         
         ROS_INFO("Reading environment map... ");	    
-	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin;
+	    std::ifstream file__MapSize, \
+	                  file__MapSensorPlacements, \
+	                  file__CellSize, \
+	                  file__RobotOrigin;
 	    
         
 	    
@@ -344,6 +355,8 @@ int main(int argc, char** argv){
         ros::spin();
         //ros::spinOnce();
         //r.sleep();
+        
+        
         return 0;
 }
 

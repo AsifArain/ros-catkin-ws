@@ -293,7 +293,7 @@ int main(int argc, char **argv)
 	        
 	            curr_x       = vecXpoints[i]*cell_size;
 	            curr_y       = vecYpoints[j]*cell_size;
-    	        curr_reading = 200.0; //vecConcent[(i*vecXpoints.size())+j];
+    	        curr_reading = vecConcent[(i*vecXpoints.size())+j]; //200.0; //vecConcent[(i*vecXpoints.size())+j];
     	        
     	        GDM_map.addDataPoint(curr_x,curr_y,curr_reading);
     	        //GDM_map.publishMap(mean_advertise);

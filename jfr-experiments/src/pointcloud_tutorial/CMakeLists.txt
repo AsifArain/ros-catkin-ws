@@ -2,7 +2,7 @@
 # Catkin User Guide: http://www.ros.org/doc/groovy/api/catkin/html/user_guide/user_guide.html
 # Catkin CMake Standard: http://www.ros.org/doc/groovy/api/catkin/html/user_guide/standards.html
 cmake_minimum_required(VERSION 2.8.3)
-project(kdmv_publisher)
+project(pointcloud_tutorial)
 # Load catkin and all dependencies required for this package
 # TODO: remove all from COMPONENTS that are not catkin packages.
 
@@ -62,15 +62,15 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
 
-FILE(GLOB_RECURSE MYFILES_CPP "src/*.cpp")
-add_executable(kdmv_publisher src/kernel_dmv_node.cpp src/gas_map.cpp)
+#FILE(GLOB_RECURSE MYFILES_CPP "src/*.cpp")
+#add_executable(kdmv_publisher src/kernel_dmv_node.cpp src/gas_map.cpp)
 
 
 find_package(OpenCV REQUIRED)
 include_directories(include ${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
 
-target_link_libraries(kdmv_publisher ${catkin_LIBRARIES} )
+#target_link_libraries(kdmv_publisher ${catkin_LIBRARIES} )
 
 #uncomment if you have defined messages
 
@@ -86,14 +86,14 @@ target_link_libraries(kdmv_publisher ${catkin_LIBRARIES} )
 
 
 
-#---- GDM Publisher
-#=======================================
-add_executable(gdm_publisher_node src/gdm_publisher_node.cpp src/gas_map.cpp)
-target_link_libraries(gdm_publisher_node ${catkin_LIBRARIES} )
-
 #---- Simple test Publisher
 #=======================================
-add_executable(simple_test_publisher_node src/simple_test_publisher_node.cpp src/gas_map.cpp)
-target_link_libraries(simple_test_publisher_node ${catkin_LIBRARIES} )
+add_executable(simple_pointcloud_node src/simple_pointcloud_node.cpp)
+target_link_libraries(simple_pointcloud_node ${catkin_LIBRARIES} )
 
+
+#---- Simple test Publisher2
+#=======================================
+add_executable(simple_pointcloud_node2 src/simple_pointcloud_node2.cpp)
+target_link_libraries(simple_pointcloud_node2 ${catkin_LIBRARIES} )
 

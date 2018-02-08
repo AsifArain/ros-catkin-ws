@@ -59,9 +59,15 @@ visualization_msgs::Marker conf_positions;
 //--- File Variables
 //==========================
 double cell_size;
-std::vector<double> vec_RobotOrigin;
-std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
-std::string FilePath, filename__MapSize, filename__CellSize, filename__RobotOrigin, filename__MapSensorPlacements, filename__Confs;
+std::vector<double> vec_RobotOrigin,vec_Confs;
+std::vector<int> vec_MapSize;
+
+std::string FilePath, \
+            filename__MapSize, \
+            filename__CellSize, \
+            filename__RobotOrigin, \
+            filename__MapSensorPlacements, \
+            filename__Confs;
 
 double hard_offset_x, hard_offset_y;
 
@@ -72,9 +78,13 @@ void readDataFiles(){
 
         
         ROS_INFO("Reading data files... ");	    
-	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin, file__Confs;
-    
-       
+	    std::ifstream file__MapSize, \
+	                  file__MapSensorPlacements, \
+	                  file__CellSize, \
+	                  file__RobotOrigin, \
+	                  file__Confs;
+        
+        
 	    //==============================
 	    //--- Conf
 	    //==============================
@@ -87,9 +97,11 @@ void readDataFiles(){
 		    while(file__Confs >> this_conf){
 			    vec_Confs.push_back(this_conf);
 			    ROS_INFO("Confs: this_conf %f",this_conf);
+			    //ROS_INFO("Confs: 0th vec conf %f",vec_Confs);
+			    //ros::WallDuration(0.1).sleep();
          	}
 		    file__Confs.close();
-		    ROS_INFO("Confs: size %zd",vec_Confs.size());
+		    ROS_INFO("Confs: total size %zd",vec_Confs.size());
 	    }
 	    else std::cout << "Unable to open conf file";
 	    
@@ -145,12 +157,10 @@ int main (int argc, char** argv){
 	    //----- Map Info Parameters
 	    //============================================
 	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
-	    //paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
-	    //paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
 	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
-    
+        
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
         
@@ -199,11 +209,12 @@ int main (int argc, char** argv){
         
         
         
-        
         for (size_t i = 0; i<(vec_Confs.size()/3); ++i){
             
-            float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
-            float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+            //float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+            //float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+            float x = vec_Confs[i*3+0];
+            float y = vec_Confs[i*3+1];;
             float z = 1.0;
             float o = vec_Confs[i*3+2];
             
@@ -225,7 +236,7 @@ int main (int argc, char** argv){
             conf_orientations.poses.push_back(pos.pose);
         }
         
-        ROS_INFO("shkhkjh");
+        
         while(ros::ok()){
         
         
@@ -235,7 +246,7 @@ int main (int argc, char** argv){
             positions_pub.publish(conf_positions);
             orientations_pub.publish(conf_orientations);
             
-            ROS_INFO("spinning");
+            //ROS_INFO("spinning");
             ros::spinOnce();
             r.sleep();
             

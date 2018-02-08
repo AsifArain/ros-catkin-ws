@@ -164,8 +164,13 @@ void readReconstructionFiles(){
 	    if (fileConcent.is_open()){
 		    while(fileConcent >> valueCon){
 			    vecConcent.push_back(valueCon);
-			    //ROS_INFO("con value: %f",valueCon);
-			    //ros::WallDuration(1).sleep();
+			    /*
+			    if (valueCon > 0.1){
+			        
+			        ROS_INFO("con value: %f",valueCon);
+			        //ros::WallDuration(0.2).sleep();
+		        }
+		        */
          	}
 		    fileConcent.close();
 	    }
@@ -272,8 +277,7 @@ int main(int argc, char **argv)
 	    ros::Publisher mean_advertise = n.advertise<sensor_msgs::PointCloud2>("mean_map", 20);
 	    //-- Variance Map
 	    ros::Publisher var_advertise  = n.advertise<sensor_msgs::PointCloud2>("var_map",  20);
-        //-- Map message
-        ros::Publisher msg_pub        = n.advertise<visualization_msgs::Marker>("map_msg",20);
+        
 
 
 	    	    
@@ -283,39 +287,6 @@ int main(int argc, char **argv)
 	    double robot_offset_x = (vec_RobotOrigin[0]-1) * cell_size;
 	    double robot_offset_y = (vec_RobotOrigin[1]-1) * cell_size;
 	    
-	    	    
-	    boost::filesystem::path gdm_filepath((FilePath+conc_FileName).c_str());
-	    //Ref: https://stackoverflow.com/questions/4279164/cboost-file-system-to-return-a-list-of-files-older-than-a-specific-time
-	    
-	    std::time_t gdm_accesstime_this;
-	    std::time_t gdm_accesstime_last;
-	    
-	    gdm_accesstime_this = boost::filesystem::last_write_time( gdm_filepath );
-	    
-	    double accesstime_diff;
-	    
-	    
-        //-- MAP MESSAGE
-        //=======================
-        
-        map_msg.header.frame_id = "/map";
-        map_msg.header.stamp = ros::Time::now();
-        map_msg.ns = "map_msg_publisher";
-        map_msg.action = visualization_msgs::Marker::ADD;
-        
-        map_msg.pose.position.x = 5.0;
-        map_msg.pose.position.y = 2.0;
-        map_msg.pose.position.z = 1.0;
-        map_msg.pose.orientation.w = 1.0;
-        
-        map_msg.id = 4;
-        map_msg.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-        map_msg.scale.z = 0.5;
-                
-        map_msg.color.r = 1.0f;
-        map_msg.color.g = 0.0f;
-        map_msg.color.b = 0.0f;
-        map_msg.color.a = 1.0;
                      
         
         	    
@@ -326,80 +297,16 @@ int main(int argc, char **argv)
 	    ros::spinOnce();
 	    	    
 	    while (ros::ok()){
-	        
-	        
-	        map_msg.text.clear();
-	        
-	        
-	        //-- complete the current scan
-	        //=============================================
-	        map_msg.text = "Wait! The map is being computed.";
-	        while(statusPTU!=0){
-	            ROS_INFO("Waiting for the scan to be completed.");
-	            ros::WallDuration(2).sleep();
-	            ros::spinOnce();
-            }
-	        
-	                      
-	        
-	        //-- wait untill updated map is arrived
-	        //=============================================
-	        
-	        accesstime_diff = difftime( gdm_accesstime_this,gdm_accesstime_last );
-	        //Ref: http://www.cplusplus.com/reference/ctime/difftime/
-	        	  
-    	    map_msg.text = "Wait! The map is being computed.";
-    	    //msg_pub.publish(map_msg);
-	        while (statusPTU==0 && accesstime_diff==0){
-	            
-	            ROS_INFO("The map is being computed...");
-	            
-	            // Text message
-                //map_msg.text = "Wait! The map is being computed.";
-                msg_pub.publish(map_msg);
-	            
-	            //-- publish the current map
-	            //ROS_INFO("Publishing the previous map...");
-	            //GDM_map.publishMap(mean_advertise);
-	        
-	            ros::WallDuration(5).sleep();
-	            
-	            //-- update access time difference
-	            gdm_accesstime_this = boost::filesystem::last_write_time( gdm_filepath );
-	            accesstime_diff = difftime( gdm_accesstime_this,gdm_accesstime_last );
-	            
-	            ros::spinOnce();
-	            
-            }
             
-            
-            
-            //-- publish updated map
-	        //=============================================
-            
-            
-            //-- publish empty text message
-            
-            map_msg.text = "The updated map is coming.";
-            //map_msg.text.clear();
-            msg_pub.publish(map_msg);
-            
-            
-            //ROS_INFO("Im just after publishing the empty msg.");            
-            //ros::WallDuration(10).sleep();
-            
-                                               
             //-- Retrive map data
 	        //=============================================
 	        readMapInfo();
 	        
 	        // -1 to compensate Matlab indices	                
-	        map_min_x = ( (*min_element(vecXpoints.begin(),vecXpoints.end())-1) * cell_size) - robot_offset_x - 1; 
-	        map_max_x = ( (*max_element(vecXpoints.begin(),vecXpoints.end())-1) * cell_size) - robot_offset_x + 1;
-	        map_min_y = ( (*min_element(vecYpoints.begin(),vecYpoints.end())-1) * cell_size) - robot_offset_y - 1;
-	        map_max_y = ( (*max_element(vecYpoints.begin(),vecYpoints.end())-1) * cell_size) - robot_offset_y + 1;
-	        
-	        
+	        map_min_x = ( (*min_element(vecXpoints.begin(),vecXpoints.end())-1) * cell_size) - robot_offset_x - 5; 
+	        map_max_x = ( (*max_element(vecXpoints.begin(),vecXpoints.end())-1) * cell_size) - robot_offset_x + 5;
+	        map_min_y = ( (*min_element(vecYpoints.begin(),vecYpoints.end())-1) * cell_size) - robot_offset_y - 5;
+	        map_max_y = ( (*max_element(vecYpoints.begin(),vecYpoints.end())-1) * cell_size) - robot_offset_y + 5;
 	        
 	        //-- initialize a new map
             //=============================================
@@ -429,15 +336,11 @@ int main(int argc, char **argv)
 	        ROS_INFO("   - Colormap %s",colormap.c_str());
 	        ROS_INFO("   - Number of points %d",n_points_map);
 	        	        
-	        ros::WallDuration(1).sleep();
-	        
 	        //-- read updated map and update access time
 	        ROS_INFO("Reading reconstruction file...");
 	        readReconstructionFiles();
-	        gdm_accesstime_last = gdm_accesstime_this;
-	        	        
-            ros::WallDuration(1).sleep();
-            
+	        
+	                    
 	        //std::cout<<"map size is: "<<vecConcent.size()<<std::endl;
 	        ROS_INFO("Current map size and number of <x,y> points are: %zd <%zd,%zd>",\
 	                  vecConcent.size(),vecXpoints.size(),vecYpoints.size());
@@ -449,13 +352,22 @@ int main(int argc, char **argv)
 	        for (int i=0;i<vecXpoints.size();i++){
 	            for (int j=0;j<vecYpoints.size();j++){
 	                
-	                
+
+                    	                
 	                float x = ((vecXpoints[i]-vec_RobotOrigin[0]+0.0-1.0)*cell_size)+hard_offset_x;
 	                float y = ((vecYpoints[j]-vec_RobotOrigin[1]+0.0-1.0)*cell_size)+hard_offset_y;
-	                float r = 5; //vecConcent[(i*vecYpoints.size())+j];
+	                float r = vecConcent[(i*vecYpoints.size())+j];
 
-                    ROS_INFO("<x,y,r> are: <%f,%f,%f>",x,y,r);
-                    
+                    /*
+	                if (r > 0.1){
+	                    
+                        int ind = (i*vecYpoints.size())+j;
+                        ROS_INFO("<i,j,ind> are: <%d,%d,%d>",i,j,ind);
+                        
+                        ROS_INFO("<x,y,r> are: <%f,%f,%f>",x,y,r);
+                        ros::WallDuration(0.1).sleep();
+                    }
+                    */
                     GDM_map.addDataPoint(x,y,r);
 	                
 	                //curr_x       = (vecXpoints[i]-1)*cell_size;
@@ -480,7 +392,7 @@ int main(int argc, char **argv)
         	        //ROS_INFO("<x,y,ind,conc> are: <%f,%f,%d,%f>",this_x,this_y,this_ind,this_read);
         	        //ROS_INFO("<i,j,ind> are: <%d,%d,%d>",i,j,this_ind);
         	        
-        	        ros::WallDuration(1).sleep();
+        	        //ros::WallDuration(1).sleep();
         	        
         	        //GDM_map.addDataPoint(curr_x-robot_offset_x,curr_y-robot_offset_y,curr_reading);
         	        //GDM_map.publishMap(mean_advertise);
@@ -492,33 +404,10 @@ int main(int argc, char **argv)
 	        //-- publish the updated map
 	        ROS_INFO("Publishing the new map...");
 	        GDM_map.publishMap(mean_advertise);
-	        	        
-	        //-- publish empty text message
-            map_msg.text = ".";
-            //map_msg.text.clear();
-            msg_pub.publish(map_msg);
-	        
-	        	        
-	        //-- ptu is idle
-            //=============================================
-	        while(statusPTU==0){
-	            
-	            //ROS_INFO("Waiting for the scan.");
-	            
-	            //-- publish the current map
-	            ROS_INFO("Publishing the previous map...");
-	            GDM_map.publishMap(mean_advertise);
-
-	            ros::WallDuration(1).sleep();
-	            ros::spinOnce();
-            }
-	        
 	        
 		    ros::spinOnce();
         	loop_rate.sleep();
         }
-       
-
 }
 
 
