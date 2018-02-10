@@ -53,7 +53,15 @@ visualization_msgs::Marker map_msg;
 //--- File Variables
 //==========================
 double cell_size;
-std::vector<double> vec_RobotOrigin,vec_Concentration,vec_Confs,vec_reconColorR,vec_reconColorG,vec_reconColorB;
+std::vector<double> vec_RobotOrigin, \
+                    vec_Concentration, \
+                    vec_Confs, \
+                    vec_reconColorR, \
+                    vec_reconColorG, \
+                    vec_reconColorB, \
+                    vec_Xpoints, \
+                    vec_Ypoints;
+                    
 std::vector<int> vec_MapSize;
 std::string FilePath, \
             filename__MapSize, \
@@ -63,7 +71,11 @@ std::string FilePath, \
             filename__reconstructionColorR, \
             filename__reconstructionColorG, \
             filename__reconstructionColorB, \
-            filename__Confs;
+            filename__XPts, \
+            filename__YPts, \
+            filename__Confs, \
+            experimentTitle, \
+            explorationStrategy;
 
 double hard_offset_x, hard_offset_y, high_t;
 
@@ -100,9 +112,42 @@ void readReconstructionFiles(){
 	                  file__reconColorB, \
 	                  file__CellSize, \
 	                  file__RobotOrigin, \
-	                  file__Confs;
+	                  file__Confs, \
+	                  file__Xpoints, \
+	                  file__Ypoints;
 	    
-        
+	    //==============================
+	    //--- Read X-points
+	    //==============================
+	    ROS_INFO("Reading x points... ");
+	    file__Xpoints.open((FilePath+filename__XPts).c_str(), std::ios::app);
+	    double valueX;
+	    vec_Xpoints.clear();
+	    if (file__Xpoints.is_open()){
+		    while(file__Xpoints >> valueX){
+			    vec_Xpoints.push_back(valueX);
+         	}
+		    file__Xpoints.close();
+	    }
+	    else std::cout << "Unable to open X points file";
+	    
+	    
+	    //==============================
+	    //--- Read Y-points
+	    //==============================
+	    ROS_INFO("Reading y points... ");
+	    file__Ypoints.open((FilePath+filename__YPts).c_str(), std::ios::app);
+	    double valueY;
+	    vec_Ypoints.clear();
+	    if (file__Ypoints.is_open()){
+		    while(file__Ypoints >> valueY){
+			    vec_Ypoints.push_back(valueY);
+         	}
+		    file__Ypoints.close();
+	    }
+	    else std::cout << "Unable to open Y points file";
+	    
+	    
         //==============================
         //--- map size
 	    //==============================
@@ -240,21 +285,29 @@ void createMapCloud(){
 
     //--- read map info
     readReconstructionFiles();
-    
-    
+            
     //--------------------------------        
     //--- map cells
     //--------------------------------
     //ROS_INFO("map size is %d,%d",vec_MapSize[0],vec_MapSize[1]);        
+    /*
     for (int i = 0; i <= vec_MapSize[0]-1; ++i){        
         for (int j = 0; j <= vec_MapSize[1]-1; ++j){
-        
+    */
+    for (int i=0; i<vec_Xpoints.size(); i++){
+        for (int j=0; j<vec_Ypoints.size(); j++){
+            
             //float x = ((i-vec_RobotOrigin[0])*cell_size)+hard_offset_x;
             //float y = ((j-vec_RobotOrigin[1])*cell_size)+hard_offset_y;                                        
             //float x = ((i-vec_RobotOrigin[0]+1)*cell_size)+hard_offset_x;
             //float y = ((j-vec_RobotOrigin[1]+1)*cell_size)+hard_offset_y;
-            float x = ((i-vec_RobotOrigin[0]+0.5-0.0)*cell_size)+hard_offset_x;
-            float y = ((j-vec_RobotOrigin[1]+0.5-0.0)*cell_size)+hard_offset_y;
+            
+            //float x = ((i-vec_RobotOrigin[0]+0.5-0.0)*cell_size)+hard_offset_x;
+            //float y = ((j-vec_RobotOrigin[1]+0.5-0.0)*cell_size)+hard_offset_y;
+            
+            float x = ((vec_Xpoints[i]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+            float y = ((vec_Ypoints[j]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+            
             float z = 0.5; //0.1
             
             //ROS_INFO("origin are %f,%f",vec_RobotOrigin[0],vec_RobotOrigin[1]);
@@ -262,22 +315,22 @@ void createMapCloud(){
             //ROS_INFO("x,y are %f,%f",x,y);
             
             //-- high concentration cell
-            if (vec_Concentration[(i*vec_MapSize[1])+j] > high_t){
-                
+            //if (vec_Concentration[(i*vec_MapSize[1])+j] > high_t){
+            if (vec_Concentration[(i*vec_Ypoints.size())+j] > high_t){
                 
                 pcl::PointXYZRGB p;
                 
                 p.x = x; p.y = y; p.z = z;
                 //p.r = 255; p.g = 0.3f; p.b = 0.3f;
-                p.r = vec_reconColorR[(i*vec_MapSize[1])+j];
-                p.g = vec_reconColorG[(i*vec_MapSize[1])+j];
-                p.b = vec_reconColorB[(i*vec_MapSize[1])+j];
+                p.r = vec_reconColorR[(i*vec_Ypoints.size())+j];
+                p.g = vec_reconColorG[(i*vec_Ypoints.size())+j];
+                p.b = vec_reconColorB[(i*vec_Ypoints.size())+j];
                 
-                
+                /*
                 ROS_INFO("this <r,g,b> is <%f,%f,%f>",vec_reconColorR[(i*vec_MapSize[1])+j],\
                                                       vec_reconColorG[(i*vec_MapSize[1])+j],\
                                                       vec_reconColorB[(i*vec_MapSize[1])+j]);
-                
+                */
                 
                 map_cloud.points.push_back(p);
                 
@@ -315,18 +368,24 @@ int main( int argc, char** argv ){
         //============================================	
 	    //----- Map Info Parameters
 	    //============================================
-	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
-	    paramHandle.param<std::string>("map_file",filename__Reconstruction,"reconstruction.dat");
+	    
+	    paramHandle.param<std::string>("experiment_title",experimentTitle,"prismaforum5-04");
+	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,"one-step-exploration");
+	    paramHandle.param<std::string>("file_path",FilePath,\
+	    ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
+	    paramHandle.param<std::string>("reconstruction_file",filename__Reconstruction,"reconstruction.dat");
+	    paramHandle.param<std::string>("x_points_file",filename__XPts,"x_coord.dat");
+	    paramHandle.param<std::string>("y_points_file",filename__YPts,"y_coord.dat");	    
 	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"reconstruction_mapsize.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"reconstruction_cellsize.dat");
-	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"reconstruction_origin.dat");	    
+	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"reconstruction_origin.dat");
 	    paramHandle.param<std::string>("recon_color_r_file",filename__reconstructionColorR,"reconstructionColorR.dat");
 	    paramHandle.param<std::string>("recon_color_g_file",filename__reconstructionColorG,"reconstructionColorG.dat");
 	    paramHandle.param<std::string>("recon_color_b_file",filename__reconstructionColorB,"reconstructionColorB.dat");
 	    
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
-        paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);        
-        paramHandle.param<double>("high_threshould",high_t,100.0);        
+        paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
+        paramHandle.param<double>("high_threshould",high_t,100.0);
         paramHandle.param<std::string>("ptu_sweep_topic",topicPTUSweepStatus,"/ptu_control/state");
         
                         
@@ -344,7 +403,7 @@ int main( int argc, char** argv ){
         //-- Map message
         ros::Publisher msg_publisher = n.advertise<visualization_msgs::Marker>("msg",10);
         
-        ros::Rate r(30);        
+        ros::Rate r(30);
         
         
         //-- Access time of reconstruction file

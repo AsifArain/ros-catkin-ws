@@ -49,15 +49,13 @@ const double PI = boost::math::constants::pi<double>();
 using namespace std;
 
 
-
-
+//-- visualization variables
+//------------------------------
 geometry_msgs::PoseArray conf_orientations;
 visualization_msgs::Marker conf_positions; 
 
-
-
 //--- File Variables
-//==========================
+//-------------------------------
 double cell_size;
 std::vector<double> vec_RobotOrigin,vec_Confs;
 std::vector<int> vec_MapSize;
@@ -67,17 +65,19 @@ std::string FilePath, \
             filename__CellSize, \
             filename__RobotOrigin, \
             filename__MapSensorPlacements, \
-            filename__Confs;
+            filename__Confs, \
+            experimentTitle, \
+            explorationStrategy;
 
 double hard_offset_x, hard_offset_y;
 
 //================================================================================
-//              READ ENVIRONMENT MAP
+//              READING CONFIGURATION DATA
 //================================================================================
 void readDataFiles(){
 
         
-        ROS_INFO("Reading data files... ");	    
+        //ROS_INFO("Reading data files... ");	    
 	    std::ifstream file__MapSize, \
 	                  file__MapSensorPlacements, \
 	                  file__CellSize, \
@@ -88,7 +88,7 @@ void readDataFiles(){
 	    //==============================
 	    //--- Conf
 	    //==============================
-	    ROS_INFO("Conf... ");
+	    //ROS_INFO("Conf... ");
 	    file__Confs.open((FilePath+filename__Confs).c_str(), std::ios::app);
 	    //ROS_INFO("Conf file: %s",(FilePath+filename__Confs).c_str());
 	    double this_conf;
@@ -96,12 +96,12 @@ void readDataFiles(){
 	    if (file__Confs.is_open()){		    
 		    while(file__Confs >> this_conf){
 			    vec_Confs.push_back(this_conf);
-			    ROS_INFO("Confs: this_conf %f",this_conf);
+			    //ROS_INFO("Confs: this_conf %f",this_conf);
 			    //ROS_INFO("Confs: 0th vec conf %f",vec_Confs);
 			    //ros::WallDuration(0.1).sleep();
          	}
 		    file__Confs.close();
-		    ROS_INFO("Confs: total size %zd",vec_Confs.size());
+		    //ROS_INFO("Confs: total size %zd",vec_Confs.size());
 	    }
 	    else std::cout << "Unable to open conf file";
 	    
@@ -109,12 +109,12 @@ void readDataFiles(){
 	    //==============================
 	    //--- Read Cell Size
 	    //==============================
-	    ROS_INFO("Cell size... ");
+	    //ROS_INFO("Cell size... ");
 	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
 		    file__CellSize.close();
-		    ROS_INFO("Cell size: %f",cell_size);
+		    //ROS_INFO("Cell size: %f",cell_size);
 	    }	    
 	    else std::cout << "Unable to open file for cell size";
 	    
@@ -122,7 +122,7 @@ void readDataFiles(){
 	    //==============================
 	    //--- Read Robot Origin
 	    //==============================
-	    ROS_INFO("Robot origin... ");	    
+	    //ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
@@ -148,7 +148,7 @@ int main (int argc, char** argv){
 	    printf("\n=================================================================\n");        
         
         ros::init(argc, argv, "conf_publisher_node");
-        ros::NodeHandle n;
+        ros::NodeHandle n ("planned_confs");
         
         // ####################### PARAMETERS ########################
 	    ros::NodeHandle paramHandle ("~");
@@ -156,7 +156,11 @@ int main (int argc, char** argv){
         //============================================	
 	    //----- Map Info Parameters
 	    //============================================
-	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
+	    //paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
+	    paramHandle.param<std::string>("experiment_title",experimentTitle,"prismaforum5-04");
+	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,"one-step-exploration");
+	    paramHandle.param<std::string>("file_path",FilePath,\
+	    ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
 	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
@@ -169,15 +173,15 @@ int main (int argc, char** argv){
 	    //----- ROS Topic Publishers
         //============================================
                 
-        ros::Publisher positions_pub    = n.advertise<visualization_msgs::Marker>("/conf_positions", 10);
-        ros::Publisher orientations_pub = n.advertise<geometry_msgs::PoseArray>("/conf_orientations", 10);
+        ros::Publisher positions_pub    = n.advertise<visualization_msgs::Marker>("positions", 10);
+        ros::Publisher orientations_pub = n.advertise<geometry_msgs::PoseArray>("orientations", 10);
         
         
         ros::Rate r(30);
         
         
         //--- read map info
-        readDataFiles();
+        //readDataFiles();
         
         
         
@@ -185,7 +189,7 @@ int main (int argc, char** argv){
         // position marker
         //---------------------------------
         conf_positions.header.frame_id = "/map";        
-        conf_positions.header.stamp = ros::Time::now();
+        //conf_positions.header.stamp = ros::Time::now();
         conf_positions.ns = "env_map_publisher_node";
         conf_positions.action = visualization_msgs::Marker::ADD;
         conf_positions.pose.orientation.w = 1.0;   
@@ -203,43 +207,52 @@ int main (int argc, char** argv){
         //---------------------------------
         // orientation marker
         //---------------------------------
-        conf_orientations.poses.clear();
-        conf_orientations.header.stamp = ros::Time::now();
+        //conf_orientations.poses.clear();
+        //conf_orientations.header.stamp = ros::Time::now();
         conf_orientations.header.frame_id = "/map";
         
         
         
-        for (size_t i = 0; i<(vec_Confs.size()/3); ++i){
-            
-            //float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
-            //float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
-            float x = vec_Confs[i*3+0];
-            float y = vec_Confs[i*3+1];;
-            float z = 1.0;
-            float o = vec_Confs[i*3+2];
-            
-            ROS_INFO("this conf x,y,th are %f,%f,%f",x,y,o);
-            
-            //-- positions
-            geometry_msgs::Point pnt;
-            pnt.x = x;
-            pnt.y = y;
-            pnt.z = z;            
-            conf_positions.points.push_back(pnt);
-            
-            //-- orientation
-            geometry_msgs::PoseStamped pos;            
-            pos.pose.position.x = x;
-            pos.pose.position.y = y;
-            pos.pose.position.z = z;
-            pos.pose.orientation = tf::createQuaternionMsgFromYaw(o*M_PI/180);
-            conf_orientations.poses.push_back(pos.pose);
-        }
-        
-        
         while(ros::ok()){
         
-        
+            //--- read map info
+            readDataFiles();
+            
+            conf_positions.points.clear();
+            conf_orientations.poses.clear();
+            
+            
+            for (size_t i = 0; i<(vec_Confs.size()/3); ++i){
+                
+                //float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+                //float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+                float x = vec_Confs[i*3+0];
+                float y = vec_Confs[i*3+1];;
+                float z = 1.0;
+                float o = vec_Confs[i*3+2];
+                
+                //ROS_INFO("this conf x,y,th are %f,%f,%f",x,y,o);
+                
+                //-- positions
+                geometry_msgs::Point pnt;
+                pnt.x = x;
+                pnt.y = y;
+                pnt.z = z;            
+                conf_positions.points.push_back(pnt);
+                
+                //-- orientation
+                geometry_msgs::PoseStamped pos;            
+                pos.pose.position.x = x;
+                pos.pose.position.y = y;
+                pos.pose.position.z = z;
+                pos.pose.orientation = tf::createQuaternionMsgFromYaw(o*M_PI/180);
+                conf_orientations.poses.push_back(pos.pose);
+            }
+            
+            //-- update time stamps
+            conf_positions.header.stamp = ros::Time::now();
+            conf_orientations.header.stamp = ros::Time::now();
+            
             //-- publish 
             //------------------
             
@@ -248,7 +261,7 @@ int main (int argc, char** argv){
             
             //ROS_INFO("spinning");
             ros::spinOnce();
-            r.sleep();
+            r.sleep();            
             
         }
 }

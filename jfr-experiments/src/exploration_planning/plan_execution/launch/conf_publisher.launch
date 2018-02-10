@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--                                                                                    -->
+        <!--                                                                                    -->
+        <!--                            LAUNCH SENSOR PLACEMENTS MAP                            -->
+        <!--                                                                                    -->
+        <!--                                                                                    -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--                              @AsifArain, Dec 08, 2017                              -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<launch>
+
+	<node pkg="plan_execution" type="conf_publisher_node" name="conf_poses_publisher" output="screen">
+	    
+        <param name="cell_size_file"	value="prismaforum5_cellsize_conf.dat"/>
+        <param name="robot_origin_file"	value="prismaforum5_origin_conf.dat"/>        
+        <param name="conf_file"	        value="robot_plan_detection.dat"/>
+        
+        <param name="hard_offset_x"	    value="0.0"/> <!--"0.0"-->
+        <param name="hard_offset_y"	    value="0.0"/> <!--"-0.25"-->
+        
+    </node>
+</launch>
+
+

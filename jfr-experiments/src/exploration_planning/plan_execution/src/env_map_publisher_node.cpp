@@ -47,7 +47,9 @@ std::string FilePath, \
             filename__CellSize, \
             filename__RobotOrigin, \
             filename__MapSensorPlacements, \
-            filename__Confs;
+            filename__Confs, \
+            experimentTitle, \
+            explorationStrategy;
 
 double hard_offset_x, hard_offset_y;
 
@@ -169,13 +171,17 @@ int main( int argc, char** argv ){
         //============================================	
 	    //----- Map Info Parameters
 	    //============================================
-	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
+	    //paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/");
+	    paramHandle.param<std::string>("experiment_title",experimentTitle,"prismaforum5-04");
+	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,"one-step-exploration");
+	    paramHandle.param<std::string>("file_path",FilePath,\
+	    ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
 	    paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
 	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
 	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
-    
+	    
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
         

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--                                                         -->
+        <!--                                                         -->
+        <!--              LAUNCH GDM PUBLISHER                       -->
+        <!--                                                         -->
+        <!--                                                         -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--            @AsifArain, Feb 09, 2018                     -->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<launch>
+
+
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--              GDM                           -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<node pkg="plan_execution" 
+	      type="exploration_gdm_publisher_node" 
+	      name="exploration_gdm_publisher" 
+	      output="screen">
+	
+	    <param name="experiment_title"	    value="prismaforum5-04"/>
+	    <param name="exploration_strategy"	value="one-step-exploration"/>
+	    
+	    <param name="reconstruction_file"   value="reconstruction.dat"/>
+	    <param name="x_points_file"	        value="x_coord.dat"/>
+	    <param name="y_points_file"	        value="y_coord.dat"/>
+	    
+	    
+        
+        <param name="map_size_file"	        value="reconstruction_mapsize.dat"/>
+        <param name="cell_size_file"	    value="reconstruction_cellsize.dat"/>
+        <param name="robot_origin_file"	    value="reconstruction_origin.dat"/>
+        <param name="high_threshould"	    value="100"/>
+        <!--param name="conf_file"	        value="robot_plan_detection_test.dat"/-->
+        
+        <param name="hard_offset_x"	        value="0.0"/> <!--"0.0"-->
+        <param name="hard_offset_y"	        value="0.0"/> <!--"-0.25"-->
+        
+        
+    </node>
+    
+    
+</launch>
+
+

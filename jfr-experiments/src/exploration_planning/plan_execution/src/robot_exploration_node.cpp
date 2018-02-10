@@ -71,10 +71,12 @@ void readEnvironmentMap(){
 	    //==============================
 	    ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
+	    ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
 		    while(file__RobotOrigin >> this_origin){
 			    vec_RobotOrigin.push_back(this_origin);
+			    ROS_INFO("This origin %f",this_origin);
          	}
 		    file__RobotOrigin.close();
 	    }
@@ -99,7 +101,7 @@ void get________PlannedPosesFromFile(){
 	filePoses.open((FilePath+plan_FileName).c_str(), std::ios::app);
 	if (filePoses.is_open()){
 		//std::cout << "File is open."<<std::endl;
-		//ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
+		ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
 		while(filePoses >> value){
 			vecPoses.push_back(value);
 			//std::cout<<"value is "<<value<<std::endl;
@@ -133,33 +135,47 @@ void execute____PlannedConfigurations(){
         ROS_INFO("Obtaining planned poses to execute...");
         get________PlannedPosesFromFile();
         std::cout<<"size of vector "<<vecPoses.size()<<std::endl;
-            num_of_conf = vecPoses.size()/4;
+            num_of_conf = vecPoses.size()/3;
         std::cout<<"Number of conf to execute "<<num_of_conf<<std::endl;
+        
+        ROS_INFO("conf_num %d",conf_num);
             
         if (num_of_conf > conf_num){
 
             ros::WallDuration(1).sleep();
+            
+            ROS_INFO("Before move base ....");
             //tell the action client that we want to spin a thread by default
             actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base", true);
-                
+            ROS_INFO("After move base ....");
+            
+            
             //-- wait for the action server to come up
             //--------------------------------------------
             while(!ac.waitForServer(ros::Duration(5.0))){
                     ROS_INFO("Waiting for the move_base action server to come up");
             }
+            
+            ROS_INFO("After wakeup ....");
 
-            for (int i=conf_num;i<vecPoses.size()/4;i++){
-                move_base_msgs::MoveBaseGoal goal;
+            for (int i=conf_num;i<vecPoses.size()/3;i++){
                 
+                ROS_INFO("In the loop....");
                 
-                                
+                ROS_INFO("first %f",vecPoses[i*3+0]); 
+                ROS_INFO("second %f",vec_RobotOrigin[0]);
+                ROS_INFO("third %f",cell_size);
+                
                 float conf_x = ((vecPoses[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size);
                 float conf_y = ((vecPoses[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size);                
                 float conf_t = vecPoses[i*3+2];
                 
+                ROS_INFO("This conf <%f,%f,%f>",conf_x,conf_y,conf_t);
                 
                 //--- goal pose
                 //--------------------
+                move_base_msgs::MoveBaseGoal goal;
+                
                 goal.target_pose.header.frame_id = plan_frame_name; //"/world"; //"base_link" //"base_footprint";
                 goal.target_pose.header.stamp    = ros::Time::now();
 
@@ -298,7 +314,8 @@ int main(int argc, char** argv){
 	    //============================================	
 	    //----- Map Info Parameters
 	    //============================================
-	    paramHandle.param<std::string>("file_path",FilePath,ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
+	    paramHandle.param<std::string>("file_path",FilePath,\
+	    ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
 	    //paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
 	    //paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
