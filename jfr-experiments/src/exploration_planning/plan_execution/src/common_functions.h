@@ -229,15 +229,19 @@ void callback___RMLD(rmld_node::rmld_msg mea){
 }
 
 
+
 //================================================================================
 //              GAS SAMPLING
 //================================================================================
 void perform____GasSampling(){
 
-	    ros::NodeHandle n;      	
-      	ros::ServiceClient client1 = n.serviceClient<ptu_control2::commandSweep>(srvPTUSweepCommand);
-      	ros::ServiceClient client2 = n.serviceClient<amtec::GetStatus>(srvPTUJointStatus);
+	    ros::NodeHandle nSampling;      	
+      	ros::ServiceClient client1 = nSampling.serviceClient<ptu_control2::commandSweep>(srvPTUSweepCommand);
+      	ros::ServiceClient client2 = nSampling.serviceClient<amtec::GetStatus>(srvPTUJointStatus);
       
+        ROS_INFO("srvPTUSweepCommand: %s",srvPTUSweepCommand.c_str());
+        ROS_INFO("srvPTUJointStatus:  %s",srvPTUJointStatus.c_str());
+        
 	    ptu_control2::commandSweep srvSweep;
 	    //amtec::GetStatus  srvState;
 	    //rosservice call /ptu_control/sweep "{min_pan: -45.0, max_pan: 45.0, min_tilt: -10.0, max_tilt: -10.0, n_pan: 1, n_tilt: 1, samp_delay: 0.1}"
@@ -257,6 +261,17 @@ void perform____GasSampling(){
 	    */
 	
 	    tilt_angle = (atan(sensing_range/offsetY_base_rmld)*(180/M_PI))-90;
+	    
+	    /*
+	    ROS_INFO("human parameters for Service request:%f,%f,%f,%f,%d,%d,%f",\
+	             -(FoV/2),\
+	             (FoV/2),\
+	             tilt_angle, \
+  	             tilt_angle, \
+	             num_pan_sweeps,\
+	             num_tilt_sweeps,\
+	             sample_delay);
+	    */         
 
 	    srvSweep.request.min_pan  	= -(FoV/2);        //min_pan_angle;
 	    srvSweep.request.max_pan  	=  (FoV/2);        //max_pan_angle;
@@ -265,9 +280,20 @@ void perform____GasSampling(){
 	    srvSweep.request.n_pan    	= num_pan_sweeps;  //  1;
 	    srvSweep.request.n_tilt   	= num_tilt_sweeps; //  1;
 	    srvSweep.request.samp_delay = sample_delay;    //0.1;
+	    
+	    //ROS_INFO("human Num of pan sweeps: %d,%d",num_pan_sweeps,srvSweep.request.n_pan);
+	    
+	    ROS_INFO("Service request:%f,%f,%f,%f,%d,%d,%f",\
+	             srvSweep.request.min_pan,\
+	             srvSweep.request.max_pan,\
+	             srvSweep.request.min_tilt, \
+  	             srvSweep.request.max_tilt, \
+	             srvSweep.request.n_pan,\
+	             srvSweep.request.n_tilt,\
+	             srvSweep.request.samp_delay);
 	
 	    if (client1.call(srvSweep)){
-		    ROS_INFO("Gas measurements are progress ... <%.2f~%.2f,%.2f>",-(FoV/2),(FoV/2),tilt_angle);
+		    ROS_INFO("human Gas measurements are progress ... <%.2f~%.2f,%.2f>",-(FoV/2),(FoV/2),tilt_angle);
 	    }
 	    else{
 		    ROS_ERROR("Failed to initialize gas scanning.");
@@ -280,4 +306,6 @@ void perform____GasSampling(){
 		    ROS_ERROR("Failed to get status.");} 
 		*/
 }
+
+
 

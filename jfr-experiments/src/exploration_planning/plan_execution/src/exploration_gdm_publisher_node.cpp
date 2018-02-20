@@ -294,8 +294,17 @@ void createMapCloud(){
     for (int i = 0; i <= vec_MapSize[0]-1; ++i){        
         for (int j = 0; j <= vec_MapSize[1]-1; ++j){
     */
+    
+    //ROS_INFO("Im here to create cloud....");
+    
+    //ROS_INFO("sizes are: %d, %d, %d", vec_Xpoints.size(),vec_Ypoints.size(),vec_Concentration.size());
+    //ROS_INFO("sizes are: %d, %d, %d", vec_reconColorR.size(),vec_reconColorG.size(),vec_reconColorB.size());
+    
     for (int i=0; i<vec_Xpoints.size(); i++){
         for (int j=0; j<vec_Ypoints.size(); j++){
+            
+            
+            //ROS_INFO("In the loop...."); 
             
             //float x = ((i-vec_RobotOrigin[0])*cell_size)+hard_offset_x;
             //float y = ((j-vec_RobotOrigin[1])*cell_size)+hard_offset_y;                                        
@@ -316,22 +325,33 @@ void createMapCloud(){
             
             //-- high concentration cell
             //if (vec_Concentration[(i*vec_MapSize[1])+j] > high_t){
+            //ROS_INFO("This index: %d", (i*vec_Ypoints.size())+j);
+            //ROS_INFO("Concentration here: %f",vec_Concentration[(i*vec_Ypoints.size())+j]);
+            //ROS_INFO("RGB here: <%f,%f,%f>",vec_reconColorR[(i*vec_Ypoints.size())+j],vec_reconColorG[(i*vec_Ypoints.size())+j],vec_reconColorB[(i*vec_Ypoints.size())+j]);
+            
             if (vec_Concentration[(i*vec_Ypoints.size())+j] > high_t){
                 
-                pcl::PointXYZRGB p;
                 
+                //ROS_INFO("In color loop1...");
+                pcl::PointXYZRGB p;
+                //ROS_INFO("In color loop2...");
                 p.x = x; p.y = y; p.z = z;
+                
+                //ROS_INFO("In color loop3...");
+                
                 //p.r = 255; p.g = 0.3f; p.b = 0.3f;
                 p.r = vec_reconColorR[(i*vec_Ypoints.size())+j];
                 p.g = vec_reconColorG[(i*vec_Ypoints.size())+j];
                 p.b = vec_reconColorB[(i*vec_Ypoints.size())+j];
+                
+                //ROS_INFO("In color loop4...");
                 
                 /*
                 ROS_INFO("this <r,g,b> is <%f,%f,%f>",vec_reconColorR[(i*vec_MapSize[1])+j],\
                                                       vec_reconColorG[(i*vec_MapSize[1])+j],\
                                                       vec_reconColorB[(i*vec_MapSize[1])+j]);
                 */
-                
+                //ROS_INFO("In color loop5...");
                 map_cloud.points.push_back(p);
                 
             }
@@ -342,6 +362,8 @@ void createMapCloud(){
     map_cloud.height = 1;
     map_cloud.width = map_cloud.points.size();
     map_cloud.header.frame_id = "/map";
+    
+    //ROS_INFO("OUT OF CLOUD PUBLISHER...."); 
 
 }
 
@@ -455,8 +477,9 @@ int main( int argc, char** argv ){
 	        //-- complete the current scan
 	        //=============================================
 	        //map_msg.text = "Wait! The map is being computed.";
+	        ROS_INFO("Waiting for the scan to be completed.");
 	        while(statusPTU!=0){
-	            ROS_INFO("Waiting for the scan to be completed.");
+	            //ROS_INFO("Waiting for the scan to be completed.");
 	            ros::WallDuration(2).sleep();
 	            ros::spinOnce();
             }
@@ -472,7 +495,7 @@ int main( int argc, char** argv ){
     	    //msg_publisher.publish(map_msg);
 	        while (statusPTU==0 && accesstime_diff==0){
 	            
-	            ROS_INFO("The map is being computed...");
+	            //ROS_INFO("The map is being computed...");
 	            
 	            // Text message
                 //map_msg.text = "Wait! The map is being computed.";
@@ -526,12 +549,13 @@ int main( int argc, char** argv ){
 	        	        
 	        //-- ptu is idle
             //=============================================
+            ROS_INFO("Publishing the previous map...");
 	        while(statusPTU==0){
 	            
 	            //ROS_INFO("Waiting for the scan.");
 	            
 	            //-- publish the current map
-	            ROS_INFO("Publishing the previous map...");
+	            //ROS_INFO("Publishing the previous map...");
 	            cloud_publisher.publish (map_cloud.makeShared());
 
 	            ros::WallDuration(1).sleep();

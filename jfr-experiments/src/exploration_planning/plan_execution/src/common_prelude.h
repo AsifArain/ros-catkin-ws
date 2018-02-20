@@ -71,6 +71,7 @@ string rmld_msg;
 double GasMeasureThreshold;
 int    OperationStatus;
 
+
 //--- PTU/Sweeping Variables
 //==========================
 double min_pan_angle, max_pan_angle, min_tilt_angle, max_tilt_angle, sample_delay, tilt_angle;
@@ -78,6 +79,7 @@ int    statusPTU, num_pan_sweeps, num_tilt_sweeps;
 double sensing_range, offsetY_base_rmld, FoV;
 vector<double> vecJointState;
 double anglePan,angleTilt;
+
 
 //--- Pose/localization Variables
 //==========================
@@ -138,11 +140,11 @@ void execute____PlannedConfigurations();
 
 //----- Gas Sampling Parameters
 //============================================
-	#define	DEFAULT_MIN_PAN_ANGLE       -90.0
-	#define	DEFAULT_MAX_PAN_ANGLE       90.0
+	//#define	DEFAULT_MIN_PAN_ANGLE       -90.0
+	//#define	DEFAULT_MAX_PAN_ANGLE       90.0
     #define	DEFAULT_SENSING_RANGE       15.0
     #define	DEFAULT_OFFSETY_BASE_RMLD   0.904
-    #define	DEFAULT_FOV                 180.0
+    #define	DEFAULT_FOV                 270.0
     #define	DEFAULT_NUM_PAN_SWEEPS      1
     #define	DEFAULT_NUM_TILT_SWEEPS     1
     #define	DEFAULT_SAMPLE_DELAY        0.1

@@ -221,13 +221,14 @@ int main (int argc, char** argv){
             conf_positions.points.clear();
             conf_orientations.poses.clear();
             
+            //ROS_INFO("Im here....%d",vec_Confs.size()/3);
             
             for (size_t i = 0; i<(vec_Confs.size()/3); ++i){
                 
-                //float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
-                //float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
-                float x = vec_Confs[i*3+0];
-                float y = vec_Confs[i*3+1];;
+                float x = ((vec_Confs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+                float y = ((vec_Confs[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+                //float x = vec_Confs[i*3+0];
+                //float y = vec_Confs[i*3+1];;
                 float z = 1.0;
                 float o = vec_Confs[i*3+2];
                 

@@ -25,7 +25,7 @@
          value="prismaforum5" />
          
     <!-- Experiment Number -->
-    <arg name="para_ExperimentTitle"
+    <arg name="para_ExperimentNum"
          value="04" />
     
     <!-- Experiment Title -->
@@ -44,7 +44,7 @@
          
     <!-- Map Size File -->
     <arg name="para_MapSizeFile" 		
-         value=".dat" />
+         value="prismaforum5_mapsize_conf.dat" />
     
     <!-- Cell Size File -->
     <arg name="para_CellSizeFile" 		
@@ -86,8 +86,12 @@
     <!-- Hard Offset Y -->
     <arg name="para_HardOffsetY"
          value="0.0" />
+    
          
-        
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--                 RVIZ                       -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <node pkg="rviz" type="rviz" name="rviz" />
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <!--           ONE STEP EXPLORATION             -->
@@ -124,7 +128,10 @@
 	<node pkg="plan_execution" 
 	      type="env_map_publisher_node" 
 	      name="env_map_publisher" output="screen">
-	
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
 	    <param name="map_file"	            value="$(arg para_MapFile)"/>
         <param name="map_size_file"	        value="$(arg para_MapSizeFile)"/>
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
@@ -142,6 +149,9 @@
     <node pkg="plan_execution" 
           type="conf_publisher_node" 
           name="conf_publisher" output="screen">
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
 	    
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>

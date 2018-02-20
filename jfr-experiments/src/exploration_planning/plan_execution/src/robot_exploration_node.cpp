@@ -71,12 +71,12 @@ void readEnvironmentMap(){
 	    //==============================
 	    ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
-	    ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
+	    //ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
 		    while(file__RobotOrigin >> this_origin){
 			    vec_RobotOrigin.push_back(this_origin);
-			    ROS_INFO("This origin %f",this_origin);
+			    //ROS_INFO("This origin %f",this_origin);
          	}
 		    file__RobotOrigin.close();
 	    }
@@ -101,7 +101,7 @@ void get________PlannedPosesFromFile(){
 	filePoses.open((FilePath+plan_FileName).c_str(), std::ios::app);
 	if (filePoses.is_open()){
 		//std::cout << "File is open."<<std::endl;
-		ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
+		//ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
 		while(filePoses >> value){
 			vecPoses.push_back(value);
 			//std::cout<<"value is "<<value<<std::endl;
@@ -116,6 +116,8 @@ void get________PlannedPosesFromFile(){
 //================================================================================
 void execute____PlannedConfigurations(){
 	
+	
+	//perform____GasSampling(); // dummy
 	//int conf_num = 0;
 	
 	//-- create log directory
@@ -162,9 +164,10 @@ void execute____PlannedConfigurations(){
                 
                 ROS_INFO("In the loop....");
                 
-                ROS_INFO("first %f",vecPoses[i*3+0]); 
-                ROS_INFO("second %f",vec_RobotOrigin[0]);
-                ROS_INFO("third %f",cell_size);
+                //ROS_INFO("first %f",vecPoses[i*3+0]); 
+                //ROS_INFO("second %f",vec_RobotOrigin[0]);
+                //ROS_INFO("third %f",cell_size);
+                
                 
                 float conf_x = ((vecPoses[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size);
                 float conf_y = ((vecPoses[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size);                
@@ -285,6 +288,7 @@ int main(int argc, char** argv){
 	    paramHandle.param("num_tilt_sweeps",  num_tilt_sweeps,  DEFAULT_NUM_TILT_SWEEPS);
 	    paramHandle.param("sample_delay",     sample_delay,     DEFAULT_SAMPLE_DELAY);
 	    
+	    
 	    	
     	//============================================
 	    //----- File contains poses or plan
@@ -323,9 +327,6 @@ int main(int argc, char** argv){
 	    //paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
 	    
 	    
-	    
-	    
-	    
 	    //============================================	
 	    //----- ROS Topic Names
 	    //============================================
@@ -335,6 +336,12 @@ int main(int argc, char** argv){
 	    paramHandle.param<std::string>("rmld_topic",        topicRMLDReadings,   DEFAULT_TOPIC_RMLD_READINGS);
 	    //paramHandle.param<std::string>("current_goal_topic",topicCurrentGoal,    DEFAULT_TOPIC_CURRENT_GOAL);
 	    
+	    
+	    //============================================	
+	    //----- ROS Service Names
+	    //============================================
+	    paramHandle.param<std::string>("ptu_sweep_command_srv", srvPTUSweepCommand, DEFAULT_SERVICE_PTU_SWEEP_COMMAND);
+	    paramHandle.param<std::string>("ptu_joint_angles_srv",  srvPTUJointStatus,  DEFAULT_SERVICE_PTU_JOINT_STATUS);
 	    
 	    
 	    

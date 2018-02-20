@@ -72,6 +72,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    ROS_INFO("Map size... ");
 	    file__MapSize.open((FilePath+filename__MapSize).c_str(), std::ios::app);
+	    //ROS_INFO("file: %s",(FilePath+filename__MapSize).c_str());
 	    int this_size;
 	    vec_MapSize.clear();
 	    if (file__MapSize.is_open()){
@@ -131,7 +132,7 @@ void readEnvironmentMap(){
          	file__CellSize >> cell_size;
 		    file__CellSize.close();
 		    //ROS_INFO("Cell size: %f",cell_size);
-	    }	    
+	    }
 	    else std::cout << "Unable to open file for cell size";
 	    
 	    
@@ -140,10 +141,12 @@ void readEnvironmentMap(){
 	    //==============================
 	    ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
+	    //ROS_INFO("file: %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
 		    while(file__RobotOrigin >> this_origin){
 			    vec_RobotOrigin.push_back(this_origin);
+			    //ROS_INFO("this origin: %f",this_origin);
          	}
 		    file__RobotOrigin.close();
 	    }

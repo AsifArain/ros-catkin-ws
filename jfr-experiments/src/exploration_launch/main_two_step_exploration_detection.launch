@@ -33,7 +33,7 @@
          
     <!-- Map Size File -->
     <arg name="para_MapSizeFile" 		
-         value=".dat" />
+         value="prismaforum5_mapsize_conf.dat" />
     
     <!-- Cell Size File -->
     <arg name="para_CellSizeFile" 		
@@ -76,6 +76,11 @@
     <arg name="para_HardOffsetY"
          value="0.0" />
 
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--                 RVIZ                       -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <node pkg="rviz" type="rviz" name="rviz" />
+    
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <!--      TWO STEP EXPLORATION (DETECTION)      -->
@@ -105,6 +110,57 @@
 
     </node>
     
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--            ENVIRONMENT MAP                 -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+	<node pkg="plan_execution" 
+	      type="env_map_publisher_node" 
+	      name="env_map_publisher" output="screen">
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
+	    <param name="map_file"	            value="$(arg para_MapFile)"/>
+        <param name="map_size_file"	        value="$(arg para_MapSizeFile)"/>
+        <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
+        <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
+        
+        <param name="hard_offset_x"	        value="$(arg para_HardOffsetX)"/>
+        <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>
+                
+    </node>
+    
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--         PLANNED CONF PLACEMENTS            -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <node pkg="plan_execution" 
+          type="conf_publisher_node" 
+          name="conf_publisher" output="screen">
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
+        <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
+        <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
+        <param name="conf_file"	            value="$(arg para_PlannedConfsFile)"/>
+        
+        <param name="hard_offset_x"	        value="$(arg para_HardOffsetX)"/>
+        <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>
+        
+    </node>
+    
+    
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--              SCAN PUBLISHER                -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <node pkg="plan_execution" 
+          type="scan_publisher_node" 
+          name="scan_publisher" output="screen">
+	
+	    <param name="field_of_view"	        value="$(arg para_FOV)"/>
+	    <param name="sensing_range"	        value="$(arg para_SensingRange)"/>
+
+    </node>
     
         
 </launch>

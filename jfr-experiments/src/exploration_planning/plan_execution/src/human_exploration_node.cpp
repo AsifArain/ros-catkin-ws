@@ -22,6 +22,8 @@
 #include <visualization_msgs/Marker.h>
 
 
+
+
 //--- File Variables
 //==========================
 double cell_size;
@@ -107,10 +109,12 @@ void readEnvironmentMap(){
 	    //==============================
 	    ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
+	    //ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
 		    while(file__RobotOrigin >> this_origin){
 			    vec_RobotOrigin.push_back(this_origin);
+			    //ROS_INFO("This origin %f",this_origin);
          	}
 		    file__RobotOrigin.close();
 	    }
@@ -126,6 +130,10 @@ void readEnvironmentMap(){
 //              EXECUTE PLANNED CONFIGURATIONS (HUMAN-SELECTED)
 //================================================================================
 void execute____PlannedConfigurations(){
+        
+        
+        //perform____GasSampling(); // dummy
+        
         
         //-- create log directory
         //------------------------
@@ -245,7 +253,9 @@ void execute____PlannedConfigurations(){
 	    //----------------------------------
 	    
         while(ros::ok()){
-                                    
+                            
+            
+                    
             //-----------------------------------------------------
             //-- get goal from rviz
             //-----------------------------------------------------
@@ -443,17 +453,16 @@ int main(int argc, char** argv){
         //============================================
 	    //----- Gas Sampling Parameters
 	    //============================================
-	    paramHandle.param("min_pan_angle",    min_pan_angle,    DEFAULT_MIN_PAN_ANGLE);
-	    paramHandle.param("max_pan_angle",    max_pan_angle,    DEFAULT_MAX_PAN_ANGLE);
+	    //paramHandle.param("min_pan_angle",    min_pan_angle,    DEFAULT_MIN_PAN_ANGLE);
+	    //paramHandle.param("max_pan_angle",    max_pan_angle,    DEFAULT_MAX_PAN_ANGLE);
 	    paramHandle.param("sensing_range",    sensing_range,    DEFAULT_SENSING_RANGE);
 	    paramHandle.param("offsetY_base_rmld",offsetY_base_rmld,DEFAULT_OFFSETY_BASE_RMLD);
 	    paramHandle.param("field_of_view",    FoV,              DEFAULT_FOV);
 	    paramHandle.param("num_pan_sweeps",   num_pan_sweeps,   DEFAULT_NUM_PAN_SWEEPS);
 	    paramHandle.param("num_tilt_sweeps",  num_tilt_sweeps,  DEFAULT_NUM_TILT_SWEEPS);
 	    paramHandle.param("sample_delay",     sample_delay,     DEFAULT_SAMPLE_DELAY);	    
-        
-               
-	
+                
+	    
         //============================================	
 	    //----- Navignation Parameters
 	    //============================================

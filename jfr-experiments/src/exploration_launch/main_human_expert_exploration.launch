@@ -33,7 +33,7 @@
          
     <!-- Map Size File -->
     <arg name="para_MapSizeFile" 		
-         value=".dat" />
+         value="prismaforum5_mapsize_conf.dat" />
     
     <!-- Cell Size File -->
     <arg name="para_CellSizeFile" 		
@@ -76,7 +76,12 @@
     <arg name="para_HardOffsetY"
          value="0.0" />
          
-         
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <!--                 RVIZ                       -->
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <node pkg="rviz" type="rviz" name="rviz" />
+    
+    
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <!--         HUMAN EXPERT EXPLORATION           -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -110,7 +115,10 @@
 	<node pkg="plan_execution" 
 	      type="env_map_publisher_node" 
 	      name="env_map_publisher" output="screen">
-	
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
 	    <param name="map_file"	            value="$(arg para_MapFile)"/>
         <param name="map_size_file"	        value="$(arg para_MapSizeFile)"/>
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
@@ -140,7 +148,7 @@
         <param name="map_size_file"	        value="reconstruction_mapsize.dat"/>
         <param name="cell_size_file"	    value="reconstruction_cellsize.dat"/>
         <param name="robot_origin_file"	    value="reconstruction_origin.dat"/>
-        <param name="high_threshould"	    value="100"/>
+        <param name="high_threshould"	    value="50"/>
         
         <param name="recon_color_r_file"	value="reconstructionColorR.dat"/>
         <param name="recon_color_g_file"	value="reconstructionColorG.dat"/>

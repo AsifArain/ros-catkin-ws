@@ -190,6 +190,19 @@ add_executable(exploration_gdm_publisher_node src/exploration_gdm_publisher_node
 target_link_libraries(exploration_gdm_publisher_node ${catkin_LIBRARIES} )
 
 
+#---- PTU Sweep Request Node (Test)
+#=======================================
+add_executable(ptu_sweep_request_node src/ptu_sweep_request_node.cpp)
+target_link_libraries(ptu_sweep_request_node ${catkin_LIBRARIES} )
+
+
+#---- Robot exploration (PTU sweep test)
+#=======================================
+add_executable(robot_exploration_sweep_test_node src/robot_exploration_sweep_test_node.cpp)
+target_link_libraries(robot_exploration_sweep_test_node ${catkin_LIBRARIES} )
+
+
+
 
 ###### test to read file ########################################################
 #add_executable(test_read_file src/test_read_file.cpp)
