@@ -285,7 +285,7 @@ void createMapCloud(){
 
     //--- read map info
     readReconstructionFiles();
-            
+    
     //--------------------------------        
     //--- map cells
     //--------------------------------
@@ -444,19 +444,19 @@ int main( int argc, char** argv ){
         //-- MAP MESSAGE INITIALIZATION
         //--------------------------------
         
-        map_msg.header.frame_id = "/map";
+        map_msg.header.frame_id = "/base_footprint";
         map_msg.header.stamp = ros::Time::now();
         map_msg.ns = "map_msg_publisherlisher";
         map_msg.action = visualization_msgs::Marker::ADD;
         
-        map_msg.pose.position.x = 5.0;
+        map_msg.pose.position.x = 0.0;
         map_msg.pose.position.y = 2.0;
         map_msg.pose.position.z = 1.0;
         map_msg.pose.orientation.w = 1.0;
         
         map_msg.id = 4;
         map_msg.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-        map_msg.scale.z = 0.5;
+        map_msg.scale.z = 5.5;
                 
         map_msg.color.r = 1.0f;
         map_msg.color.g = 0.0f;

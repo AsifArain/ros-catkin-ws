@@ -40,6 +40,7 @@
 
 #include <boost/math/constants/constants.hpp>
 const double PI = boost::math::constants::pi<double>();
+#include <geometry_msgs/PoseArray.h>
 
 
 using namespace std;
@@ -80,10 +81,17 @@ visualization_msgs::Marker conf_points, \
                            path_strip;
 
 
+geometry_msgs::PoseArray conf_orns;
+
+
 void callback___Localization();
 void publish____ScanArea();
 void callback___PTUSweepingStatus();
 void callback___PTUJointAngles();
+
+
+geometry_msgs::PoseStamped currentPose;
+
 
 //visualization_msgs::Marker scan_marker;
 
@@ -116,6 +124,11 @@ void callback___Localization(const nav_msgs::Odometry::ConstPtr& enco){
 
 	//-- Print info
 	//ROS_INFO("position (X,Y,W) is... %.2f,%.2f,%.2f",posX,posY,posW);	
+	
+	
+	currentPose.pose.position = enco->pose.pose.position;
+	currentPose.pose.orientation = enco->pose.pose.orientation;
+	
 }
 
 
@@ -145,6 +158,8 @@ void callback___PTUJointAngles(const sensor_msgs::JointState::ConstPtr& jsta){
 	//ROS_INFO("Pan Angle %.2f, Tilt Angle %.2f",anglePan,angleTilt);
 
 }
+
+
 
 
 
@@ -236,10 +251,22 @@ void publish____ScanArea(){
                 geometry_msgs::Point po;
                 po.x = posX;
                 po.y = posY;
-                po.z = 0.1; 
+                po.z = 0.5; //0.1; 
                 conf_points.points.push_back(po);
                 conf_spheres.points.push_back(po);
                 path_strip.points.push_back(po);
+                
+                                
+                //-- conf orientation
+                geometry_msgs::PoseStamped pos;        
+                pos.pose.position.x = posX;
+                pos.pose.position.y = posY;
+                pos.pose.position.z = 0.5; //0.1;                
+                pos.pose.orientation = currentPose.pose.orientation; //tf::createQuaternionMsgFromYaw(o*M_PI/180);
+                conf_orns.poses.push_back(pos.pose);
+                
+                
+                
             }
             
         }
@@ -259,7 +286,7 @@ int main( int argc, char** argv ){
 	    printf("\n=================================================================\n");        
         
         ros::init(argc, argv, "scan_publisher_node");
-        ros::NodeHandle n;
+        ros::NodeHandle n ("scan_pub");
     
         // ####################### PARAMETERS ########################
         ros::NodeHandle paramHandle ("~");
@@ -294,7 +321,11 @@ int main( int argc, char** argv ){
         //============================================
 	    //----- ROS Topic Publishers
         //============================================
-        ros::Publisher scan_marker = n.advertise<visualization_msgs::Marker>("scan_area", 10);
+        //ros::Publisher scan_marker = n.advertise<visualization_msgs::Marker>("scan_area", 10);
+        ros::Publisher sweep_pub = n.advertise<visualization_msgs::Marker>("sweep", 10);
+        ros::Publisher pos_pub = n.advertise<visualization_msgs::Marker>("positions", 10);
+        ros::Publisher orn_pub = n.advertise<geometry_msgs::PoseArray>("orientations", 10);
+        ros::Publisher path_pub = n.advertise<visualization_msgs::Marker>("path", 10);
         
         ros::Rate r(30);
         
@@ -314,7 +345,7 @@ int main( int argc, char** argv ){
         fov_strip.header.frame_id = \
         beam_line.header.frame_id = "/map";
         
-        conf_spheres.header.stamp = \
+        //conf_spheres.header.stamp = \
         path_strip.header.stamp = \
         conf_points.header.stamp = \
         fov_strip.header.stamp = \
@@ -381,9 +412,9 @@ int main( int argc, char** argv ){
         //--------------------------------
         
         // spheres are dark gray
-        conf_spheres.color.r = 0.40;
-        conf_spheres.color.g = 0.40;
-        conf_spheres.color.b = 0.40;
+        conf_spheres.color.r = 0.6902; //0.40;
+        conf_spheres.color.g = 0.7686; //0.40;
+        conf_spheres.color.b = 0.8706; //0.40;
         conf_spheres.color.a = 1.00;
                 
         // Points are green
@@ -410,7 +441,14 @@ int main( int argc, char** argv ){
         path_strip.color.b = 0.5;
         path_strip.color.a = 0.3;
         
-                       
+
+        //---------------------------------
+        // orientation marker
+        //---------------------------------
+        //conf_orns.poses.clear();
+        //conf_orns.header.stamp = ros::Time::now();
+        conf_orns.header.frame_id = "/map";                       
+        
         
         while(ros::ok()){
         
@@ -419,13 +457,38 @@ int main( int argc, char** argv ){
                 publish____ScanArea();
                 
                 
+                //-- update time stamps
+                conf_spheres.header.stamp = \
+                path_strip.header.stamp = \
+                conf_points.header.stamp = \
+                fov_strip.header.stamp = \
+                beam_line.header.stamp = \
+                conf_orns.header.stamp = ros::Time::now();
+        
+            
+                               
+                
                 //-- publish 
                 //------------------
+                /*
                 scan_marker.publish(fov_strip);
                 scan_marker.publish(beam_line);
                 //scan_marker.publish(conf_points);
                 scan_marker.publish(path_strip);
                 scan_marker.publish(conf_spheres);
+                
+                orientations_pub.publish(conf_orns);
+                */
+                
+                
+                sweep_pub.publish(fov_strip);
+                sweep_pub.publish(beam_line);
+                
+                pos_pub.publish(conf_spheres);
+                orn_pub.publish(conf_orns);
+                
+                path_pub.publish(path_strip);
+                
                 
                 //ROS_INFO("Spinning");
                 ros::spinOnce();

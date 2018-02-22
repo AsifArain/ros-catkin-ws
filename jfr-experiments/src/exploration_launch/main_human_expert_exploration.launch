@@ -21,7 +21,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-04" /> <!-- -->
+         value="prismaforum5-05" /> <!-- -->
 
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
