@@ -7,9 +7,9 @@
     This is main file to publish field of view at RVIZ.
     
     -------------------------------------------------------------------------
-    Author:  Asif Arain
-    Date:    06-Nov-2017
-    Version: 0.0
+        Author:  Asif Arain
+        Date:    06-Nov-2017
+        Version: 0.0
     -------------------------------------------------------------------------
 
 
@@ -403,8 +403,8 @@ int main( int argc, char** argv ){
         conf_points.scale.y = 0.20;
         
         // LINE_STRIP/LINE_LIST markers use only the x component of scale, for the line width
-        fov_strip.scale.x  = 0.10;
-        beam_line.scale.x  = 0.10;
+        fov_strip.scale.x  = 0.15;
+        beam_line.scale.x  = 0.15;
         path_strip.scale.x = 0.10;
         
         
@@ -423,23 +423,20 @@ int main( int argc, char** argv ){
         conf_points.color.b = 0.7f;
         conf_points.color.a = 1.00;
         
-        // Line strip is blue
-        fov_strip.color.b = 1.00;
-        fov_strip.color.a = 0.30;
-        
+                
         // Line list is red
         beam_line.color.r = 1.0;
         beam_line.color.a = 1.0;
         
         // Line strip is blue
         fov_strip.color.b = 1.0;
-        fov_strip.color.a = 0.3;
+        fov_strip.color.a = 0.5;
         
         // path strip is gray
         path_strip.color.r = 0.5;
         path_strip.color.g = 0.5;
         path_strip.color.b = 0.5;
-        path_strip.color.a = 0.3;
+        path_strip.color.a = 0.5;
         
 
         //---------------------------------

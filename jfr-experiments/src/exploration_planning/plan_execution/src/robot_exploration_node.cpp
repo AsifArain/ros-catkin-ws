@@ -9,9 +9,9 @@
     Exploration strategy.
     
     -------------------------------------------------------------------------
-    Author:  Asif Arain
-    Date:    27-Oct-2017
-    Version: 0.0
+        Author:  Asif Arain
+        Date:    27-Oct-2017
+        Version: 0.0
     -------------------------------------------------------------------------
 
 
@@ -45,8 +45,10 @@ double hard_offset_x, hard_offset_y;
 //================================================================================
 void readEnvironmentMap(){
 
+        ROS_INFO("Reading data for robot exploration node... ");
         
-        ROS_INFO("Reading environment map... ");	    
+        
+        //ROS_INFO("Reading environment map... ");	    
 	    std::ifstream file__MapSize, \
 	                  file__MapSensorPlacements, \
 	                  file__CellSize, \
@@ -57,7 +59,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Read Cell Size
 	    //==============================
-	    ROS_INFO("Cell size... ");
+	    //ROS_INFO("Cell size... ");
 	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
@@ -69,7 +71,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Read Robot Origin
 	    //==============================
-	    ROS_INFO("Robot origin... ");	    
+	    //ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
 	    //ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
@@ -104,7 +106,7 @@ void get________PlannedPosesFromFile(){
 		//ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
 		while(filePoses >> value){
 			vecPoses.push_back(value);
-			//std::cout<<"value is "<<value<<std::endl;
+			std::cout<<"value is "<<value<<std::endl;
  		}
 		filePoses.close();
 	}
@@ -136,20 +138,22 @@ void execute____PlannedConfigurations(){
         //---------------------
         ROS_INFO("Obtaining planned poses to execute...");
         get________PlannedPosesFromFile();
-        std::cout<<"size of vector "<<vecPoses.size()<<std::endl;
-            num_of_conf = vecPoses.size()/3;
-        std::cout<<"Number of conf to execute "<<num_of_conf<<std::endl;
         
-        ROS_INFO("conf_num %d",conf_num);
+        //std::cout<<"size of vector "<<vecPoses.size()<<std::endl;
+        
+        num_of_conf = vecPoses.size()/3;
+        //std::cout<<"Number of conf to execute: "<<num_of_conf<<std::endl;        
+        ROS_INFO("Number of conf to execute: %d",num_of_conf);        
+        ROS_INFO("Initial conf num (of this reading): %d",conf_num);
             
-        if (num_of_conf > conf_num){
+        if (num_of_conf >= conf_num){
 
             ros::WallDuration(1).sleep();
             
-            ROS_INFO("Before move base ....");
+            ROS_DEBUG("Before move base ....");
             //tell the action client that we want to spin a thread by default
             actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base", true);
-            ROS_INFO("After move base ....");
+            ROS_DEBUG("After move base ....");
             
             
             //-- wait for the action server to come up
@@ -158,11 +162,11 @@ void execute____PlannedConfigurations(){
                     ROS_INFO("Waiting for the move_base action server to come up");
             }
             
-            ROS_INFO("After wakeup ....");
+            ROS_DEBUG("After wakeup ....");
 
-            for (int i=conf_num;i<vecPoses.size()/3;i++){
+            for (int i=(conf_num-1);i<vecPoses.size()/3;i++){
                 
-                ROS_INFO("In the loop....");
+                //ROS_INFO("In the loop....");
                 
                 //ROS_INFO("first %f",vecPoses[i*3+0]); 
                 //ROS_INFO("second %f",vec_RobotOrigin[0]);
@@ -174,28 +178,32 @@ void execute____PlannedConfigurations(){
                 float conf_t = vecPoses[i*3+2];
                 
                 ROS_INFO("This conf <%f,%f,%f>",conf_x,conf_y,conf_t);
+                ROS_INFO("This vecPoses <%f,%f,%f>",vecPoses[i*3+0],vecPoses[i*3+1],vecPoses[i*3+2]);
                 
                 //--- goal pose
                 //--------------------
                 move_base_msgs::MoveBaseGoal goal;
                 
-                goal.target_pose.header.frame_id = plan_frame_name; //"/world"; //"base_link" //"base_footprint";
-                goal.target_pose.header.stamp    = ros::Time::now();
-
-                goal.target_pose.pose.position.x 	= conf_x;
-                goal.target_pose.pose.position.y 	= conf_y;                
-                goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(conf_t*M_PI/180);
+                goal.target_pose.header.frame_id  = plan_frame_name; //"/world"; //"base_link" //"base_footprint";
+                goal.target_pose.header.stamp     = ros::Time::now();
+                
+                goal.target_pose.pose.position.x  = conf_x;
+                goal.target_pose.pose.position.y  = conf_y;                
+                goal.target_pose.pose.orientation = tf::createQuaternionMsgFromYaw(conf_t*M_PI/180);
                 
                                 
                 //--- sending goal
                 //--------------------
-                ROS_INFO("Gasbot is moving to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i,conf_x,conf_y,conf_t); 
+                
+                ROS_INFO("Gasbot is moving to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i+1,conf_x,conf_y,conf_t); 
                 ac.sendGoal(goal);
                 ac.waitForResult();
-
+                
+                //ROS_INFO("Move gasbot to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i,conf_x,conf_y,conf_t); 
+                
                 if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
 	                
-	                ROS_INFO("Gasbot has reached to desired pose %i",i+1);
+	                ROS_INFO("Gasbot has reached to the desired pose# %i",i+1);
 	                //ROS_INFO("Wait for a sec....");
 	                //ros::WallDuration(1).sleep();
 	                
@@ -212,7 +220,7 @@ void execute____PlannedConfigurations(){
                         
                         //-- Gas sampling
                         //------------------------
-                        ROS_INFO("Gas sampling is in progress....");
+                        ROS_INFO("Gas sampling in progress....");
                         perform____GasSampling();
 		                
 		                //-- Wait untill sampling is completed
@@ -231,19 +239,22 @@ void execute____PlannedConfigurations(){
                         }
                         //ROS_INFO("Line 192, PTU status is %d",statusPTU);
 				        //ROS_INFO("Hamary ptu ka status...%i\n",global_status);}
-		                ROS_INFO("Gas detection COMPLETED.");
+		                ROS_INFO("Gas sampling COMPLETED.");
 		                
-		                //-- update conf num
-		                //------------------------
-                        conf_num++;
+		                
 	                    
                         //-- close log file
                         //------------------------
 		                close______LogFile();
+		                
+		                //-- update conf num
+		                //------------------------
+                        conf_num++;
+                        
 	                //}
                 }
                 else{
-                	ROS_INFO("The Husky failed to reach desired pose.");
+                	ROS_WARN("Gasbot failed to reach the desired pose.");
             	}
             }
         
@@ -251,7 +262,7 @@ void execute____PlannedConfigurations(){
         ros::WallDuration(5).sleep();
         }
         else{                    
-            ROS_INFO("No configuration to execute.....");
+            ROS_INFO("No more planned configurations to execute.....");
             ros::WallDuration(5).sleep();
         }
     }
@@ -313,7 +324,7 @@ int main(int argc, char** argv){
 	    paramHandle.param<std::string>("experiment_title",experimentTitle,DEFAULT_EXPERIMENT_TITLE);
 	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,DEFAULT_EXPLORATION_STRATEGY);
 
-	    
+	    paramHandle.param("initial_conf_num",conf_num,DEFAULT_CONF_NUM);
 	    	    
 	    //============================================	
 	    //----- Map Info Parameters

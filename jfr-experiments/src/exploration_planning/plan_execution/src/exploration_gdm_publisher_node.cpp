@@ -7,9 +7,9 @@
     This is main file to publish gas distribution map using pointcloud.
     
     -------------------------------------------------------------------------
-    Author:  Asif Arain
-    Date:    08-Feb-2017
-    Version: 0.0
+        Author:  Asif Arain
+        Date:    08-Feb-2017
+        Version: 0.0
     -------------------------------------------------------------------------
 
 
@@ -103,8 +103,10 @@ int statusPTU;
 //================================================================================
 void readReconstructionFiles(){
 
+
+        ROS_INFO("Reading data for GDM publisher node... ");
         
-        ROS_INFO("Reading environment map... ");	    
+        //ROS_INFO("Reading environment map... ");	    
 	    std::ifstream file__MapSize, \
 	                  file__MapConcentration, \
 	                  file__reconColorR, \
@@ -119,7 +121,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- Read X-points
 	    //==============================
-	    ROS_INFO("Reading x points... ");
+	    //ROS_INFO("Reading x points... ");
 	    file__Xpoints.open((FilePath+filename__XPts).c_str(), std::ios::app);
 	    double valueX;
 	    vec_Xpoints.clear();
@@ -135,7 +137,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- Read Y-points
 	    //==============================
-	    ROS_INFO("Reading y points... ");
+	    //ROS_INFO("Reading y points... ");
 	    file__Ypoints.open((FilePath+filename__YPts).c_str(), std::ios::app);
 	    double valueY;
 	    vec_Ypoints.clear();
@@ -151,7 +153,7 @@ void readReconstructionFiles(){
         //==============================
         //--- map size
 	    //==============================
-	    ROS_INFO("Map size... ");
+	    //ROS_INFO("Map size... ");
 	    file__MapSize.open((FilePath+filename__MapSize).c_str(), std::ios::app);
 	    int this_size;
 	    vec_MapSize.clear();
@@ -168,7 +170,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- concentration map
 	    //==============================
-	    ROS_INFO("Map... ");
+	    //ROS_INFO("Map... ");
 	    file__MapConcentration.open((FilePath+filename__Reconstruction).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__Reconstruction).c_str());
 	    double this_map;
@@ -186,7 +188,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- reconstruction color R
 	    //==============================
-	    ROS_INFO("Reconstruction Color R... ");
+	    //ROS_INFO("Reconstruction Color R... ");
 	    file__reconColorR.open((FilePath+filename__reconstructionColorR).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorR).c_str());
 	    int this_colR;
@@ -204,7 +206,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- reconstruction color G
 	    //==============================
-	    ROS_INFO("Reconstruction Color G... ");
+	    //ROS_INFO("Reconstruction Color G... ");
 	    file__reconColorG.open((FilePath+filename__reconstructionColorG).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorG).c_str());
 	    int this_colG;
@@ -222,7 +224,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- reconstruction color B
 	    //==============================
-	    ROS_INFO("Reconstruction Color B... ");
+	    //ROS_INFO("Reconstruction Color B... ");
 	    file__reconColorB.open((FilePath+filename__reconstructionColorB).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__reconstructionColorB).c_str());
 	    int this_colB;
@@ -240,7 +242,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- Read Cell Size
 	    //==============================
-	    ROS_INFO("Cell size... ");
+	    //ROS_INFO("Cell size... ");
 	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
@@ -253,7 +255,7 @@ void readReconstructionFiles(){
 	    //==============================
 	    //--- Read Robot Origin
 	    //==============================
-	    ROS_INFO("Robot origin... ");	    
+	    //ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
 	    double this_origin;
 	    if (file__RobotOrigin.is_open()){
@@ -444,19 +446,19 @@ int main( int argc, char** argv ){
         //-- MAP MESSAGE INITIALIZATION
         //--------------------------------
         
-        map_msg.header.frame_id = "/base_footprint";
-        map_msg.header.stamp = ros::Time::now();
+        map_msg.header.frame_id = "/base_link";
+        //map_msg.header.stamp = ros::Time::now();
         map_msg.ns = "map_msg_publisherlisher";
-        map_msg.action = visualization_msgs::Marker::ADD;
+        //map_msg.action = visualization_msgs::Marker::ADD;
         
         map_msg.pose.position.x = 0.0;
-        map_msg.pose.position.y = 2.0;
+        map_msg.pose.position.y = 0.0;
         map_msg.pose.position.z = 1.0;
         map_msg.pose.orientation.w = 1.0;
         
         map_msg.id = 4;
         map_msg.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
-        map_msg.scale.z = 5.5;
+        map_msg.scale.z = 1.5; //text size
                 
         map_msg.color.r = 1.0f;
         map_msg.color.g = 0.0f;
@@ -469,19 +471,30 @@ int main( int argc, char** argv ){
 	    //================================
 	    
 	    ros::spinOnce();
-	    	    
+	    r.sleep();
+	    
+	    map_msg.text.clear();
+	      
 	    while (ros::ok()){
 	        
-	        map_msg.text.clear();
+	        //map_msg.text.clear();
 	        	        
 	        //-- complete the current scan
 	        //=============================================
-	        //map_msg.text = "Wait! The map is being computed.";
+	        map_msg.text = "Gas sampling is in progress...";
 	        ROS_INFO("Waiting for the scan to be completed.");
 	        while(statusPTU!=0){
+	        
+	            // Text message
+                //map_msg.text = "Wait! The map is being computed.";
+                map_msg.action = visualization_msgs::Marker::DELETE; //FIXME
+                map_msg.header.stamp = ros::Time::now();
+                msg_publisher.publish(map_msg);
+                
 	            //ROS_INFO("Waiting for the scan to be completed.");
 	            ros::WallDuration(2).sleep();
 	            ros::spinOnce();
+	            r.sleep();
             }
             ros::WallDuration(2).sleep();
             
@@ -491,7 +504,8 @@ int main( int argc, char** argv ){
 	        accesstime_diff = difftime( gdm_accesstime_this,gdm_accesstime_last );
 	        //Ref: http://www.cplusplus.com/reference/ctime/difftime/
 	        	  
-    	    map_msg.text = "Wait! The map is being computed.";
+            ROS_INFO("Wait! The reconstruction map is being computed.");
+    	    map_msg.text = "Wait! Building a reconstruction....";
     	    //msg_publisher.publish(map_msg);
 	        while (statusPTU==0 && accesstime_diff==0){
 	            
@@ -499,6 +513,8 @@ int main( int argc, char** argv ){
 	            
 	            // Text message
                 //map_msg.text = "Wait! The map is being computed.";
+                map_msg.action = visualization_msgs::Marker::ADD; //FIXME
+                map_msg.header.stamp = ros::Time::now();
                 msg_publisher.publish(map_msg);
 	            
 	            //-- publish the current map
@@ -511,15 +527,18 @@ int main( int argc, char** argv ){
 	            gdm_accesstime_this = boost::filesystem::last_write_time( gdm_filepath );
 	            accesstime_diff = difftime( gdm_accesstime_this,gdm_accesstime_last );
 	            
-	            ros::spinOnce();	            
+	            ros::spinOnce();	
+	            r.sleep();            
             }
             
             
             //-- publish updated map
 	        //=============================================
                         
-            map_msg.text = "The updated map is coming.";
+            map_msg.text = "The updated map is coming...";
             //map_msg.text.clear();
+            map_msg.action = visualization_msgs::Marker::ADD; //FIXME
+            map_msg.header.stamp = ros::Time::now();
             msg_publisher.publish(map_msg);
             
             
@@ -542,24 +561,46 @@ int main( int argc, char** argv ){
             cloud_publisher.publish (map_cloud.makeShared());
             
 	        //-- publish map text (empty)
-            map_msg.text = ".";
+	        ros::spinOnce();
+	        r.sleep();
+            
+            //ROS_INFO("before text clear...");            
             //map_msg.text.clear();
+            //map_msg.text = "."; //FIXME
+            //map_msg.action = visualization_msgs::Marker::DELETE;
+            map_msg.action = visualization_msgs::Marker::ADD;
+            //map_msg.text = "This is the latest reconstruction.\nI'm ready for the next measurements..."; 
+            map_msg.text = "The latest reconstruction is displayed..."; 
+            //ROS_INFO("after text clear...");
+            map_msg.header.stamp = ros::Time::now();
+            map_msg.lifetime = ros::Duration(5.00);
             msg_publisher.publish(map_msg);
+	        //ROS_INFO("after text publish...");
 	        
-	        	        
 	        //-- ptu is idle
             //=============================================
             ROS_INFO("Publishing the previous map...");
 	        while(statusPTU==0){
 	            
 	            //ROS_INFO("Waiting for the scan.");
+	            //ROS_INFO("BEFORE publish the map.. in this loop....");
 	            
 	            //-- publish the current map
 	            //ROS_INFO("Publishing the previous map...");
+	            //Ref: https://answers.ros.org/question/172241/pcl-and-rostime/
+                ros::Time time_st = ros::Time::now ();
+                map_cloud.header.stamp = time_st.toNSec()/1e3;
 	            cloud_publisher.publish (map_cloud.makeShared());
-
+                
+                //ROS_INFO("AFTER publish the map.. in this loop....");
+                
 	            ros::WallDuration(1).sleep();
+	            
+	            //ROS_INFO("AFTER WAIT... in this loop....");
 	            ros::spinOnce();
+	            //ROS_INFO("AFTER ROS SPIN... in this loop....");
+	            r.sleep();
+	            //ROS_INFO("AFTER ROS SLEEP... in this loop....");
             }
 	        
 	        

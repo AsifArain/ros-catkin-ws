@@ -27,9 +27,17 @@
     <arg name="para_ExplorationStrategy" 		
          value="two-step-exploration-tomography-adaptive" />
     
-    <!-- Map File -->
-    <arg name="para_MapFile" 		
+    <!-- Initial Conf Num -->
+    <arg name="para_InitialConfNum" 		
+         value="1" />
+         
+    <!-- Conf Map File -->
+    <arg name="para_ConfMapFile" 		
          value="prismaforum5_map_conf.dat" />
+    
+    <!-- Coverage Map File -->
+    <arg name="para_CoverageMapFile" 		
+         value="prismaforum5_map_coverage.dat" />
          
     <!-- Map Size File -->
     <arg name="para_MapSizeFile" 		
@@ -99,8 +107,9 @@
 	    <param name="num_pan_sweeps"	    value="$(arg para_NumOfPanSweeps)"/>
 	    <param name="num_tilt_sweeps"	    value="$(arg para_NumOfTiltSweeps)"/>
 	    <param name="sample_delay"	        value="$(arg para_SampleDelay)"/>
+	    <param name="initial_conf_num"	    value="$(arg para_InitialConfNum)"/>
 	
-	    <param name="map_file"	            value="$(arg para_MapFile)"/>
+	    <param name="map_file"	            value="$(arg para_ConfMapFile)"/>
         <param name="map_size_file"	        value="$(arg para_MapSizeFile)"/>
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
@@ -121,7 +130,8 @@
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
 	    
-	    <param name="map_file"	            value="$(arg para_MapFile)"/>
+	    <param name="conf_map_file"         value="$(arg para_ConfMapFile)"/>
+	    <param name="coverage_map_file"     value="$(arg para_CoverageMapFile)"/>
         <param name="map_size_file"	        value="$(arg para_MapSizeFile)"/>
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>

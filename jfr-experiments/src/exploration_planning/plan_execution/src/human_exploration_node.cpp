@@ -8,9 +8,9 @@
     expert.
     
     -------------------------------------------------------------------------
-    Author:  Asif Arain
-    Date:    27-Oct-2017
-    Version: 0.0
+        Author:  Asif Arain
+        Date:    27-Oct-2017
+        Version: 0.0
     -------------------------------------------------------------------------
 
 
@@ -55,15 +55,16 @@ ros::Publisher placement_pub;
 //================================================================================
 void readEnvironmentMap(){
 
+        ROS_INFO("Reading data for human exploration node... ");
         
-        ROS_INFO("Reading environment map... ");	    
+        //ROS_INFO("Reading environment map... ");	    
 	    std::ifstream file__MapSize, file__MapSensorPlacements, file__CellSize, file__RobotOrigin;
 	    
         
         //==============================
         //--- map size
 	    //==============================
-	    ROS_INFO("Map size... ");
+	    //ROS_INFO("Map size... ");
 	    file__MapSize.open((FilePath+filename__MapSize).c_str(), std::ios::app);
 	    int this_size;
 	    vec_MapSize.clear();
@@ -79,7 +80,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- map sensor placements
 	    //==============================
-	    ROS_INFO("Sensor placements map... ");
+	    //ROS_INFO("Sensor placements map... ");
 	    file__MapSensorPlacements.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
 	    int this_map;
 	    vec_MapSensorPlacements.clear();
@@ -95,7 +96,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Read Cell Size
 	    //==============================
-	    ROS_INFO("Cell size... ");
+	    //ROS_INFO("Cell size... ");
 	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
@@ -107,7 +108,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Read Robot Origin
 	    //==============================
-	    ROS_INFO("Robot origin... ");	    
+	    //ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
 	    //ROS_INFO("This origin file %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
@@ -158,17 +159,17 @@ void execute____PlannedConfigurations(){
 	    
 	    //-- initialization of text message
 	    //----------------------------------	    
-        p_msg.header.frame_id = "/mcl_pose"; //"/map";        
+        p_msg.header.frame_id = "/map"; //"/map";        
         p_msg.header.stamp = ros::Time::now();
         p_msg.ns = "placement_msg_publisher";
-        p_msg.action = visualization_msgs::Marker::ADD;
-        p_msg.pose.position.x = 1.0;
-        p_msg.pose.position.y = 1.0;
+        //p_msg.action = visualization_msgs::Marker::ADD;
+        //p_msg.pose.position.x = 1.0;
+        //p_msg.pose.position.y = 1.0;
         p_msg.pose.position.z = 1.0;
         p_msg.pose.orientation.w = 1.0;        
         p_msg.id = 0;
         p_msg.type = visualization_msgs::Marker::TEXT_VIEW_FACING;        
-        p_msg.scale.z = 0.5;        
+        p_msg.scale.z = 1.5;        
         p_msg.color.r = 1.0f;
         p_msg.color.g = 0.0f;
         p_msg.color.b = 0.0f;
@@ -244,22 +245,23 @@ void execute____PlannedConfigurations(){
         
 	    //-- publish an empty message
 	    //----------------------------------
-	    p_msg.text = ".";
-        placement_pub.publish(p_msg);
-	    
-	    
+	    //p_msg.text = ".";
+        //placement_pub.publish(p_msg);
+        //p_msg.text = "Please select a safe position.\nThis position is unsafe to reach.";
+        p_msg.text = "Select a safe sensing position.";
+        
+        
 	    //----------------------------------
 	    // lets follow human plan
 	    //----------------------------------
 	    
         while(ros::ok()){
-                            
             
                     
             //-----------------------------------------------------
             //-- get goal from rviz
             //-----------------------------------------------------
-            ROS_INFO("Waiting for a desired pose from a human expert...");
+            ROS_INFO("Waiting for a desired sampling pose from the human expert...");
             geometry_msgs::PoseStampedConstPtr rviz_goal = ros::topic::waitForMessage<geometry_msgs::PoseStamped>(topicRVIZGoal);
                         
             //REF: http://smrpn.blogspot.se/2014/09/call-any-subscriber-to-topic-only-once.html
@@ -309,13 +311,16 @@ void execute____PlannedConfigurations(){
             
             if (rviz_occ_info == 1){
             
-                ROS_INFO("I am moving to the pose <%.1fm,%.1fm,%.1fdeg>....",\
+                ROS_INFO("Moving to the desired pose <%.1fm,%.1fm,%.1fdeg>....",\
                      rviz_goal->pose.position.x,rviz_goal->pose.position.y,goal_yaw_dg);
                 
                 
                 //-- publish message
                 //--------------------------
-                p_msg.text = "It is a safe position.";
+                //p_msg.text = "It is a safe position.";
+                p_msg.pose.position.x = rviz_goal->pose.position.x;
+                p_msg.pose.position.y = rviz_goal->pose.position.y;
+                p_msg.action = visualization_msgs::Marker::DELETE; //FIXME
 	            placement_pub.publish(p_msg);
 	            
 	            
@@ -389,7 +394,13 @@ void execute____PlannedConfigurations(){
                     while(statusPTU!=0){
                         ros::WallDuration(1).sleep();
                     }
-                    ROS_INFO("Gas measurements are completed.");
+                    ROS_INFO("Gas sampling is completed.");
+                    
+                    
+                    //-- close log file
+                    //------------------------
+                    close______LogFile();
+                    
                     
                     //-- Update conf num
                     //------------------------
@@ -398,9 +409,7 @@ void execute____PlannedConfigurations(){
                     
                     //pub_conf.publish(conf_msg);
                     
-                    //-- close log file
-                    //------------------------
-                    close______LogFile();
+                    
                     
                 }
                 else{
@@ -415,7 +424,11 @@ void execute____PlannedConfigurations(){
                 
                 //-- publish message
                 //--------------------------
-                p_msg.text = "Select a safe sensing position.";
+                //p_msg.text = "Select a safe sensing position.";
+                p_msg.pose.position.x = rviz_goal->pose.position.x;
+                p_msg.pose.position.y = rviz_goal->pose.position.y;
+                p_msg.action = visualization_msgs::Marker::ADD; //FIXME
+                p_msg.lifetime = ros::Duration(5.00);
 	            placement_pub.publish(p_msg);	    
                 
                 
@@ -472,12 +485,14 @@ int main(int argc, char** argv){
         //----- Historian (default) Parameters -----
         //============================================
 	    // Gas Measurements
-	    paramHandle.param("threshold",GasMeasureThreshold,DEFAULT_GAS_MEASURE_THRESHOLD);
-	    paramHandle.param("operation",OperationStatus,    DEFAULT_OPERATION_STATUS);
+	    paramHandle.param("gas_log_threshold",GasMeasureThreshold,DEFAULT_GAS_MEASURE_THRESHOLD);
+	    paramHandle.param("ptu_operation_status",OperationStatus,DEFAULT_OPERATION_STATUS);
 	    // Log File
 	    //paramHandle.param<std::string>("log_file_path",log_FilePath,ros::package::getPath("plan_execution")+"/logs/human_exploration/");
 	    paramHandle.param<std::string>("experiment_title",    experimentTitle,    DEFAULT_EXPERIMENT_TITLE);
 	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,DEFAULT_EXPLORATION_STRATEGY);
+	    
+	    paramHandle.param("initial_conf_num",conf_num,DEFAULT_CONF_NUM);
         
         //============================================	
 	    //----- Localization Parameters

@@ -29,8 +29,9 @@ using namespace std;
 //--- Visualization Markers
 //==========================
 visualization_msgs::Marker marker_none, \
-                           marker_occu, \
                            marker_free, \
+                           marker_occu, \
+                           marker_covX, \
                            marker_orig, \
                            marker_conf_sphere, \
                            marker_conf_arrow, \
@@ -41,12 +42,13 @@ visualization_msgs::Marker marker_none, \
 //==========================
 double cell_size;
 std::vector<double> vec_RobotOrigin;
-std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_Confs;
+std::vector<int> vec_MapSize,vec_MapSensorPlacements,vec_MapCoverage,vec_Confs;
 std::string FilePath, \
             filename__MapSize, \
             filename__CellSize, \
             filename__RobotOrigin, \
             filename__MapSensorPlacements, \
+            filename__MapCoverage, \
             filename__Confs, \
             experimentTitle, \
             explorationStrategy;
@@ -62,6 +64,7 @@ void readEnvironmentMap(){
         ROS_INFO("Reading environment map... ");	    
 	    std::ifstream file__MapSize, \
 	                  file__MapSensorPlacements, \
+	                  file__MapCoverage, \
 	                  file__CellSize, \
 	                  file__RobotOrigin, \
 	                  file__Confs;
@@ -86,9 +89,9 @@ void readEnvironmentMap(){
         
         	    
 	    //==============================
-	    //--- map
+	    //--- map (sensor placements)
 	    //==============================
-	    ROS_INFO("Map... ");
+	    ROS_INFO("Map sensor placements... ");
 	    file__MapSensorPlacements.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__MapSensorPlacements).c_str());
 	    int this_map;
@@ -102,6 +105,22 @@ void readEnvironmentMap(){
 	    }
 	    else std::cout << "Unable to open planning map file";
 	    
+	    //==============================
+	    //--- map (coverage)
+	    //==============================
+	    ROS_INFO("Map coverage... ");
+	    file__MapCoverage.open((FilePath+filename__MapCoverage).c_str(), std::ios::app);
+	    //ROS_INFO("Map file: %s",(FilePath+filename__MapCoverage).c_str());
+	    int this_cmap;
+	    vec_MapCoverage.clear();
+	    if (file__MapCoverage.is_open()){		    
+		    while(file__MapCoverage >> this_cmap){
+			    vec_MapCoverage.push_back(this_cmap);
+         	}
+		    file__MapCoverage.close();
+		    //ROS_INFO("file__MapCoverage: size %zd",file__MapCoverage.size());
+	    }
+	    else std::cout << "Unable to open planning map file";
 	    
 	    	    
 	    //==============================
@@ -179,7 +198,8 @@ int main( int argc, char** argv ){
 	    paramHandle.param<std::string>("exploration_strategy",explorationStrategy,"one-step-exploration");
 	    paramHandle.param<std::string>("file_path",FilePath,\
 	    ros::package::getPath("plan_execution")+"/logs/"+experimentTitle+"/"+explorationStrategy+"/");
-	    paramHandle.param<std::string>("map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
+	    paramHandle.param<std::string>("conf_map_file",filename__MapSensorPlacements,"prismaforum_map_conf.dat");
+	    paramHandle.param<std::string>("coverage_map_file",filename__MapCoverage,"prismaforum_map_coverage.dat");
 	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
@@ -226,37 +246,54 @@ int main( int argc, char** argv ){
         
         //--- Marker initialization (unoccupied)
         //--------------------------------
-        marker_occu.header.frame_id = "/map";        
-        marker_occu.header.stamp = ros::Time::now();
-        marker_occu.ns = "env_map_publisher_node";
-        marker_occu.action = visualization_msgs::Marker::ADD;
-        marker_occu.pose.orientation.w = 1.0;   
-        marker_occu.id = 1;      
-        marker_occu.type = visualization_msgs::Marker::POINTS;
-        marker_occu.scale.x = 0.45; //cell_size; //0.2;
-        marker_occu.scale.y = 0.45; //cell_size; //0.2;
-        marker_occu.color.r = 0.0f;
-        marker_occu.color.g = 0.7f;
-        marker_occu.color.b = 0.0f;
-        marker_occu.color.a = 0.25; //0.25
-        
-               
-        
-        //--- Marker initialization (occupied)
-        //--------------------------------        
         marker_free.header.frame_id = "/map";        
         marker_free.header.stamp = ros::Time::now();
         marker_free.ns = "env_map_publisher_node";
         marker_free.action = visualization_msgs::Marker::ADD;
         marker_free.pose.orientation.w = 1.0;   
-        marker_free.id = 2;
+        marker_free.id = 1;      
         marker_free.type = visualization_msgs::Marker::POINTS;
         marker_free.scale.x = 0.45; //cell_size; //0.2;
         marker_free.scale.y = 0.45; //cell_size; //0.2;
-        marker_free.color.r = 0.7f;
-        marker_free.color.g = 0.0f;
+        marker_free.color.r = 0.0f;
+        marker_free.color.g = 0.7f;
         marker_free.color.b = 0.0f;
-        marker_free.color.a = 0.25; //0.75
+        marker_free.color.a = 0.25; //0.25
+        
+               
+        
+        //--- Marker initialization (occupied)
+        //--------------------------------        
+        marker_occu.header.frame_id = "/map";        
+        marker_occu.header.stamp = ros::Time::now();
+        marker_occu.ns = "env_map_publisher_node";
+        marker_occu.action = visualization_msgs::Marker::ADD;
+        marker_occu.pose.orientation.w = 1.0;   
+        marker_occu.id = 2;
+        marker_occu.type = visualization_msgs::Marker::POINTS;
+        marker_occu.scale.x = 0.45; //cell_size; //0.2;
+        marker_occu.scale.y = 0.45; //cell_size; //0.2;
+        marker_occu.color.r = 0.7f;
+        marker_occu.color.g = 0.0f;
+        marker_occu.color.b = 0.0f;
+        marker_occu.color.a = 0.25; //0.75
+        
+        
+        //--- Marker initialization (occupied and no coverage)
+        //--------------------------------        
+        marker_covX.header.frame_id = "/map";        
+        marker_covX.header.stamp = ros::Time::now();
+        marker_covX.ns = "env_map_publisher_node";
+        marker_covX.action = visualization_msgs::Marker::ADD;
+        marker_covX.pose.orientation.w = 1.0;   
+        marker_covX.id = 3;
+        marker_covX.type = visualization_msgs::Marker::POINTS;
+        marker_covX.scale.x = 0.45; //cell_size; //0.2;
+        marker_covX.scale.y = 0.45; //cell_size; //0.2;
+        marker_covX.color.r = 0.1f;
+        marker_covX.color.g = 0.1f;
+        marker_covX.color.b = 0.1f;
+        marker_covX.color.a = 0.5; //0.75
         
         
         //--- Marker initialization (map origin)
@@ -266,7 +303,7 @@ int main( int argc, char** argv ){
         marker_orig.ns = "env_map_publisher_node";
         marker_orig.action = visualization_msgs::Marker::ADD;
         marker_orig.pose.orientation.w = 1.0;   
-        marker_orig.id = 3;
+        marker_orig.id = 4;
         marker_orig.type = visualization_msgs::Marker::POINTS;
         marker_orig.scale.x = 0.45; //cell_size; //0.2;
         marker_orig.scale.y = 0.45; //cell_size; //0.2;
@@ -283,7 +320,7 @@ int main( int argc, char** argv ){
         marker_conf_sphere.ns = "env_map_publisher_node";
         marker_conf_sphere.action = visualization_msgs::Marker::ADD;
         marker_conf_sphere.pose.orientation.w = 1.0;   
-        marker_conf_sphere.id = 4;
+        marker_conf_sphere.id = 5;
         marker_conf_sphere.type = visualization_msgs::Marker::SPHERE_LIST;
         marker_conf_sphere.scale.x = 0.25; //cell_size; //0.2;
         marker_conf_sphere.scale.y = 0.25; //cell_size; //0.2;
@@ -301,7 +338,7 @@ int main( int argc, char** argv ){
         marker_conf_arrow.ns = "env_map_publisher_node";
         marker_conf_arrow.action = visualization_msgs::Marker::ADD;
         marker_conf_arrow.pose.orientation.w = 1.0;   
-        marker_conf_arrow.id = 5;
+        marker_conf_arrow.id = 6;
         marker_conf_arrow.type = visualization_msgs::Marker::ARROW;
         marker_conf_arrow.scale.x = 0.25; //cell_size; //0.2;
         marker_conf_arrow.scale.y = 0.25; //cell_size; //0.2;
@@ -337,13 +374,31 @@ int main( int argc, char** argv ){
                 p.y = y;
                 p.z = z;
                 
+                /*
                 //-- unoccupied cell
                 if (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 1){
-                    marker_occu.points.push_back(p);
+                    marker_free.points.push_back(p);
                 }
                 //-- occupied cell
                 else{
+                    marker_occu.points.push_back(p);
+                }
+                */
+                
+                //-- unoccupied cell
+                if ( (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 1) &&\
+                     (vec_MapCoverage[(i*vec_MapSize[1])+j] == 1) ){
                     marker_free.points.push_back(p);
+                }
+                //-- occupied cell
+                else if ( (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 0) &&\
+                         (vec_MapCoverage[(i*vec_MapSize[1])+j] == 1) ){
+                    marker_occu.points.push_back(p);
+                }
+                //-- occupied cell
+                else if ( (vec_MapSensorPlacements[(i*vec_MapSize[1])+j] == 0) &&\
+                         (vec_MapCoverage[(i*vec_MapSize[1])+j] == 0) ){
+                    marker_covX.points.push_back(p);
                 }
             }
         }
@@ -411,8 +466,9 @@ int main( int argc, char** argv ){
             //-- publish 
             //------------------
             
-            map_marker.publish(marker_occu);
             map_marker.publish(marker_free);
+            map_marker.publish(marker_occu);
+            map_marker.publish(marker_covX);
                                     
             ros::spinOnce();
             r.sleep();

@@ -110,7 +110,8 @@ std::string plan_frame_name;
 //==========================
 int num_of_conf;
 //std_msgs::Int16 conf_msg;
-int conf_num = 0;
+//int conf_num = 0;
+int conf_num;
 
 //--- Functions
 //==========================
@@ -175,4 +176,7 @@ void execute____PlannedConfigurations();
     #define	DEFAULT_SERVICE_PTU_JOINT_STATUS   "/amtec/get_status"
     
     
-		
+//----- Conf num
+//============================================
+    #define	DEFAULT_CONF_NUM  1    
+

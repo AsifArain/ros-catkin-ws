@@ -68,8 +68,9 @@ void create_____LogFile(){
     
         //===== File name	
         //string filename = "measurements_"+std::to_string (conf_num)+".dat";
-        log_FileName = "measurements_conf"+boost::lexical_cast<std::string>(conf_num+1)+".dat";
-
+        //log_FileName = "measurements_conf"+boost::lexical_cast<std::string>(conf_num+1)+".dat";
+        log_FileName = "measurements_conf"+boost::lexical_cast<std::string>(conf_num)+".dat";
+        
         //===== Create File
         historyFile.open((log_FilePath+log_FileName).c_str());
 
@@ -148,7 +149,7 @@ bool service____ExecutedConfNumber(roscpp_tutorials::TwoInts::Request  &req,
     roscpp_tutorials::TwoInts::Response &res){
         
         //res.sum = req.a + req.b;
-        res.sum = conf_num;
+        res.sum = conf_num-1; // this conf num minus 1
         //ROS_INFO("request: x=%ld, y=%ld", (long int)req.a, (long int)req.b);
         //ROS_INFO("sending back response: [%ld]", (long int)res.sum);
         return true;
@@ -293,7 +294,7 @@ void perform____GasSampling(){
 	             srvSweep.request.samp_delay);
 	
 	    if (client1.call(srvSweep)){
-		    ROS_INFO("human Gas measurements are progress ... <%.2f~%.2f,%.2f>",-(FoV/2),(FoV/2),tilt_angle);
+		    ROS_INFO("Gas measurements are progress... <%.2f~%.2f,%.2f>",-(FoV/2),(FoV/2),tilt_angle);
 	    }
 	    else{
 		    ROS_ERROR("Failed to initialize gas scanning.");
