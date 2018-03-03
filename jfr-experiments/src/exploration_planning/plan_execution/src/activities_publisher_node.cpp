@@ -1,14 +1,17 @@
 /*
 
-                            SCAN PUBLISHER NODE
+                          ACTIVITIES PUBLISHER NODE
               ____________________________________________________
 
 
-    This is main file to publish field of view at RVIZ.
+    This is main file to publish following exploration activities.
+        --> traveling path
+        --> executed configurations
+        --> sampling process
 
     -------------------------------------------------------------------------
         Author:  Asif Arain
-        Date:    06-Nov-2017
+        Date:    03-Mar-2018
         Version: 0.0
     -------------------------------------------------------------------------
 
@@ -78,17 +81,17 @@ double anglePan,angleTilt;
 //--- Visualization Markers
 //==========================
 visualization_msgs::Marker conf_points, \
-                           conf_spheres, \
+                           conf_positions, \
                            fov_strip, \
                            beam_line, \
                            path_strip;
 
 
-geometry_msgs::PoseArray conf_orns;
+geometry_msgs::PoseArray conf_poses;
 
 
 void callback___Localization();
-void publish____ScanArea();
+void captureActivities();
 void callback___PTUSweepingStatus();
 void callback___PTUJointAngles();
 
@@ -230,7 +233,7 @@ void readExecutedPlanFromFile(){
                 pt.y = y;
                 pt.z = 0.5;
                 conf_points.points.push_back(pt);
-                conf_spheres.points.push_back(pt);
+                conf_positions.points.push_back(pt);
                 ROS_INFO("(from file) Pt <%f,%f> added to conf points.",pt.x,pt.y);
 
                 //-- pose 
@@ -239,7 +242,7 @@ void readExecutedPlanFromFile(){
                 ps.pose.position.y = y;
                 ps.pose.position.z = 0.5;
                 ps.pose.orientation = tf::createQuaternionMsgFromYaw(t*M_PI/180); //currentPose.pose.orientation; //
-                conf_orns.poses.push_back(ps.pose);
+                conf_poses.poses.push_back(ps.pose);
                 ROS_INFO("(from file) Pt <%f,%f,%f> added to conf pose.",ps.pose.position.x,ps.pose.position.y,t);
          	}
 		    fileExecutedConfs.close();
@@ -302,7 +305,7 @@ void writeExecutedConfsFile(double x,double y,double t){
 //================================================================================
 //              PUBLISH SCAN AREA
 //================================================================================
-void publish____ScanArea(){
+void captureActivities(){
 
 
         //--- clear variables
@@ -340,7 +343,7 @@ void publish____ScanArea(){
             //-- Back to the origin
             fov_strip.points.push_back(p0);
 
-            //--- Optical Beam
+            //--- Optical beam
             //=========================================
             //ROS_INFO("Beam angle: %f",((posW*PI/180)+anglePan)*180/PI);
 
@@ -384,7 +387,7 @@ void publish____ScanArea(){
                 po.y = posY;
                 po.z = 0.5; //0.1;
                 //conf_points.points.push_back(po);
-                //conf_spheres.points.push_back(po);
+                //conf_positions.points.push_back(po);
                 path_strip.points.push_back(po);
                 
                 writeTravelingPathFile(po.x,po.y);
@@ -404,7 +407,7 @@ void publish____ScanArea(){
                     po.y = posY;
                     po.z = 0.5; //0.1;
                     //conf_points.points.push_back(po);
-                    //conf_spheres.points.push_back(po);
+                    //conf_positions.points.push_back(po);
                     path_strip.points.push_back(po);
                     
                     writeTravelingPathFile(po.x,po.y);
@@ -419,12 +422,12 @@ void publish____ScanArea(){
 
             //-- check that this conf is not already in the list
             
-            //if ( conf_spheres.points[conf_spheres.points.size()-1].x != posX &&\
-            //     conf_spheres.points[conf_spheres.points.size()-1].y != posY){
+            //if ( conf_positions.points[conf_positions.points.size()-1].x != posX &&\
+            //     conf_positions.points[conf_positions.points.size()-1].y != posY){
 
             //ROS_INFO("Conf loop...");
             
-            if( conf_spheres.points.empty() ){
+            if( conf_positions.points.empty() ){
                 
                 //-- position
                 geometry_msgs::Point pt;
@@ -432,7 +435,7 @@ void publish____ScanArea(){
                 pt.y = posY;
                 pt.z = 0.5;
                 conf_points.points.push_back(pt);
-                conf_spheres.points.push_back(pt);                
+                conf_positions.points.push_back(pt);                
 
                 //-- pose
                 geometry_msgs::PoseStamped ps;
@@ -440,7 +443,7 @@ void publish____ScanArea(){
                 ps.pose.position.y = posY;
                 ps.pose.position.z = 0.5;
                 ps.pose.orientation = currentPose.pose.orientation;
-                conf_orns.poses.push_back(ps.pose);
+                conf_poses.poses.push_back(ps.pose);
                                 
                 //-- quaternion to degree
 	            tf::Quaternion q(currentPose.pose.orientation.x, currentPose.pose.orientation.y, \
@@ -455,10 +458,10 @@ void publish____ScanArea(){
             }
             else
             {                
-                //ROS_INFO("Last conf <%f,%f>",conf_spheres.points.back().x,conf_spheres.points.back().y);
+                //ROS_INFO("Last conf <%f,%f>",conf_positions.points.back().x,conf_positions.points.back().y);
                 
-                if ( conf_spheres.points.back().x != posX &&\
-                     conf_spheres.points.back().y != posY){
+                if ( conf_positions.points.back().x != posX &&\
+                     conf_positions.points.back().y != posY){
 
                     //-- position
                     geometry_msgs::Point pt;
@@ -466,7 +469,7 @@ void publish____ScanArea(){
                     pt.y = posY;
                     pt.z = 0.5;
                     conf_points.points.push_back(pt);
-                    conf_spheres.points.push_back(pt);                
+                    conf_positions.points.push_back(pt);                
 
                     //-- pose
                     geometry_msgs::PoseStamped ps;
@@ -474,7 +477,7 @@ void publish____ScanArea(){
                     ps.pose.position.y = posY;
                     ps.pose.position.z = 0.5;
                     ps.pose.orientation = currentPose.pose.orientation;
-                    conf_orns.poses.push_back(ps.pose);
+                    conf_poses.poses.push_back(ps.pose);
                                     
                     //-- quaternion to degree
                     tf::Quaternion q(currentPose.pose.orientation.x, currentPose.pose.orientation.y, \
@@ -509,7 +512,7 @@ void publish____ScanArea(){
                 po.y = posY;
                 po.z = 0.5; //0.1;
                 conf_points.points.push_back(po);
-                conf_spheres.points.push_back(po);
+                conf_positions.points.push_back(po);
                 path_strip.points.push_back(po);
 
 
@@ -519,7 +522,7 @@ void publish____ScanArea(){
                 pos.pose.position.y = posY;
                 pos.pose.position.z = 0.5; //0.1;
                 pos.pose.orientation = currentPose.pose.orientation; //tf::createQuaternionMsgFromYaw(o*M_PI/180);
-                conf_orns.poses.push_back(pos.pose);
+                conf_poses.poses.push_back(pos.pose);
 
             }
             */            
@@ -528,7 +531,7 @@ void publish____ScanArea(){
                 
         
         
-        //-- Traveling path (points between two confs)
+        //-- Traveling path (intermediate points between two confs)
         //-----------------------------------------------
         
         if( path_strip.points.empty() ){
@@ -541,7 +544,7 @@ void publish____ScanArea(){
             p.y = posY;
             p.z = 0.5; //0.1;
             //conf_points.points.push_back(po);
-            //conf_spheres.points.push_back(po);
+            //conf_positions.points.push_back(po);
             path_strip.points.push_back(p);
             
             writeTravelingPathFile(p.x,p.y);
@@ -567,7 +570,7 @@ void publish____ScanArea(){
                 p.y = posY;
                 p.z = 0.5; //0.1;
                 //conf_points.points.push_back(po);
-                //conf_spheres.points.push_back(po);
+                //conf_positions.points.push_back(po);
                 path_strip.points.push_back(p);
                 
                 writeTravelingPathFile(p.x,p.y);
@@ -576,9 +579,6 @@ void publish____ScanArea(){
                 
             }
         }
-        
-        //-----------------------
-
 
 }
 
@@ -591,13 +591,13 @@ int main( int argc, char** argv ){
 
 
         printf("\n=================================================================");
-	    printf("\n=	             Scan Publisher Node                               ");
+	    printf("\n=	         Exploration Activities Publisher Node                 ");
 	    printf("\n=================================================================\n");
 
-        ros::init(argc, argv, "scan_publisher_node");
-        ros::NodeHandle n ("scan_pub");
+        ros::init(argc, argv, "activities_publisher_node");
+        ros::NodeHandle n ("exploration_act");
 
-        // ####################### PARAMETERS ########################
+        //-- Parameters node
         ros::NodeHandle paramHandle ("~");
 
 
@@ -619,9 +619,6 @@ int main( int argc, char** argv ){
 	    paramHandle.param("traveling_points_distance",travelingPointsDist,DEFAULT_TRAVELING_POINTS_DISTANCE);
 	    
 	    
-
-
-
         //============================================
         //----- ROS Topic Names
         //============================================
@@ -645,14 +642,13 @@ int main( int argc, char** argv ){
         //============================================
         //ros::Publisher scan_marker = n.advertise<visualization_msgs::Marker>("scan_area", 10);
         ros::Publisher sweep_pub = n.advertise<visualization_msgs::Marker>("sweep", 10);
-        ros::Publisher pos_pub = n.advertise<visualization_msgs::Marker>("positions", 10);
-        ros::Publisher orn_pub = n.advertise<geometry_msgs::PoseArray>("orientations", 10);
+        ros::Publisher position_pub = n.advertise<visualization_msgs::Marker>("positions", 10);
+        ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseArray>("poses", 10);
         ros::Publisher path_pub = n.advertise<visualization_msgs::Marker>("path", 10);
 
-        ros::Rate r(30);
-
-
-
+        ros::Rate r(10);
+        
+        
         //---------------------------------
         // VISUALIZATION MARKERS
         //---------------------------------
@@ -661,31 +657,31 @@ int main( int argc, char** argv ){
         //--- Marker initialization
         //--------------------------------
 
-        conf_spheres.header.frame_id = \
+        conf_positions.header.frame_id = \
         path_strip.header.frame_id = \
         conf_points.header.frame_id = \
         fov_strip.header.frame_id = \
         beam_line.header.frame_id = "/map";
 
-        //conf_spheres.header.stamp = \
+        //conf_positions.header.stamp = \
         path_strip.header.stamp = \
         conf_points.header.stamp = \
         fov_strip.header.stamp = \
         beam_line.header.stamp = ros::Time::now();
 
-        conf_spheres.ns = \
+        conf_positions.ns = \
         path_strip.ns = \
         conf_points.ns = \
         fov_strip.ns = \
-        beam_line.ns = "scan_publisher_node";
+        beam_line.ns = "exploration_activities_publisher_node";
 
-        conf_spheres.action = \
+        conf_positions.action = \
         path_strip.action = \
         conf_points.action = \
         fov_strip.action = \
         beam_line.action = visualization_msgs::Marker::ADD;
 
-        conf_spheres.pose.orientation.w = \
+        conf_positions.pose.orientation.w = \
         path_strip.pose.orientation.w = \
         conf_points.pose.orientation.w = \
         fov_strip.pose.orientation.w = \
@@ -699,13 +695,13 @@ int main( int argc, char** argv ){
         fov_strip.id    = 1;
         beam_line.id    = 2;
         path_strip.id   = 3;
-        conf_spheres.id = 4;
+        conf_positions.id = 4;
 
 
         //--- Marker types
         //--------------------------------
 
-        conf_spheres.type = visualization_msgs::Marker::SPHERE_LIST;
+        conf_positions.type = visualization_msgs::Marker::SPHERE_LIST;
         conf_points.type  = visualization_msgs::Marker::POINTS;
         fov_strip.type    = visualization_msgs::Marker::LINE_STRIP;
         beam_line.type    = visualization_msgs::Marker::LINE_LIST;
@@ -715,9 +711,9 @@ int main( int argc, char** argv ){
         //--------------------------------
 
         // conf sphare list
-        conf_spheres.scale.x = 0.50;
-        conf_spheres.scale.y = 0.50;
-        conf_spheres.scale.z = 0.50;
+        conf_positions.scale.x = 0.50;
+        conf_positions.scale.y = 0.50;
+        conf_positions.scale.z = 0.50;
 
 
         // POINTS markers use x and y scale for width/height respectively
@@ -734,10 +730,10 @@ int main( int argc, char** argv ){
         //--------------------------------
 
         // spheres are dark gray
-        conf_spheres.color.r = 0.6902; //0.40;
-        conf_spheres.color.g = 0.7686; //0.40;
-        conf_spheres.color.b = 0.8706; //0.40;
-        conf_spheres.color.a = 1.00;
+        conf_positions.color.r = 0.6902; //0.40;
+        conf_positions.color.g = 0.7686; //0.40;
+        conf_positions.color.b = 0.8706; //0.40;
+        conf_positions.color.a = 1.00;
 
         // Points are green
         conf_points.color.r = 0.7f;
@@ -764,9 +760,9 @@ int main( int argc, char** argv ){
         //---------------------------------
         // orientation marker
         //---------------------------------
-        //conf_orns.poses.clear();
-        //conf_orns.header.stamp = ros::Time::now();
-        conf_orns.header.frame_id = "/map";
+        //conf_poses.poses.clear();
+        //conf_poses.header.stamp = ros::Time::now();
+        conf_poses.header.frame_id = "/map";
         
         
         //---
@@ -781,33 +777,32 @@ int main( int argc, char** argv ){
         ros::spinOnce();
         r.sleep();
         ROS_INFO("First localization position: <%.2f,%.2f,%.2f>",posX,posY,posW);        
-        ros::WallDuration(5).sleep();
+        //ros::WallDuration(5).sleep();
         
         //ros::spinOnce();
         //r.sleep();
         //ROS_INFO("Second localization position: <%.2f,%.2f,%.2f>",posX,posY,posW);        
         //ros::WallDuration(5).sleep();
         
+        //-- read executed plan
+        //----------------------------------
         readExecutedPlanFromFile();
-        
-        
-        
         
 
         while(ros::ok()){
-
-
-
-                publish____ScanArea();
+        
+                //-- capture exploration activies
+                //-----------------------------------
+                captureActivities();
 
 
                 //-- update time stamps
-                conf_spheres.header.stamp = \
+                conf_positions.header.stamp = \
                 path_strip.header.stamp = \
                 conf_points.header.stamp = \
                 fov_strip.header.stamp = \
                 beam_line.header.stamp = \
-                conf_orns.header.stamp = ros::Time::now();
+                conf_poses.header.stamp = ros::Time::now();
 
 
 
@@ -819,20 +814,19 @@ int main( int argc, char** argv ){
                 scan_marker.publish(beam_line);
                 //scan_marker.publish(conf_points);
                 scan_marker.publish(path_strip);
-                scan_marker.publish(conf_spheres);
+                scan_marker.publish(conf_positions);
 
-                orientations_pub.publish(conf_orns);
+                orientations_pub.publish(conf_poses);
                 */
-
 
                 sweep_pub.publish(fov_strip);
                 sweep_pub.publish(beam_line);
 
-                pos_pub.publish(conf_spheres);
-                orn_pub.publish(conf_orns);
+                position_pub.publish(conf_positions);
+                pose_pub.publish(conf_poses);
 
                 path_pub.publish(path_strip);
-
+                
 
                 //ROS_INFO("Spinning");
                 ros::spinOnce();

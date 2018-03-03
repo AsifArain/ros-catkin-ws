@@ -17,8 +17,8 @@
 
 	<node pkg="plan_execution" type="scan_publisher_node" name="scan_publisher" output="screen">
 	
-	    <param name="field_of_view"	value="90.0"/>
-    	<param name="sensing_range"	value="10.0"/> <!-- FIXME 8.25 is 10 meter in real -->
+	    <param name="field_of_view"	value="270.0"/>
+    	<param name="sensing_range"	value="15.0"/> <!-- FIXME 8.25 is 10 meter in real -->
 	
 
     </node>

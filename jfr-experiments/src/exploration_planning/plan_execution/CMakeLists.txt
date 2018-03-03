@@ -154,6 +154,13 @@ add_executable(scan_publisher_node src/scan_publisher_node.cpp)
 target_link_libraries(scan_publisher_node ${catkin_LIBRARIES} )
 
 
+#---- Exploration Activites Publisher
+#=======================================
+add_executable(activities_publisher_node src/activities_publisher_node.cpp)
+target_link_libraries(activities_publisher_node ${catkin_LIBRARIES} )
+
+
+
 #---- Environment Map Publisher
 #=======================================
 add_executable(env_map_publisher_node src/env_map_publisher_node.cpp)

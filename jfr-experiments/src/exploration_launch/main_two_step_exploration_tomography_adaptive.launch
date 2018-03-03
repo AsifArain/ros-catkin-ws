@@ -55,6 +55,14 @@
     <arg name="para_PlannedConfsFile" 		
          value="robot_plan.dat" />
 
+    <!-- Traveling Path File -->
+    <arg name="para_TravelingPathFile" 		
+         value="traveling_path.dat" />
+         
+    <!-- Executed Configuratios File -->
+    <arg name="para_ExecutedConfsFile" 		
+         value="executed_confs.dat" />
+         
     <!-- Field of View -->
     <arg name="para_FOV" 
          value="270.0" />
@@ -191,12 +199,18 @@
     </node>
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--              SCAN PUBLISHER                -->
+    <!--     EXPLORATION ACTIVITES PUBLISHER        -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <node pkg="plan_execution" 
-          type="scan_publisher_node" 
-          name="scan_publisher" output="screen">
+          type="activities_publisher_node" 
+          name="activities_publisher" output="screen">
 	
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
+	    <param name="traveling_path_file"	value="$(arg para_TravelingPathFile)"/>
+	    <param name="executed_confs_file"	value="$(arg para_ExecutedConfsFile)"/>
+	    
 	    <param name="field_of_view"	        value="$(arg para_FOV)"/>
 	    <param name="sensing_range"	        value="$(arg para_SensingRange)"/>
 
