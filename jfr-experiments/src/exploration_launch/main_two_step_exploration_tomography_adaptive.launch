@@ -52,16 +52,28 @@
          value="prismaforum5_origin_conf.dat" />
          
     <!-- Planned Configuratios File -->
-    <arg name="para_PlannedConfsFile" 		
-         value="robot_plan.dat" />
-
-    <!-- Traveling Path File -->
-    <arg name="para_TravelingPathFile" 		
-         value="traveling_path.dat" />
+    <!--arg name="para_PlannedConfsFile" 		
+         value="planned_confs.dat" /-->
+    
+    <!-- Planned Configuratios (Global)bFile -->
+    <arg name="para_PlannedConfsGlobalFile" 		
+         value="planned_confs_global.dat" />
+         
+    <!-- Planned Configuratios (Local) File -->
+    <arg name="para_PlannedConfsLocalFile" 		
+         value="planned_confs_local.dat" />
+         
+    <!-- Hotspots File -->
+    <arg name="para_HotspotsFile" 		
+         value="hotspots.dat" />
          
     <!-- Executed Configuratios File -->
     <arg name="para_ExecutedConfsFile" 		
          value="executed_confs.dat" />
+                  
+    <!-- Traveling Path File -->
+    <arg name="para_TravelingPathFile" 		
+         value="executed_path.dat" />
          
     <!-- Field of View -->
     <arg name="para_FOV" 
@@ -162,7 +174,10 @@
 	    
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
-        <param name="conf_file"	            value="$(arg para_PlannedConfsFile)"/>
+        <!--param name="conf_file"	        value="$(arg para_PlannedConfsFile)"/-->
+        <param name="global_conf_file"	    value="$(arg para_PlannedConfsGlobalFile)"/>
+        <param name="local_conf_file"	    value="$(arg para_PlannedConfsLocalFile)"/>
+        <param name="hotspots_file"	        value="$(arg para_HotspotsFile)"/>
         
         <param name="hard_offset_x"	        value="$(arg para_HardOffsetX)"/>
         <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>
@@ -187,7 +202,7 @@
         <param name="map_size_file"	        value="reconstruction_mapsize.dat"/>
         <param name="cell_size_file"	    value="reconstruction_cellsize.dat"/>
         <param name="robot_origin_file"	    value="reconstruction_origin.dat"/>
-        <param name="high_threshould"	    value="100"/>
+        <param name="high_threshould"	    value="10"/>
         
         <param name="recon_color_r_file"	value="reconstructionColorR.dat"/>
         <param name="recon_color_g_file"	value="reconstructionColorG.dat"/>

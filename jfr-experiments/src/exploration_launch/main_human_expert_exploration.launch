@@ -7,10 +7,10 @@
         <!--                HUMAN EXPERT EXPLORATION                 -->
         <!--              FOR GAS EMISSION MONITORING                -->
         <!--                                                         -->
-        <!--                         MAIN                            -->
+        <!--                        MAIN                             -->
         <!--                                                         -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--                @AsifArain, Feb 10, 2018                 -->
+        <!--                @AsifArain, Mar 05, 2018                 -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         
 
@@ -21,7 +21,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-07" />
+         value="prismaforum5-08" />
 
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
@@ -29,7 +29,7 @@
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="13" />
+         value="13" /> <!-- 13 for 5-07 -->
     
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -52,16 +52,28 @@
          value="prismaforum5_origin_conf.dat" />
          
     <!-- Planned Configuratios File -->
-    <arg name="para_PlannedConfsFile" 		
-         value="robot_plan.dat" />
+    <!--arg name="para_PlannedConfsFile" 		
+         value="planned_confs.dat" /-->
+    
+    <!-- Planned Configuratios (Global)bFile -->
+    <arg name="para_PlannedConfsGlobalFile" 		
+         value="planned_confs_global.dat" />
          
-    <!-- Traveling Path File -->
-    <arg name="para_TravelingPathFile" 		
-         value="traveling_path.dat" />
+    <!-- Planned Configuratios (Local) File -->
+    <arg name="para_PlannedConfsLocalFile" 		
+         value="planned_confs_local.dat" />
+         
+    <!-- Hotspots File -->
+    <arg name="para_HotspotsFile" 		
+         value="hotspots.dat" />
          
     <!-- Executed Configuratios File -->
     <arg name="para_ExecutedConfsFile" 		
          value="executed_confs.dat" />
+                  
+    <!-- Traveling Path File -->
+    <arg name="para_TravelingPathFile" 		
+         value="executed_path.dat" />
 
     <!-- Field of View -->
     <arg name="para_FOV" 

@@ -116,7 +116,7 @@ string explorationStrategy;
 #define	DEFAULT_TOPIC_PTU_SWEEP_STATUS  "/ptu_control/state"
 #define	DEFAULT_TOPIC_PTU_JOINT_STATUS  "/amtec/joint_states"
 
-#define	DEFAULT_TRAVELING_POINTS_DISTANCE  0.5
+#define	DEFAULT_TRAVELING_POINTS_DISTANCE  0.25
 
 //================================================================================
 //              CALLBACK: LOCALIZATION
@@ -191,11 +191,11 @@ double fEuclideanDist(double x1, double y1, double x2, double y2){
 
 
 //================================================================================
-//              READ ENVIRONMENT MAP
+//              READ EXPLORATION PLAN
 //================================================================================
 void readExecutedPlanFromFile(){
 
-        ROS_INFO("Reading executed plan from a file... ");
+        //ROS_INFO("Reading executed plan from a file... ");
         
 	    std::ifstream fileTravelingPath,fileExecutedConfs;
 	    double x,y,t;
@@ -212,7 +212,7 @@ void readExecutedPlanFromFile(){
                 pt.y = y;
                 pt.z = 0.5; 
                 path_strip.points.push_back(pt);
-                ROS_INFO("(from file) Pt <%f,%f> added to traveling path.",pt.x,pt.y);
+                //ROS_INFO("(from file) Pt <%f,%f> added to traveling path.",pt.x,pt.y);
          	}
 		    fileTravelingPath.close();
 	    }
@@ -234,7 +234,7 @@ void readExecutedPlanFromFile(){
                 pt.z = 0.5;
                 conf_points.points.push_back(pt);
                 conf_positions.points.push_back(pt);
-                ROS_INFO("(from file) Pt <%f,%f> added to conf points.",pt.x,pt.y);
+                //ROS_INFO("(from file) Pt <%f,%f> added to conf points.",pt.x,pt.y);
 
                 //-- pose 
                 geometry_msgs::PoseStamped ps;
@@ -243,11 +243,11 @@ void readExecutedPlanFromFile(){
                 ps.pose.position.z = 0.5;
                 ps.pose.orientation = tf::createQuaternionMsgFromYaw(t*M_PI/180); //currentPose.pose.orientation; //
                 conf_poses.poses.push_back(ps.pose);
-                ROS_INFO("(from file) Pt <%f,%f,%f> added to conf pose.",ps.pose.position.x,ps.pose.position.y,t);
+                //ROS_INFO("(from file) Pt <%f,%f,%f> added to conf pose.",ps.pose.position.x,ps.pose.position.y,t);
          	}
 		    fileExecutedConfs.close();
 	    }
-	    else ROS_INFO("Unable to open path file");
+	    else ROS_INFO("Unable to open configrations file");
         	    
 	    
 	    	    
@@ -260,7 +260,7 @@ void readExecutedPlanFromFile(){
 //================================================================================
 void writeTravelingPathFile(double x, double y){
     
-    ROS_INFO("In path writing function....");
+    //ROS_INFO("In path writing function....");
     
     //===== Create File    
     fileTravelingPath.open((FilePath+filenameTravelingPath).c_str(),std::ios::app);
@@ -271,7 +271,7 @@ void writeTravelingPathFile(double x, double y){
         //fileTravelingPath<<x<<" "<<y<<endl;
         fileTravelingPath << std::fixed << std::setprecision(4) << x << " " << y << endl;
         //-- Print info
-		ROS_INFO("Point <%.2f,%.2f> is written to traveling path file",x,y);
+		//ROS_INFO("Point <%.2f,%.2f> is written to traveling path file",x,y);
 	}
 	else ROS_INFO("Unable to open path file");
 	
@@ -284,7 +284,7 @@ void writeTravelingPathFile(double x, double y){
 //================================================================================
 void writeExecutedConfsFile(double x,double y,double t){
     
-    ROS_INFO("In conf writing function....");
+    //ROS_INFO("In conf writing function....");
         
     //===== Create File
     fileExecutedConfs.open((FilePath+filenameExecutedConfs).c_str(),std::ios::app);
@@ -294,7 +294,7 @@ void writeExecutedConfsFile(double x,double y,double t){
         //-- write data
         fileExecutedConfs << std::fixed << std::setprecision(4) << x << " " << y << " " << t << endl;
         //-- Print info
-		ROS_INFO("Point <%.2f,%.2f,%.2f> is written to conf file",x,y,t);
+		//ROS_INFO("Point <%.2f,%.2f,%.2f> is written to conf file",x,y,t);
 	}
 	else ROS_INFO("Unable to open conf file");
 	
@@ -303,7 +303,7 @@ void writeExecutedConfsFile(double x,double y,double t){
 
 
 //================================================================================
-//              PUBLISH SCAN AREA
+//              CAPTURE EXPLORATION ACTIVITIES
 //================================================================================
 void captureActivities(){
 
@@ -390,32 +390,31 @@ void captureActivities(){
                 //conf_positions.points.push_back(po);
                 path_strip.points.push_back(po);
                 
+                //-- write to the file
                 writeTravelingPathFile(po.x,po.y);
                 
-                ROS_INFO("(if) Pt <%f,%f> added to traveling path.",po.x,po.y);
+                //ROS_INFO("(if) Pt <%f,%f> added to traveling path.",po.x,po.y);
                 
             }                
-            else{
-            
-                if ( path_strip.points.back().x != posX &&\
-                     path_strip.points.back().y != posY){
+            else if ( path_strip.points.back().x != posX &&\
+                      path_strip.points.back().y != posY){
+                    
+                //-- this origin
+                geometry_msgs::Point po;
+                po.x = posX;
+                po.y = posY;
+                po.z = 0.5; //0.1;
+                //conf_points.points.push_back(po);
+                //conf_positions.points.push_back(po);
+                path_strip.points.push_back(po);
+                
+                //-- write to the file
+                writeTravelingPathFile(po.x,po.y);
+                
+                //ROS_INFO("(else) Pt <%f,%f> added to traveling path.",po.x,po.y);
 
-                    
-                    //-- this origin
-                    geometry_msgs::Point po;
-                    po.x = posX;
-                    po.y = posY;
-                    po.z = 0.5; //0.1;
-                    //conf_points.points.push_back(po);
-                    //conf_positions.points.push_back(po);
-                    path_strip.points.push_back(po);
-                    
-                    writeTravelingPathFile(po.x,po.y);
-                    
-                    ROS_INFO("(else) Pt <%f,%f> added to traveling path.",po.x,po.y);
-
-                 }
              }
+             
 
             //--- Configurations
             //=========================================
@@ -453,44 +452,43 @@ void captureActivities(){
 	            m.getRPY(roll,pitch,yaw);
 	            double t = (yaw)*180/M_PI;
 	            
+	            //-- write to the file
 	            writeExecutedConfsFile(ps.pose.position.x,ps.pose.position.y,t);
-                ROS_INFO("(if) Pose <%f,%f,%f> added to conf.",ps.pose.position.x,ps.pose.position.y,t);
-            }
-            else
-            {                
-                //ROS_INFO("Last conf <%f,%f>",conf_positions.points.back().x,conf_positions.points.back().y);
                 
-                if ( conf_positions.points.back().x != posX &&\
-                     conf_positions.points.back().y != posY){
-
-                    //-- position
-                    geometry_msgs::Point pt;
-                    pt.x = posX;
-                    pt.y = posY;
-                    pt.z = 0.5;
-                    conf_points.points.push_back(pt);
-                    conf_positions.points.push_back(pt);                
-
-                    //-- pose
-                    geometry_msgs::PoseStamped ps;
-                    ps.pose.position.x = posX;
-                    ps.pose.position.y = posY;
-                    ps.pose.position.z = 0.5;
-                    ps.pose.orientation = currentPose.pose.orientation;
-                    conf_poses.poses.push_back(ps.pose);
-                                    
-                    //-- quaternion to degree
-                    tf::Quaternion q(currentPose.pose.orientation.x, currentPose.pose.orientation.y, \
-                    currentPose.pose.orientation.z, currentPose.pose.orientation.w);
-                    tf::Matrix3x3 m(q);
-                    double roll,pitch,yaw;
-                    m.getRPY(roll,pitch,yaw);
-                    double t = (yaw)*180/M_PI;
-                    
-                    writeExecutedConfsFile(ps.pose.position.x,ps.pose.position.y,t);
-                    ROS_INFO("(else) Pose <%f,%f,%f> added to conf.",ps.pose.position.x,ps.pose.position.y,t);
-                }
+                //ROS_INFO("(if) Pose <%f,%f,%f> added to conf.",ps.pose.position.x,ps.pose.position.y,t);
             }
+            else if ( conf_positions.points.back().x != posX &&\
+                      conf_positions.points.back().y != posY){
+
+                //-- position
+                geometry_msgs::Point pt;
+                pt.x = posX;
+                pt.y = posY;
+                pt.z = 0.5;
+                conf_points.points.push_back(pt);
+                conf_positions.points.push_back(pt);                
+
+                //-- pose
+                geometry_msgs::PoseStamped ps;
+                ps.pose.position.x = posX;
+                ps.pose.position.y = posY;
+                ps.pose.position.z = 0.5;
+                ps.pose.orientation = currentPose.pose.orientation;
+                conf_poses.poses.push_back(ps.pose);
+                                
+                //-- quaternion to degree
+                tf::Quaternion q(currentPose.pose.orientation.x, currentPose.pose.orientation.y, \
+                currentPose.pose.orientation.z, currentPose.pose.orientation.w);
+                tf::Matrix3x3 m(q);
+                double roll,pitch,yaw;
+                m.getRPY(roll,pitch,yaw);
+                double t = (yaw)*180/M_PI;
+                
+                //-- write to the file
+                writeExecutedConfsFile(ps.pose.position.x,ps.pose.position.y,t);
+                //ROS_INFO("(else) Pose <%f,%f,%f> added to conf.",ps.pose.position.x,ps.pose.position.y,t);
+            }
+            
 
 
             /*
@@ -547,9 +545,9 @@ void captureActivities(){
             //conf_positions.points.push_back(po);
             path_strip.points.push_back(p);
             
-            writeTravelingPathFile(p.x,p.y);
-            
-            ROS_INFO("(if) Pt <%f,%f> added to traveling path.",p.x,p.y);
+            //-- write to the file
+            writeTravelingPathFile(p.x,p.y);            
+            //ROS_INFO("(if) Pt <%f,%f> added to traveling path.",p.x,p.y);
         }
         else
         {                        
@@ -560,7 +558,7 @@ void captureActivities(){
             
             double dist = fEuclideanDist(lastX,lastY,thisX,thisY);
             
-            ROS_INFO("Last pt: <%f,%f>, this pt: <%f,%f>, dist: %f",lastX,lastY,thisX,thisY,dist);
+            //ROS_INFO("Last pt: <%f,%f>, this pt: <%f,%f>, dist: %f",lastX,lastY,thisX,thisY,dist);
             
             if ( dist >= travelingPointsDist ){
                 
@@ -573,9 +571,10 @@ void captureActivities(){
                 //conf_positions.points.push_back(po);
                 path_strip.points.push_back(p);
                 
+                //-- write to the file
                 writeTravelingPathFile(p.x,p.y);
                 
-                ROS_INFO("(else) Pt <%f,%f> added to traveling path.",p.x,p.y);
+                //ROS_INFO("(else) Pt <%f,%f> added to traveling path.",p.x,p.y);
                 
             }
         }
@@ -591,7 +590,7 @@ int main( int argc, char** argv ){
 
 
         printf("\n=================================================================");
-	    printf("\n=	         Exploration Activities Publisher Node                 ");
+	    printf("\n=	    Exploration Activities Publisher Node                      ");
 	    printf("\n=================================================================\n");
 
         ros::init(argc, argv, "activities_publisher_node");
@@ -776,7 +775,7 @@ int main( int argc, char** argv ){
         ros::WallDuration(1).sleep();
         ros::spinOnce();
         r.sleep();
-        ROS_INFO("First localization position: <%.2f,%.2f,%.2f>",posX,posY,posW);        
+        //ROS_INFO("First localization position: <%.2f,%.2f,%.2f>",posX,posY,posW);        
         //ros::WallDuration(5).sleep();
         
         //ros::spinOnce();

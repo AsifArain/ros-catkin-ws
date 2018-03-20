@@ -106,7 +106,7 @@ void get________PlannedPosesFromFile(){
 		//ROS_INFO("A file '%s' is to be read \n",(FilePath+plan_FileName).c_str());
 		while(filePoses >> value){
 			vecPoses.push_back(value);
-			std::cout<<"value is "<<value<<std::endl;
+			//std::cout<<"value is "<<value<<std::endl;
  		}
 		filePoses.close();
 	}
