@@ -30,7 +30,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-06" />    
+         value="prismaforum5-09" />    
     
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
@@ -38,7 +38,7 @@
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="1" />
+         value="12" />
     
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -126,7 +126,7 @@
         <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
 	    
-	    <param name="file_plan"		        value="$(arg para_PlannedConfsFile)"/>
+	    <param name="file_plan"		        value="$(arg para_PlannedConfsGlobalFile)"/>
 	    
 	    <param name="field_of_view"	        value="$(arg para_FOV)"/>
 	    <param name="sensing_range"	        value="$(arg para_SensingRange)"/>
@@ -169,18 +169,18 @@
     
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--         PLANNED CONF PLACEMENTS            -->
+    <!--         EXPLORATION PLAN PUBLISHER         -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <node pkg="plan_execution" 
-          type="conf_publisher_node" 
-          name="conf_publisher" output="screen">
+          type="exploration_plan_publisher_node" 
+          name="exploration_plan_publisher" output="screen">
 	    
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
 	    
         <param name="cell_size_file"	    value="$(arg para_CellSizeFile)"/>
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
-        <!--param name="conf_file"	        value="$(arg para_PlannedConfsFile)"/-->
+        
         <param name="global_conf_file"	    value="$(arg para_PlannedConfsGlobalFile)"/>
         <param name="local_conf_file"	    value="$(arg para_PlannedConfsLocalFile)"/>
         <param name="hotspots_file"	        value="$(arg para_HotspotsFile)"/>
@@ -219,12 +219,13 @@
                 
     </node>
     
+    
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--     EXPLORATION ACTIVITES PUBLISHER        -->
+    <!--     EXPLORATION EXECUTION PUBLISHER        -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <node pkg="plan_execution" 
-          type="activities_publisher_node" 
-          name="activities_publisher" output="screen">
+          type="exploration_exe_publisher_node" 
+          name="exploration_execution_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>

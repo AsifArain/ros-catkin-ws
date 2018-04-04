@@ -1,48 +1,145 @@
 <?xml version="1.0"?>
 
+	
+		<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <!--                                                         -->
+        <!--                                                         -->
+        <!--                HUMAN EXPERT EXPLORATION                 -->
+        <!--              FOR GAS EMISSION MONITORING                -->
+        <!--                                                         -->
+        <!--                        MAIN                             -->
+        <!--                                                         -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--                                                         -->
-        <!--                                                         -->
-        <!--              LAUNCH GDM PUBLISHER                       -->
-        <!--                                                         -->
-        <!--                                                         -->
+        <!--                @AsifArain, Mar 05, 2018                 -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--            @AsifArain, Feb 09, 2018                     -->
-        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        
 
 <launch>
 
+<!-- General parameters: -->
+<!-- ................... -->
+    
+    <!-- Experiment Title -->
+    <arg name="para_ExperimentTitle"
+         value="prismaforum5-10" /> <!-- Expert:  -->
 
+    <!-- Exploration Strategy -->
+    <arg name="para_ExplorationStrategy" 		
+         value="two-step-exploration-tomography-fixed" />
+    
+    <!-- Initial Conf Num -->
+    <arg name="para_InitialConfNum" 		
+         value="23" /> <!-- 13 for 5-07 -->
+    
+    <!-- Conf Map File -->
+    <arg name="para_ConfMapFile" 		
+         value="prismaforum5_map_conf.dat" />
+         
+    <!-- Coverage Map File -->
+    <arg name="para_CoverageMapFile" 		
+         value="prismaforum5_map_coverage.dat" />
+         
+    <!-- Map Size File -->
+    <arg name="para_MapSizeFile" 		
+         value="prismaforum5_mapsize_conf.dat" />
+    
+    <!-- Cell Size File -->
+    <arg name="para_CellSizeFile" 		
+         value="prismaforum5_cellsize_conf.dat" />
+         
+    <!-- Robot Origin File -->
+    <arg name="para_RobotOriginFile" 		
+         value="prismaforum5_origin_conf.dat" />
+         
+    <!-- Planned Configuratios File -->
+    <!--arg name="para_PlannedConfsFile" 		
+         value="planned_confs.dat" /-->
+    
+    <!-- Planned Configuratios (Global)bFile -->
+    <arg name="para_PlannedConfsGlobalFile" 		
+         value="planned_confs_global.dat" />
+         
+    <!-- Planned Configuratios (Local) File -->
+    <arg name="para_PlannedConfsLocalFile" 		
+         value="planned_confs_local.dat" />
+         
+    <!-- Hotspots File -->
+    <arg name="para_HotspotsFile" 		
+         value="hotspots.dat" />
+         
+    <!-- Executed Configuratios File -->
+    <arg name="para_ExecutedConfsFile" 		
+         value="executed_confs.dat" />
+                  
+    <!-- Traveling Path File -->
+    <arg name="para_TravelingPathFile" 		
+         value="executed_path.dat" />
+
+    <!-- Field of View -->
+    <arg name="para_FOV" 
+         value="270.0" />
+
+    <!-- Sensing Range -->
+    <arg name="para_SensingRange"
+         value="15.0" />
+
+    <!-- Number of Pan Sweeps -->
+    <arg name="para_NumOfPanSweeps"
+         value="1" />
+         
+    <!-- Number of Tilt Sweeps -->
+    <arg name="para_NumOfTiltSweeps"
+         value="1" />
+         
+    <!-- Sample Delay -->
+    <arg name="para_SampleDelay"
+         value="0.1" />
+
+    
+    <!-- Hard Offset X -->
+    <arg name="para_HardOffsetX"	
+         value="0.0" />
+         
+    <!-- Hard Offset Y -->
+    <arg name="para_HardOffsetY"
+         value="0.0" />
+         
+    
+    <arg name="para_ConfNum" value="23" />
+    
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--              GDM                           -->
+    <!--              GDM PUBLISHER                 -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 	<node pkg="plan_execution" 
 	      type="exploration_gdm_publisher_node" 
-	      name="exploration_gdm_publisher" 
-	      output="screen">
-	
-	    <param name="experiment_title"	    value="prismaforum5-04"/>
-	    <param name="exploration_strategy"	value="one-step-exploration"/>
-	    
-	    <param name="reconstruction_file"   value="reconstruction.dat"/>
-	    <param name="x_points_file"	        value="x_coord.dat"/>
-	    <param name="y_points_file"	        value="y_coord.dat"/>
-	    
-	    
+	      name="exploration_gdm_publisher" output="screen">
+	      
         
+	    
+	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
+	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
+	    
+	    <param name="reconstruction_file"	value="reconstruction_conf$(arg para_ConfNum).dat"/>
+	    <param name="x_points_file"	        value="x_coord_conf$(arg para_ConfNum).dat"/>
+	    <param name="y_points_file"	        value="y_coord_conf$(arg para_ConfNum).dat"/>
+	    
         <param name="map_size_file"	        value="reconstruction_mapsize.dat"/>
         <param name="cell_size_file"	    value="reconstruction_cellsize.dat"/>
         <param name="robot_origin_file"	    value="reconstruction_origin.dat"/>
-        <param name="high_threshould"	    value="100"/>
-        <!--param name="conf_file"	        value="robot_plan_detection_test.dat"/-->
+        <param name="high_threshould"	    value="50"/>
         
-        <param name="hard_offset_x"	        value="0.0"/> <!--"0.0"-->
-        <param name="hard_offset_y"	        value="0.0"/> <!--"-0.25"-->
-        
+        <param name="recon_color_r_file"	value="reconstructionColorR_conf$(arg para_ConfNum).dat"/>
+        <param name="recon_color_g_file"	value="reconstructionColorG_conf$(arg para_ConfNum).dat"/>
+        <param name="recon_color_b_file"	value="reconstructionColorB_conf$(arg para_ConfNum).dat"/>
+
+	    <param name="hard_offset_x"	        value="$(arg para_HardOffsetX)"/>
+        <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>
         
     </node>
     
+        
     
+        
 </launch>
 
 

@@ -1,6 +1,6 @@
 /*
 
-                          ACTIVITIES PUBLISHER NODE
+                      EXPLORATION EXECUTION PUBLISHER NODE
               ____________________________________________________
 
 
@@ -98,6 +98,11 @@ void callback___PTUJointAngles();
 geometry_msgs::PoseStamped currentPose;
 
 double travelingPointsDist;
+double pathZ;
+double confZ;
+double fovZ;
+double beamZstart;
+double beamZend;
 
 //--- Log File Variables
 //==========================
@@ -117,6 +122,12 @@ string explorationStrategy;
 #define	DEFAULT_TOPIC_PTU_JOINT_STATUS  "/amtec/joint_states"
 
 #define	DEFAULT_TRAVELING_POINTS_DISTANCE  0.25
+
+#define DEFAULT_PATH_Z          0.400
+#define DEFAULT_CONF_Z          0.450
+#define DEFAULT_FOV_Z           0.904
+#define DEFAULT_BEAM_Z_START    0.904
+#define DEFAULT_BEAM_Z_END      0.200
 
 //================================================================================
 //              CALLBACK: LOCALIZATION
@@ -210,7 +221,7 @@ void readExecutedPlanFromFile(){
 		        geometry_msgs::Point pt;
                 pt.x = x;
                 pt.y = y;
-                pt.z = 0.5; 
+                pt.z = pathZ; //0.40; //0.2; //0.5; 
                 path_strip.points.push_back(pt);
                 //ROS_INFO("(from file) Pt <%f,%f> added to traveling path.",pt.x,pt.y);
          	}
@@ -228,19 +239,21 @@ void readExecutedPlanFromFile(){
 		    while(fileExecutedConfs >> x >> y >> t){
 		        
 		        //-- position
+		        /*
                 geometry_msgs::Point pt;
                 pt.x = x;
                 pt.y = y;
-                pt.z = 0.5;
+                pt.z = confZ; //0.45; //0.2; //0.5; 
                 conf_points.points.push_back(pt);
                 conf_positions.points.push_back(pt);
                 //ROS_INFO("(from file) Pt <%f,%f> added to conf points.",pt.x,pt.y);
-
+                */
+                
                 //-- pose 
                 geometry_msgs::PoseStamped ps;
                 ps.pose.position.x = x;
                 ps.pose.position.y = y;
-                ps.pose.position.z = 0.5;
+                ps.pose.position.z = confZ; //0.45; //0.2; //0.5; 
                 ps.pose.orientation = tf::createQuaternionMsgFromYaw(t*M_PI/180); //currentPose.pose.orientation; //
                 conf_poses.poses.push_back(ps.pose);
                 //ROS_INFO("(from file) Pt <%f,%f,%f> added to conf pose.",ps.pose.position.x,ps.pose.position.y,t);
@@ -323,7 +336,7 @@ void captureActivities(){
             geometry_msgs::Point p0;
             p0.x = posX+0.0;
             p0.y = posY+0.0;
-            p0.z = 0.904;
+            p0.z = fovZ; //0.904;
             fov_strip.points.push_back(p0);
 
             //-- Circumference points
@@ -331,7 +344,7 @@ void captureActivities(){
 
                 float x = posX + sensing_range * cos(i * PI/180);
                 float y = posY + sensing_range * sin(i * PI/180);
-                float z = 0.1;
+                float z = fovZ; //0.904; //0.7; //0.1; 
                 geometry_msgs::Point p1;
                 p1.x = x;
                 p1.y = y;
@@ -350,7 +363,7 @@ void captureActivities(){
             //-- initial point
             float xi = posX + 0.21 * cos((posW*PI/180)+anglePan);
             float yi = posY + 0.21 * sin((posW*PI/180)+anglePan);
-            float zi = 0.904;
+            float zi = beamZstart; //0.904;
             geometry_msgs::Point pi;
             pi.x = xi;
             pi.y = yi;
@@ -359,7 +372,7 @@ void captureActivities(){
             //-- end point
             float xe = posX + sensing_range * cos((posW*PI/180)+anglePan);
             float ye = posY + sensing_range * sin((posW*PI/180)+anglePan);
-            float ze = 0.1;
+            float ze = beamZend; //0.2; //0.1;
             geometry_msgs::Point pe;
             pe.x = xe;
             pe.y = ye;
@@ -385,7 +398,7 @@ void captureActivities(){
                 geometry_msgs::Point po;
                 po.x = posX;
                 po.y = posY;
-                po.z = 0.5; //0.1;
+                po.z = pathZ; //0.40; //0.2; //0.5; //0.1;
                 //conf_points.points.push_back(po);
                 //conf_positions.points.push_back(po);
                 path_strip.points.push_back(po);
@@ -403,7 +416,7 @@ void captureActivities(){
                 geometry_msgs::Point po;
                 po.x = posX;
                 po.y = posY;
-                po.z = 0.5; //0.1;
+                po.z = pathZ; //0.40; //0.2; //0.5; //0.1;
                 //conf_points.points.push_back(po);
                 //conf_positions.points.push_back(po);
                 path_strip.points.push_back(po);
@@ -426,21 +439,24 @@ void captureActivities(){
 
             //ROS_INFO("Conf loop...");
             
-            if( conf_positions.points.empty() ){
+            //if( conf_positions.points.empty() ){
+            if( conf_poses.poses.empty() ){
                 
                 //-- position
+                /*                
                 geometry_msgs::Point pt;
                 pt.x = posX;
                 pt.y = posY;
-                pt.z = 0.5;
+                pt.z = confZ; //0.45; //0.25; //0.5;
                 conf_points.points.push_back(pt);
                 conf_positions.points.push_back(pt);                
-
+                */
+                
                 //-- pose
                 geometry_msgs::PoseStamped ps;
                 ps.pose.position.x = posX;
                 ps.pose.position.y = posY;
-                ps.pose.position.z = 0.5;
+                ps.pose.position.z = confZ; //0.45; //0.25; //0.5;
                 ps.pose.orientation = currentPose.pose.orientation;
                 conf_poses.poses.push_back(ps.pose);
                                 
@@ -456,23 +472,29 @@ void captureActivities(){
 	            writeExecutedConfsFile(ps.pose.position.x,ps.pose.position.y,t);
                 
                 //ROS_INFO("(if) Pose <%f,%f,%f> added to conf.",ps.pose.position.x,ps.pose.position.y,t);
+                //ROS_INFO("(if) Pose <%f> added to conf.",conf_poses.poses[0].position.x);
             }
-            else if ( conf_positions.points.back().x != posX &&\
-                      conf_positions.points.back().y != posY){
+            else if ( conf_poses.poses.back().position.x != posX &&\
+                      conf_poses.poses.back().position.y != posY){
+                      
+                //conf_positions.points.back().x != posX
+                //conf_positions.points.back().y != posY
 
                 //-- position
+                /*
                 geometry_msgs::Point pt;
                 pt.x = posX;
                 pt.y = posY;
-                pt.z = 0.5;
+                pt.z = 0.45; //0.25; //0.5;
                 conf_points.points.push_back(pt);
                 conf_positions.points.push_back(pt);                
-
+                */
+                
                 //-- pose
                 geometry_msgs::PoseStamped ps;
                 ps.pose.position.x = posX;
                 ps.pose.position.y = posY;
-                ps.pose.position.z = 0.5;
+                ps.pose.position.z = confZ; //0.45; //0.25; //0.5;
                 ps.pose.orientation = currentPose.pose.orientation;
                 conf_poses.poses.push_back(ps.pose);
                                 
@@ -540,7 +562,7 @@ void captureActivities(){
             geometry_msgs::Point p;
             p.x = posX;
             p.y = posY;
-            p.z = 0.5; //0.1;
+            p.z = pathZ; //0.40; //0.2; //0.5; //0.1;
             //conf_points.points.push_back(po);
             //conf_positions.points.push_back(po);
             path_strip.points.push_back(p);
@@ -566,7 +588,7 @@ void captureActivities(){
                 geometry_msgs::Point p;
                 p.x = posX;
                 p.y = posY;
-                p.z = 0.5; //0.1;
+                p.z = pathZ; //0.40; //0.2; //0.5; //0.1;
                 //conf_points.points.push_back(po);
                 //conf_positions.points.push_back(po);
                 path_strip.points.push_back(p);
@@ -590,11 +612,11 @@ int main( int argc, char** argv ){
 
 
         printf("\n=================================================================");
-	    printf("\n=	    Exploration Activities Publisher Node                      ");
+	    printf("\n=	    Exploration Execution Publisher Node                      ");
 	    printf("\n=================================================================\n");
 
-        ros::init(argc, argv, "activities_publisher_node");
-        ros::NodeHandle n ("exploration_act");
+        ros::init(argc, argv, "exploration_execution_publisher_node");
+        ros::NodeHandle n ("executed");
 
         //-- Parameters node
         ros::NodeHandle paramHandle ("~");
@@ -617,6 +639,14 @@ int main( int argc, char** argv ){
 	    paramHandle.param("field_of_view",FoV,DEFAULT_FOV);
 	    paramHandle.param("traveling_points_distance",travelingPointsDist,DEFAULT_TRAVELING_POINTS_DISTANCE);
 	    
+	    paramHandle.param("path_z",pathZ,DEFAULT_PATH_Z);
+	    paramHandle.param("conf_z",confZ,DEFAULT_CONF_Z);
+	    paramHandle.param("fov_z",fovZ,DEFAULT_FOV_Z);
+	    paramHandle.param("beam_z_start",beamZstart,DEFAULT_BEAM_Z_START);
+	    paramHandle.param("beam_z_end",beamZend,DEFAULT_BEAM_Z_END);
+	    
+	    
+	        
 	    
         //============================================
         //----- ROS Topic Names
@@ -641,8 +671,8 @@ int main( int argc, char** argv ){
         //============================================
         //ros::Publisher scan_marker = n.advertise<visualization_msgs::Marker>("scan_area", 10);
         ros::Publisher sweep_pub = n.advertise<visualization_msgs::Marker>("sweep", 10);
-        ros::Publisher position_pub = n.advertise<visualization_msgs::Marker>("positions", 10);
-        ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseArray>("poses", 10);
+        //ros::Publisher position_pub = n.advertise<visualization_msgs::Marker>("positions", 10);
+        ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseArray>("confs", 10);
         ros::Publisher path_pub = n.advertise<visualization_msgs::Marker>("path", 10);
 
         ros::Rate r(10);
@@ -821,7 +851,7 @@ int main( int argc, char** argv ){
                 sweep_pub.publish(fov_strip);
                 sweep_pub.publish(beam_line);
 
-                position_pub.publish(conf_positions);
+                //position_pub.publish(conf_positions);
                 pose_pub.publish(conf_poses);
 
                 path_pub.publish(path_strip);

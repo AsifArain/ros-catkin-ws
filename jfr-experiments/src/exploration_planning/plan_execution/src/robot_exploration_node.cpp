@@ -177,8 +177,8 @@ void execute____PlannedConfigurations(){
                 float conf_y = ((vecPoses[i*3+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size);                
                 float conf_t = vecPoses[i*3+2];
                 
-                ROS_INFO("This conf <%f,%f,%f>",conf_x,conf_y,conf_t);
-                ROS_INFO("This vecPoses <%f,%f,%f>",vecPoses[i*3+0],vecPoses[i*3+1],vecPoses[i*3+2]);
+                //ROS_INFO("This conf <%f,%f,%f>",conf_x,conf_y,conf_t);
+                //ROS_INFO("This vecPoses <%f,%f,%f>",vecPoses[i*3+0],vecPoses[i*3+1],vecPoses[i*3+2]);
                 
                 //--- goal pose
                 //--------------------
@@ -195,7 +195,7 @@ void execute____PlannedConfigurations(){
                 //--- sending goal
                 //--------------------
                 
-                ROS_INFO("Gasbot is moving to Pose# %i <%.1fm,%.1fm,%.1fdeg>.",i+1,conf_x,conf_y,conf_t); 
+                ROS_INFO("Gasbot is moving to Pose #%i <%.1fm,%.1fm,%.1fdeg>.",i+1,conf_x,conf_y,conf_t); 
                 ac.sendGoal(goal);
                 ac.waitForResult();
                 
@@ -203,7 +203,7 @@ void execute____PlannedConfigurations(){
                 
                 if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
 	                
-	                ROS_INFO("Gasbot has reached to the desired pose# %i",i+1);
+	                ROS_INFO("Gasbot has reached to the desired pose #%i",i+1);
 	                //ROS_INFO("Wait for a sec....");
 	                //ros::WallDuration(1).sleep();
 	                

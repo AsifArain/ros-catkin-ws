@@ -47,11 +47,11 @@ void create_____LogDirectory(){
         if (mkdir(log_FilePath.c_str(),0777)==-1){ 
         
             //===== Print info
-            ROS_INFO("Following logs directory is created:\n%s\n",log_FilePath.c_str());
+            //ROS_INFO("Following logs directory is created:\n%s\n",log_FilePath.c_str());
         }
         else{
             //===== Print info
-            ROS_INFO("Following logs directory either already exists or it is not created:\n%s\n",log_FilePath.c_str());
+            //ROS_INFO("Following logs directory either already exists or it is not created:\n%s\n",log_FilePath.c_str());
         }
 
         

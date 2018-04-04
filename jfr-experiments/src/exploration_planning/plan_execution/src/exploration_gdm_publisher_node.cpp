@@ -79,6 +79,11 @@ std::string FilePath, \
 
 double hard_offset_x, hard_offset_y, high_t;
 
+double cloudZ;
+double msgZ;
+
+#define DEFAULT_CLOUD_Z 0.750
+#define DEFAULT_MSG_Z   1.000
 
 
 
@@ -302,6 +307,8 @@ void createMapCloud(){
     //ROS_INFO("sizes are: %d, %d, %d", vec_Xpoints.size(),vec_Ypoints.size(),vec_Concentration.size());
     //ROS_INFO("sizes are: %d, %d, %d", vec_reconColorR.size(),vec_reconColorG.size(),vec_reconColorB.size());
     
+    map_cloud.points.clear();
+    
     for (int i=0; i<vec_Xpoints.size(); i++){
         for (int j=0; j<vec_Ypoints.size(); j++){
             
@@ -319,7 +326,7 @@ void createMapCloud(){
             float x = ((vec_Xpoints[i]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
             float y = ((vec_Ypoints[j]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
             
-            float z = 0.5; //0.1
+            float z = cloudZ; //0.75; //0.5; //0.1
             
             //ROS_INFO("origin are %f,%f",vec_RobotOrigin[0],vec_RobotOrigin[1]);
             //ROS_INFO("i,j are %d,%d",i,j);
@@ -337,6 +344,7 @@ void createMapCloud(){
                 //ROS_INFO("In color loop1...");
                 pcl::PointXYZRGB p;
                 //ROS_INFO("In color loop2...");
+                //ROS_INFO("x,y,z are %f,%f,%f",x,y,z);
                 p.x = x; p.y = y; p.z = z;
                 
                 //ROS_INFO("In color loop3...");
@@ -407,6 +415,11 @@ int main( int argc, char** argv ){
 	    paramHandle.param<std::string>("recon_color_g_file",filename__reconstructionColorG,"reconstructionColorG.dat");
 	    paramHandle.param<std::string>("recon_color_b_file",filename__reconstructionColorB,"reconstructionColorB.dat");
 	    
+	    
+	    paramHandle.param<double>("gdm_cloud_z",cloudZ,DEFAULT_CLOUD_Z);
+	    paramHandle.param<double>("gdm_msg_z",msgZ,DEFAULT_MSG_Z);
+	    
+	    
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
         paramHandle.param<double>("high_threshould",high_t,100.0);
@@ -453,7 +466,7 @@ int main( int argc, char** argv ){
         
         map_msg.pose.position.x = 0.0;
         map_msg.pose.position.y = 0.0;
-        map_msg.pose.position.z = 1.0;
+        map_msg.pose.position.z = msgZ; //1.0;
         map_msg.pose.orientation.w = 1.0;
         
         map_msg.id = 4;
@@ -474,6 +487,9 @@ int main( int argc, char** argv ){
 	    r.sleep();
 	    
 	    map_msg.text.clear();
+	    
+	    //-- create cloud
+        createMapCloud();
 	      
 	    while (ros::ok()){
 	        
@@ -482,14 +498,21 @@ int main( int argc, char** argv ){
 	        //-- complete the current scan
 	        //=============================================
 	        map_msg.text = "Gas sampling is in progress...";
-	        ROS_INFO("Waiting for the scan to be completed.");
+	        ROS_INFO("Waiting for the scan to be completed...");
 	        while(statusPTU!=0){
 	        
-	            // Text message
+	            //-- Text message
                 //map_msg.text = "Wait! The map is being computed.";
                 map_msg.action = visualization_msgs::Marker::DELETE; //FIXME
                 map_msg.header.stamp = ros::Time::now();
                 msg_publisher.publish(map_msg);
+                
+                
+                //-- publish map cloud
+                //Ref: https://answers.ros.org/question/172241/pcl-and-rostime/
+                ros::Time time_st = ros::Time::now ();
+                map_cloud.header.stamp = time_st.toNSec()/1e3;            
+                cloud_publisher.publish(map_cloud.makeShared());
                 
 	            //ROS_INFO("Waiting for the scan to be completed.");
 	            ros::WallDuration(2).sleep();
@@ -504,8 +527,8 @@ int main( int argc, char** argv ){
 	        accesstime_diff = difftime( gdm_accesstime_this,gdm_accesstime_last );
 	        //Ref: http://www.cplusplus.com/reference/ctime/difftime/
 	        	  
-            ROS_INFO("Wait! The reconstruction map is being computed.");
-    	    map_msg.text = "Wait! Building a reconstruction....";
+            ROS_INFO("Wait! The reconstruction map is being computed...");
+    	    map_msg.text = "Wait! Building a reconstruction...";
     	    //msg_publisher.publish(map_msg);
 	        while (statusPTU==0 && accesstime_diff==0){
 	            
@@ -515,13 +538,20 @@ int main( int argc, char** argv ){
                 //map_msg.text = "Wait! The map is being computed.";
                 map_msg.action = visualization_msgs::Marker::ADD; //FIXME
                 map_msg.header.stamp = ros::Time::now();
+                map_msg.lifetime = ros::Duration(1.00);
                 msg_publisher.publish(map_msg);
 	            
 	            //-- publish the current map
 	            //ROS_INFO("Publishing the previous map...");
 	            //GDM_map.publishMap(mean_advertise);
+	            
+	            //-- publish map cloud
+                //Ref: https://answers.ros.org/question/172241/pcl-and-rostime/
+                ros::Time time_st = ros::Time::now ();
+                map_cloud.header.stamp = time_st.toNSec()/1e3;            
+                cloud_publisher.publish(map_cloud.makeShared());
 	        
-	            ros::WallDuration(5).sleep();
+	            ros::WallDuration(2).sleep();
 	            
 	            //-- update access time difference
 	            gdm_accesstime_this = boost::filesystem::last_write_time( gdm_filepath );
@@ -573,7 +603,7 @@ int main( int argc, char** argv ){
             map_msg.text = "The latest reconstruction is displayed..."; 
             //ROS_INFO("after text clear...");
             map_msg.header.stamp = ros::Time::now();
-            map_msg.lifetime = ros::Duration(5.00);
+            map_msg.lifetime = ros::Duration(3.00);
             msg_publisher.publish(map_msg);
 	        //ROS_INFO("after text publish...");
 	        
@@ -590,9 +620,10 @@ int main( int argc, char** argv ){
 	            //Ref: https://answers.ros.org/question/172241/pcl-and-rostime/
                 ros::Time time_st = ros::Time::now ();
                 map_cloud.header.stamp = time_st.toNSec()/1e3;
-	            cloud_publisher.publish (map_cloud.makeShared());
+	            cloud_publisher.publish(map_cloud.makeShared());
                 
                 //ROS_INFO("AFTER publish the map.. in this loop....");
+                //ros::WallDuration(10).sleep();
                 
 	            ros::WallDuration(1).sleep();
 	            

@@ -61,7 +61,8 @@ double hard_offset_x, hard_offset_y;
 void readEnvironmentMap(){
 
         
-        ROS_INFO("Reading environment map... ");	    
+        //ROS_INFO("Reading environment map... ");	    
+	    
 	    std::ifstream file__MapSize, \
 	                  file__MapSensorPlacements, \
 	                  file__MapCoverage, \
@@ -73,7 +74,7 @@ void readEnvironmentMap(){
         //==============================
         //--- map size
 	    //==============================
-	    ROS_INFO("Map size... ");
+	    //ROS_INFO("Map size... ");
 	    file__MapSize.open((FilePath+filename__MapSize).c_str(), std::ios::app);
 	    //ROS_INFO("file: %s",(FilePath+filename__MapSize).c_str());
 	    int this_size;
@@ -91,7 +92,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- map (sensor placements)
 	    //==============================
-	    ROS_INFO("Map sensor placements... ");
+	    //ROS_INFO("Map sensor placements... ");
 	    file__MapSensorPlacements.open((FilePath+filename__MapSensorPlacements).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__MapSensorPlacements).c_str());
 	    int this_map;
@@ -108,7 +109,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- map (coverage)
 	    //==============================
-	    ROS_INFO("Map coverage... ");
+	    //ROS_INFO("Map coverage... ");
 	    file__MapCoverage.open((FilePath+filename__MapCoverage).c_str(), std::ios::app);
 	    //ROS_INFO("Map file: %s",(FilePath+filename__MapCoverage).c_str());
 	    int this_cmap;
@@ -126,6 +127,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Conf
 	    //==============================
+	    /*
 	    ROS_INFO("Conf... ");
 	    file__Confs.open((FilePath+filename__Confs).c_str(), std::ios::app);
 	    //ROS_INFO("Conf file: %s",(FilePath+filename__Confs).c_str());
@@ -140,12 +142,12 @@ void readEnvironmentMap(){
 		    //ROS_INFO("Confs: size %zd",vec_Confs.size());
 	    }
 	    else std::cout << "Unable to open conf file";
-	    
+	    */
 	    
 	    //==============================
 	    //--- Read Cell Size
 	    //==============================
-	    ROS_INFO("Cell size... ");
+	    //ROS_INFO("Cell size... ");
 	    file__CellSize.open((FilePath+filename__CellSize).c_str(), std::ios::app);
 	    if (file__CellSize.is_open()){
          	file__CellSize >> cell_size;
@@ -158,7 +160,7 @@ void readEnvironmentMap(){
 	    //==============================
 	    //--- Read Robot Origin
 	    //==============================
-	    ROS_INFO("Robot origin... ");	    
+	    //ROS_INFO("Robot origin... ");	    
 	    file__RobotOrigin.open((FilePath+filename__RobotOrigin).c_str(), std::ios::app);
 	    //ROS_INFO("file: %s",(FilePath+filename__RobotOrigin).c_str());
 	    double this_origin;
@@ -203,7 +205,7 @@ int main( int argc, char** argv ){
 	    paramHandle.param<std::string>("map_size_file",filename__MapSize,"prismaforum_mapsize_conf.dat");	    
 	    paramHandle.param<std::string>("cell_size_file",filename__CellSize,"prismaforum_cellsize_conf.dat");
 	    paramHandle.param<std::string>("robot_origin_file",filename__RobotOrigin,"prismaforum_origin_conf.dat");
-	    paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
+	    //paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
 	    
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
@@ -315,6 +317,7 @@ int main( int argc, char** argv ){
         
         //--- Marker initialization (confs)
         //--------------------------------        
+        /*
         marker_conf_sphere.header.frame_id = "/map";        
         marker_conf_sphere.header.stamp = ros::Time::now();
         marker_conf_sphere.ns = "env_map_publisher_node";
@@ -329,7 +332,7 @@ int main( int argc, char** argv ){
         marker_conf_sphere.color.g = 0.0f;
         marker_conf_sphere.color.b = 1.0f;
         marker_conf_sphere.color.a = 1.00;
-        
+        */
         
         //--- Marker initialization (confs)
         //--------------------------------        
@@ -363,7 +366,7 @@ int main( int argc, char** argv ){
                 //float y = ((j-vec_RobotOrigin[1]+1)*cell_size)+hard_offset_y;
                 float x = ((i-vec_RobotOrigin[0]+0.5-0.0)*cell_size)+hard_offset_x;
                 float y = ((j-vec_RobotOrigin[1]+0.5-0.0)*cell_size)+hard_offset_y;
-                float z = 0.5; //0.1
+                float z = 0.1; //0.5; //0.1
                 
                 //ROS_INFO("origin are %f,%f",vec_RobotOrigin[0],vec_RobotOrigin[1]);
                 //ROS_INFO("i,j are %d,%d",i,j);
@@ -407,6 +410,7 @@ int main( int argc, char** argv ){
         //--------------------------------        
         //--- confs
         //--------------------------------
+        /*
         //ROS_INFO("map size is %d,%d",vec_MapSize[0],vec_MapSize[1]);        
         for (int i = 0; i<(vec_Confs.size()/3); ++i){        
             
@@ -426,10 +430,8 @@ int main( int argc, char** argv ){
             p.z = z;
             
             marker_conf_sphere.points.push_back(p);
-            
-            
         }
-        
+        */
                 
         //--------------------------------
         //-- map origin (troubleshooting)
@@ -458,7 +460,7 @@ int main( int argc, char** argv ){
         //-- publish map
         //--------------------------------
         
-        ROS_INFO("The map is being published...");
+        ROS_INFO("The environment map is being published...");
                 
         while(ros::ok()){
         

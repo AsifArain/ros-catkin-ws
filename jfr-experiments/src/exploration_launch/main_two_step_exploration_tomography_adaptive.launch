@@ -104,10 +104,6 @@
     <arg name="para_HardOffsetY"
          value="0.0" />
 
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--                 RVIZ                       -->
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <node pkg="rviz" type="rviz" name="rviz" />
     
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -120,7 +116,7 @@
         <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
 	    
-	    <param name="file_plan"		        value="$(arg para_PlannedConfsFile)"/>
+	    <param name="file_plan"		        value="$(arg para_PlannedConfsGlobalFile)"/>
 	    
 	    <param name="field_of_view"	        value="$(arg para_FOV)"/>
 	    <param name="sensing_range"	        value="$(arg para_SensingRange)"/>
@@ -214,11 +210,11 @@
     </node>
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--     EXPLORATION ACTIVITES PUBLISHER        -->
+    <!--     EXPLORATION EXECUTION PUBLISHER        -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <node pkg="plan_execution" 
-          type="activities_publisher_node" 
-          name="activities_publisher" output="screen">
+          type="exploration_exe_publisher_node" 
+          name="exploration_execution_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>

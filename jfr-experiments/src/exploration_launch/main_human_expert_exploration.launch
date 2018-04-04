@@ -21,7 +21,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-08" />
+         value="prismaforum5-10" /> <!-- Expert:  -->
 
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
@@ -29,7 +29,7 @@
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="13" /> <!-- 13 for 5-07 -->
+         value="23" /> <!-- 13 for 5-07 -->
     
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -104,10 +104,6 @@
     <arg name="para_HardOffsetY"
          value="0.0" />
          
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--                 RVIZ                       -->
-    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--node pkg="rviz" type="rviz" name="rviz" /-->
     
     
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
@@ -155,8 +151,7 @@
         <param name="robot_origin_file"	    value="$(arg para_RobotOriginFile)"/>
         
         <param name="hard_offset_x"	        value="$(arg para_HardOffsetX)"/>
-        <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>
-        
+        <param name="hard_offset_y"	        value="$(arg para_HardOffsetY)"/>        
         
     </node>
     
@@ -191,11 +186,11 @@
     
         
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-    <!--     EXPLORATION ACTIVITES PUBLISHER        -->
+    <!--     EXPLORATION EXECUTION PUBLISHER        -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
     <node pkg="plan_execution" 
-          type="activities_publisher_node" 
-          name="activities_publisher" output="screen">
+          type="exploration_exe_publisher_node" 
+          name="exploration_execution_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
