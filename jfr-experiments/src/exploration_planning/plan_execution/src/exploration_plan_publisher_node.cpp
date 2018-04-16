@@ -7,7 +7,9 @@
     This is main file to publish following exploration plan.
         --> planned configurations (global)
         --> planned configurations (local)
+        --> planned traveling path (global)
         --> estimated hotspots center (hcs)
+        --> gas sources (gas bottles)
     
     -------------------------------------------------------------------------
     Author:  Asif Arain
@@ -61,13 +63,16 @@ geometry_msgs::PoseArray gConfsPoses;
 geometry_msgs::PoseArray lConfsPoses;
 //visualization_msgs::Marker hcsMark; 
 
+visualization_msgs::Marker gPathStrip;
+
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 PointCloud hcsCloud;
+PointCloud sourcesCloud;
 
 //--- File Variables
 //-------------------------------
 double cell_size;
-std::vector<double> vec_RobotOrigin,vec_gConfs,vec_lConfs,vec_Hcs;
+std::vector<double> vec_RobotOrigin,vec_gConfs,vec_gPath,vec_lConfs,vec_Hcs,vec_Sources;
 std::vector<int> vec_MapSize;
 
 std::string FilePath, \
@@ -78,19 +83,25 @@ std::string FilePath, \
             filenameGlobalConfs, \
             filenameLocalConfs, \
             filenameHotspots, \
+            filenameGasSources, \
+            filenameGlobalPath, \
             experimentTitle, \
             explorationStrategy;
 
 double hard_offset_x, hard_offset_y;
 
 double gConfZ;
+double gPathZ;
 double lConfZ;
 double hcZ;
+double sourcesZ;
 
 
 #define DEFAULT_G_CONF_Z   0.300
 #define DEFAULT_L_CONF_Z   0.350
+#define DEFAULT_G_PATH_Z   0.280
 #define DEFAULT_HOT_Z      0.200
+#define DEFAULT_SOURCES_Z  0.150
 
 
 //================================================================================
@@ -106,7 +117,9 @@ void readDataFiles(){
 	                  fileRobotOrigin, \
 	                  fileGlobalConfs, \
 	                  fileLocalConfs, \
-	                  fileHotspots;
+	                  fileGlobalPath, \
+	                  fileHotspots, \
+	                  fileGasSources;
         
         
 	    //==============================
@@ -117,7 +130,7 @@ void readDataFiles(){
 	    //ROS_INFO("Conf file: %s",(FilePath+filenameGlobalConfs).c_str());
 	    double this_gconf;
 	    vec_gConfs.clear();
-	    if (fileGlobalConfs.is_open()){		    
+	    if (fileGlobalConfs.is_open()){
 		    while(fileGlobalConfs >> this_gconf){
 			    vec_gConfs.push_back(this_gconf);
 			    //ROS_INFO("Confs: this_gconf %f",this_gconf);
@@ -152,6 +165,26 @@ void readDataFiles(){
 	    
 	    
 	    //==============================
+        //  Global path
+	    //==============================	    
+	    fileGlobalPath.open((FilePath+filenameGlobalPath).c_str(),std::ios::app);
+	    double this_gpath;
+	    vec_gPath.clear();
+	    if (fileGlobalPath.is_open()){
+		    while(fileGlobalPath >> this_gpath){		    
+		        vec_gPath.push_back(this_gpath);
+		        //geometry_msgs::Point pt;
+                //pt.x = gPathX;
+                //pt.y = gPathY;
+                //pt.z = gPathZ; //0.40; //0.2; //0.5; 
+                //path_strip.points.push_back(pt);
+                //ROS_INFO("(from file) Pt <%f,%f> added to traveling path.",pt.x,pt.y);
+         	}
+		    fileGlobalPath.close();
+	    }
+	    else ROS_INFO("Unable to open global path file");
+	    
+	    //==============================
 	    //--- Hotspots
 	    //==============================
 	    //ROS_INFO("Hotspots... ");
@@ -171,6 +204,23 @@ void readDataFiles(){
 	    }
 	    else std::cout << "Unable to open hcs file";
 	    
+	    
+	    //==============================
+	    //--- Gas Sources
+	    //==============================
+	    //ROS_INFO("Gas sources... ");
+	    fileGasSources.open((FilePath+filenameGasSources).c_str(), std::ios::app);
+	    //ROS_INFO("Conf file: %s",(FilePath+filenameGasSources).c_str());
+	    double this_source;
+	    vec_Sources.clear();
+	    if (fileGasSources.is_open()){		    
+		    while(fileGasSources >> this_source){
+			    vec_Sources.push_back(this_source);
+         	}
+		    fileGasSources.close();
+		    //ROS_INFO("Confs: total size %zd",vec_Sources.size());
+	    }
+	    else std::cout << "Unable to open gas sources file";
 	    
 	    
 	    //==============================
@@ -234,12 +284,16 @@ int main (int argc, char** argv){
 	    
 	    //paramHandle.param<std::string>("conf_file",filename__Confs,"robot_plan_detection.dat");
 	    paramHandle.param<std::string>("global_conf_file",filenameGlobalConfs,"planned_confs_global.dat");
+	    paramHandle.param<std::string>("global_path_file",filenameGlobalPath,"planned_path_global.dat");
 	    paramHandle.param<std::string>("local_conf_file",filenameLocalConfs,"planned_confs_local.dat");
 	    paramHandle.param<std::string>("hotspots_file",filenameHotspots,"hotspots.dat");
+	    paramHandle.param<std::string>("gas_sources_file",filenameGasSources,"gas_sources.dat");
         
         paramHandle.param<double>("global_conf_z",gConfZ,DEFAULT_G_CONF_Z);
+        paramHandle.param<double>("global_path_z",gPathZ,DEFAULT_G_PATH_Z);
 	    paramHandle.param<double>("local_conf_z",lConfZ,DEFAULT_L_CONF_Z);
 	    paramHandle.param<double>("hotspot_z",hcZ,DEFAULT_HOT_Z);
+	    paramHandle.param<double>("gas_sources_z",sourcesZ,DEFAULT_SOURCES_Z);
         
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
@@ -248,11 +302,13 @@ int main (int argc, char** argv){
         //============================================
 	    //----- ROS Topic Publishers
         //============================================
-                
+        
+        ros::Publisher sources_pub = n.advertise<sensor_msgs::PointCloud2> ("gas_sources",10);        
         ros::Publisher hcs_pub_cloud = n.advertise<sensor_msgs::PointCloud2> ("hotspots",10);
-        //ros::Publisher hcs_pub   = n.advertise<visualization_msgs::Marker>("hotspots", 10);
-        ros::Publisher gconf_pub = n.advertise<geometry_msgs::PoseArray>("global_confs", 10);
-        ros::Publisher lconf_pub = n.advertise<geometry_msgs::PoseArray>("local_confs", 10);
+        //ros::Publisher hcs_pub   = n.advertise<visualization_msgs::Marker>("hotspots",10);
+        ros::Publisher gconf_pub = n.advertise<geometry_msgs::PoseArray>("global_confs",10);
+        ros::Publisher lconf_pub = n.advertise<geometry_msgs::PoseArray>("local_confs",10);
+        ros::Publisher gpath_pub   = n.advertise<visualization_msgs::Marker>("global_path",10);
         
         ros::Rate r(30);
         
@@ -284,7 +340,22 @@ int main (int argc, char** argv){
         //gConfsPoses.header.stamp = ros::Time::now();
         gConfsPoses.header.frame_id = "/map";
         lConfsPoses.header.frame_id = "/map";
+        gPathStrip.header.frame_id = "/map";
         
+        gPathStrip.ns = "exploration_plan_publisher_node";
+        gPathStrip.action = visualization_msgs::Marker::ADD;
+        gPathStrip.pose.orientation.w = 1.0;
+        gPathStrip.id = 0;
+        gPathStrip.type = visualization_msgs::Marker::LINE_STRIP;
+        
+        gPathStrip.scale.x = 0.10;
+        
+        gPathStrip.color.r = 0.75;
+        gPathStrip.color.g = 0.00;
+        gPathStrip.color.b = 0.75;
+        gPathStrip.color.a = 0.50;
+        
+        //gPathStrip.lifetime = ros::Duration(10.00);
         
         
         while(ros::ok()){
@@ -292,15 +363,18 @@ int main (int argc, char** argv){
             //--- read map info
             readDataFiles();
             
+            sourcesCloud.points.clear();
             //hcsMark.points.clear();
             hcsCloud.points.clear();
             gConfsPoses.poses.clear();
-            lConfsPoses.poses.clear();
+            lConfsPoses.poses.clear();            
+            gPathStrip.points.clear();
             
             //ROS_INFO("Im here....%d",vec_gConfs.size()/3);
             
+            //**************************
             //-- global confs
-            //--------------------
+            //**************************
             for (size_t i = 0; i<(vec_gConfs.size()/3); ++i){
                 
                 float x = ((vec_gConfs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
@@ -322,8 +396,28 @@ int main (int argc, char** argv){
             }
             
             
+            //**************************
+            //-- global path
+            //**************************
+            for (size_t i = 0; i<(vec_gPath.size()/2); ++i){
+                
+                float x = ((vec_gPath[i*2+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+                float y = ((vec_gPath[i*2+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+                float z = gPathZ;
+                
+                //ROS_INFO("this global path x,y,z are %f,%f,%f",x,y,z);
+                
+                //-- this path point
+                geometry_msgs::Point pt;
+                pt.x = x; 
+                pt.y = y; 
+                pt.z = z;
+                gPathStrip.points.push_back(pt);
+            }
+            
+            //**************************
             //-- local confs
-            //------------------
+            //**************************
             for (size_t i = 0; i<(vec_lConfs.size()/3); ++i){
                 
                 float x = ((vec_lConfs[i*3+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
@@ -344,8 +438,10 @@ int main (int argc, char** argv){
                 lConfsPoses.poses.push_back(pos.pose);
             }
             
+            
+            //**************************
             //-- hotspots
-            //----------------
+            //**************************
             for (size_t i = 0; i<(vec_Hcs.size()/2); ++i){
                 
                 float x = ((vec_Hcs[i*2+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
@@ -371,7 +467,6 @@ int main (int argc, char** argv){
                 p.x = x; p.y = y; p.z = z;
                 
                 hcsCloud.points.push_back(p);
-                
             }
             
             hcsCloud.height = 1;
@@ -380,28 +475,58 @@ int main (int argc, char** argv){
             //----------------------
             
             
+            //**************************
+            //-- Gas sources
+            //**************************
+            for (size_t i = 0; i<(vec_Sources.size()/2); ++i){
+                
+                float x = ((vec_Sources[i*2+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+                float y = ((vec_Sources[i*2+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+                //float x = vec_Sources[i*3+0];
+                //float y = vec_Sources[i*3+1];;
+                float z = sourcesZ;
+                
+                pcl::PointXYZ p;                
+                p.x = x; p.y = y; p.z = z;
+                
+                sourcesCloud.points.push_back(p);
+            }
+            
+            sourcesCloud.height = 1;
+            sourcesCloud.width = sourcesCloud.points.size();
+            sourcesCloud.header.frame_id = "/map";
+            //----------------------
+            
+            
             //-- update time stamps
             //hcsMark.header.stamp = ros::Time::now();
             //gConfsPoses.header.stamp = ros::Time::now();            
             gConfsPoses.header.stamp = \
+            gPathStrip.header.stamp = \
             lConfsPoses.header.stamp = ros::Time::now();
             //hcsMark.header.stamp = ros::Time::now();
             
             
             
             ros::Time time_st = ros::Time::now ();
-            hcsCloud.header.stamp = time_st.toNSec()/1e3;            
+            
+            sourcesCloud.header.stamp = time_st.toNSec()/1e3;
+            hcsCloud.header.stamp = time_st.toNSec()/1e3;
             ros::WallDuration(0).sleep();
             //ROS_INFO("Publishing the new map...");
             
             
             //-- publish 
             //------------------            
+            
+            sources_pub.publish (sourcesCloud.makeShared());
             hcs_pub_cloud.publish (hcsCloud.makeShared());
             
             gconf_pub.publish(gConfsPoses);
             lconf_pub.publish(lConfsPoses);
             //hcs_pub.publish(hcsMark);
+            
+            gpath_pub.publish(gPathStrip);
             
             
             

@@ -255,6 +255,9 @@ void execute____PlannedConfigurations(){
                 }
                 else{
                 	ROS_WARN("Gasbot failed to reach the desired pose.");
+                	
+                	ROS_WARN("Trying again....");                	
+                	i--;
             	}
             }
         

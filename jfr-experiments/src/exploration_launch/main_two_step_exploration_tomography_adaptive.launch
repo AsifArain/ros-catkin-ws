@@ -10,7 +10,7 @@
         <!--                         MAIN                            -->
         <!--                                                         -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--                @AsifArain, Feb 10, 2018                 -->
+        <!--                @AsifArain, Apr 12, 2018                 -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         
 
@@ -50,10 +50,6 @@
     <!-- Robot Origin File -->
     <arg name="para_RobotOriginFile" 		
          value="prismaforum5_origin_conf.dat" />
-         
-    <!-- Planned Configuratios File -->
-    <!--arg name="para_PlannedConfsFile" 		
-         value="planned_confs.dat" /-->
     
     <!-- Planned Configuratios (Global)bFile -->
     <arg name="para_PlannedConfsGlobalFile" 		
@@ -95,7 +91,6 @@
     <arg name="para_SampleDelay"
          value="0.1" />
 
-    
     <!-- Hard Offset X -->
     <arg name="para_HardOffsetX"	
          value="0.0" />
@@ -185,8 +180,8 @@
     <!--              GDM PUBLISHER                 -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 	<node pkg="plan_execution" 
-	      type="exploration_gdm_publisher_node" 
-	      name="exploration_gdm_publisher" output="screen">
+	      type="exploration_gdm_robot_publisher_node" 
+	      name="exploration_gdm_robot_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>

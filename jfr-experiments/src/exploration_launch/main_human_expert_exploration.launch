@@ -21,7 +21,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-10" /> <!-- Expert:  -->
+         value="prismaforum5-07" /> <!-- Expert:  -->
 
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
@@ -29,7 +29,7 @@
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="23" /> <!-- 13 for 5-07 -->
+         value="14" /> <!-- 11 for 5-06 -->
     
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -160,8 +160,8 @@
     <!--              GDM PUBLISHER                 -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 	<node pkg="plan_execution" 
-	      type="exploration_gdm_publisher_node" 
-	      name="exploration_gdm_publisher" output="screen">
+	      type="exploration_gdm_human_publisher_node" 
+	      name="exploration_gdm_human_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>

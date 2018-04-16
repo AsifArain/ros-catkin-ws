@@ -210,6 +210,18 @@ add_executable(exploration_gdm_publisher_node src/exploration_gdm_publisher_node
 target_link_libraries(exploration_gdm_publisher_node ${catkin_LIBRARIES} )
 
 
+#---- (Robot) Exploration GDM Publisher
+#=======================================
+add_executable(exploration_gdm_robot_publisher_node src/exploration_gdm_robot_publisher_node.cpp)
+target_link_libraries(exploration_gdm_robot_publisher_node ${catkin_LIBRARIES} )
+
+
+#---- (Human) Exploration GDM Publisher
+#=======================================
+add_executable(exploration_gdm_human_publisher_node src/exploration_gdm_human_publisher_node.cpp)
+target_link_libraries(exploration_gdm_human_publisher_node ${catkin_LIBRARIES} )
+
+
 #---- PTU Sweep Request Node (Test)
 #=======================================
 add_executable(ptu_sweep_request_node src/ptu_sweep_request_node.cpp)

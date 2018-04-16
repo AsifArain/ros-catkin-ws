@@ -10,7 +10,7 @@
         <!--                         MAIN                            -->
         <!--                                                         -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-        <!--                @AsifArain, Feb 10, 2018                 -->
+        <!--                @AsifArain, Apr 12, 2018                 -->
         <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
         
 
@@ -21,7 +21,7 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-10" /> <!-- -->
+         value="prismaforum5-07" /> <!-- -->
 
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
@@ -29,7 +29,7 @@
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="21" />
+         value="1" />
          
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -51,10 +51,6 @@
     <arg name="para_RobotOriginFile" 		
          value="prismaforum5_origin_conf.dat" />
          
-    <!-- Planned Configuratios File -->
-    <!--arg name="para_PlannedConfsFile" 		
-         value="planned_confs.dat" /-->
-    
     <!-- Planned Configuratios (Global)bFile -->
     <arg name="para_PlannedConfsGlobalFile" 		
          value="planned_confs_global.dat" />
@@ -95,7 +91,6 @@
     <arg name="para_SampleDelay"
          value="0.1" />
 
-    
     <!-- Hard Offset X -->
     <arg name="para_HardOffsetX"	
          value="0.0" />

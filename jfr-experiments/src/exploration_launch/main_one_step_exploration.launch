@@ -30,15 +30,15 @@
     
     <!-- Experiment Title -->
     <arg name="para_ExperimentTitle"
-         value="prismaforum5-09" />    
+         value="prismaforum5-10" />    
     
     <!-- Exploration Strategy -->
     <arg name="para_ExplorationStrategy" 		
-         value="one-step-exploration" />
+         value="one-step-exploration-Conf15" />
     
     <!-- Initial Conf Num -->
     <arg name="para_InitialConfNum" 		
-         value="12" />
+         value="16" />
     
     <!-- Conf Map File -->
     <arg name="para_ConfMapFile" 		
@@ -59,12 +59,8 @@
     <!-- Robot Origin File -->
     <arg name="para_RobotOriginFile" 		
          value="prismaforum5_origin_conf.dat" />
-         
-    <!-- Planned Configuratios File -->
-    <!--arg name="para_PlannedConfsFile" 		
-         value="planned_confs.dat" /-->
-    
-    <!-- Planned Configuratios (Global)bFile -->
+
+    <!-- Planned Configuratios (Global) File -->
     <arg name="para_PlannedConfsGlobalFile" 		
          value="planned_confs_global.dat" />
          
@@ -75,7 +71,6 @@
     <!-- Hotspots File -->
     <arg name="para_HotspotsFile" 		
          value="hotspots.dat" />
-         
          
     <!-- Executed Configuratios File -->
     <arg name="para_ExecutedConfsFile" 		
@@ -195,8 +190,8 @@
     <!--              GDM PUBLISHER                 -->
     <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 	<node pkg="plan_execution" 
-	      type="exploration_gdm_publisher_node" 
-	      name="exploration_gdm_publisher" output="screen">
+	      type="exploration_gdm_robot_publisher_node" 
+	      name="exploration_gdm_robot_publisher" output="screen">
 	
 	    <param name="experiment_title"	    value="$(arg para_ExperimentTitle)"/>
 	    <param name="exploration_strategy"	value="$(arg para_ExplorationStrategy)"/>
