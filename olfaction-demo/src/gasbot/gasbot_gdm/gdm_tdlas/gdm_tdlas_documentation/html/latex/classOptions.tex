@@ -1,0 +1,531 @@
+\section{Options Class Reference}
+\label{classOptions}\index{Options@{Options}}
+
+
+Manages all user-\/specified options for solving QPs.  
+
+
+
+
+{\ttfamily \#include $<$Options.hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf ensureConsistency} ()
+\item 
+{\bf Options} \& {\bf operator=} (const {\bf Options} \&rhs)
+\item 
+{\bf Options} ()
+\item 
+{\bf Options} (const {\bf Options} \&rhs)
+\item 
+{\bf returnValue} {\bf print} () const 
+\item 
+{\bf returnValue} {\bf setToDefault} ()
+\item 
+{\bf returnValue} {\bf setToFast} ()
+\item 
+{\bf returnValue} {\bf setToMPC} ()
+\item 
+{\bf returnValue} {\bf setToReliable} ()
+\item 
+{\bf $\sim$Options} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf real\_\-t} {\bf boundRelaxation}
+\item 
+{\bf real\_\-t} {\bf boundTolerance}
+\item 
+int {\bf dropBoundPriority}
+\item 
+int {\bf dropEqConPriority}
+\item 
+int {\bf dropIneqConPriority}
+\item 
+int {\bf enableCholeskyRefactorisation}
+\item 
+int {\bf enableDriftCorrection}
+\item 
+{\bf BooleanType} {\bf enableDropInfeasibles}
+\item 
+{\bf BooleanType} {\bf enableEqualities}
+\item 
+{\bf BooleanType} {\bf enableFarBounds}
+\item 
+{\bf BooleanType} {\bf enableFlippingBounds}
+\item 
+{\bf BooleanType} {\bf enableFullLITests}
+\item 
+{\bf BooleanType} {\bf enableNZCTests}
+\item 
+{\bf BooleanType} {\bf enableRamping}
+\item 
+{\bf BooleanType} {\bf enableRegularisation}
+\item 
+{\bf real\_\-t} {\bf epsDen}
+\item 
+{\bf real\_\-t} {\bf epsFlipping}
+\item 
+{\bf real\_\-t} {\bf epsIterRef}
+\item 
+{\bf real\_\-t} {\bf epsLITests}
+\item 
+{\bf real\_\-t} {\bf epsNum}
+\item 
+{\bf real\_\-t} {\bf epsNZCTests}
+\item 
+{\bf real\_\-t} {\bf epsRegularisation}
+\item 
+{\bf real\_\-t} {\bf finalRamping}
+\item 
+{\bf real\_\-t} {\bf growFarBounds}
+\item 
+{\bf real\_\-t} {\bf initialFarBounds}
+\item 
+{\bf real\_\-t} {\bf initialRamping}
+\item 
+{\bf SubjectToStatus} {\bf initialStatusBounds}
+\item 
+{\bf real\_\-t} {\bf maxDualJump}
+\item 
+{\bf real\_\-t} {\bf maxPrimalJump}
+\item 
+int {\bf numRefinementSteps}
+\item 
+int {\bf numRegularisationSteps}
+\item 
+{\bf PrintLevel} {\bf printLevel}
+\item 
+{\bf real\_\-t} {\bf terminationTolerance}
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf copy} (const {\bf Options} \&rhs)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages all user-\/specified options for solving QPs. 
+
+This class manages all user-\/specified options used for solving quadratic programs.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 56 of file Options.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Options@{Options}!Options@{Options}}
+\index{Options@{Options}!Options@{Options}}
+\subsubsection[{Options}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES Options::Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_aeaece707f540fe3efef777a934e3d273}
+Default constructor. 
+
+Definition at line 50 of file Options.cpp.
+
+\index{Options@{Options}!Options@{Options}}
+\index{Options@{Options}!Options@{Options}}
+\subsubsection[{Options}]{\setlength{\rightskip}{0pt plus 5cm}Options::Options (
+\begin{DoxyParamCaption}
+\item[{const {\bf Options} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classOptions_ad9215a27608868991e0cd3e9081cb3b4}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 59 of file Options.cpp.
+
+\index{Options@{Options}!$\sim$Options@{$\sim$Options}}
+\index{$\sim$Options@{$\sim$Options}!Options@{Options}}
+\subsubsection[{$\sim$Options}]{\setlength{\rightskip}{0pt plus 5cm}Options::$\sim$Options (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_a86ddb85b183f8b58af5481f30a42fa92}
+Destructor. 
+
+Definition at line 68 of file Options.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Options@{Options}!copy@{copy}}
+\index{copy@{copy}!Options@{Options}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Options} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classOptions_a095e22d9b8588029781094cccc01e375}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 400 of file Options.cpp.
+
+\index{Options@{Options}!ensureConsistency@{ensureConsistency}}
+\index{ensureConsistency@{ensureConsistency}!Options@{Options}}
+\subsubsection[{ensureConsistency}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::ensureConsistency (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_af10ef0a01e3be1db805a3fa4aea094db}
+Ensures that all options have consistent values by automatically correcting inconsistent ones. Note: This routine cannot (and does not try to) ensure that values are set to reasonable values that make the QP solution work! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 195 of file Options.cpp.
+
+\index{Options@{Options}!operator=@{operator=}}
+\index{operator=@{operator=}!Options@{Options}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Options} \& Options::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Options} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classOptions_a58a8fea98a7e4c83e6692084e4227fa8}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 76 of file Options.cpp.
+
+\index{Options@{Options}!print@{print}}
+\index{print@{print}!Options@{Options}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classOptions_a24f5eded5c6d6ea7e7a88a78248687d1}
+Prints values of all options. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 272 of file Options.cpp.
+
+\index{Options@{Options}!setToDefault@{setToDefault}}
+\index{setToDefault@{setToDefault}!Options@{Options}}
+\subsubsection[{setToDefault}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::setToDefault (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_abea747512c08e02ef1148efec0fcddca}
+Sets all options to default values. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 91 of file Options.cpp.
+
+\index{Options@{Options}!setToFast@{setToFast}}
+\index{setToFast@{setToFast}!Options@{Options}}
+\subsubsection[{setToFast}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::setToFast (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_a78bc5793ae28467496254f6b59f503c0}
+Same as \doxyref{setToMPC( )}{p.}{classOptions_a3127057d81b63c2206a3a59adca44b9b}, for ensuring backwards compatibility. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 185 of file Options.cpp.
+
+\index{Options@{Options}!setToMPC@{setToMPC}}
+\index{setToMPC@{setToMPC}!Options@{Options}}
+\subsubsection[{setToMPC}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::setToMPC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_a3127057d81b63c2206a3a59adca44b9b}
+Sets all options to values resulting in minimum solution time. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file Options.cpp.
+
+\index{Options@{Options}!setToReliable@{setToReliable}}
+\index{setToReliable@{setToReliable}!Options@{Options}}
+\subsubsection[{setToReliable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Options::setToReliable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classOptions_a9febf0968f9e848e701b996b6694db73}
+Sets all options to values resulting in maximum reliabilty. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 144 of file Options.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Options@{Options}!boundRelaxation@{boundRelaxation}}
+\index{boundRelaxation@{boundRelaxation}!Options@{Options}}
+\subsubsection[{boundRelaxation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::boundRelaxation}}\label{classOptions_aa23e1c8d7c64953adcc8cc2c3f03d25e}
+Offset for relaxing (constraints') bounds at beginning of an initial homotopy. It is also as initial value for far bounds. 
+
+Definition at line 135 of file Options.hpp.
+
+\index{Options@{Options}!boundTolerance@{boundTolerance}}
+\index{boundTolerance@{boundTolerance}!Options@{Options}}
+\subsubsection[{boundTolerance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::boundTolerance}}\label{classOptions_a9cc43ec93c854bd0302de1a940fda5dd}
+Lower/upper (constraints') bound tolerance (an inequality constraint whose lower and upper bounds differ by less is regarded to be an equality constraint). 
+
+Definition at line 134 of file Options.hpp.
+
+\index{Options@{Options}!dropBoundPriority@{dropBoundPriority}}
+\index{dropBoundPriority@{dropBoundPriority}!Options@{Options}}
+\subsubsection[{dropBoundPriority}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::dropBoundPriority}}\label{classOptions_a09b31fc2cc40a0d247688f2cf9d054e8}
+
+
+Definition at line 155 of file Options.hpp.
+
+\index{Options@{Options}!dropEqConPriority@{dropEqConPriority}}
+\index{dropEqConPriority@{dropEqConPriority}!Options@{Options}}
+\subsubsection[{dropEqConPriority}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::dropEqConPriority}}\label{classOptions_aab5750d7a7a8d6da2f151b15f15b93bd}
+
+
+Definition at line 156 of file Options.hpp.
+
+\index{Options@{Options}!dropIneqConPriority@{dropIneqConPriority}}
+\index{dropIneqConPriority@{dropIneqConPriority}!Options@{Options}}
+\subsubsection[{dropIneqConPriority}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::dropIneqConPriority}}\label{classOptions_a995f6bd60c5010f5e1c08c5b490485c9}
+
+
+Definition at line 157 of file Options.hpp.
+
+\index{Options@{Options}!enableCholeskyRefactorisation@{enableCholeskyRefactorisation}}
+\index{enableCholeskyRefactorisation@{enableCholeskyRefactorisation}!Options@{Options}}
+\subsubsection[{enableCholeskyRefactorisation}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::enableCholeskyRefactorisation}}\label{classOptions_ab4f0461ee7ed5b58edbed5eff9094ff2}
+Specifies the frequency of full refactorisation of proj. Hessian (otherwise updates). 
+
+Definition at line 130 of file Options.hpp.
+
+\index{Options@{Options}!enableDriftCorrection@{enableDriftCorrection}}
+\index{enableDriftCorrection@{enableDriftCorrection}!Options@{Options}}
+\subsubsection[{enableDriftCorrection}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::enableDriftCorrection}}\label{classOptions_a7154bdf586544880d867c48eabe741b7}
+Specifies the frequency of drift corrections (0 = off). 
+
+Definition at line 129 of file Options.hpp.
+
+\index{Options@{Options}!enableDropInfeasibles@{enableDropInfeasibles}}
+\index{enableDropInfeasibles@{enableDropInfeasibles}!Options@{Options}}
+\subsubsection[{enableDropInfeasibles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableDropInfeasibles}}\label{classOptions_a471b77ce66c8b16a06e61d94af785f91}
+
+
+Definition at line 154 of file Options.hpp.
+
+\index{Options@{Options}!enableEqualities@{enableEqualities}}
+\index{enableEqualities@{enableEqualities}!Options@{Options}}
+\subsubsection[{enableEqualities}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableEqualities}}\label{classOptions_a21c673d77ae5210038a05ca2a41bd1da}
+Specifies whether equalities shall be always treated as active constraints. 
+
+Definition at line 131 of file Options.hpp.
+
+\index{Options@{Options}!enableFarBounds@{enableFarBounds}}
+\index{enableFarBounds@{enableFarBounds}!Options@{Options}}
+\subsubsection[{enableFarBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableFarBounds}}\label{classOptions_aa691471f2994643343ddcf2b697a19aa}
+Specifies whether far bounds shall be used or not. 
+
+Definition at line 124 of file Options.hpp.
+
+\index{Options@{Options}!enableFlippingBounds@{enableFlippingBounds}}
+\index{enableFlippingBounds@{enableFlippingBounds}!Options@{Options}}
+\subsubsection[{enableFlippingBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableFlippingBounds}}\label{classOptions_abba3f3ece76237c647b5719eae9c26f2}
+Specifies whether flipping bounds shall be used or not. 
+
+Definition at line 125 of file Options.hpp.
+
+\index{Options@{Options}!enableFullLITests@{enableFullLITests}}
+\index{enableFullLITests@{enableFullLITests}!Options@{Options}}
+\subsubsection[{enableFullLITests}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableFullLITests}}\label{classOptions_a043d6f962a785e05d304950d01461432}
+Specifies whether condition-\/hardened LI test shall be used or not. 
+
+Definition at line 127 of file Options.hpp.
+
+\index{Options@{Options}!enableNZCTests@{enableNZCTests}}
+\index{enableNZCTests@{enableNZCTests}!Options@{Options}}
+\subsubsection[{enableNZCTests}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableNZCTests}}\label{classOptions_aeec0473a768989b1a2f587f51709636a}
+Specifies whether nonzero curvature tests shall be used. 
+
+Definition at line 128 of file Options.hpp.
+
+\index{Options@{Options}!enableRamping@{enableRamping}}
+\index{enableRamping@{enableRamping}!Options@{Options}}
+\subsubsection[{enableRamping}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableRamping}}\label{classOptions_a8346f6e9a849cc3da7cbbede72a10196}
+Specifies whether ramping shall be enabled or not. 
+
+Definition at line 123 of file Options.hpp.
+
+\index{Options@{Options}!enableRegularisation@{enableRegularisation}}
+\index{enableRegularisation@{enableRegularisation}!Options@{Options}}
+\subsubsection[{enableRegularisation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Options::enableRegularisation}}\label{classOptions_adebe0981cee6bd30e7f242fa16efddb7}
+Specifies whether Hessian matrix shall be regularised in case semi-\/definiteness is detected. 
+
+Definition at line 126 of file Options.hpp.
+
+\index{Options@{Options}!epsDen@{epsDen}}
+\index{epsDen@{epsDen}!Options@{Options}}
+\subsubsection[{epsDen}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsDen}}\label{classOptions_a982819ac9663847af5c920416192de1b}
+Denominator tolerance for ratio tests. 
+
+Definition at line 137 of file Options.hpp.
+
+\index{Options@{Options}!epsFlipping@{epsFlipping}}
+\index{epsFlipping@{epsFlipping}!Options@{Options}}
+\subsubsection[{epsFlipping}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsFlipping}}\label{classOptions_aadb15470a12af09f0146a8b24e1a26fd}
+Tolerance of squared Cholesky diagonal factor which triggers flipping bound. 
+
+Definition at line 146 of file Options.hpp.
+
+\index{Options@{Options}!epsIterRef@{epsIterRef}}
+\index{epsIterRef@{epsIterRef}!Options@{Options}}
+\subsubsection[{epsIterRef}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsIterRef}}\label{classOptions_a8d7b0b4ab3311519b73e0c30a98e7295}
+Early termination tolerance for iterative refinement. 
+
+Definition at line 150 of file Options.hpp.
+
+\index{Options@{Options}!epsLITests@{epsLITests}}
+\index{epsLITests@{epsLITests}!Options@{Options}}
+\subsubsection[{epsLITests}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsLITests}}\label{classOptions_af972adad4f56f124531725e1248a51e3}
+Tolerance for linear independence tests. 
+
+Definition at line 151 of file Options.hpp.
+
+\index{Options@{Options}!epsNum@{epsNum}}
+\index{epsNum@{epsNum}!Options@{Options}}
+\subsubsection[{epsNum}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsNum}}\label{classOptions_af655ae1250e2c425b278644163cd3a61}
+Numerator tolerance for ratio tests. 
+
+Definition at line 136 of file Options.hpp.
+
+\index{Options@{Options}!epsNZCTests@{epsNZCTests}}
+\index{epsNZCTests@{epsNZCTests}!Options@{Options}}
+\subsubsection[{epsNZCTests}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsNZCTests}}\label{classOptions_a636e3942e0ad78b9c4914541a20b70d0}
+Tolerance for nonzero curvature tests. 
+
+Definition at line 152 of file Options.hpp.
+
+\index{Options@{Options}!epsRegularisation@{epsRegularisation}}
+\index{epsRegularisation@{epsRegularisation}!Options@{Options}}
+\subsubsection[{epsRegularisation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::epsRegularisation}}\label{classOptions_a3521b2ae6a97e3f10f08ef8130ca7a49}
+Scaling factor of identity matrix used for Hessian regularisation. 
+
+Definition at line 148 of file Options.hpp.
+
+\index{Options@{Options}!finalRamping@{finalRamping}}
+\index{finalRamping@{finalRamping}!Options@{Options}}
+\subsubsection[{finalRamping}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::finalRamping}}\label{classOptions_adf4a78f73d1efb4f645e9875e2f8be07}
+Final value for Ramping Strategy. 
+
+Definition at line 142 of file Options.hpp.
+
+\index{Options@{Options}!growFarBounds@{growFarBounds}}
+\index{growFarBounds@{growFarBounds}!Options@{Options}}
+\subsubsection[{growFarBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::growFarBounds}}\label{classOptions_a5331179ac3983d3e57d7d6a80e3c8175}
+Factor to grow Far \doxyref{Bounds}{p.}{classBounds}. 
+
+Definition at line 144 of file Options.hpp.
+
+\index{Options@{Options}!initialFarBounds@{initialFarBounds}}
+\index{initialFarBounds@{initialFarBounds}!Options@{Options}}
+\subsubsection[{initialFarBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::initialFarBounds}}\label{classOptions_a2ec58bd7731426a3eb260ed7a9ad481c}
+Initial size of Far \doxyref{Bounds}{p.}{classBounds}. 
+
+Definition at line 143 of file Options.hpp.
+
+\index{Options@{Options}!initialRamping@{initialRamping}}
+\index{initialRamping@{initialRamping}!Options@{Options}}
+\subsubsection[{initialRamping}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::initialRamping}}\label{classOptions_ae6f01e48e40c0e90c1d081225824fa69}
+Start value for Ramping Strategy. 
+
+Definition at line 141 of file Options.hpp.
+
+\index{Options@{Options}!initialStatusBounds@{initialStatusBounds}}
+\index{initialStatusBounds@{initialStatusBounds}!Options@{Options}}
+\subsubsection[{initialStatusBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectToStatus} {\bf Options::initialStatusBounds}}\label{classOptions_af9aaafb64ae87034efa2c916eff51dca}
+Initial status of bounds at first iteration. 
+
+Definition at line 145 of file Options.hpp.
+
+\index{Options@{Options}!maxDualJump@{maxDualJump}}
+\index{maxDualJump@{maxDualJump}!Options@{Options}}
+\subsubsection[{maxDualJump}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::maxDualJump}}\label{classOptions_a0b8e5478791cd5c003882b72a706014f}
+Maximum allowed jump in dual variables in linear independence tests. 
+
+Definition at line 139 of file Options.hpp.
+
+\index{Options@{Options}!maxPrimalJump@{maxPrimalJump}}
+\index{maxPrimalJump@{maxPrimalJump}!Options@{Options}}
+\subsubsection[{maxPrimalJump}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::maxPrimalJump}}\label{classOptions_a4b40320e0298e2d21720541b117f5d81}
+Maximum allowed jump in primal variables in nonzero curvature tests. 
+
+Definition at line 138 of file Options.hpp.
+
+\index{Options@{Options}!numRefinementSteps@{numRefinementSteps}}
+\index{numRefinementSteps@{numRefinementSteps}!Options@{Options}}
+\subsubsection[{numRefinementSteps}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::numRefinementSteps}}\label{classOptions_a090518bedb440a53f6b7e31f45b9b4a5}
+Maximum number of iterative refinement steps. 
+
+Definition at line 149 of file Options.hpp.
+
+\index{Options@{Options}!numRegularisationSteps@{numRegularisationSteps}}
+\index{numRegularisationSteps@{numRegularisationSteps}!Options@{Options}}
+\subsubsection[{numRegularisationSteps}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Options::numRegularisationSteps}}\label{classOptions_a0993f3821e2570755fffed48a5f00cff}
+Maximum number of successive regularisation steps. 
+
+Definition at line 147 of file Options.hpp.
+
+\index{Options@{Options}!printLevel@{printLevel}}
+\index{printLevel@{printLevel}!Options@{Options}}
+\subsubsection[{printLevel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PrintLevel} {\bf Options::printLevel}}\label{classOptions_a3c7327943ce25f36479356d33a0b0723}
+Print level. 
+
+Definition at line 121 of file Options.hpp.
+
+\index{Options@{Options}!terminationTolerance@{terminationTolerance}}
+\index{terminationTolerance@{terminationTolerance}!Options@{Options}}
+\subsubsection[{terminationTolerance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf Options::terminationTolerance}}\label{classOptions_ad18a17e6fd0c84625ad44261a7f73474}
+Termination tolerance. 
+
+Definition at line 133 of file Options.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Options.hpp}\item 
+{\bf Options.cpp}\end{DoxyCompactItemize}

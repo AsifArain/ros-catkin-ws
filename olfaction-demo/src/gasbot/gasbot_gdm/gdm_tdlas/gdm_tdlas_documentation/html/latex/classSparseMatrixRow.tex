@@ -1,0 +1,640 @@
+\section{SparseMatrixRow Class Reference}
+\label{classSparseMatrixRow}\index{SparseMatrixRow@{SparseMatrixRow}}
+
+
+Interfaces matrix-\/vector operations tailored to general sparse matrices.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for SparseMatrixRow:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{classSparseMatrixRow__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf addToDiag} ({\bf real\_\-t} alpha)
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf createDiagInfo} ()
+\item 
+virtual {\bf real\_\-t} {\bf diag} (int i) const 
+\item 
+virtual {\bf Matrix} $\ast$ {\bf duplicate} () const 
+\item 
+virtual void {\bf free} ()
+\item 
+{\bf real\_\-t} $\ast$ {\bf full} () const 
+\item 
+virtual {\bf returnValue} {\bf getCol} (int cNum, const {\bf Indexlist} $\ast$const irows, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$col) const 
+\item 
+virtual {\bf real\_\-t} {\bf getNorm} () const 
+\item 
+virtual {\bf returnValue} {\bf getRow} (int rNum, const {\bf Indexlist} $\ast$const icols, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$row) const 
+\item 
+virtual {\bf real\_\-t} {\bf getRowNorm} (int rNum) const 
+\item 
+virtual {\bf BooleanType} {\bf isDiag} () const 
+\item 
+virtual {\bf returnValue} {\bf print} () const 
+\item 
+{\bf SparseMatrixRow} (int nr, int nc, {\bf sparse\_\-int\_\-t} $\ast$r, {\bf sparse\_\-int\_\-t} $\ast$c, {\bf real\_\-t} $\ast$v, {\bf sparse\_\-int\_\-t} $\ast$d=0)
+\item 
+{\bf SparseMatrixRow} (int nr, int nc, int ld, const {\bf real\_\-t} $\ast$const v)
+\item 
+{\bf SparseMatrixRow} ()
+\item 
+virtual {\bf returnValue} {\bf times} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf returnValue} {\bf times} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD, {\bf BooleanType} yCompr=BT\_\-TRUE) const 
+\item 
+virtual {\bf returnValue} {\bf transTimes} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf returnValue} {\bf transTimes} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf $\sim$SparseMatrixRow} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf ic}
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf jd}
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf jr}
+\item 
+int {\bf nCols}
+\item 
+int {\bf nRows}
+\item 
+{\bf real\_\-t} $\ast$ {\bf val}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces matrix-\/vector operations tailored to general sparse matrices. 
+
+Sparse matrix class (row compressed format).
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 625 of file Matrices.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{SparseMatrixRow}]{\setlength{\rightskip}{0pt plus 5cm}SparseMatrixRow::SparseMatrixRow (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSparseMatrixRow_ad61dd7c9a0b5f00126f2c17cb325bfa4}
+Default constructor. 
+
+Definition at line 1121 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{SparseMatrixRow}]{\setlength{\rightskip}{0pt plus 5cm}SparseMatrixRow::SparseMatrixRow (
+\begin{DoxyParamCaption}
+\item[{int}]{nr, }
+\item[{int}]{nc, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{r, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{c, }
+\item[{{\bf real\_\-t} $\ast$}]{v, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{d = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSparseMatrixRow_a765e27ca72ed8ed66a05860bc7c18386}
+Constructor with arguments. 
+\begin{DoxyParams}{Parameters}
+{\em nr} & Number of rows. \\
+\hline
+{\em nc} & Number of columns. \\
+\hline
+{\em r} & Indices to first entry of rows (nRows+1). \\
+\hline
+{\em c} & Column indices (length). \\
+\hline
+{\em v} & Vector of entries (length). \\
+\hline
+{\em d} & Indices to first entry of upper triangle (including diagonal) (nRows). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1123 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\index{SparseMatrixRow@{SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{SparseMatrixRow}]{\setlength{\rightskip}{0pt plus 5cm}SparseMatrixRow::SparseMatrixRow (
+\begin{DoxyParamCaption}
+\item[{int}]{nr, }
+\item[{int}]{nc, }
+\item[{int}]{ld, }
+\item[{const {\bf real\_\-t} $\ast$const}]{v}
+\end{DoxyParamCaption}
+)}\label{classSparseMatrixRow_abc607194ad7f60073409272bc5620bd1}
+Constructor from dense matrix. 
+\begin{DoxyParams}{Parameters}
+{\em nr} & Number of rows. \\
+\hline
+{\em nc} & Number of columns. \\
+\hline
+{\em ld} & Leading dimension. \\
+\hline
+{\em v} & Row major stored matrix elements. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1126 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!$\sim$SparseMatrixRow@{$\sim$SparseMatrixRow}}
+\index{$\sim$SparseMatrixRow@{$\sim$SparseMatrixRow}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{$\sim$SparseMatrixRow}]{\setlength{\rightskip}{0pt plus 5cm}SparseMatrixRow::$\sim$SparseMatrixRow (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a40b6466c07a504d2232bac57b00338d5}
+Destructor. 
+
+Definition at line 1150 of file Matrices.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SparseMatrixRow@{SparseMatrixRow}!addToDiag@{addToDiag}}
+\index{addToDiag@{addToDiag}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{addToDiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::addToDiag (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a6feb397255c49e09d2cb25b2b5bef57d}
+Adds given offset to diagonal of matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & Diagonal offset. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a7ee8d1b4ef0d5d5fb34342ea1889382f}.
+
+
+
+Definition at line 1676 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!createDiagInfo@{createDiagInfo}}
+\index{createDiagInfo@{createDiagInfo}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{createDiagInfo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t} $\ast$ SparseMatrixRow::createDiagInfo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSparseMatrixRow_a3e72a351698454ba063f3b0814f919c8}
+Create jd field from ir and jc. \begin{DoxyReturn}{Returns}
+Pointer to jd. 
+\end{DoxyReturn}
+
+
+Definition at line 1688 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!diag@{diag}}
+\index{diag@{diag}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{diag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} SparseMatrixRow::diag (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a2d7a602f21ac2221d60a4a10c06061b5}
+Returns i-\/th diagonal entry. \begin{DoxyReturn}{Returns}
+i-\/th diagonal entry 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ab78435722398170cb87b0eb9650d8ca1}.
+
+
+
+Definition at line 1193 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{duplicate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix} $\ast$ SparseMatrixRow::duplicate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_afd8b02e3332e03dc702b9d8c12dbc4a8}
+Returns a deep-\/copy of the \doxyref{Matrix}{p.}{classMatrix} object. \begin{DoxyReturn}{Returns}
+Deep-\/copy of \doxyref{Matrix}{p.}{classMatrix} object 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_abf41d80f7392e9d63e9b2fa4b822d3b9}.
+
+
+
+Definition at line 1169 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!free@{free}}
+\index{free@{free}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}void SparseMatrixRow::free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a5295955ae17b29db89b8fc2607bab8c8}
+Frees all internal memory. 
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ae13ca77389c2eae7b3eba79cb9fefecb}.
+
+
+
+Definition at line 1156 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!full@{full}}
+\index{full@{full}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{full}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} $\ast$ SparseMatrixRow::full (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classSparseMatrixRow_acc769f595994a52a06d9d0fb7fb37a7b}
+Allocate and create dense matrix in row major format. \begin{DoxyReturn}{Returns}
+Pointer to matrix array. 
+\end{DoxyReturn}
+
+
+Definition at line 1705 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!getCol@{getCol}}
+\index{getCol@{getCol}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{getCol}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::getCol (
+\begin{DoxyParamCaption}
+\item[{int}]{cNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{col}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a0eda7784ab3fc69e83d5ffb60be7dee9}
+Retrieve indexed entries of matrix column multiplied by alpha. 
+\begin{DoxyParams}{Parameters}
+{\em cNum} & Column number. \\
+\hline
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em col} & Output column vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a7b9f4ce0fe8c2efc34503bb260383d2c}.
+
+
+
+Definition at line 1279 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!getNorm@{getNorm}}
+\index{getNorm@{getNorm}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{getNorm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} SparseMatrixRow::getNorm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_adcdb1c467c3b038453499a045f1a3a01}
+Get the two-\/norm of the matrix \begin{DoxyReturn}{Returns}
+Two-\/norm of the matrix 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a1cb0da3d4cf9b7c4ae21efbc05f66556}.
+
+
+
+Definition at line 1206 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!getRow@{getRow}}
+\index{getRow@{getRow}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{getRow}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::getRow (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{row}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a9914ef7473337cf15da63e8550a319e2}
+Retrieve indexed entries of matrix row multiplied by alpha. 
+\begin{DoxyParams}{Parameters}
+{\em rNum} & Row number. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em row} & Output row vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ab67514f6450264a6c8d55b319802099d}.
+
+
+
+Definition at line 1223 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!getRowNorm@{getRowNorm}}
+\index{getRowNorm@{getRowNorm}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{getRowNorm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} SparseMatrixRow::getRowNorm (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_ae0ff0f389e1118bfa36d1b98a5664664}
+Get the two-\/norm of a row \begin{DoxyReturn}{Returns}
+Two-\/norm of row {\itshape rNum\/} 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a44dd9bd45bd8529128b722bce60b6f42}.
+
+
+
+Definition at line 1213 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!isDiag@{isDiag}}
+\index{isDiag@{isDiag}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{isDiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} SparseMatrixRow::isDiag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a033dd6a08ab67a871afe9cc2d9ffa2ba}
+Checks whether matrix is square and diagonal. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff matrix is square and diagonal; \par
+ BT\_\-FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a1f5595f0147658d9f79f92dd283dcbac}.
+
+
+
+Definition at line 1200 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!print@{print}}
+\index{print@{print}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_a45cd971f4f2cad552070c569c5a70489}
+Prints matrix to screen. \begin{DoxyReturn}{Returns}
+RET\_\-NOT\_\-YET\_\-IMPLEMENTED 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a110943ca5fc5b30a3e8d941622a15f8f}.
+
+
+
+Definition at line 1721 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!times@{times}}
+\index{times@{times}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::times (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD, }
+\item[{{\bf BooleanType}}]{yCompr = {\ttfamily BT\_\-TRUE}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_ad643b60c929d1715ec97b14447e6f23d}
+Evaluate matrix vector product with submatrix given by \doxyref{Indexlist}{p.}{classIndexlist}. 
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+{\em yCompr} & Compressed storage for y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_add63b9303590f022b4aa49278f91f605}.
+
+
+
+Definition at line 1408 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!times@{times}}
+\index{times@{times}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::times (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_aa4bea8854c08e8de61ce1fa337e4f5c1}
+Evaluate Y=alpha$\ast$A$\ast$X + beta$\ast$Y. 
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aab443ceb9e4e37d3efca65f446872dc2}.
+
+
+
+Definition at line 1334 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::transTimes (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_af4bb1e2407476f0bd19bc95e63928f0d}
+Evaluate matrix transpose vector product. 
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aa84ec7c391f7478e78ffbaf4f1f5f732}.
+
+
+
+Definition at line 1603 of file Matrices.cpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SparseMatrixRow::transTimes (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSparseMatrixRow_ac1b658d2ae14bdb519fa7304e18e3aa5}
+Evaluate Y=alpha$\ast$A'$\ast$X + beta$\ast$Y. 
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aae760f106376a34dfaf0c168fa836d84}.
+
+
+
+Definition at line 1371 of file Matrices.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{SparseMatrixRow@{SparseMatrixRow}!ic@{ic}}
+\index{ic@{ic}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{ic}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf SparseMatrixRow::ic}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_a46dd9b0b5138ecd2deb37415d170c6b5}
+Column indices (length). 
+
+Definition at line 764 of file Matrices.hpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!jd@{jd}}
+\index{jd@{jd}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{jd}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf SparseMatrixRow::jd}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_a8d71f4ae6afa7bd4ac153f9b11019a7a}
+Indices to first entry of upper triangle (including diagonal) (nRows). 
+
+Definition at line 765 of file Matrices.hpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!jr@{jr}}
+\index{jr@{jr}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{jr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf SparseMatrixRow::jr}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_a899e34180345977c83769223b3152bcc}
+Indices to first entry of row (nRows+1). 
+
+Definition at line 763 of file Matrices.hpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!nCols@{nCols}}
+\index{nCols@{nCols}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{nCols}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SparseMatrixRow::nCols}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_ac03b14599cbe97f6a27aeab7d1f3cc23}
+Number of columns. 
+
+Definition at line 762 of file Matrices.hpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!nRows@{nRows}}
+\index{nRows@{nRows}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{nRows}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SparseMatrixRow::nRows}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_aeab41911582adf0c6f26262acc109ffa}
+Number of rows. 
+
+Definition at line 761 of file Matrices.hpp.
+
+\index{SparseMatrixRow@{SparseMatrixRow}!val@{val}}
+\index{val@{val}!SparseMatrixRow@{SparseMatrixRow}}
+\subsubsection[{val}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf SparseMatrixRow::val}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSparseMatrixRow_a2cec7a8738e87414eaf6ebdf1056b3ab}
+Vector of entries (length). 
+
+Definition at line 766 of file Matrices.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\item 
+{\bf Matrices.cpp}\end{DoxyCompactItemize}

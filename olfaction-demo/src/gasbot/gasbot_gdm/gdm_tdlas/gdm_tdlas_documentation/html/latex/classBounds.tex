@@ -1,0 +1,592 @@
+\section{Bounds Class Reference}
+\label{classBounds}\index{Bounds@{Bounds}}
+
+
+Manages working sets of bounds (= box constraints).  
+
+
+
+
+{\ttfamily \#include $<$Bounds.hpp$>$}
+
+
+
+Inheritance diagram for Bounds:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=104pt]{classBounds__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Bounds} ()
+\item 
+{\bf Bounds} (int \_\-n)
+\item 
+{\bf Bounds} (const {\bf Bounds} \&rhs)
+\item 
+{\bf returnValue} {\bf flipFixed} (int number)
+\item 
+{\bf Indexlist} $\ast$ {\bf getFixed} ()
+\item 
+{\bf Indexlist} $\ast$ {\bf getFree} ()
+\item 
+int {\bf getNBV} () const 
+\item 
+int {\bf getNFR} () const 
+\item 
+int {\bf getNFV} () const 
+\item 
+int {\bf getNFX} () const 
+\item 
+int {\bf getNUV} () const 
+\item 
+int {\bf getNV} () const 
+\item 
+{\bf returnValue} {\bf init} (int \_\-n=0)
+\item 
+{\bf returnValue} {\bf moveFixedToFree} (int number)
+\item 
+{\bf returnValue} {\bf moveFreeToFixed} (int number, {\bf SubjectToStatus} \_\-status)
+\item 
+{\bf Bounds} \& {\bf operator=} (const {\bf Bounds} \&rhs)
+\item 
+{\bf returnValue} {\bf print} ()
+\item 
+virtual {\bf returnValue} {\bf rotate} (int offset)
+\item 
+{\bf returnValue} {\bf setupAllFree} ()
+\item 
+{\bf returnValue} {\bf setupAllLower} ()
+\item 
+{\bf returnValue} {\bf setupAllUpper} ()
+\item 
+{\bf returnValue} {\bf setupBound} (int number, {\bf SubjectToStatus} \_\-status)
+\item 
+virtual {\bf returnValue} {\bf shift} (int offset)
+\item 
+{\bf returnValue} {\bf swapFree} (int number1, int number2)
+\item 
+virtual {\bf $\sim$Bounds} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+{\bf returnValue} {\bf copy} (const {\bf Bounds} \&rhs)
+\item 
+{\bf returnValue} {\bf setupAll} ({\bf SubjectToStatus} \_\-status)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Indexlist} {\bf fixed}
+\item 
+{\bf Indexlist} {\bf freee}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages working sets of bounds (= box constraints). 
+
+This class manages working sets of bounds (= box constraints) by storing index sets and other status information.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 56 of file Bounds.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\subsubsection[{Bounds}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES Bounds::Bounds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classBounds_a4df99b6aeade42ade4eaf2d1a14e176a}
+Default constructor. 
+
+Definition at line 50 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\subsubsection[{Bounds}]{\setlength{\rightskip}{0pt plus 5cm}Bounds::Bounds (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n}
+\end{DoxyParamCaption}
+)}\label{classBounds_a8ff472dfd05fdaf07a5e2433dd0b88e7}
+Constructor which takes the number of bounds. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\index{Bounds@{Bounds}!Bounds@{Bounds}}
+\subsubsection[{Bounds}]{\setlength{\rightskip}{0pt plus 5cm}Bounds::Bounds (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classBounds_acc45b5ad09d22f0aa1f2594bf426f700}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!$\sim$Bounds@{$\sim$Bounds}}
+\index{$\sim$Bounds@{$\sim$Bounds}!Bounds@{Bounds}}
+\subsubsection[{$\sim$Bounds}]{\setlength{\rightskip}{0pt plus 5cm}Bounds::$\sim$Bounds (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classBounds_aed8643720e1ca9c1da0b902aec80d3c4}
+Destructor. 
+
+Definition at line 76 of file Bounds.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Bounds@{Bounds}!clear@{clear}}
+\index{clear@{clear}!Bounds@{Bounds}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classBounds_ad19e200f0cd0b476f5630d2516eb4d4c}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented from {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_a0b48052eada79f7688475f9bc42b2a0b}.
+
+
+
+Definition at line 439 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!copy@{copy}}
+\index{copy@{copy}!Bounds@{Bounds}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classBounds_abb34af9c6fbd53b591aaa65db6108bac}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 448 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!flipFixed@{flipFixed}}
+\index{flipFixed@{flipFixed}!Bounds@{Bounds}}
+\subsubsection[{flipFixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::flipFixed (
+\begin{DoxyParamCaption}
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{classBounds_ae040b8d26920a6e52a572171504891df}
+Flip fixed bound. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-BOUND\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+
+Definition at line 228 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!getFixed@{getFixed}}
+\index{getFixed@{getFixed}!Bounds@{Bounds}}
+\subsubsection[{getFixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist}$\ast$ Bounds::getFixed (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_a1819c61019c2b76a77336ac3159759ad}
+Returns a pointer to fixed variables index list. \begin{DoxyReturn}{Returns}
+Pointer to fixed variables index list. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getFree@{getFree}}
+\index{getFree@{getFree}!Bounds@{Bounds}}
+\subsubsection[{getFree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist}$\ast$ Bounds::getFree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_aa015d4fafc119776f4274c51a0e60a08}
+Returns a pointer to free variables index list. \begin{DoxyReturn}{Returns}
+Pointer to free variables index list. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNBV@{getNBV}}
+\index{getNBV@{getNBV}!Bounds@{Bounds}}
+\subsubsection[{getNBV}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNBV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_a7873f65765a31325792e9c4600b82f14}
+Returns number of bounded (but possibly free) variables. \begin{DoxyReturn}{Returns}
+Number of bounded (but possibly free) variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNFR@{getNFR}}
+\index{getNFR@{getNFR}!Bounds@{Bounds}}
+\subsubsection[{getNFR}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNFR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_acc06fa3280c8f477a4a2a8d27d699ed7}
+Returns number of free variables. \begin{DoxyReturn}{Returns}
+Number of free variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNFV@{getNFV}}
+\index{getNFV@{getNFV}!Bounds@{Bounds}}
+\subsubsection[{getNFV}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNFV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_a67e5af10a1fc863d25e0f5b8adde3245}
+Returns number of implicitly fixed variables. \begin{DoxyReturn}{Returns}
+Number of implicitly fixed variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNFX@{getNFX}}
+\index{getNFX@{getNFX}!Bounds@{Bounds}}
+\subsubsection[{getNFX}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNFX (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_a93af6a24513cae52988646aec520bd89}
+Returns number of fixed variables. \begin{DoxyReturn}{Returns}
+Number of fixed variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNUV@{getNUV}}
+\index{getNUV@{getNUV}!Bounds@{Bounds}}
+\subsubsection[{getNUV}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNUV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_adec338d39cd3a9b6307db86b4db42605}
+Returns number of unbounded variables. \begin{DoxyReturn}{Returns}
+Number of unbounded variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!getNV@{getNV}}
+\index{getNV@{getNV}!Bounds@{Bounds}}
+\subsubsection[{getNV}]{\setlength{\rightskip}{0pt plus 5cm}int Bounds::getNV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classBounds_a18746d19acb33653d82010245a0df36b}
+Returns number of variables. \begin{DoxyReturn}{Returns}
+Number of variables. 
+\end{DoxyReturn}
+\index{Bounds@{Bounds}!init@{init}}
+\index{init@{init}!Bounds@{Bounds}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::init (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classBounds_a11440ef91a144d38738d0d979ee8e9e3}
+Initialises object with given number of bounds. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_afc63cf1993f2ee007997658013c86566}.
+
+
+
+Definition at line 102 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!moveFixedToFree@{moveFixedToFree}}
+\index{moveFixedToFree@{moveFixedToFree}!Bounds@{Bounds}}
+\subsubsection[{moveFixedToFree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::moveFixedToFree (
+\begin{DoxyParamCaption}
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{classBounds_ad5b809717231157ee0e02ab972106795}
+Moves index of a bound from index list of fixed to that of free bounds. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-BOUND\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of bound to be freed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 187 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!moveFreeToFixed@{moveFreeToFixed}}
+\index{moveFreeToFixed@{moveFreeToFixed}!Bounds@{Bounds}}
+\subsubsection[{moveFreeToFixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::moveFreeToFixed (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)}\label{classBounds_a6d6f6a6405fb0b7ff607e5a587eedafb}
+Moves index of a bound from index list of free to that of fixed bounds. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-BOUND\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of bound to be fixed. \\
+\hline
+{\em \_\-status} & Status of bound to be fixed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 207 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!operator=@{operator=}}
+\index{operator=@{operator=}!Bounds@{Bounds}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounds} \& Bounds::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classBounds_a394c33cd33ba7c8560121f414bececdb}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 85 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!print@{print}}
+\index{print@{print}!Bounds@{Bounds}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classBounds_a04ad16d13952adff7be66e8a82ab8281}
+Prints information on bounds object (in particular, lists of free and fixed bounds. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEXLIST\_\-CORRUPTED 
+\end{DoxyReturn}
+
+
+Definition at line 400 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!rotate@{rotate}}
+\index{rotate@{rotate}!Bounds@{Bounds}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::rotate (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classBounds_a977be2e3415aecf530c80fbe6a546791}
+Rotates forward type and status of all bounds by a given offset. This offset has to lie within the range [0,n]. Example for offset = 2: \par
+ rotate( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b1,c/b2\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-ROTATING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Rotation offset within the range [0,n]. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_a632d97f115810ba91f2b363281216db4}.
+
+
+
+Definition at line 325 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!setupAll@{setupAll}}
+\index{setupAll@{setupAll}!Bounds@{Bounds}}
+\subsubsection[{setupAll}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::setupAll (
+\begin{DoxyParamCaption}
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classBounds_ac8733669924bba05b64b3a0fb2e5c784}
+Initially adds all numbers of new (i.e. not yet in the list) bounds to to the index set corresponding to the desired status; the order depends on the SujectToType of each index. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-BOUND\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-status} & Desired initial status for all bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 462 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!setupAllFree@{setupAllFree}}
+\index{setupAllFree@{setupAllFree}!Bounds@{Bounds}}
+\subsubsection[{setupAllFree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::setupAllFree (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classBounds_ae2f0eb4f34eb9a16b7d036ce23fa7ad0}
+Initially adds all numbers of new (i.e. not yet in the list) bounds to to the index set of free bounds; the order depends on the SujectToType of each index. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-BOUND\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 160 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!setupAllLower@{setupAllLower}}
+\index{setupAllLower@{setupAllLower}!Bounds@{Bounds}}
+\subsubsection[{setupAllLower}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::setupAllLower (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classBounds_a3e87cf95718653034b86d021f70e45ac}
+Initially adds all numbers of new (i.e. not yet in the list) bounds to to the index set of fixed bounds (on their lower bounds); the order depends on the SujectToType of each index. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-BOUND\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 169 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!setupAllUpper@{setupAllUpper}}
+\index{setupAllUpper@{setupAllUpper}!Bounds@{Bounds}}
+\subsubsection[{setupAllUpper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::setupAllUpper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classBounds_a0626b894a71f058d3eebf3ee37f6f8d2}
+Initially adds all numbers of new (i.e. not yet in the list) bounds to to the index set of fixed bounds (on their upper bounds); the order depends on the SujectToType of each index. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-BOUND\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 178 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!setupBound@{setupBound}}
+\index{setupBound@{setupBound}!Bounds@{Bounds}}
+\subsubsection[{setupBound}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::setupBound (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)}\label{classBounds_a33bb74eea2c6a060442a34e464b93a50}
+Initially adds number of a new (i.e. not yet in the list) bound to given index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-BOUND\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of new bound. \\
+\hline
+{\em \_\-status} & Status of new bound. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 124 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!shift@{shift}}
+\index{shift@{shift}!Bounds@{Bounds}}
+\subsubsection[{shift}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::shift (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classBounds_ad17d8dcd3b7dcbd2d43ea79b9fcf774b}
+Shifts forward type and status of all bounds by a given offset. This offset has to lie within the range [0,n/2] and has to be an integer divisor of the total number of bounds n. Type and status of the first $<$offset$>$ bounds is thrown away, type and status of the last $<$offset$>$ bounds is real\_\-td, e.g. for offset = 2: \par
+ shift( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b5,c/b6\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-SHIFTING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Shift offset within the range [0,n/2] and integer divisor of n. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_afe3e60938d251b1eae24971179bd99de}.
+
+
+
+Definition at line 264 of file Bounds.cpp.
+
+\index{Bounds@{Bounds}!swapFree@{swapFree}}
+\index{swapFree@{swapFree}!Bounds@{Bounds}}
+\subsubsection[{swapFree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Bounds::swapFree (
+\begin{DoxyParamCaption}
+\item[{int}]{number1, }
+\item[{int}]{number2}
+\end{DoxyParamCaption}
+)}\label{classBounds_aa43c846e6c5a9ee5275f155cf1331d63}
+Swaps the indices of two free bounds within the index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SWAPINDEX\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number1} & Number of first constraint or bound. \\
+\hline
+{\em number2} & Number of second constraint or bound. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 249 of file Bounds.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Bounds@{Bounds}!fixed@{fixed}}
+\index{fixed@{fixed}!Bounds@{Bounds}}
+\subsubsection[{fixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist} {\bf Bounds::fixed}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classBounds_a7c4780c7710eec138bd4def344cedd69}
+Index list of fixed variables. 
+
+Definition at line 243 of file Bounds.hpp.
+
+\index{Bounds@{Bounds}!freee@{freee}}
+\index{freee@{freee}!Bounds@{Bounds}}
+\subsubsection[{freee}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist} {\bf Bounds::freee}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classBounds_a0e915647e5ef1a3a48f17fea73ccf03f}
+Index list of free variables. 
+
+Definition at line 242 of file Bounds.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Bounds.hpp}\item 
+{\bf Bounds.cpp}\end{DoxyCompactItemize}

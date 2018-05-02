@@ -1,0 +1,156 @@
+\section{SymDenseMat Class Reference}
+\label{classSymDenseMat}\index{SymDenseMat@{SymDenseMat}}
+
+
+Interfaces matrix-\/vector operations tailored to symmetric dense matrices.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for SymDenseMat:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{classSymDenseMat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf bilinear} (const {\bf Indexlist} $\ast$const icols, int xN, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf Matrix} $\ast$ {\bf duplicate} () const 
+\item 
+{\bf SymDenseMat} ()
+\item 
+{\bf SymDenseMat} (int m, int n, int lD, {\bf real\_\-t} $\ast$v)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces matrix-\/vector operations tailored to symmetric dense matrices. 
+
+Symmetric dense matrix class.
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 432 of file Matrices.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SymDenseMat@{SymDenseMat}!SymDenseMat@{SymDenseMat}}
+\index{SymDenseMat@{SymDenseMat}!SymDenseMat@{SymDenseMat}}
+\subsubsection[{SymDenseMat}]{\setlength{\rightskip}{0pt plus 5cm}SymDenseMat::SymDenseMat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSymDenseMat_a6e733eae71c243aeca8218216235cc6a}
+Default constructor. 
+
+Definition at line 436 of file Matrices.hpp.
+
+\index{SymDenseMat@{SymDenseMat}!SymDenseMat@{SymDenseMat}}
+\index{SymDenseMat@{SymDenseMat}!SymDenseMat@{SymDenseMat}}
+\subsubsection[{SymDenseMat}]{\setlength{\rightskip}{0pt plus 5cm}SymDenseMat::SymDenseMat (
+\begin{DoxyParamCaption}
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{int}]{lD, }
+\item[{{\bf real\_\-t} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSymDenseMat_a9edb583b9ba029bcc02778c47a67ffc6}
+Constructor from vector of values. 
+\begin{DoxyParams}{Parameters}
+{\em m} & Number of rows. \\
+\hline
+{\em n} & Number of columns. \\
+\hline
+{\em lD} & Leading dimension. \\
+\hline
+{\em v} & Values. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 439 of file Matrices.hpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SymDenseMat@{SymDenseMat}!bilinear@{bilinear}}
+\index{bilinear@{bilinear}!SymDenseMat@{SymDenseMat}}
+\subsubsection[{bilinear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SymDenseMat::bilinear (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSymDenseMat_af7d89e70ee0a2b15c5884a1aadc441ef}
+Compute bilinear form y = x'$\ast$H$\ast$x using submatrix given by index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em icols} & Index list specifying columns of x. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em x} & Input vector to be multiplied (uncompressed). \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em y} & Output vector of results (compressed). \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SymmetricMatrix} \doxyref{}{p.}{classSymmetricMatrix_a1ff4cc04a2d05ed5765a981c37ae57eb}.
+
+
+
+Definition at line 467 of file Matrices.cpp.
+
+\index{SymDenseMat@{SymDenseMat}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!SymDenseMat@{SymDenseMat}}
+\subsubsection[{duplicate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix} $\ast$ SymDenseMat::duplicate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSymDenseMat_af9544d2c52d356e2830e2d7dc65d9b2d}
+Returns a deep-\/copy of the \doxyref{Matrix}{p.}{classMatrix} object. \begin{DoxyReturn}{Returns}
+Deep-\/copy of \doxyref{Matrix}{p.}{classMatrix} object 
+\end{DoxyReturn}
+
+
+Reimplemented from {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_af914e214e10c8f9731da75e605dae3ff}.
+
+
+
+Definition at line 446 of file Matrices.cpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\item 
+{\bf Matrices.cpp}\end{DoxyCompactItemize}

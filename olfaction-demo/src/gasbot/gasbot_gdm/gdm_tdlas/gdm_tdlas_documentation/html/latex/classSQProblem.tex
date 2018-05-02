@@ -1,0 +1,670 @@
+\section{SQProblem Class Reference}
+\label{classSQProblem}\index{SQProblem@{SQProblem}}
+
+
+Implements the online active set strategy for QPs with varying matrices.  
+
+
+
+
+{\ttfamily \#include $<$SQProblem.hpp$>$}
+
+
+
+Inheritance diagram for SQProblem:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=110pt]{classSQProblem__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf hotstart} (const {\bf real\_\-t} $\ast$const H\_\-new, const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const A\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, const {\bf real\_\-t} $\ast$const lbA\_\-new, const {\bf real\_\-t} $\ast$const ubA\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} ({\bf SymmetricMatrix} $\ast$H\_\-new, const {\bf real\_\-t} $\ast$const g\_\-new, {\bf Matrix} $\ast$A\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, const {\bf real\_\-t} $\ast$const lbA\_\-new, const {\bf real\_\-t} $\ast$const ubA\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime)
+\item 
+{\bf returnValue} {\bf hotstart} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, const {\bf real\_\-t} $\ast$const lbA\_\-new, const {\bf real\_\-t} $\ast$const ubA\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf Bounds} $\ast$const guessedBounds, const {\bf Constraints} $\ast$const guessedConstraints)
+\item 
+{\bf returnValue} {\bf hotstart} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, const {\bf real\_\-t} $\ast$const lbA\_\-new, const {\bf real\_\-t} $\ast$const ubA\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} (const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, const char $\ast$const lbA\_\-file, const char $\ast$const ubA\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} (const char $\ast$const H\_\-file, const char $\ast$const g\_\-file, const char $\ast$const A\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, const char $\ast$const lbA\_\-file, const char $\ast$const ubA\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} (const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, const char $\ast$const lbA\_\-file, const char $\ast$const ubA\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf Bounds} $\ast$const guessedBounds, const {\bf Constraints} $\ast$const guessedConstraints)
+\item 
+{\bf SQProblem} \& {\bf operator=} (const {\bf SQProblem} \&rhs)
+\item 
+{\bf SQProblem} (int \_\-nV, int \_\-nC, {\bf HessianType} \_\-hessianType=HST\_\-UNKNOWN)
+\item 
+{\bf SQProblem} (const {\bf SQProblem} \&rhs)
+\item 
+{\bf SQProblem} ()
+\item 
+virtual {\bf $\sim$SQProblem} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf setupAuxiliaryQP} (const {\bf real\_\-t} $\ast$const H\_\-new, const {\bf real\_\-t} $\ast$const A\_\-new, const {\bf real\_\-t} $\ast$lb\_\-new, const {\bf real\_\-t} $\ast$ub\_\-new, const {\bf real\_\-t} $\ast$lbA\_\-new, const {\bf real\_\-t} $\ast$ubA\_\-new)
+\item 
+virtual {\bf returnValue} {\bf setupAuxiliaryQP} ({\bf SymmetricMatrix} $\ast$H\_\-new, {\bf Matrix} $\ast$A\_\-new, const {\bf real\_\-t} $\ast$lb\_\-new, const {\bf real\_\-t} $\ast$ub\_\-new, const {\bf real\_\-t} $\ast$lbA\_\-new, const {\bf real\_\-t} $\ast$ubA\_\-new)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf SolutionAnalysis}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements the online active set strategy for QPs with varying matrices. 
+
+A class for setting up and solving quadratic programs with varying QP matrices. The main feature is the possibily to use the newly developed online active set strategy for parametric quadratic programming.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 59 of file SQProblem.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\subsubsection[{SQProblem}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES SQProblem::SQProblem (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_ae1cb6ec33ca0ea3021688d4ed2971b50}
+Default constructor. 
+
+Definition at line 51 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\subsubsection[{SQProblem}]{\setlength{\rightskip}{0pt plus 5cm}SQProblem::SQProblem (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-nV, }
+\item[{int}]{\_\-nC, }
+\item[{{\bf HessianType}}]{\_\-hessianType = {\ttfamily HST\_\-UNKNOWN}}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_aeb7c89d308a9805c6998c72a3c2e6a45}
+Constructor which takes the QP dimension and Hessian type information. If the Hessian is the zero (i.e. HST\_\-ZERO) or the identity matrix (i.e. HST\_\-IDENTITY), respectively, no memory is allocated for it and a NULL pointer can be passed for it to the \doxyref{init()}{p.}{classQProblem_aa286539b43de9a08bc18a9d70c799008} functions. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-nV} & Number of variables. \\
+\hline
+{\em \_\-nC} & Number of constraints. \\
+\hline
+{\em \_\-hessianType} & Type of Hessian matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 59 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\index{SQProblem@{SQProblem}!SQProblem@{SQProblem}}
+\subsubsection[{SQProblem}]{\setlength{\rightskip}{0pt plus 5cm}SQProblem::SQProblem (
+\begin{DoxyParamCaption}
+\item[{const {\bf SQProblem} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a720cfa87922b63bdee6679a72c773c8d}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!$\sim$SQProblem@{$\sim$SQProblem}}
+\index{$\sim$SQProblem@{$\sim$SQProblem}!SQProblem@{SQProblem}}
+\subsubsection[{$\sim$SQProblem}]{\setlength{\rightskip}{0pt plus 5cm}SQProblem::$\sim$SQProblem (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSQProblem_a65cb28afd5651a23856c37f644155f31}
+Destructor. 
+
+Definition at line 75 of file SQProblem.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{H\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{A\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_ae857262f55e360c3e1e4295c8d713270}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} using online active set strategy. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-MATRIX\_\-SHIFT\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & Hessian matrix of neighbouring QP to be solved. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em A\_\-new} & Constraint matrix of neighbouring QP to be solved. \par
+ If QP sequence does not involve constraints, a NULL pointer can be passed. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-new} & Lower constraints' bounds of neighbouring QP to be solved. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-new} & Upper constraints' bounds of neighbouring QP to be solved. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 97 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{H\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{{\bf Matrix} $\ast$}]{A\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_af99c2e4c5473e9617d08382c6d5bf44f}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} using online active set strategy. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-MATRIX\_\-SHIFT\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & Hessian matrix of neighbouring QP to be solved. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em A\_\-new} & Constraint matrix of neighbouring QP to be solved. \par
+ If QP sequence does not involve constraints, a NULL pointer can be passed. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-new} & Lower constraints' bounds of neighbouring QP to be solved. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-new} & Upper constraints' bounds of neighbouring QP to be solved. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 226 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{const char $\ast$const}]{lbA\_\-file, }
+\item[{const char $\ast$const}]{ubA\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds, }
+\item[{const {\bf Constraints} $\ast$const}]{guessedConstraints}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a75e77fc4849e362540980cdc34bef0cd}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} (without matrix shift) using online active set strategy (using an initialised homotopy) reading QP data from files. Note: This functions just forwards to the corresponding \doxyref{QProblem::hotstart}{p.}{classQProblem_ac4779ef92b0dda8a9dd283df2a910afc} member function. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-file} & Name of file where lower constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-file} & Name of file where upper constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em guessedBounds} & Initial guess for working set of bounds. A null pointer corresponds to an empty working set! \\
+\hline
+{\em guessedConstraints} & Initial guess for working set of constraints. A null pointer corresponds to an empty working set! \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf QProblem} \doxyref{}{p.}{classQProblem_ab1c064ca7d61b33afa39e98311ea9f1f}.
+
+
+
+Definition at line 318 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a722bf7dbc812e92bb696a7e5a0c47050}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} (without matrix shift) using online active set strategy. Note: This functions just forwards to the corresponding \doxyref{QProblem::hotstart}{p.}{classQProblem_ac4779ef92b0dda8a9dd283df2a910afc} member function. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-new} & Lower constraints' bounds of neighbouring QP to be solved. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-new} & Upper constraints' bounds of neighbouring QP to be solved. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf QProblem} \doxyref{}{p.}{classQProblem_ac4779ef92b0dda8a9dd283df2a910afc}.
+
+
+
+Definition at line 275 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds, }
+\item[{const {\bf Constraints} $\ast$const}]{guessedConstraints}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a2c3fb4cccdcb45bf4db67bd0cebf6e60}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} (without matrix shift) using online active set strategy (using an initialised homotopy). Note: This functions just forwards to the corresponding \doxyref{QProblem::hotstart}{p.}{classQProblem_ac4779ef92b0dda8a9dd283df2a910afc} member function. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-new} & Lower constraints' bounds of neighbouring QP to be solved. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-new} & Upper constraints' bounds of neighbouring QP to be solved. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em guessedBounds} & Initial guess for working set of bounds. A null pointer corresponds to an empty working set! \\
+\hline
+{\em guessedConstraints} & Initial guess for working set of constraints. A null pointer corresponds to an empty working set! \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf QProblem} \doxyref{}{p.}{classQProblem_ac54d0d8ce4b025ec5d9eae3182b09687}.
+
+
+
+Definition at line 303 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{const char $\ast$const}]{lbA\_\-file, }
+\item[{const char $\ast$const}]{ubA\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a08314bc34b07e91956e8abacd13b2315}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} (without matrix shift) using online active set strategy reading QP data from files. Note: This functions just forwards to the corresponding \doxyref{QProblem::hotstart}{p.}{classQProblem_ac4779ef92b0dda8a9dd283df2a910afc} member function. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-file} & Name of file where lower constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-file} & Name of file where upper constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf QProblem} \doxyref{}{p.}{classQProblem_a3dcfc9199ff2391c25fb5c7cfdcfd2f9}.
+
+
+
+Definition at line 289 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!SQProblem@{SQProblem}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::hotstart (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{H\_\-file, }
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{A\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{const char $\ast$const}]{lbA\_\-file, }
+\item[{const char $\ast$const}]{ubA\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_a0b60e7d63ff62e6222d8d2474b0d0bd6}
+Solves an initialised \doxyref{SQProblem}{p.}{classSQProblem} using online active set strategy reading QP data from files. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-MATRIX\_\-SHIFT\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-file} & Name of file where Hessian matrix is stored. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em A\_\-file} & Name of file where constraint matrix is stored. \par
+ If QP sequence does not involve constraints, a NULL pointer can be passed. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em lbA\_\-file} & Name of file where lower constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ubA\_\-file} & Name of file where upper constraints' bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper constraints' bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 140 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!operator=@{operator=}}
+\index{operator=@{operator=}!SQProblem@{SQProblem}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SQProblem} \& SQProblem::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf SQProblem} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSQProblem_aa040a1957af3927e985b1cae3b1dff27}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!setupAuxiliaryQP@{setupAuxiliaryQP}}
+\index{setupAuxiliaryQP@{setupAuxiliaryQP}!SQProblem@{SQProblem}}
+\subsubsection[{setupAuxiliaryQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::setupAuxiliaryQP (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{H\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{A\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{ubA\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{classSQProblem_ae5cd3ceaf3dbcaf9e0754264c29ba266}
+Sets new matrices and calculates their factorisations. If the current Hessian is trivial (i.e. HST\_\-ZERO or HST\_\-IDENTITY) but a non-\/trivial one is given, memory for Hessian is allocated and it is set to the given one. Afterwards, all QP vectors are transformed in order to start from an optimal solution. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED \par
+ RET\_\-NO\_\-HESSIAN\_\-SPECIFIED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & New Hessian matrix. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em A\_\-new} & New constraint matrix. \par
+ If QP sequence does not involve constraints, a NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 350 of file SQProblem.cpp.
+
+\index{SQProblem@{SQProblem}!setupAuxiliaryQP@{setupAuxiliaryQP}}
+\index{setupAuxiliaryQP@{setupAuxiliaryQP}!SQProblem@{SQProblem}}
+\subsubsection[{setupAuxiliaryQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SQProblem::setupAuxiliaryQP (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{H\_\-new, }
+\item[{{\bf Matrix} $\ast$}]{A\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{ub\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{lbA\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$}]{ubA\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{classSQProblem_aee7ddf9b36cb0e89d2252c8ac1fbe876}
+Sets new matrices and calculates their factorisations. If the current Hessian is trivial (i.e. HST\_\-ZERO or HST\_\-IDENTITY) but a non-\/trivial one is given, memory for Hessian is allocated and it is set to the given one. Afterwards, all QP vectors are transformed in order to start from an optimal solution. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED \par
+ RET\_\-NO\_\-HESSIAN\_\-SPECIFIED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & New Hessian matrix. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em A\_\-new} & New constraint matrix. \par
+ If QP sequence does not involve constraints, a NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 372 of file SQProblem.cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{SQProblem@{SQProblem}!SolutionAnalysis@{SolutionAnalysis}}
+\index{SolutionAnalysis@{SolutionAnalysis}!SQProblem@{SQProblem}}
+\subsubsection[{SolutionAnalysis}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SolutionAnalysis}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classSQProblem_ab55a166adacbc90da27a86b0010c81d7}
+
+
+Reimplemented from {\bf QProblem} \doxyref{}{p.}{classQProblem_ab55a166adacbc90da27a86b0010c81d7}.
+
+
+
+Definition at line 62 of file SQProblem.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf SQProblem.hpp}\item 
+{\bf SQProblem.cpp}\end{DoxyCompactItemize}

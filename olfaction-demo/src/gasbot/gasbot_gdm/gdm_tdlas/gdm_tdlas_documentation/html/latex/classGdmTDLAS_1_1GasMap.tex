@@ -1,0 +1,444 @@
+\section{GdmTDLAS::GasMap Class Reference}
+\label{classGdmTDLAS_1_1GasMap}\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+
+
+{\ttfamily \#include $<$map.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bf CalculateNewMeasurementRow} (geometry\_\-msgs::Point start, geometry\_\-msgs::Point end, float ppmm, std::vector$<$ int $>$ $\ast$idx, std::vector$<$ float $>$ $\ast$val)
+\item 
+bool {\bf CalculateNewMeasurementRow} (geometry\_\-msgs::Point start, geometry\_\-msgs::Point end, float ppmm, std::vector$<$ int $>$ $\ast$idx, std::vector$<$ float $>$ $\ast$val)
+\item 
+{\bf GasMap} (float min\_\-x, float max\_\-x, float min\_\-y, float max\_\-y, float cell\_\-size, float max\_\-conc, std::string frame)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+{\bf GasMap} (float min\_\-x, float max\_\-x, float min\_\-y, float max\_\-y, float cell\_\-size, float max\_\-conc, std::string frame)
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+int {\bf getCols} ()
+\item 
+int {\bf getCols} ()
+\item 
+int {\bf getRows} ()
+\item 
+int {\bf getRows} ()
+\item 
+void {\bf printInfo} ()
+\item 
+void {\bf printInfo} ()
+\item 
+void {\bf publish} (ros::Publisher \&tdlas\_\-advertise)
+\item 
+void {\bf publish} (ros::Publisher \&tdlas\_\-advertise)
+\item 
+bool {\bf updateMap} (std::vector$<$ {\bf real\_\-t} $>$ $\ast$new\_\-concentrations)
+\item 
+bool {\bf updateMap} (std::vector$<$ {\bf real\_\-t} $>$ $\ast$new\_\-concentrations)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::vector$<$ float $>$ {\bf m\_\-cell\_\-coords\_\-x}
+\begin{DoxyCompactList}\small\item\em Vector representing the floor. \end{DoxyCompactList}\item 
+std::vector$<$ float $>$ {\bf m\_\-cell\_\-coords\_\-y}
+\begin{DoxyCompactList}\small\item\em Vector representing the floor. \end{DoxyCompactList}\item 
+float {\bf m\_\-cell\_\-size}
+\begin{DoxyCompactList}\small\item\em size of the cell of the map \end{DoxyCompactList}\item 
+int {\bf m\_\-cols}
+\begin{DoxyCompactList}\small\item\em number of the columns of the map \end{DoxyCompactList}\item 
+std::string {\bf m\_\-frame}
+\begin{DoxyCompactList}\small\item\em Coordinate frame of the map. \end{DoxyCompactList}\item 
+std::vector$<$ {\bf Cell} $>$ {\bf m\_\-map}
+\begin{DoxyCompactList}\small\item\em Vector representing the floor. \end{DoxyCompactList}\item 
+float {\bf m\_\-max\_\-conc}
+\begin{DoxyCompactList}\small\item\em maximum gas concentration (useful for visualization purposes) \end{DoxyCompactList}\item 
+float {\bf m\_\-max\_\-x}
+\begin{DoxyCompactList}\small\item\em maximum x coordinate of the map \end{DoxyCompactList}\item 
+float {\bf m\_\-max\_\-y}
+\begin{DoxyCompactList}\small\item\em maximum y coordinate of the map \end{DoxyCompactList}\item 
+float {\bf m\_\-min\_\-x}
+\begin{DoxyCompactList}\small\item\em minumum x coordinate of the map \end{DoxyCompactList}\item 
+float {\bf m\_\-min\_\-y}
+\begin{DoxyCompactList}\small\item\em minumum y coordinate of the map \end{DoxyCompactList}\item 
+int {\bf m\_\-rows}
+\begin{DoxyCompactList}\small\item\em number of rows of the map \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 17 of file map.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!GasMap@{GasMap}}
+\index{GasMap@{GasMap}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{GasMap}]{\setlength{\rightskip}{0pt plus 5cm}GasMap::GasMap (
+\begin{DoxyParamCaption}
+\item[{float}]{min\_\-x, }
+\item[{float}]{max\_\-x, }
+\item[{float}]{min\_\-y, }
+\item[{float}]{max\_\-y, }
+\item[{float}]{cell\_\-size, }
+\item[{float}]{max\_\-conc, }
+\item[{std::string}]{frame}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a6298a4c4aeb34d5ab9a192047b5d879e}
+
+
+Default constructor. 
+
+
+
+Definition at line 10 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!GasMap@{GasMap}}
+\index{GasMap@{GasMap}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{GasMap}]{\setlength{\rightskip}{0pt plus 5cm}GdmTDLAS::GasMap::GasMap (
+\begin{DoxyParamCaption}
+\item[{float}]{min\_\-x, }
+\item[{float}]{max\_\-x, }
+\item[{float}]{min\_\-y, }
+\item[{float}]{max\_\-y, }
+\item[{float}]{cell\_\-size, }
+\item[{float}]{max\_\-conc, }
+\item[{std::string}]{frame}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_ab60d498b8c469eed76f948e6a9abd895}
+
+
+Default constructor. 
+
+
+
+\subsection{Member Function Documentation}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!CalculateNewMeasurementRow@{CalculateNewMeasurementRow}}
+\index{CalculateNewMeasurementRow@{CalculateNewMeasurementRow}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{CalculateNewMeasurementRow}]{\setlength{\rightskip}{0pt plus 5cm}bool GasMap::CalculateNewMeasurementRow (
+\begin{DoxyParamCaption}
+\item[{geometry\_\-msgs::Point}]{start, }
+\item[{geometry\_\-msgs::Point}]{end, }
+\item[{float}]{ppmm, }
+\item[{std::vector$<$ int $>$ $\ast$}]{idx, }
+\item[{std::vector$<$ float $>$ $\ast$}]{val}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a3fdac43a976274f4b2b44dde9f8d1dba}
+Sets the color of the cell to be visualized 
+\begin{DoxyParams}{Parameters}
+{\em start} & beam start point \\
+\hline
+{\em end} & beam end point \\
+\hline
+{\em row} & vector containing the length traversed in each cell by the measurement at hand \\
+\hline
+{\em reading} & from the TDLAS sensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean value, TRUE success -\/ FALSE failure 
+\end{DoxyReturn}
+
+
+Definition at line 59 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!CalculateNewMeasurementRow@{CalculateNewMeasurementRow}}
+\index{CalculateNewMeasurementRow@{CalculateNewMeasurementRow}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{CalculateNewMeasurementRow}]{\setlength{\rightskip}{0pt plus 5cm}bool GdmTDLAS::GasMap::CalculateNewMeasurementRow (
+\begin{DoxyParamCaption}
+\item[{geometry\_\-msgs::Point}]{start, }
+\item[{geometry\_\-msgs::Point}]{end, }
+\item[{float}]{ppmm, }
+\item[{std::vector$<$ int $>$ $\ast$}]{idx, }
+\item[{std::vector$<$ float $>$ $\ast$}]{val}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a7f2f54c12ca6067f6a044ced7b9f7f28}
+Sets the color of the cell to be visualized 
+\begin{DoxyParams}{Parameters}
+{\em start} & beam start point \\
+\hline
+{\em end} & beam end point \\
+\hline
+{\em row} & vector containing the length traversed in each cell by the measurement at hand \\
+\hline
+{\em reading} & from the TDLAS sensor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean value, TRUE success -\/ FALSE failure 
+\end{DoxyReturn}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!getCols@{getCols}}
+\index{getCols@{getCols}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{getCols}]{\setlength{\rightskip}{0pt plus 5cm}int GdmTDLAS::GasMap::getCols (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a271dec12fc7b5dcefb114971b54dc85f}
+Getter method \begin{DoxyReturn}{Returns}
+number of columns 
+\end{DoxyReturn}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!getCols@{getCols}}
+\index{getCols@{getCols}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{getCols}]{\setlength{\rightskip}{0pt plus 5cm}int GasMap::getCols (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_af82b54856faf2eea9d553fd89c1cc71d}
+Getter method \begin{DoxyReturn}{Returns}
+number of columns 
+\end{DoxyReturn}
+
+
+Definition at line 53 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!getRows@{getRows}}
+\index{getRows@{getRows}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{getRows}]{\setlength{\rightskip}{0pt plus 5cm}int GasMap::getRows (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a4cca67f1052210b0fc3a51fb89281368}
+Getter method \begin{DoxyReturn}{Returns}
+number of rows 
+\end{DoxyReturn}
+
+
+Definition at line 47 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!getRows@{getRows}}
+\index{getRows@{getRows}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{getRows}]{\setlength{\rightskip}{0pt plus 5cm}int GdmTDLAS::GasMap::getRows (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a394170b0330f8e97138160b8e4199a39}
+Getter method \begin{DoxyReturn}{Returns}
+number of rows 
+\end{DoxyReturn}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!printInfo@{printInfo}}
+\index{printInfo@{printInfo}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{printInfo}]{\setlength{\rightskip}{0pt plus 5cm}void GdmTDLAS::GasMap::printInfo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_aa63fdbd9eedede2f6fae2fd8e70d965a}
+Print at screen information about the map \index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!printInfo@{printInfo}}
+\index{printInfo@{printInfo}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{printInfo}]{\setlength{\rightskip}{0pt plus 5cm}void GasMap::printInfo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a68f6dddfbd7096d57417649a790f7873}
+Print at screen information about the map 
+
+Definition at line 213 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!publish@{publish}}
+\index{publish@{publish}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{publish}]{\setlength{\rightskip}{0pt plus 5cm}void GasMap::publish (
+\begin{DoxyParamCaption}
+\item[{ros::Publisher \&}]{tdlas\_\-advertise}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_ae1284c715e3e1861a5d564e97c2daf24}
+Publishes the map for visualization in a given frame 
+\begin{DoxyParams}{Parameters}
+{\em array} & \\
+\hline
+{\em frame} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 186 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!publish@{publish}}
+\index{publish@{publish}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{publish}]{\setlength{\rightskip}{0pt plus 5cm}void GdmTDLAS::GasMap::publish (
+\begin{DoxyParamCaption}
+\item[{ros::Publisher \&}]{tdlas\_\-advertise}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_afba3171d1f054adf2f364bb3fafc1677}
+Publishes the map for visualization in a given frame 
+\begin{DoxyParams}{Parameters}
+{\em array} & \\
+\hline
+{\em frame} & \\
+\hline
+\end{DoxyParams}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!updateMap@{updateMap}}
+\index{updateMap@{updateMap}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{updateMap}]{\setlength{\rightskip}{0pt plus 5cm}bool GasMap::updateMap (
+\begin{DoxyParamCaption}
+\item[{std::vector$<$ {\bf real\_\-t} $>$ $\ast$}]{new\_\-concentrations}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a685787c256f39512c7546845435a3f10}
+Updates the map according to the new model 
+\begin{DoxyParams}{Parameters}
+{\em array} & of concentrations \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean value, TRUE success -\/ FALSE failure 
+\end{DoxyReturn}
+
+
+Definition at line 164 of file map.cpp.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!updateMap@{updateMap}}
+\index{updateMap@{updateMap}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{updateMap}]{\setlength{\rightskip}{0pt plus 5cm}bool GdmTDLAS::GasMap::updateMap (
+\begin{DoxyParamCaption}
+\item[{std::vector$<$ {\bf real\_\-t} $>$ $\ast$}]{new\_\-concentrations}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1GasMap_a17ec275b7147298d17f4cb549bcc3b4f}
+Updates the map according to the new model 
+\begin{DoxyParams}{Parameters}
+{\em array} & of concentrations \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean value, TRUE success -\/ FALSE failure 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-cell\_\-coords\_\-x@{m\_\-cell\_\-coords\_\-x}}
+\index{m\_\-cell\_\-coords\_\-x@{m\_\-cell\_\-coords\_\-x}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-cell\_\-coords\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ float $>$ {\bf GdmTDLAS::GasMap::m\_\-cell\_\-coords\_\-x}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a602f8a135870ab42285ebab89c4630ef}
+
+
+Vector representing the floor. 
+
+
+
+Definition at line 37 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-cell\_\-coords\_\-y@{m\_\-cell\_\-coords\_\-y}}
+\index{m\_\-cell\_\-coords\_\-y@{m\_\-cell\_\-coords\_\-y}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-cell\_\-coords\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ float $>$ {\bf GdmTDLAS::GasMap::m\_\-cell\_\-coords\_\-y}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_aae08a7da5e3e2fbb252842d731f34bd3}
+
+
+Vector representing the floor. 
+
+
+
+Definition at line 39 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-cell\_\-size@{m\_\-cell\_\-size}}
+\index{m\_\-cell\_\-size@{m\_\-cell\_\-size}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-cell\_\-size}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-cell\_\-size}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_ab18c6c69d50c8294d762d359c19b6590}
+
+
+size of the cell of the map 
+
+
+
+Definition at line 29 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-cols@{m\_\-cols}}
+\index{m\_\-cols@{m\_\-cols}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-cols}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf GdmTDLAS::GasMap::m\_\-cols}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_acfd92d4f4155edda88f1d2bc43a10be4}
+
+
+number of the columns of the map 
+
+
+
+Definition at line 35 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-frame@{m\_\-frame}}
+\index{m\_\-frame@{m\_\-frame}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-frame}]{\setlength{\rightskip}{0pt plus 5cm}std::string {\bf GdmTDLAS::GasMap::m\_\-frame}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a366f4b965fcdcc3d6b3d2206dadfc645}
+
+
+Coordinate frame of the map. 
+
+
+
+Definition at line 43 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-map@{m\_\-map}}
+\index{m\_\-map@{m\_\-map}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf Cell} $>$ {\bf GdmTDLAS::GasMap::m\_\-map}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a7efbb6f5835713fe37dea1e9f7a37314}
+
+
+Vector representing the floor. 
+
+
+
+Definition at line 41 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-max\_\-conc@{m\_\-max\_\-conc}}
+\index{m\_\-max\_\-conc@{m\_\-max\_\-conc}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-max\_\-conc}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-max\_\-conc}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a514016155a1e1f6aa3614e55adad6576}
+
+
+maximum gas concentration (useful for visualization purposes) 
+
+
+
+Definition at line 31 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-max\_\-x@{m\_\-max\_\-x}}
+\index{m\_\-max\_\-x@{m\_\-max\_\-x}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-max\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-max\_\-x}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_aab6a559bbc7382030a99a58cc1e702bd}
+
+
+maximum x coordinate of the map 
+
+
+
+Definition at line 23 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-max\_\-y@{m\_\-max\_\-y}}
+\index{m\_\-max\_\-y@{m\_\-max\_\-y}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-max\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-max\_\-y}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a2f64ed720ec38700de09322270f6a284}
+
+
+maximum y coordinate of the map 
+
+
+
+Definition at line 27 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-min\_\-x@{m\_\-min\_\-x}}
+\index{m\_\-min\_\-x@{m\_\-min\_\-x}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-min\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-min\_\-x}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_ac5d56870a48f2e5be61896f19622f28b}
+
+
+minumum x coordinate of the map 
+
+
+
+Definition at line 21 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-min\_\-y@{m\_\-min\_\-y}}
+\index{m\_\-min\_\-y@{m\_\-min\_\-y}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-min\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::GasMap::m\_\-min\_\-y}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_acf348ff87a503f510ba4b6954b72d85b}
+
+
+minumum y coordinate of the map 
+
+
+
+Definition at line 25 of file map.h.
+
+\index{GdmTDLAS::GasMap@{GdmTDLAS::GasMap}!m\_\-rows@{m\_\-rows}}
+\index{m\_\-rows@{m\_\-rows}!GdmTDLAS::GasMap@{GdmTDLAS::GasMap}}
+\subsubsection[{m\_\-rows}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf GdmTDLAS::GasMap::m\_\-rows}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1GasMap_a6359b35046e31e39c70002395bb86c05}
+
+
+number of rows of the map 
+
+
+
+Definition at line 33 of file map.h.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf map.h}\item 
+{\bf map\_\-hot.h}\item 
+{\bf map.cpp}\item 
+{\bf map\_\-hot.cpp}\end{DoxyCompactItemize}

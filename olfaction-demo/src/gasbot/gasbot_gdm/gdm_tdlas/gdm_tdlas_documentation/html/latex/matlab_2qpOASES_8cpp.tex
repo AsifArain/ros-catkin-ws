@@ -1,0 +1,100 @@
+\section{qpOASES.cpp File Reference}
+\label{matlab_2qpOASES_8cpp}\index{qpOASES.cpp@{qpOASES.cpp}}
+{\ttfamily \#include $<$qpOASES/QProblem.hpp$>$}\par
+{\ttfamily \#include \char`\"{}qpOASES\_\-matlab\_\-utils.cpp\char`\"{}}\par
+Include dependency graph for matlab/qpOASES.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{matlab_2qpOASES_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf mexFunction} (int nlhs, mxArray $\ast$plhs[$\,$], int nrhs, const mxArray $\ast$prhs[$\,$])
+\item 
+void {\bf qpOASESmex\_\-bounds} (int nV, int nP, {\bf SymmetricMatrix} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, int nWSRin, {\bf real\_\-t} $\ast$x0, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf qpOASESmex\_\-constraints} (int nV, int nC, int nP, {\bf SymmetricMatrix} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf Matrix} $\ast$A, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int nWSRin, {\bf real\_\-t} $\ast$x0, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Aude Perrin 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Interface for Matlab(R) that enables to call qpOASES as a MEX function. 
+
+Definition in file {\bf matlab/qpOASES.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{matlab/qpOASES.cpp@{matlab/qpOASES.cpp}!mexFunction@{mexFunction}}
+\index{mexFunction@{mexFunction}!matlab/qpOASES.cpp@{matlab/qpOASES.cpp}}
+\subsubsection[{mexFunction}]{\setlength{\rightskip}{0pt plus 5cm}void mexFunction (
+\begin{DoxyParamCaption}
+\item[{int}]{nlhs, }
+\item[{mxArray $\ast$}]{plhs[$\,$], }
+\item[{int}]{nrhs, }
+\item[{const mxArray $\ast$}]{prhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES_8cpp_a6a215cbfde54f82a3ce599228fc3fce5}
+
+
+Definition at line 159 of file matlab/qpOASES.cpp.
+
+\index{matlab/qpOASES.cpp@{matlab/qpOASES.cpp}!qpOASESmex\_\-bounds@{qpOASESmex\_\-bounds}}
+\index{qpOASESmex\_\-bounds@{qpOASESmex\_\-bounds}!matlab/qpOASES.cpp@{matlab/qpOASES.cpp}}
+\subsubsection[{qpOASESmex\_\-bounds}]{\setlength{\rightskip}{0pt plus 5cm}void qpOASESmex\_\-bounds (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{int}]{nP, }
+\item[{{\bf SymmetricMatrix} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{int}]{nWSRin, }
+\item[{{\bf real\_\-t} $\ast$}]{x0, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES_8cpp_a4794adb4b1957cdc96f091516992bf43}
+
+
+Definition at line 106 of file matlab/qpOASES.cpp.
+
+\index{matlab/qpOASES.cpp@{matlab/qpOASES.cpp}!qpOASESmex\_\-constraints@{qpOASESmex\_\-constraints}}
+\index{qpOASESmex\_\-constraints@{qpOASESmex\_\-constraints}!matlab/qpOASES.cpp@{matlab/qpOASES.cpp}}
+\subsubsection[{qpOASESmex\_\-constraints}]{\setlength{\rightskip}{0pt plus 5cm}void qpOASESmex\_\-constraints (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{int}]{nP, }
+\item[{{\bf SymmetricMatrix} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf Matrix} $\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int}]{nWSRin, }
+\item[{{\bf real\_\-t} $\ast$}]{x0, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES_8cpp_aa41bb600d67ca585667a0f8b48c362f9}
+
+
+Definition at line 48 of file matlab/qpOASES.cpp.
+

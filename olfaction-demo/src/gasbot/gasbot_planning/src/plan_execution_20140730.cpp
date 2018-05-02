@@ -1,0 +1,314 @@
+#include <ros/ros.h>
+#include <move_base_msgs/MoveBaseAction.h>
+#include <actionlib/client/simple_action_client.h>
+#include <tf/transform_datatypes.h>
+#include <nav_msgs/Odometry.h>
+#include <stdio.h>
+#include <fstream>
+#include <boost/thread.hpp>
+#include "ptu_control/commandSweep.h"
+#include "amtec/GetStatus.h"
+#include "std_msgs/Int16.h"
+#include <cstdlib>
+#include <vector>
+
+#include <iostream>
+#include <string>
+#include <streambuf>
+#include <cerrno>
+
+#include <ros/package.h>
+
+//typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
+//void getPoses();
+void followPoses();
+void gasDetection();
+int  global_status;
+//bool first_time=true;
+std::vector<double> vecGoals; //vector contains goals
+std::vector<double> vec; //vector contains goals
+//double vecGoals; //vector contains goals
+
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//                                    PTU STATUS CALLBACK
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+void stateCallback(const std_msgs::Int16::ConstPtr& sta){
+	//ROS_INFO("PTU status is...%d",sta->data);
+	global_status=sta->data;
+}
+
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//                               GET POSES FROM EXTERNAL FILE
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+/*
+void getPoses(){
+    double goal; 
+    std::ifstream inFILE;
+    //inData.open(fileName.c_str());
+    inFILE.open("POSES.txt");
+
+    //  Declare vector<double> vecx
+    //vector<double> vecGoals;
+    //  read data from input file to vector vecx,
+    while(inFILE >> goal){
+        vecGoals.push_back(goal);
+	std::cout << "Gole is " << goal << std::endl;
+    }
+    for (int i=0;i<vecGoals.size();i++){
+	std::cout << "gole is " << vecGoals[i] << std::endl;
+    }
+    inFILE.close(); 
+}
+*/
+
+
+void getPOS(){
+	// ######################################################	
+	std::cout << "Unable to open file\n"; 	
+	std::string line;
+	double goal;
+	//std::ifstream meriFile ("POSES.txt");
+	std::ifstream meriFile;
+	//FILE * pFile;
+  	//pFile = fopen ("POSES.txt","r");
+	//meriFile.open();
+	//std::string path = ros::package::getPath("roslib");	
+	//meriFile.open("POSES.txt", std::ios::app);	
+	meriFile.open((ros::package::getPath("roslib")+"POSES.txt"), std::ios::app);
+	//std::cout << "here is myfile"<<meriFile.is_open()<<std::endl; 	
+	if (meriFile.is_open()){
+		std::cout << "ok upto here...\n";
+		std::cout << "Gole is " << goal << std::endl;		
+		meriFile >> goal;
+		std::cout << "Gole is " << goal << std::endl;
+		while(meriFile >> goal){
+		vecGoals.push_back(goal);
+		std::cout << "Gole is " << goal << std::endl;
+     		}
+		while ( getline (meriFile,line) )
+		{
+		std::cout << line << '\n';
+		}
+		meriFile.close();
+	}
+
+	else std::cout << "Unable to open file"; 
+	// #######################################################	
+	/*
+	std::ofstream myfile;
+	myfile.open("POSES.txt", std::ios::app);
+	//double secs = ros::Time::now().toSec();
+	if (!myfile.is_open()) {
+	ROS_ERROR("GPS FILE NOT OPEN!");
+	}
+	myfile << secs << " " 
+	<< msg.pose.pose.position.x << " "
+	<< msg.pose.pose.position.y << " "
+	<< "\n";
+
+	myfile.close();
+	*/
+
+}
+
+std::string get_file_contents(const char *filename)
+	{
+	  std::ifstream in(filename, std::ios::in | std::ios::binary);
+	  if (in)
+	  {
+	    return(std::string((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>()));
+	  }
+	  throw(errno);
+	std::cout<<in<<std::endl;
+	}
+
+void readDATA(){
+	double value;
+	std::ifstream myFile;
+	myFile.open("POSES.txt", std::ios::app);	
+	if (myFile.is_open()){
+		std::cout << "File is open."<<std::endl;
+		while(myFile >> value){
+			vec.push_back(value);
+			std::cout << "value is " <<value<< std::endl;
+     		}
+		myFile.close();
+	}
+	else std::cout << "Unable to open the file"; 
+}
+
+
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//                                 SCANNING FOR GAS DETECTION
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+void gasDetection(){
+	ros::NodeHandle n;
+  	ros::ServiceClient client1 = n.serviceClient<ptu_control::commandSweep>("/ptu_control/sweep");
+  	ros::ServiceClient client2 = n.serviceClient<amtec::GetStatus>("/amtec/get_status");
+  
+	ptu_control::commandSweep srvSweep;
+	//amtec::GetStatus  srvState;
+
+	srvSweep.request.min_pan  	= -10;
+	srvSweep.request.max_pan  	=  10;
+	srvSweep.request.min_tilt 	= -10;
+	srvSweep.request.max_tilt 	= -10;
+	srvSweep.request.n_pan    	=   1;
+	srvSweep.request.n_tilt   	=   1;
+	srvSweep.request.samp_delay 	= 0.1;
+
+	if (client1.call(srvSweep)){
+		ROS_INFO("Gas detection in progress ... ");}
+	else{
+		ROS_ERROR("Failed to initialize gas scanning.");}
+	/*
+	if(client2.call(srvState)){     
+		ROS_INFO("Got status");
+		ROS_INFO("Sum: %f", (float)srvState.response.position_pan);}
+	else{
+		ROS_ERROR("Failed to get status.");} */
+}
+
+
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//                           NAVIGATING THROUGH DESIRED POSES
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+void followPoses(){
+	
+	ROS_INFO("Here we go...");
+	//getPOS();
+	
+
+
+	ros::WallDuration(1).sleep();
+	//tell the action client that we want to spin a thread by default
+	actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac("move_base", true);
+
+	//wait for the action server to come up
+	while(!ac.waitForServer(ros::Duration(5.0))){
+	ROS_INFO("Waiting for the move_base action server to come up");}
+
+	/*
+	ifstream fin;
+	fin.open("goals.txt", ifstream::in);
+	double var1, var2, var3;
+	fin>> var1 >> var2 >> var3;
+	ROS_INFO("Waiting %f, %f, %f, ",var1,var2,var3);
+	*/
+	/*
+	{
+        std::ifstream file("goals.txt");
+    	if(file.is_open()){
+		string myGoals[3];
+		for(int i = 0; i < 3; ++i){
+			file >> myGoals[i];
+			}
+	    }
+
+	}*/
+	//double goalX[6] = {1.0, 1.0, 0.0,-1.0, 0.0,-1.0};
+	//double goalY[6] = {0.0, 1.0, 1.0, 0.0,-1.0,-1.0};
+	//double goalW[6] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
+	//std::vector<double> goalX[4] = {  1.0,  1.0, -1.0, -1.0}; //goalX.size()
+	/*	
+	double goalX[5] = {  1.0,  0.0,  1.0,  1.0,  3.0};
+	double goalY[5] = {  0.0,  2.0,  0.0,  0.0,  0.0};
+	double goalO[5] = {  0.0, 90.0, 90.0, 90.0, 90.0};
+	*/
+	
+	double goalX[5] = {  1.0,  1.0,   1.0,   1.0,   0.0};
+	double goalY[5] = {  0.0,  2.0,   3.0,   3.0,   0.0};
+	double goalO[5] = {  0.0, 90.0, 180.0, -90.0,   0.0};
+	
+	//getPoses();
+	
+	/*
+	// ################## Read File ########	
+	double pose; 
+	std::vector<double> vecGoals; //vector contains goals
+	//double vecGoals[1];
+	//std::cout << "vecGoal is " << vecGoals<< std::endl;
+	std::ifstream inFILE;
+	//inData.open(fileName.c_str());
+	inFILE.open("POSES.txt");
+	
+	//  Declare vector<double> vecx
+	//vector<double> vecGoals;
+	//  read data from input file to vector vecx,
+	while(inFILE >> pose){
+		vecGoals.push_back(pose);
+		std::cout << "Gole is " << pose << std::endl;
+	}
+	std::cout << "I am here ..." <<std::endl;
+	std::cout << "and gole is " << vecGoals[1]<< std::endl;	
+	for (int i=0;i<vecGoals.size();i++){
+		std::cout << "gole is " << vecGoals[i] << std::endl;
+	}
+	inFILE.close();
+	*/	
+	
+	
+	
+	// #####################################
+	/*
+	for (int i=0;i<5;i++){
+		move_base_msgs::MoveBaseGoal goal;
+		  
+		//we'll send a goal to the robot to move 1 meter forward
+		//goal.target_pose.header.frame_id = "base_footprint"; //"base_link"
+		goal.target_pose.header.frame_id = "/world"; //"base_link"
+		goal.target_pose.header.stamp = ros::Time::now();
+
+		goal.target_pose.pose.position.x 	= vecGoals[(i*3)+0]; //goalX[i];
+		goal.target_pose.pose.position.y 	= vecGoals[(i*3)+1]; //goalY[i];
+		//goal.target_pose.pose.orientation.w 	= goalW[i]; //vecGoals[(i*3)+2]; //goalW[i];
+		//goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(goalO[i]*M_PI/180);
+		goal.target_pose.pose.orientation 	= tf::createQuaternionMsgFromYaw(vecGoals[(i*3)+2]*M_PI/180);
+
+		//ROS_INFO("Gasbot is moving to pose %i i.e. <%.1fm,%.1fm,%.1fdeg>.",i+1,goalX[i],goalY[i],goalO[i]); 
+		ROS_INFO("Gasbot is moving to pose %i i.e. <%.1fm,%.1fm,%.1fdeg>.",i+1,vecGoals[(i*3)+0],vecGoals[(i*3)+1],vecGoals[(i*3)+2]); 
+		ac.sendGoal(goal);
+		ac.waitForResult();
+
+		if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED){
+			ROS_INFO("Gasbot has reached to desired pose %i",i+1);
+			ROS_INFO("Wait for a sec....");
+			ros::WallDuration(1).sleep();
+			gasDetection();
+			ros::WallDuration(5).sleep();
+			while(global_status!=0){}
+				//ROS_INFO("Hamary ptu ka status...%i\n",global_status);}
+			ROS_INFO("Gas detection COMPLETED.");
+			}
+		else
+			ROS_INFO("The Husky failed to reach desired pose.");
+	}*/
+}
+
+
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+//                                       MAIN
+// ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+
+int main(int argc, char** argv){
+  ros::init(argc, argv, "plan_execution");
+  ros::NodeHandle n;
+  //ros::Rate r(10); // 10 hz
+  ros::Subscriber sub1 = n.subscribe("/ptu_control/state",10,stateCallback);
+  //getPOS();
+  //get_file_contents("POSES.txt");
+  readDATA();
+  //getPoses();  
+  boost::thread mythread(followPoses);
+  //ros::spinOnce();
+  
+  //followPoses();
+  ros::spin();
+  //ros::spinOnce();
+  //r.sleep();
+  
+return 0;
+}
+
+
+

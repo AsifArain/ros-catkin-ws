@@ -1,0 +1,495 @@
+\section{Indexlist Class Reference}
+\label{classIndexlist}\index{Indexlist@{Indexlist}}
+
+
+Stores and manages index lists.  
+
+
+
+
+{\ttfamily \#include $<$Indexlist.hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf addNumber} (int addnumber)
+\item 
+int {\bf getIndex} (int givennumber) const 
+\item 
+int {\bf getLastNumber} () const 
+\item 
+int {\bf getLength} () const 
+\item 
+int {\bf getNumber} (int physicalindex) const 
+\item 
+{\bf returnValue} {\bf getNumberArray} (int $\ast$$\ast$const numberarray) const 
+\item 
+{\bf Indexlist} (int n)
+\item 
+{\bf Indexlist} ()
+\item 
+{\bf Indexlist} (const {\bf Indexlist} \&rhs)
+\item 
+{\bf returnValue} {\bf init} (int n=0)
+\item 
+{\bf BooleanType} {\bf isMember} (int \_\-number) const 
+\item 
+{\bf Indexlist} \& {\bf operator=} (const {\bf Indexlist} \&rhs)
+\item 
+{\bf returnValue} {\bf removeNumber} (int removenumber)
+\item 
+{\bf returnValue} {\bf swapNumbers} (int number1, int number2)
+\item 
+{\bf $\sim$Indexlist} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+{\bf returnValue} {\bf copy} (const {\bf Indexlist} \&rhs)
+\item 
+int {\bf findInsert} (int i) const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf first}
+\item 
+int $\ast$ {\bf iSort}
+\item 
+int {\bf last}
+\item 
+int {\bf lastusedindex}
+\item 
+int {\bf length}
+\item 
+int $\ast$ {\bf number}
+\item 
+int {\bf physicallength}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf DenseMatrix}
+\item 
+class {\bf SparseMatrix}
+\item 
+class {\bf SparseMatrixRow}
+\item 
+class {\bf SymDenseMat}
+\item 
+class {\bf SymSparseMat}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stores and manages index lists. 
+
+This class manages index lists of active/inactive bounds/constraints.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 55 of file Indexlist.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\subsubsection[{Indexlist}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES Indexlist::Indexlist (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_ae8912418954f7d3988b45e61ae3e1792}
+Default constructor. 
+
+Definition at line 50 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\subsubsection[{Indexlist}]{\setlength{\rightskip}{0pt plus 5cm}Indexlist::Indexlist (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_a8c91296520f657a87f2d6a7b440e7bb6}
+Constructor which takes the desired physical length of the index list. 
+\begin{DoxyParams}{Parameters}
+{\em n} & Physical length of index list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\index{Indexlist@{Indexlist}!Indexlist@{Indexlist}}
+\subsubsection[{Indexlist}]{\setlength{\rightskip}{0pt plus 5cm}Indexlist::Indexlist (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_ad9e5f23de8e6689e64bb47fa94d54af3}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!$\sim$Indexlist@{$\sim$Indexlist}}
+\index{$\sim$Indexlist@{$\sim$Indexlist}!Indexlist@{Indexlist}}
+\subsubsection[{$\sim$Indexlist}]{\setlength{\rightskip}{0pt plus 5cm}Indexlist::$\sim$Indexlist (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_a25da3346974b3749f54355fc040c6450}
+Destructor. 
+
+Definition at line 83 of file Indexlist.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Indexlist@{Indexlist}!addNumber@{addNumber}}
+\index{addNumber@{addNumber}!Indexlist@{Indexlist}}
+\subsubsection[{addNumber}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::addNumber (
+\begin{DoxyParamCaption}
+\item[{int}]{addnumber}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_a4cde208485d979fc2d6db5a4f39dd1d1}
+Adds number to index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD \par
+ RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em addnumber} & Number to be added. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 156 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!clear@{clear}}
+\index{clear@{clear}!Indexlist@{Indexlist}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_a34e0b17923cc67a03f9aeb011261bb89}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 237 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!copy@{copy}}
+\index{copy@{copy}!Indexlist@{Indexlist}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_a9ffa9399d56190092586fe3f366aab87}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 258 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!findInsert@{findInsert}}
+\index{findInsert@{findInsert}!Indexlist@{Indexlist}}
+\subsubsection[{findInsert}]{\setlength{\rightskip}{0pt plus 5cm}int Indexlist::findInsert (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_ae864e2462056ff5637772e21945099e0}
+Find first index j between -\/1 and length in sorted list of indices iSort such that numbers[iSort[j]] $<$= i $<$ numbers[iSort[j+1]]. Uses bisection. \begin{DoxyReturn}{Returns}
+j. 
+\end{DoxyReturn}
+
+
+Definition at line 284 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!getIndex@{getIndex}}
+\index{getIndex@{getIndex}!Indexlist@{Indexlist}}
+\subsubsection[{getIndex}]{\setlength{\rightskip}{0pt plus 5cm}int Indexlist::getIndex (
+\begin{DoxyParamCaption}
+\item[{int}]{givennumber}
+\end{DoxyParamCaption}
+) const}\label{classIndexlist_ad6531121bb05cfc3ab38d05973b462d9}
+Determines the index within the index list at with a given number is stored. \begin{DoxyReturn}{Returns}
+$>$= 0: Index of given number. \par
+ -\/1: Number not found. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em givennumber} & Number whose index shall be determined. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 146 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!getLastNumber@{getLastNumber}}
+\index{getLastNumber@{getLastNumber}!Indexlist@{Indexlist}}
+\subsubsection[{getLastNumber}]{\setlength{\rightskip}{0pt plus 5cm}int Indexlist::getLastNumber (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classIndexlist_addc4fcc5c2425e5cfd1d28c843540a7f}
+Returns last number within the index list. \begin{DoxyReturn}{Returns}
+Last number within the index list. 
+\end{DoxyReturn}
+\index{Indexlist@{Indexlist}!getLength@{getLength}}
+\index{getLength@{getLength}!Indexlist@{Indexlist}}
+\subsubsection[{getLength}]{\setlength{\rightskip}{0pt plus 5cm}int Indexlist::getLength (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classIndexlist_a60283130d120b0ff22c0e3964d8d2b27}
+Returns the current length of the index list. \begin{DoxyReturn}{Returns}
+Current length of the index list. 
+\end{DoxyReturn}
+\index{Indexlist@{Indexlist}!getNumber@{getNumber}}
+\index{getNumber@{getNumber}!Indexlist@{Indexlist}}
+\subsubsection[{getNumber}]{\setlength{\rightskip}{0pt plus 5cm}int Indexlist::getNumber (
+\begin{DoxyParamCaption}
+\item[{int}]{physicalindex}
+\end{DoxyParamCaption}
+) const}\label{classIndexlist_aa48c15974ce70469041f84c0f1dcd8e4}
+Returns the number stored at a given physical index. \begin{DoxyReturn}{Returns}
+$>$= 0: Number stored at given physical index. \par
+ -\/RET\_\-INDEXLIST\_\-OUTOFBOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em physicalindex} & Physical index of the number to be returned. \\
+\hline
+\end{DoxyParams}
+\index{Indexlist@{Indexlist}!getNumberArray@{getNumberArray}}
+\index{getNumberArray@{getNumberArray}!Indexlist@{Indexlist}}
+\subsubsection[{getNumberArray}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::getNumberArray (
+\begin{DoxyParamCaption}
+\item[{int $\ast$$\ast$const}]{numberarray}
+\end{DoxyParamCaption}
+) const}\label{classIndexlist_a0db44282494b4986dc25a5f82acc6255}
+Creates an array of all numbers within the index set in correct order. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEXLIST\_\-CORRUPTED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em numberarray} & Output: Array of numbers (NULL on error). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 132 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!init@{init}}
+\index{init@{init}!Indexlist@{Indexlist}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::init (
+\begin{DoxyParamCaption}
+\item[{int}]{n = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_af13240d42ee17bf491c84738604057ca}
+Initialises index list of desired physical length. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em n} & Physical length of index list. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 108 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!isMember@{isMember}}
+\index{isMember@{isMember}!Indexlist@{Indexlist}}
+\subsubsection[{isMember}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} Indexlist::isMember (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-number}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classIndexlist_a0ef11404fa0a51bfc0cc7944fdfc4759}
+Determines if a given number is contained in the index set. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff number is contain in the index set 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-number} & Number to be tested for membership. \\
+\hline
+\end{DoxyParams}
+\index{Indexlist@{Indexlist}!operator=@{operator=}}
+\index{operator=@{operator=}!Indexlist@{Indexlist}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist} \& Indexlist::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_a3f2085c6aed278494e5314691d155a93}
+Assingment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!removeNumber@{removeNumber}}
+\index{removeNumber@{removeNumber}!Indexlist@{Indexlist}}
+\subsubsection[{removeNumber}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::removeNumber (
+\begin{DoxyParamCaption}
+\item[{int}]{removenumber}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_a44c30e4b019c1fe5042a672eca981da2}
+Removes number from index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em removenumber} & Number to be removed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 176 of file Indexlist.cpp.
+
+\index{Indexlist@{Indexlist}!swapNumbers@{swapNumbers}}
+\index{swapNumbers@{swapNumbers}!Indexlist@{Indexlist}}
+\subsubsection[{swapNumbers}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Indexlist::swapNumbers (
+\begin{DoxyParamCaption}
+\item[{int}]{number1, }
+\item[{int}]{number2}
+\end{DoxyParamCaption}
+)}\label{classIndexlist_aec670e9353058c9720afcbadbb1a87f0}
+Swaps two numbers within index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number1} & First number for swapping. \\
+\hline
+{\em number2} & Second number for swapping. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 206 of file Indexlist.cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Indexlist@{Indexlist}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!Indexlist@{Indexlist}}
+\subsubsection[{DenseMatrix}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf DenseMatrix}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classIndexlist_a429f2ee49f7ee672b5fcbd858afcd972}
+
+
+Definition at line 60 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!SparseMatrix@{SparseMatrix}}
+\index{SparseMatrix@{SparseMatrix}!Indexlist@{Indexlist}}
+\subsubsection[{SparseMatrix}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SparseMatrix}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classIndexlist_a240abf68603784c3dcc4761f8bc41ad6}
+
+
+Definition at line 62 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!SparseMatrixRow@{SparseMatrixRow}}
+\index{SparseMatrixRow@{SparseMatrixRow}!Indexlist@{Indexlist}}
+\subsubsection[{SparseMatrixRow}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SparseMatrixRow}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classIndexlist_a68f9c6f33847742616d4c74f06881475}
+
+
+Definition at line 63 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!SymDenseMat@{SymDenseMat}}
+\index{SymDenseMat@{SymDenseMat}!Indexlist@{Indexlist}}
+\subsubsection[{SymDenseMat}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SymDenseMat}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classIndexlist_a5beabcf69cba4b4f91d6b8b3aaae3d72}
+
+
+Definition at line 61 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!SymSparseMat@{SymSparseMat}}
+\index{SymSparseMat@{SymSparseMat}!Indexlist@{Indexlist}}
+\subsubsection[{SymSparseMat}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SymSparseMat}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classIndexlist_a769cc6bc95fb8501b74eb4eee3bb275b}
+
+
+Definition at line 64 of file Indexlist.hpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Indexlist@{Indexlist}!first@{first}}
+\index{first@{first}!Indexlist@{Indexlist}}
+\subsubsection[{first}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Indexlist::first}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_aa793a1cba24ff6b678eff5dbc95db371}
+Physical index of first element. 
+
+Definition at line 178 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!iSort@{iSort}}
+\index{iSort@{iSort}!Indexlist@{Indexlist}}
+\subsubsection[{iSort}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ {\bf Indexlist::iSort}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_aa07b79966c07a7ca547a19359bae2efc}
+Index list to sort vector {\itshape number\/} 
+
+Definition at line 175 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!last@{last}}
+\index{last@{last}!Indexlist@{Indexlist}}
+\subsubsection[{last}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Indexlist::last}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_a7201ead49241e67e1f11415235192052}
+Physical index of last element. 
+
+Definition at line 179 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!lastusedindex@{lastusedindex}}
+\index{lastusedindex@{lastusedindex}!Indexlist@{Indexlist}}
+\subsubsection[{lastusedindex}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Indexlist::lastusedindex}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_ac3eec3cee5e4eaa0bb335be9ee8d7df5}
+Physical index of last entry in index list. 
+
+Definition at line 180 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!length@{length}}
+\index{length@{length}!Indexlist@{Indexlist}}
+\subsubsection[{length}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Indexlist::length}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_a884668aadf23027e57c12739ef37c12b}
+Length of index list. 
+
+Definition at line 177 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!number@{number}}
+\index{number@{number}!Indexlist@{Indexlist}}
+\subsubsection[{number}]{\setlength{\rightskip}{0pt plus 5cm}int$\ast$ {\bf Indexlist::number}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_aede0cb27f83052ccf65327e9fa602342}
+Array to store numbers of constraints or bounds. 
+
+Definition at line 174 of file Indexlist.hpp.
+
+\index{Indexlist@{Indexlist}!physicallength@{physicallength}}
+\index{physicallength@{physicallength}!Indexlist@{Indexlist}}
+\subsubsection[{physicallength}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Indexlist::physicallength}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classIndexlist_a1207c42b696c50fa882565835ec09802}
+Physical length of index list. 
+
+Definition at line 181 of file Indexlist.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Indexlist.hpp}\item 
+{\bf Indexlist.cpp}\end{DoxyCompactItemize}

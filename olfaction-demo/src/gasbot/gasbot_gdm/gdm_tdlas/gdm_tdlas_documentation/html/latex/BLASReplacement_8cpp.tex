@@ -1,0 +1,74 @@
+\section{BLASReplacement.cpp File Reference}
+\label{BLASReplacement_8cpp}\index{BLASReplacement.cpp@{BLASReplacement.cpp}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf dgemm\_\-} (const char $\ast$TRANSA, const char $\ast$TRANSB, const unsigned long $\ast$M, const unsigned long $\ast$N, const unsigned long $\ast$K, const double $\ast$ALPHA, const double $\ast$A, const unsigned long $\ast$LDA, const double $\ast$B, const unsigned long $\ast$LDB, const double $\ast$BETA, double $\ast$C, const unsigned long $\ast$LDC)
+\item 
+void {\bf sgemm\_\-} (const char $\ast$TRANSA, const char $\ast$TRANSB, const unsigned long $\ast$M, const unsigned long $\ast$N, const unsigned long $\ast$K, const float $\ast$ALPHA, const float $\ast$A, const unsigned long $\ast$LDA, const float $\ast$B, const unsigned long $\ast$LDB, const float $\ast$BETA, float $\ast$C, const unsigned long $\ast$LDC)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+BLAS Level 3 replacement routines. 
+
+Definition in file {\bf BLASReplacement.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{BLASReplacement.cpp@{BLASReplacement.cpp}!dgemm\_\-@{dgemm\_\-}}
+\index{dgemm\_\-@{dgemm\_\-}!BLASReplacement.cpp@{BLASReplacement.cpp}}
+\subsubsection[{dgemm\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void dgemm\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{BLASReplacement_8cpp_ad441cf5d1882f29ab501eefbe791dc75}
+Performs one of the matrix-\/matrix operation in double precision. 
+
+Definition at line 36 of file BLASReplacement.cpp.
+
+\index{BLASReplacement.cpp@{BLASReplacement.cpp}!sgemm\_\-@{sgemm\_\-}}
+\index{sgemm\_\-@{sgemm\_\-}!BLASReplacement.cpp@{BLASReplacement.cpp}}
+\subsubsection[{sgemm\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void sgemm\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{BLASReplacement_8cpp_ac7a6acbb91ffb7eaaf8b71be4a7cc632}
+Performs one of the matrix-\/matrix operation in single precision. 
+
+Definition at line 90 of file BLASReplacement.cpp.
+

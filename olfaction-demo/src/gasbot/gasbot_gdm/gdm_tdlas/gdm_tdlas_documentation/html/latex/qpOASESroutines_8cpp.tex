@@ -1,0 +1,307 @@
+\section{qpOASESroutines.cpp File Reference}
+\label{qpOASESroutines_8cpp}\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+{\ttfamily \#include $<$iostream$>$}\par
+{\ttfamily \#include $<$qpOASES/SQProblem.hpp$>$}\par
+Include dependency graph for qpOASESroutines.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{qpOASESroutines_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf cleanupp} ()
+\item 
+void {\bf cleanupSB} ()
+\item 
+void {\bf cleanupVM} ()
+\item 
+int {\bf getStatus} ({\bf returnValue} returnvalue)
+\item 
+void {\bf hotstart} ({\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf hotstartSB} ({\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf hotstartVM} ({\bf real\_\-t} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast$A, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf init} ({\bf real\_\-t} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast$A, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf initSB} ({\bf real\_\-t} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, int $\ast$nV, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf initVM} ({\bf real\_\-t} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast$A, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf qpoases} ({\bf real\_\-t} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf real\_\-t} $\ast$A, {\bf real\_\-t} $\ast${\bf lb}, {\bf real\_\-t} $\ast${\bf ub}, {\bf real\_\-t} $\ast${\bf lbA}, {\bf real\_\-t} $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, {\bf real\_\-t} $\ast$x, {\bf real\_\-t} $\ast$obj, int $\ast$status, int $\ast$nWSRout, {\bf real\_\-t} $\ast$y)
+\item 
+void {\bf transformA} ({\bf real\_\-t} $\ast$A, int nV, int nC)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+{\bf QProblem} $\ast$ {\bf qp} = 0
+\item 
+{\bf QProblemB} $\ast$ {\bf qpb} = 0
+\item 
+{\bf SQProblem} $\ast$ {\bf sqp} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Holger Diedam, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Interface that enables to call qpOASES from scilab (C++ file to provide an interface between the files that have to be compiled with gcc and the qpOASES library). 
+
+Definition in file {\bf qpOASESroutines.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!cleanupp@{cleanupp}}
+\index{cleanupp@{cleanupp}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{cleanupp}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a10388765097b4c4b6ccdc644a4f5b8bb}
+
+
+Definition at line 344 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!cleanupSB@{cleanupSB}}
+\index{cleanupSB@{cleanupSB}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{cleanupSB}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupSB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a618e0da2f37a7371733d8428639427fe}
+
+
+Definition at line 360 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!cleanupVM@{cleanupVM}}
+\index{cleanupVM@{cleanupVM}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{cleanupVM}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupVM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a1c15dd4b1d8c102d2ed2f3b7b69c0338}
+
+
+Definition at line 375 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}int getStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{returnvalue}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a0444842a350fb525b253cca216789214}
+
+
+Definition at line 116 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}void hotstart (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a462438b0ba7daa41c95a6a6524c7f279}
+
+
+Definition at line 254 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!hotstartSB@{hotstartSB}}
+\index{hotstartSB@{hotstartSB}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{hotstartSB}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartSB (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a91fd060077c37b48e3f4c81527590f26}
+
+
+Definition at line 283 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!hotstartVM@{hotstartVM}}
+\index{hotstartVM@{hotstartVM}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{hotstartVM}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartVM (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_af5e617ed634a8a2fd1cfdc7cdfd6ff66}
+
+
+Definition at line 312 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!init@{init}}
+\index{init@{init}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_affd290dc8a7d14f171d0dedc06d0a176}
+
+
+Definition at line 170 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!initSB@{initSB}}
+\index{initSB@{initSB}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{initSB}]{\setlength{\rightskip}{0pt plus 5cm}void initSB (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a2145ac79028ea34a7ab3b7721cbfbb5b}
+
+
+Definition at line 199 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!initVM@{initVM}}
+\index{initVM@{initVM}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{initVM}]{\setlength{\rightskip}{0pt plus 5cm}void initVM (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a5e53b21d0454623da695b0f5f9fd58a0}
+
+
+Definition at line 225 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!qpoases@{qpoases}}
+\index{qpoases@{qpoases}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{qpoases}]{\setlength{\rightskip}{0pt plus 5cm}void qpoases (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$}]{x, }
+\item[{{\bf real\_\-t} $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{{\bf real\_\-t} $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_a4b418583e92fdf00675e355c60dcea64}
+
+
+Definition at line 143 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!transformA@{transformA}}
+\index{transformA@{transformA}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{transformA}]{\setlength{\rightskip}{0pt plus 5cm}void transformA (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{A, }
+\item[{int}]{nV, }
+\item[{int}]{nC}
+\end{DoxyParamCaption}
+)}\label{qpOASESroutines_8cpp_ae901690d9dbc0f6d4da1fd1fbbe12673}
+
+
+Definition at line 94 of file qpOASESroutines.cpp.
+
+
+
+\subsection{Variable Documentation}
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!qp@{qp}}
+\index{qp@{qp}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{qp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblem}$\ast$ {\bf qp} = 0}\label{qpOASESroutines_8cpp_aceda8d7523613f0f0913e593aeade348}
+
+
+Definition at line 46 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!qpb@{qpb}}
+\index{qpb@{qpb}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{qpb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblemB}$\ast$ {\bf qpb} = 0}\label{qpOASESroutines_8cpp_a7e6083d7d0a8de265e081e409fc5dd99}
+
+
+Definition at line 47 of file qpOASESroutines.cpp.
+
+\index{qpOASESroutines.cpp@{qpOASESroutines.cpp}!sqp@{sqp}}
+\index{sqp@{sqp}!qpOASESroutines.cpp@{qpOASESroutines.cpp}}
+\subsubsection[{sqp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SQProblem}$\ast$ {\bf sqp} = 0}\label{qpOASESroutines_8cpp_a2a2d53ce4d00d40238f21d60cced514b}
+
+
+Definition at line 48 of file qpOASESroutines.cpp.
+

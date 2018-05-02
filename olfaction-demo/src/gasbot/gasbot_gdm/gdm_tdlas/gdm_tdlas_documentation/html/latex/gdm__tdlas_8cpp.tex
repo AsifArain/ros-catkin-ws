@@ -1,0 +1,93 @@
+\section{gdm\_\-tdlas.cpp File Reference}
+\label{gdm__tdlas_8cpp}\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}}
+{\ttfamily \#include \char`\"{}gdm\_\-tdlas.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}std\_\-msgs/Float32.h\char`\"{}}\par
+Include dependency graph for gdm\_\-tdlas.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{gdm__tdlas_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf main} (int argc, char $\ast$$\ast$argv)
+\item 
+void {\bf printSparseMatrixInfo} (vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast${\bf H\_\-jc}, vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast${\bf H\_\-ir}, vector$<$ {\bf real\_\-t} $>$ $\ast${\bf H\_\-val})
+\item 
+void {\bf rmldInCallback} (const {\bf localized\_\-RMLD::rmld\_\-msg::ConstPtr} \&msg\_\-in)
+\item 
+void {\bf updateGradient} ({\bf real\_\-t} $\ast${\bf g}, std::vector$<$ int $>$ $\ast$idx, std::vector$<$ float $>$ $\ast$val, float ppmm)
+\item 
+void {\bf updateHessian} (vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast${\bf H\_\-jc}, vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast${\bf H\_\-ir}, vector$<$ {\bf real\_\-t} $>$ $\ast${\bf H\_\-val}, std::vector$<$ int $>$ $\ast$idx, std::vector$<$ float $>$ $\ast$val)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}!main@{main}}
+\index{main@{main}!gdm_tdlas.cpp@{gdm\_\-tdlas.cpp}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$$\ast$}]{argv}
+\end{DoxyParamCaption}
+)}\label{gdm__tdlas_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}
+
+
+Definition at line 122 of file gdm\_\-tdlas.cpp.
+
+\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}!printSparseMatrixInfo@{printSparseMatrixInfo}}
+\index{printSparseMatrixInfo@{printSparseMatrixInfo}!gdm_tdlas.cpp@{gdm\_\-tdlas.cpp}}
+\subsubsection[{printSparseMatrixInfo}]{\setlength{\rightskip}{0pt plus 5cm}void printSparseMatrixInfo (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast$}]{H\_\-jc, }
+\item[{vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast$}]{H\_\-ir, }
+\item[{vector$<$ {\bf real\_\-t} $>$ $\ast$}]{H\_\-val}
+\end{DoxyParamCaption}
+)}\label{gdm__tdlas_8cpp_a770fbb72148815e193cb914c3b90672e}
+
+
+Definition at line 62 of file gdm\_\-tdlas.cpp.
+
+\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}!rmldInCallback@{rmldInCallback}}
+\index{rmldInCallback@{rmldInCallback}!gdm_tdlas.cpp@{gdm\_\-tdlas.cpp}}
+\subsubsection[{rmldInCallback}]{\setlength{\rightskip}{0pt plus 5cm}void rmldInCallback (
+\begin{DoxyParamCaption}
+\item[{const {\bf localized\_\-RMLD::rmld\_\-msg::ConstPtr} \&}]{msg\_\-in}
+\end{DoxyParamCaption}
+)}\label{gdm__tdlas_8cpp_a9292cdb1fe5d1204ecdbebe741c53c0a}
+
+
+Definition at line 42 of file gdm\_\-tdlas.cpp.
+
+\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}!updateGradient@{updateGradient}}
+\index{updateGradient@{updateGradient}!gdm_tdlas.cpp@{gdm\_\-tdlas.cpp}}
+\subsubsection[{updateGradient}]{\setlength{\rightskip}{0pt plus 5cm}void updateGradient (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{std::vector$<$ int $>$ $\ast$}]{idx, }
+\item[{std::vector$<$ float $>$ $\ast$}]{val, }
+\item[{float}]{ppmm}
+\end{DoxyParamCaption}
+)}\label{gdm__tdlas_8cpp_a2cce26a45fa8cc7c05809eda69e50caf}
+
+
+Definition at line 56 of file gdm\_\-tdlas.cpp.
+
+\index{gdm\_\-tdlas.cpp@{gdm\_\-tdlas.cpp}!updateHessian@{updateHessian}}
+\index{updateHessian@{updateHessian}!gdm_tdlas.cpp@{gdm\_\-tdlas.cpp}}
+\subsubsection[{updateHessian}]{\setlength{\rightskip}{0pt plus 5cm}void updateHessian (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast$}]{H\_\-jc, }
+\item[{vector$<$ {\bf sparse\_\-int\_\-t} $>$ $\ast$}]{H\_\-ir, }
+\item[{vector$<$ {\bf real\_\-t} $>$ $\ast$}]{H\_\-val, }
+\item[{std::vector$<$ int $>$ $\ast$}]{idx, }
+\item[{std::vector$<$ float $>$ $\ast$}]{val}
+\end{DoxyParamCaption}
+)}\label{gdm__tdlas_8cpp_ab675358ab25a01aba70d16afe129fcfc}
+
+
+Definition at line 75 of file gdm\_\-tdlas.cpp.
+

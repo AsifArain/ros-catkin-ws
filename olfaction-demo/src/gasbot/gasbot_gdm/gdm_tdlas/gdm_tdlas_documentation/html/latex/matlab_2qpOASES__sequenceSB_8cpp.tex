@@ -1,0 +1,191 @@
+\section{qpOASES\_\-sequenceSB.cpp File Reference}
+\label{matlab_2qpOASES__sequenceSB_8cpp}\index{qpOASES\_\-sequenceSB.cpp@{qpOASES\_\-sequenceSB.cpp}}
+{\ttfamily \#include $<$qpOASES/QProblemB.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES\_\-matlab\_\-utils.cpp$>$}\par
+Include dependency graph for matlab/qpOASES\_\-sequenceSB.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{matlab_2qpOASES__sequenceSB_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf allocateGlobalQProblemBInstance} (int nV, {\bf Options} $\ast$options)
+\item 
+void {\bf deleteGlobalQProblemBInstance} ()
+\item 
+void {\bf deleteGlobalQProblemBMatrices} ()
+\item 
+void {\bf hotstartSB} (const {\bf real\_\-t} $\ast$const {\bf g}, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, int nWSR, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf initSB} (int nV, {\bf SymmetricMatrix} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, int nWSR, const {\bf real\_\-t} $\ast$const x0, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf mexFunction} (int nlhs, mxArray $\ast$plhs[$\,$], int nrhs, const mxArray $\ast$prhs[$\,$])
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf QProblemB} $\ast$ {\bf globalQPB} = 0
+\item 
+static {\bf SymmetricMatrix} $\ast$ {\bf globalQPB\_\-H} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQPB\_\-Hdiag} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQPB\_\-Hir} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQPB\_\-Hjc} = 0
+\item 
+{\bf real\_\-t} $\ast$ {\bf globalQPB\_\-Hv} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Aude Perrin 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Interface for Matlab(R) that enables to call qpOASES as a MEX function (variant for simply bounded QPs). 
+
+Definition in file {\bf matlab/qpOASES\_\-sequenceSB.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!allocateGlobalQProblemBInstance@{allocateGlobalQProblemBInstance}}
+\index{allocateGlobalQProblemBInstance@{allocateGlobalQProblemBInstance}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{allocateGlobalQProblemBInstance}]{\setlength{\rightskip}{0pt plus 5cm}void allocateGlobalQProblemBInstance (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{{\bf Options} $\ast$}]{options}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_abfd4c1c43770323766236b34ef9710a9}
+
+
+Definition at line 58 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!deleteGlobalQProblemBInstance@{deleteGlobalQProblemBInstance}}
+\index{deleteGlobalQProblemBInstance@{deleteGlobalQProblemBInstance}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{deleteGlobalQProblemBInstance}]{\setlength{\rightskip}{0pt plus 5cm}void deleteGlobalQProblemBInstance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_a4eece93a52b94b740b755404a7549e26}
+
+
+Definition at line 71 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!deleteGlobalQProblemBMatrices@{deleteGlobalQProblemBMatrices}}
+\index{deleteGlobalQProblemBMatrices@{deleteGlobalQProblemBMatrices}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{deleteGlobalQProblemBMatrices}]{\setlength{\rightskip}{0pt plus 5cm}void deleteGlobalQProblemBMatrices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_a8c48ea140f12a350f4f7f10ba9ce4fc9}
+
+
+Definition at line 86 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!hotstartSB@{hotstartSB}}
+\index{hotstartSB@{hotstartSB}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{hotstartSB}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartSB (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{int}]{nWSR, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_a94e2a4caffc319be06636ff5ff4fc4be}
+
+
+Definition at line 159 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!initSB@{initSB}}
+\index{initSB@{initSB}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{initSB}]{\setlength{\rightskip}{0pt plus 5cm}void initSB (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{{\bf SymmetricMatrix} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{int}]{nWSR, }
+\item[{const {\bf real\_\-t} $\ast$const}]{x0, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_abfbf2a1277822fde9960f0c664c534c3}
+
+
+Definition at line 125 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!mexFunction@{mexFunction}}
+\index{mexFunction@{mexFunction}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{mexFunction}]{\setlength{\rightskip}{0pt plus 5cm}void mexFunction (
+\begin{DoxyParamCaption}
+\item[{int}]{nlhs, }
+\item[{mxArray $\ast$}]{plhs[$\,$], }
+\item[{int}]{nrhs, }
+\item[{const mxArray $\ast$}]{prhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{matlab_2qpOASES__sequenceSB_8cpp_a6a215cbfde54f82a3ce599228fc3fce5}
+
+
+Definition at line 180 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+
+
+\subsection{Variable Documentation}
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB@{globalQPB}}
+\index{globalQPB@{globalQPB}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblemB}$\ast$ {\bf globalQPB} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{matlab_2qpOASES__sequenceSB_8cpp_a5213191f24806ba47697ddbdc67566d4}
+
+
+Definition at line 47 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB\_\-H@{globalQPB\_\-H}}
+\index{globalQPB\_\-H@{globalQPB\_\-H}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB\_\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SymmetricMatrix}$\ast$ {\bf globalQPB\_\-H} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{matlab_2qpOASES__sequenceSB_8cpp_afafb42bddb44f8704972532410a6bec0}
+
+
+Definition at line 48 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB\_\-Hdiag@{globalQPB\_\-Hdiag}}
+\index{globalQPB\_\-Hdiag@{globalQPB\_\-Hdiag}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB\_\-Hdiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQPB\_\-Hdiag} = 0}\label{matlab_2qpOASES__sequenceSB_8cpp_a03289ef7cedf1edadcbf8248a2a53291}
+
+
+Definition at line 49 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB\_\-Hir@{globalQPB\_\-Hir}}
+\index{globalQPB\_\-Hir@{globalQPB\_\-Hir}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB\_\-Hir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQPB\_\-Hir} = 0}\label{matlab_2qpOASES__sequenceSB_8cpp_a1bd2997cb19571a3ffa92b4690d8f646}
+
+
+Definition at line 50 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB\_\-Hjc@{globalQPB\_\-Hjc}}
+\index{globalQPB\_\-Hjc@{globalQPB\_\-Hjc}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB\_\-Hjc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQPB\_\-Hjc} = 0}\label{matlab_2qpOASES__sequenceSB_8cpp_aaf4a6415f2c1a30d207fe1ce42d383e3}
+
+
+Definition at line 51 of file matlab/qpOASES\_\-sequenceSB.cpp.
+
+\index{matlab/qpOASES\_\-sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}!globalQPB\_\-Hv@{globalQPB\_\-Hv}}
+\index{globalQPB\_\-Hv@{globalQPB\_\-Hv}!matlab/qpOASES_sequenceSB.cpp@{matlab/qpOASES\_\-sequenceSB.cpp}}
+\subsubsection[{globalQPB\_\-Hv}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf globalQPB\_\-Hv} = 0}\label{matlab_2qpOASES__sequenceSB_8cpp_a4c470f97618fd5682196c85460e68f01}
+
+
+Definition at line 52 of file matlab/qpOASES\_\-sequenceSB.cpp.
+

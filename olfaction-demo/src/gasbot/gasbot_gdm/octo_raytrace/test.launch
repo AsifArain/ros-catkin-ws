@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- Arain, May 04, 2016 -->
+<launch>
+
+
+	<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+	<!-- =============================== TO PLAY OFFLINE WITH ROSBAG =================================== -->
+	<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+	<param name="/use_sim_time" value="true"/>
+	<!-- pkg="rosbag" type="play" name="play" args="-d 2 /home/husky/ROS_Bags/StudentgatanForest_20140813_t1/NDT/2014-08-13-11-26-37.bag"/-->
+
+
+	<!-- ================================================================================================= -->
+	<!-- 					HUSKY MODEL 				     		       -->
+	<!-- ================================================================================================= -->
+	<!--<include file="$(find husky_viz)/launch/view_model.launch"/> -->
+	<!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find husky_viz)/rviz/model.rviz" />-->
+	<!--Standalone launch file to visualize the URDF Model of a Clearpath Husky A200-->
+	<arg name="gui" default="True" />
+	<include file="$(find husky_description)/launch/description_gasbot.launch" />
+	<param name="use_gui" value="$(arg gui)"/>	
+
+	
+
+	<!-- ################################################################################################# -->
+	<!-- 					NDT MCL				     		       -->
+	<!-- ################################################################################################# -->
+	<!--include file="$(find ndt_mcl)/launch/gasbot_3d_ndt_mcl_node_testGDM.launch"/-->
+	
+	<!-- Static Transformations >
+	<node pkg="tf" type="static_transform_publisher" name="odo_static" args="0 0 0 0 0 0 /world /odom 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="mcl_static" args="0 0 0 0 0 0 /mcl_pose /base_footprint 20" />	
+	<node pkg="tf" type="static_transform_publisher" name="map_static" args="0 0 0 0 0 0 /map /world 20" /-->
+
+	<!-- ================================================================================================= -->
+	<!-- 					MAP SERVER				     		       -->
+	<!-- ================================================================================================= -->
+	<!--arg name="occu_map" default="$ROS_DATA/maps/TeknikhusetIndoor/map_VelodyneScan2/map.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg occu_map)"/-->
+
+	
+	<!-- ================================================================ -->
+	<!-- 		 octo-raytrace    				      -->
+	<!-- ================================================================ -->
+	<!--	
+	<node type="octo_raytrace" pkg="octo_raytrace" name="octo_raytrace" output="screen"> 
+		<param name="sampling_rate" 	value="20" />
+		<param name="rmld_frame" 	value="rmld" />
+		<param name="fixed_frame" 	value="map" />
+		<param name="pc_topic" 		value="velodyne_points" />
+		<param name="publish_model" 	value="true" />
+		<param name="display_rays" 	value="true" />
+	</node>
+	-->
+
+</launch>
+
+

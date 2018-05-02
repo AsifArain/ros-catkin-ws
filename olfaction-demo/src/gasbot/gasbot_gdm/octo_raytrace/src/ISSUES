@@ -1,0 +1,33 @@
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp: In function ‘void handlePCTopic(const ConstPtr&)’:
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:31:35: error: no matching function for call to ‘fromROSMsg(const sensor_msgs::PointCloud2_<std::allocator<void> >&, pcl::PointCloud<pcl::PointXYZ>&)’
+  pcl::fromROSMsg(*data_in,cloudpcl);
+                                   ^
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:31:35: note: candidates are:
+In file included from /media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.h:6:0,
+                 from /media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:1:
+/usr/include/pcl-1.7/pcl/ros/conversions.h:71:3: note: template<class PointT> void pcl::fromROSMsg(const pcl::PCLPointCloud2&, pcl::PointCloud<PointT>&, const MsgFieldMap&)
+   fromROSMsg (const pcl::PCLPointCloud2& msg, pcl::PointCloud<PointT>& cloud,
+   ^
+/usr/include/pcl-1.7/pcl/ros/conversions.h:71:3: note:   template argument deduction/substitution failed:
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:31:35: note:   cannot convert ‘(& data_in)->boost::shared_ptr<T>::operator*<const sensor_msgs::PointCloud2_<std::allocator<void> > >()’ (type ‘const sensor_msgs::PointCloud2_<std::allocator<void> >’) to type ‘const pcl::PCLPointCloud2&’
+  pcl::fromROSMsg(*data_in,cloudpcl);
+                                   ^
+In file included from /media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.h:6:0,
+                 from /media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:1:
+/usr/include/pcl-1.7/pcl/ros/conversions.h:85:3: note: template<class PointT> void pcl::fromROSMsg(const pcl::PCLPointCloud2&, pcl::PointCloud<PointT>&)
+   fromROSMsg (const pcl::PCLPointCloud2& msg, pcl::PointCloud<PointT>& cloud)
+   ^
+/usr/include/pcl-1.7/pcl/ros/conversions.h:85:3: note:   template argument deduction/substitution failed:
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:31:35: note:   cannot convert ‘(& data_in)->boost::shared_ptr<T>::operator*<const sensor_msgs::PointCloud2_<std::allocator<void> > >()’ (type ‘const sensor_msgs::PointCloud2_<std::allocator<void> >’) to type ‘const pcl::PCLPointCloud2&’
+  pcl::fromROSMsg(*data_in,cloudpcl);
+                                   ^
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp: In function ‘int main(int, char**)’:
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:92:4: error: ‘pointcloudPCLToOctomap’ is not a member of ‘octomap’
+    octomap::pointcloudPCLToOctomap(cloudpcl, octomap_pcl);
+    ^
+/media/asif/Win7/DATA/ROS_CatkinWS/icra16-demo/src/gasbot_gdm/octo_raytrace/src/octo_raytrace.cpp:94:46: warning: ‘void octomap::OccupancyOcTreeBase<NODE>::insertScan(const octomap::Pointcloud&, const point3d&, double, bool, bool) [with NODE = octomap::OcTreeNode; octomap::point3d = octomath::Vector3]’ is deprecated (declared at /opt/ros/indigo/include/octomap/OccupancyOcTreeBase.h:135) [-Wdeprecated-declarations]
+     model_tree->insertScan(octomap_pcl,origin);
+                                              ^
+make[2]: *** [gasbot_gdm/octo_raytrace/CMakeFiles/octo_raytrace.dir/src/octo_raytrace.cpp.o] Error 1
+make[1]: *** [gasbot_gdm/octo_raytrace/CMakeFiles/octo_raytrace.dir/all] Error 2
+

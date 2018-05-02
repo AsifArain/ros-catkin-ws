@@ -1,0 +1,241 @@
+\section{qpOASES\_\-sequence.cpp File Reference}
+\label{octave_2qpOASES__sequence_8cpp}\index{qpOASES\_\-sequence.cpp@{qpOASES\_\-sequence.cpp}}
+{\ttfamily \#include $<$qpOASES/SQProblem.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES\_\-octave\_\-utils.cpp$>$}\par
+Include dependency graph for octave/qpOASES\_\-sequence.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{octave_2qpOASES__sequence_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf allocateGlobalQProblemInstance} (int nV, int nC, {\bf Options} $\ast$options)
+\item 
+void {\bf deleteGlobalQProblemInstance} ()
+\item 
+void {\bf deleteGlobalQProblemMatrices} ()
+\item 
+void {\bf hotstart} (const {\bf real\_\-t} $\ast$const {\bf g}, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, const {\bf real\_\-t} $\ast$const {\bf lbA}, const {\bf real\_\-t} $\ast$const {\bf ubA}, int nWSR, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf hotstartVM} ({\bf SymmetricMatrix} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf Matrix} $\ast$A, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, const {\bf real\_\-t} $\ast$const {\bf lbA}, const {\bf real\_\-t} $\ast$const {\bf ubA}, int nWSR, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf init} (int nV, int nC, {\bf SymmetricMatrix} $\ast$H, {\bf real\_\-t} $\ast${\bf g}, {\bf Matrix} $\ast$A, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, const {\bf real\_\-t} $\ast$const {\bf lbA}, const {\bf real\_\-t} $\ast$const {\bf ubA}, int nWSR, const {\bf real\_\-t} $\ast$const x0, {\bf Options} $\ast$options, int nOutputs, mxArray $\ast$plhs[$\,$])
+\item 
+void {\bf mexFunction} (int nlhs, mxArray $\ast$plhs[$\,$], int nrhs, const mxArray $\ast$prhs[$\,$])
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static {\bf SQProblem} $\ast$ {\bf globalQP} = 0
+\item 
+static {\bf Matrix} $\ast$ {\bf globalQP\_\-A} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQP\_\-Air} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQP\_\-Ajc} = 0
+\item 
+{\bf real\_\-t} $\ast$ {\bf globalQP\_\-Av} = 0
+\item 
+static {\bf SymmetricMatrix} $\ast$ {\bf globalQP\_\-H} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQP\_\-Hdiag} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQP\_\-Hir} = 0
+\item 
+{\bf sparse\_\-int\_\-t} $\ast$ {\bf globalQP\_\-Hjc} = 0
+\item 
+{\bf real\_\-t} $\ast$ {\bf globalQP\_\-Hv} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!allocateGlobalQProblemInstance@{allocateGlobalQProblemInstance}}
+\index{allocateGlobalQProblemInstance@{allocateGlobalQProblemInstance}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{allocateGlobalQProblemInstance}]{\setlength{\rightskip}{0pt plus 5cm}void allocateGlobalQProblemInstance (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{{\bf Options} $\ast$}]{options}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_a54d1b45b58fc8d316065ba5e5bf2ea3e}
+
+
+Definition at line 62 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!deleteGlobalQProblemInstance@{deleteGlobalQProblemInstance}}
+\index{deleteGlobalQProblemInstance@{deleteGlobalQProblemInstance}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{deleteGlobalQProblemInstance}]{\setlength{\rightskip}{0pt plus 5cm}void deleteGlobalQProblemInstance (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_a1b6131838b05251041691f05205918e1}
+
+
+Definition at line 75 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!deleteGlobalQProblemMatrices@{deleteGlobalQProblemMatrices}}
+\index{deleteGlobalQProblemMatrices@{deleteGlobalQProblemMatrices}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{deleteGlobalQProblemMatrices}]{\setlength{\rightskip}{0pt plus 5cm}void deleteGlobalQProblemMatrices (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_a706dc45956ed892975b8fca4dd14abb4}
+
+
+Definition at line 90 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}void hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA, }
+\item[{int}]{nWSR, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_a28b23619590cc555480b46fffffb6c5e}
+
+
+Definition at line 182 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!hotstartVM@{hotstartVM}}
+\index{hotstartVM@{hotstartVM}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{hotstartVM}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartVM (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf Matrix} $\ast$}]{A, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA, }
+\item[{int}]{nWSR, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_ad6f7924e87feace7c9e38549ef5cb2c3}
+
+
+Definition at line 204 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!init@{init}}
+\index{init@{init}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{{\bf SymmetricMatrix} $\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$}]{g, }
+\item[{{\bf Matrix} $\ast$}]{A, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA, }
+\item[{int}]{nWSR, }
+\item[{const {\bf real\_\-t} $\ast$const}]{x0, }
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{int}]{nOutputs, }
+\item[{mxArray $\ast$}]{plhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_af53e3224ebf0c32edaa86766930a6fd1}
+
+
+Definition at line 153 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!mexFunction@{mexFunction}}
+\index{mexFunction@{mexFunction}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{mexFunction}]{\setlength{\rightskip}{0pt plus 5cm}void mexFunction (
+\begin{DoxyParamCaption}
+\item[{int}]{nlhs, }
+\item[{mxArray $\ast$}]{plhs[$\,$], }
+\item[{int}]{nrhs, }
+\item[{const mxArray $\ast$}]{prhs[$\,$]}
+\end{DoxyParamCaption}
+)}\label{octave_2qpOASES__sequence_8cpp_a6a215cbfde54f82a3ce599228fc3fce5}
+
+
+Definition at line 228 of file octave/qpOASES\_\-sequence.cpp.
+
+
+
+\subsection{Variable Documentation}
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP@{globalQP}}
+\index{globalQP@{globalQP}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SQProblem}$\ast$ {\bf globalQP} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{octave_2qpOASES__sequence_8cpp_a27df111bd507372110064c3312a6c972}
+
+
+Definition at line 47 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-A@{globalQP\_\-A}}
+\index{globalQP\_\-A@{globalQP\_\-A}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-A}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix}$\ast$ {\bf globalQP\_\-A} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{octave_2qpOASES__sequence_8cpp_a72404d6ecf1becc5eb46b4ed06706c8f}
+
+
+Definition at line 49 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Air@{globalQP\_\-Air}}
+\index{globalQP\_\-Air@{globalQP\_\-Air}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Air}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQP\_\-Air} = 0}\label{octave_2qpOASES__sequence_8cpp_a4d26469de6fadba409198ca15d2527d7}
+
+
+Definition at line 53 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Ajc@{globalQP\_\-Ajc}}
+\index{globalQP\_\-Ajc@{globalQP\_\-Ajc}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Ajc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQP\_\-Ajc} = 0}\label{octave_2qpOASES__sequence_8cpp_a4184407329f1cd7f511a6d18ccd2854d}
+
+
+Definition at line 54 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Av@{globalQP\_\-Av}}
+\index{globalQP\_\-Av@{globalQP\_\-Av}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Av}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf globalQP\_\-Av} = 0}\label{octave_2qpOASES__sequence_8cpp_ac37551b8dd56b45f0258dc6ac9b2e71b}
+
+
+Definition at line 56 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-H@{globalQP\_\-H}}
+\index{globalQP\_\-H@{globalQP\_\-H}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SymmetricMatrix}$\ast$ {\bf globalQP\_\-H} = 0\hspace{0.3cm}{\ttfamily  [static]}}\label{octave_2qpOASES__sequence_8cpp_a0dcfd8f97126f1d22968f608db1247af}
+
+
+Definition at line 48 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Hdiag@{globalQP\_\-Hdiag}}
+\index{globalQP\_\-Hdiag@{globalQP\_\-Hdiag}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Hdiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQP\_\-Hdiag} = 0}\label{octave_2qpOASES__sequence_8cpp_ad4b60beac0534c3e5da6797060964b98}
+
+
+Definition at line 50 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Hir@{globalQP\_\-Hir}}
+\index{globalQP\_\-Hir@{globalQP\_\-Hir}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Hir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQP\_\-Hir} = 0}\label{octave_2qpOASES__sequence_8cpp_af9884e171d3ee065bd810b57eea20107}
+
+
+Definition at line 51 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Hjc@{globalQP\_\-Hjc}}
+\index{globalQP\_\-Hjc@{globalQP\_\-Hjc}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Hjc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf sparse\_\-int\_\-t}$\ast$ {\bf globalQP\_\-Hjc} = 0}\label{octave_2qpOASES__sequence_8cpp_a74f5df6c0ecd508f89306ef3707560d2}
+
+
+Definition at line 52 of file octave/qpOASES\_\-sequence.cpp.
+
+\index{octave/qpOASES\_\-sequence.cpp@{octave/qpOASES\_\-sequence.cpp}!globalQP\_\-Hv@{globalQP\_\-Hv}}
+\index{globalQP\_\-Hv@{globalQP\_\-Hv}!octave/qpOASES_sequence.cpp@{octave/qpOASES\_\-sequence.cpp}}
+\subsubsection[{globalQP\_\-Hv}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf globalQP\_\-Hv} = 0}\label{octave_2qpOASES__sequence_8cpp_afb578467446defa17cc564d701c56610}
+
+
+Definition at line 55 of file octave/qpOASES\_\-sequence.cpp.
+

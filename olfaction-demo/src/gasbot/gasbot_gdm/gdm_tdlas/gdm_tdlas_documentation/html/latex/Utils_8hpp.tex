@@ -1,0 +1,734 @@
+\section{Utils.hpp File Reference}
+\label{Utils_8hpp}\index{Utils.hpp@{Utils.hpp}}
+{\ttfamily \#include $<$qpOASES/MessageHandling.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES/Utils.ipp$>$}\par
+Include dependency graph for Utils.hpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{Utils_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{Utils_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf convertBooleanTypeToString} ({\bf BooleanType} value, char $\ast$const string)
+\item 
+{\bf returnValue} {\bf convertPrintLevelToString} ({\bf PrintLevel} value, char $\ast$const string)
+\item 
+{\bf returnValue} {\bf convertSubjectToStatusToString} ({\bf SubjectToStatus} value, char $\ast$const string)
+\item 
+{\bf real\_\-t} {\bf getCPUtime} ()
+\item 
+void {\bf getKKTResidual} (int nV, int nC, const {\bf real\_\-t} $\ast$const H, const {\bf real\_\-t} $\ast$const {\bf g}, const {\bf real\_\-t} $\ast$const A, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, const {\bf real\_\-t} $\ast$const {\bf lbA}, const {\bf real\_\-t} $\ast$const {\bf ubA}, const {\bf real\_\-t} $\ast$const x, const {\bf real\_\-t} $\ast$const y, {\bf real\_\-t} \&stat, {\bf real\_\-t} \&feas, {\bf real\_\-t} \&cmpl)
+\item 
+int {\bf getMax} (int x, int y)
+\item 
+{\bf real\_\-t} {\bf getMax} ({\bf real\_\-t} x, {\bf real\_\-t} y)
+\item 
+{\bf real\_\-t} {\bf getMin} ({\bf real\_\-t} x, {\bf real\_\-t} y)
+\item 
+{\bf real\_\-t} {\bf getNorm} (const {\bf real\_\-t} $\ast$const v, int n)
+\item 
+{\bf real\_\-t} {\bf getSign} ({\bf real\_\-t} arg)
+\item 
+{\bf returnValue} {\bf myPrintf} (const char $\ast$s)
+\item 
+{\bf returnValue} {\bf print} (const int $\ast$const index, int n, const char $\ast$name)
+\item 
+{\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const M, int nrow, int ncol)
+\item 
+{\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const v, int n, const int $\ast$const V\_\-idx)
+\item 
+BEGIN\_\-NAMESPACE\_\-QPOASES {\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const v, int n)
+\item 
+{\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const M, int nrow, int ncol, const int $\ast$const ROW\_\-idx, const int $\ast$const COL\_\-idx)
+\item 
+{\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const M, int nrow, int ncol, const char $\ast$name)
+\item 
+{\bf returnValue} {\bf print} (const {\bf real\_\-t} $\ast$const v, int n, const char $\ast$name)
+\item 
+{\bf returnValue} {\bf print} (const int $\ast$const index, int n)
+\item 
+{\bf returnValue} {\bf printCopyrightNotice} ()
+\item 
+{\bf returnValue} {\bf readFromFile} (int $\ast$data, int n, const char $\ast$datafilename)
+\item 
+{\bf returnValue} {\bf readFromFile} ({\bf real\_\-t} $\ast$data, int n, const char $\ast$datafilename)
+\item 
+{\bf returnValue} {\bf readFromFile} ({\bf real\_\-t} $\ast$data, int nrow, int ncol, const char $\ast$datafilename)
+\item 
+{\bf returnValue} {\bf writeIntoFile} (const {\bf real\_\-t} $\ast$const data, int nrow, int ncol, const char $\ast$datafilename, {\bf BooleanType} append)
+\item 
+{\bf returnValue} {\bf writeIntoFile} (const int $\ast$const integer, int n, const char $\ast$datafilename, {\bf BooleanType} append)
+\item 
+{\bf returnValue} {\bf writeIntoFile} (const {\bf real\_\-t} $\ast$const data, int n, const char $\ast$datafilename, {\bf BooleanType} append)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Declaration of some utilities for working with the different \doxyref{QProblem}{p.}{classQProblem} classes. 
+
+Definition in file {\bf Utils.hpp}.
+
+
+
+\subsection{Function Documentation}
+\index{Utils.hpp@{Utils.hpp}!convertBooleanTypeToString@{convertBooleanTypeToString}}
+\index{convertBooleanTypeToString@{convertBooleanTypeToString}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{convertBooleanTypeToString}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} convertBooleanTypeToString (
+\begin{DoxyParamCaption}
+\item[{{\bf BooleanType}}]{value, }
+\item[{char $\ast$const}]{string}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a60dafdbb07e88245ce324151a754e1b9}
+Writes a value of BooleanType into a string. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to be written. \\
+\hline
+{\em string} & Input: String of sufficient size, \par
+ Output: String containing value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 627 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!convertPrintLevelToString@{convertPrintLevelToString}}
+\index{convertPrintLevelToString@{convertPrintLevelToString}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{convertPrintLevelToString}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} convertPrintLevelToString (
+\begin{DoxyParamCaption}
+\item[{{\bf PrintLevel}}]{value, }
+\item[{char $\ast$const}]{string}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a2fa4243b6f4dc022088d120f868c01f4}
+Writes a value of PrintLevel into a string. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to be written. \\
+\hline
+{\em string} & Input: String of sufficient size, \par
+ Output: String containing value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 671 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!convertSubjectToStatusToString@{convertSubjectToStatusToString}}
+\index{convertSubjectToStatusToString@{convertSubjectToStatusToString}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{convertSubjectToStatusToString}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} convertSubjectToStatusToString (
+\begin{DoxyParamCaption}
+\item[{{\bf SubjectToStatus}}]{value, }
+\item[{char $\ast$const}]{string}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ac5400a5b06d57f836634772994573fed}
+Writes a value of SubjectToStatus into a string. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to be written. \\
+\hline
+{\em string} & Input: String of sufficient size, \par
+ Output: String containing value. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 638 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!getCPUtime@{getCPUtime}}
+\index{getCPUtime@{getCPUtime}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getCPUtime}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getCPUtime (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a07037e36d04406103bdd5de8c87d712d}
+Returns the current system time. \begin{DoxyReturn}{Returns}
+current system time 
+\end{DoxyReturn}
+
+
+Definition at line 505 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!getKKTResidual@{getKKTResidual}}
+\index{getKKTResidual@{getKKTResidual}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getKKTResidual}]{\setlength{\rightskip}{0pt plus 5cm}void getKKTResidual (
+\begin{DoxyParamCaption}
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{const {\bf real\_\-t} $\ast$const}]{H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{A, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{x, }
+\item[{const {\bf real\_\-t} $\ast$const}]{y, }
+\item[{{\bf real\_\-t} \&}]{stat, }
+\item[{{\bf real\_\-t} \&}]{feas, }
+\item[{{\bf real\_\-t} \&}]{cmpl}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_add66dd796530c5dd6a4799795ad43fca}
+Computes \char`\"{}residual\char`\"{} of KKT system. 
+\begin{DoxyParams}{Parameters}
+{\em nV} & Number of variables. \\
+\hline
+{\em nC} & Number of constraints. \\
+\hline
+{\em H} & Hessian matrix. \\
+\hline
+{\em g} & Sequence of gradient vectors. \\
+\hline
+{\em A} & Constraint matrix. \\
+\hline
+{\em lb} & Sequence of lower bound vectors (on variables). \\
+\hline
+{\em ub} & Sequence of upper bound vectors (on variables). \\
+\hline
+{\em lbA} & Sequence of lower constraints' bound vectors. \\
+\hline
+{\em ubA} & Sequence of upper constraints' bound vectors. \\
+\hline
+{\em x} & Sequence of primal trial vectors. \\
+\hline
+{\em y} & Sequence of dual trial vectors. \\
+\hline
+{\em stat} & Maximum value of stationarity condition residual. \\
+\hline
+{\em feas} & Maximum value of primal feasibility violation. \\
+\hline
+{\em cmpl} & Maximum value of complementarity residual. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 544 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!getMax@{getMax}}
+\index{getMax@{getMax}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getMax}]{\setlength{\rightskip}{0pt plus 5cm}int getMax (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{Utils_8hpp_a63c73c0daee32d69d1113f09e8e8825c}
+Returns maximum of two integers. \begin{DoxyReturn}{Returns}
+Maximum of two integers 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & First integer. \\
+\hline
+{\em y} & Second integer. \\
+\hline
+\end{DoxyParams}
+\index{Utils.hpp@{Utils.hpp}!getMax@{getMax}}
+\index{getMax@{getMax}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getMax}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getMax (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{x, }
+\item[{{\bf real\_\-t}}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{Utils_8hpp_a8fdffff19505aed691eeca46c8c20fe6}
+Returns maximum of two reals. \begin{DoxyReturn}{Returns}
+Maximum of two reals 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & First real\_\-t. \\
+\hline
+{\em y} & Second real\_\-t. \\
+\hline
+\end{DoxyParams}
+\index{Utils.hpp@{Utils.hpp}!getMin@{getMin}}
+\index{getMin@{getMin}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getMin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getMin (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{x, }
+\item[{{\bf real\_\-t}}]{y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{Utils_8hpp_aa083f5ed6e68f9cf54621ab4dc072fcf}
+Returns minimum of two reals. \begin{DoxyReturn}{Returns}
+Minimum of two reals 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & First real\_\-t. \\
+\hline
+{\em y} & Second real\_\-t. \\
+\hline
+\end{DoxyParams}
+\index{Utils.hpp@{Utils.hpp}!getNorm@{getNorm}}
+\index{getNorm@{getNorm}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getNorm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getNorm (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{v, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a7bc956987416e6b5a909fa00a20a14e9}
+Returns the Euclidean norm of a vector. \begin{DoxyReturn}{Returns}
+0: successful 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector. \\
+\hline
+{\em n} & Vector's dimension. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 527 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!getSign@{getSign}}
+\index{getSign@{getSign}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{getSign}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getSign (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{arg}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{Utils_8hpp_a7f9147d98ff31048a09a5e61ecd81d2b}
+Returns sign of a real\_\-t-\/valued argument. \begin{DoxyReturn}{Returns}
+1.0: argument is non-\/negative \par
+ -\/1.0: argument is negative 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em arg} & Double-\/valued argument whose sign is to be determined. \\
+\hline
+\end{DoxyParams}
+\index{Utils.hpp@{Utils.hpp}!myPrintf@{myPrintf}}
+\index{myPrintf@{myPrintf}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{myPrintf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} myPrintf (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{s}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a03be15fd21d365895333869e3b08446a}
+Prints a string to desired output target (useful also for MATLAB output!). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em s} & String to be written. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 242 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const int $\ast$const}]{index, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a1293a6a59eb6a2ae5a5729144ec8dfe5}
+Prints a named index array. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index array to be printed. \\
+\hline
+{\em n} & Length of index array. \\
+\hline
+{\em name} & Name of index array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 220 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{M, }
+\item[{int}]{nrow, }
+\item[{int}]{ncol}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ab1f234d9a22b91cb8978f3f0540da883}
+Prints a matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em M} & \doxyref{Matrix}{p.}{classMatrix} to be printed. \\
+\hline
+{\em nrow} & Row number of matrix. \\
+\hline
+{\em ncol} & Column number of matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 131 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{v, }
+\item[{int}]{n, }
+\item[{const int $\ast$const}]{V\_\-idx}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a779e1bec965073483eb2383b2eccc7d8}
+Prints a permuted vector. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector to be printed. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em V\_\-idx} & Pemutation vector. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 83 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES {\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{v, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a2ba0b2bb1db420bd8dacc697ae9467dd}
+Prints a vector. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector to be printed. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{M, }
+\item[{int}]{nrow, }
+\item[{int}]{ncol, }
+\item[{const int $\ast$const}]{ROW\_\-idx, }
+\item[{const int $\ast$const}]{COL\_\-idx}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_aa57d4c27f586c46d3c2d580c4a39233d}
+Prints a permuted matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em M} & \doxyref{Matrix}{p.}{classMatrix} to be printed. \\
+\hline
+{\em nrow} & Row number of matrix. \\
+\hline
+{\em ncol} & Column number of matrix. \\
+\hline
+{\em ROW\_\-idx} & Row pemutation vector. \\
+\hline
+{\em COL\_\-idx} & Column pemutation vector. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 151 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{M, }
+\item[{int}]{nrow, }
+\item[{int}]{ncol, }
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a124bb0ee717c4639dd370bfcdda0212f}
+Prints a named matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em M} & \doxyref{Matrix}{p.}{classMatrix} to be printed. \\
+\hline
+{\em nrow} & Row number of matrix. \\
+\hline
+{\em ncol} & Column number of matrix. \\
+\hline
+{\em name} & Name of matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 173 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{v, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{name}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a3dd3a063c05039605126488e3e60f61d}
+Prints a named vector. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Vector to be printed. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em name} & Name of vector. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 110 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!print@{print}}
+\index{print@{print}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} print (
+\begin{DoxyParamCaption}
+\item[{const int $\ast$const}]{index, }
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_a03991cf631bf5dcbf49dd85b63ac5016}
+Prints an index array. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index array to be printed. \\
+\hline
+{\em n} & Length of index array. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 195 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!printCopyrightNotice@{printCopyrightNotice}}
+\index{printCopyrightNotice@{printCopyrightNotice}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{printCopyrightNotice}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} printCopyrightNotice (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ae117e78f4acacd8459d993d6eabeefab}
+Prints qpOASES copyright notice. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 265 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{readFromFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} readFromFile (
+\begin{DoxyParamCaption}
+\item[{int $\ast$}]{data, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{datafilename}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_af7026111c5d59f79d4d17298c559f437}
+Reads an integer (column) vector from file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector to be read from file. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 347 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{readFromFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} readFromFile (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{data, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{datafilename}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ac3141cd85c218e71ed06ed6cc949ab21}
+Reads a real\_\-t vector from file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector to be read from file. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 335 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!readFromFile@{readFromFile}}
+\index{readFromFile@{readFromFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{readFromFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} readFromFile (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$}]{data, }
+\item[{int}]{nrow, }
+\item[{int}]{ncol, }
+\item[{const char $\ast$}]{datafilename}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ab89740d14815571af03d5e8fea961c67}
+Reads a real\_\-t matrix from file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \doxyref{Matrix}{p.}{classMatrix} to be read from file. \\
+\hline
+{\em nrow} & Row number of matrix. \\
+\hline
+{\em ncol} & Column number of matrix. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 283 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!writeIntoFile@{writeIntoFile}}
+\index{writeIntoFile@{writeIntoFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{writeIntoFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} writeIntoFile (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{data, }
+\item[{int}]{nrow, }
+\item[{int}]{ncol, }
+\item[{const char $\ast$}]{datafilename, }
+\item[{{\bf BooleanType}}]{append}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_aa030611609874b659be483a403d2dce2}
+Writes a real\_\-t matrix into a file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & \doxyref{Matrix}{p.}{classMatrix} to be written into file. \\
+\hline
+{\em nrow} & Row number of matrix. \\
+\hline
+{\em ncol} & Column number of matrix. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+{\em append} & Indicates if data shall be appended if the file already exists (otherwise it is overwritten). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 390 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!writeIntoFile@{writeIntoFile}}
+\index{writeIntoFile@{writeIntoFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{writeIntoFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} writeIntoFile (
+\begin{DoxyParamCaption}
+\item[{const int $\ast$const}]{integer, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{datafilename, }
+\item[{{\bf BooleanType}}]{append}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ad56a808627721bfff024ee3c6a0092a7}
+Writes an integer (column) vector into a file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em integer} & Integer vector to be written into file. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+{\em append} & Indicates if integer shall be appended if the file already exists (otherwise it is overwritten). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 455 of file Utils.cpp.
+
+\index{Utils.hpp@{Utils.hpp}!writeIntoFile@{writeIntoFile}}
+\index{writeIntoFile@{writeIntoFile}!Utils.hpp@{Utils.hpp}}
+\subsubsection[{writeIntoFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} writeIntoFile (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{data, }
+\item[{int}]{n, }
+\item[{const char $\ast$}]{datafilename, }
+\item[{{\bf BooleanType}}]{append}
+\end{DoxyParamCaption}
+)}\label{Utils_8hpp_ad92bd05347e14042e50f4c73381e3abd}
+Writes a real\_\-t vector into a file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector to be written into file. \\
+\hline
+{\em n} & Length of vector. \\
+\hline
+{\em datafilename} & Data file name. \\
+\hline
+{\em append} & Indicates if data shall be appended if the file already exists (otherwise it is overwritten). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 444 of file Utils.cpp.
+

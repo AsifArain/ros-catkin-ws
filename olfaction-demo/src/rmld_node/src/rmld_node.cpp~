@@ -1,0 +1,155 @@
+//****************************************************************************************
+//* 	rmld_node.c
+//*	version 1.0
+//*	date	jan 21, 2012 (no changes made on july, 2013)
+//*	Description: ROS node for the RMLD
+//****************************************************************************************
+
+
+#include "rmld_node.h"
+
+
+//-----------------------------------------------------------------------------------------
+//	constructor
+//	public
+//-----------------------------------------------------------------------------------------
+chemNode::chemNode(const char *port_name){
+	this->sPort=port_name;
+	this->connect();	
+
+}
+
+//-----------------------------------------------------------------------------------------
+//	advertise: Advertises the topics published by this 
+//		node through the ros node handler "n"
+//	public
+//-----------------------------------------------------------------------------------------
+void chemNode::advertise(ros::NodeHandle n){
+	this->topic1 = n.advertise<rmld_node::rmld_msg>(TOPIC_NAME, 20);
+
+	#if HAS_SERVICES
+	this->service1 = n.advertiseService("enose_command", &chemNode::processServices,this);
+	#endif
+}
+
+//-----------------------------------------------------------------------------------------
+//	publishTopics: This function publish the topics 
+//		associated with this node	
+//	public
+//-----------------------------------------------------------------------------------------
+void chemNode::publishTopics(void){
+
+
+	std::string		rxPack;
+
+	if (this->isConnected){
+		try{ this->serial_port->readLine(&rxPack, RUNNING_TIMEOUT); }
+		catch(cereal::Exception& e){
+			ROS_ERROR("Timeout - RMLD");
+			}
+		this->serial_port->flush();
+
+		int rx_size=rxPack.size();
+
+		if (rx_size == PACK_SIZE){
+
+			rmld_node::rmld_msg 	rmldM;
+			
+			std::stringstream temporal;
+			temporal << std::hex << rxPack.substr(0,5);
+			unsigned int temporal_int;
+			temporal >> temporal_int;
+			rmldM.concentration_ppmm=(float)temporal_int;
+			rmldM.rmld_data_string=rxPack;
+			topic1.publish(rmldM);
+		}
+	}
+	else{
+		ROS_FATAL("%s not found during initialization",SENSOR_NAME);
+	}
+
+
+}
+
+
+
+
+//-----------------------------------------------------------------------------------------
+//	processServices: If enabled, this function handles the 
+//		service requests
+//	public
+//-----------------------------------------------------------------------------------------
+void chemNode::disconnect(void){
+
+	
+	if (this->isConnected){
+		this->serial_port->close();
+	}
+	this->isConnected=false;
+
+}
+
+
+//-----------------------------------------------------------------------------------------
+//	~chemNode: Class destructor
+//	public
+//-----------------------------------------------------------------------------------------
+
+chemNode::~chemNode()	{
+
+	if (this->isConnected){
+		this->serial_port->close();
+	}
+	this->isConnected=false;
+}
+
+
+//---------------------------------------------------------------
+//	connect: stablish a link with a device connected at the 
+//		indicated serial port
+//	private
+//---------------------------------------------------------------
+
+void chemNode::connect(void){
+	this->isConnected=0;
+	this->serial_port = new cereal::CerealPort();
+
+
+
+	this->baudRate=DEFAULT_BAUD_RATE;
+	
+	std::string rxPack;	
+
+	std::string port_name_string;
+	port_name_string=this->sPort;
+	bool connect_flag=true;
+	try{ this->serial_port->open(port_name_string.c_str(), this->baudRate); }
+		catch(cereal::Exception& e){
+			ROS_FATAL("Could not connect to the device in %s", port_name_string.c_str());
+			//ROS_BREAK();
+			connect_flag=false;
+		}
+		
+	if(connect_flag) {
+		this->isConnected=true;
+		ROS_INFO("-- Succesfully connected to device in %s",this->sPort);
+		
+		try{ this->serial_port->readLine(&rxPack, RUNNING_TIMEOUT); }
+		catch(cereal::Exception& e){
+			this->serial_port->write("l");
+			}
+
+		
+	}
+	else	{
+		this->isConnected=false;
+		ROS_FATAL("Device %s Not found",SENSOR_NAME);
+	}
+	
+
+}
+
+
+
+
+

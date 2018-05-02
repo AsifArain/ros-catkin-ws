@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classDenseMatrix.html" title="Interfaces matrix&#45;vector operations tailored to general dense matrices." alt="" coords="5,83,99,112"/>
+<area shape="rect" href="$classMatrix.html" title="Abstract base class for interfacing tailored matrix&#45;vector operations." alt="" coords="89,5,145,35"/>
+<area shape="rect" href="$classSymmetricMatrix.html" title="Abstract base class for interfacing matrix&#45;vector operations tailored to symmetric..." alt="" coords="123,83,243,112"/>
+</map>

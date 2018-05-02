@@ -1,0 +1,7 @@
+digraph G {
+"/ptu_base" -> "/ptu_actuator"[label="Broadcaster: /amtec\nAverage rate: 5.525 Hz\nMost recent transform: 0.102 sec old \nBuffer length: 4.887 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1375274731.800"[ shape=plaintext ] ;
+ }->"/ptu_base";
+}

@@ -1,0 +1,508 @@
+\section{Matrix Class Reference}
+\label{classMatrix}\index{Matrix@{Matrix}}
+
+
+Abstract base class for interfacing tailored matrix-\/vector operations.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for Matrix:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{classMatrix__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf addToDiag} ({\bf real\_\-t} alpha)=0
+\item 
+virtual {\bf real\_\-t} {\bf diag} (int i) const =0
+\item 
+void {\bf doFreeMemory} ()
+\item 
+void {\bf doNotFreeMemory} ()
+\item 
+virtual {\bf Matrix} $\ast$ {\bf duplicate} () const =0
+\item 
+virtual void {\bf free} ()=0
+\item 
+virtual {\bf returnValue} {\bf getCol} (int cNum, const {\bf Indexlist} $\ast$const irows, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$col) const =0
+\item 
+virtual {\bf real\_\-t} {\bf getNorm} () const =0
+\item 
+virtual {\bf returnValue} {\bf getRow} (int rNum, const {\bf Indexlist} $\ast$const icols, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$row) const =0
+\item 
+virtual {\bf real\_\-t} {\bf getRowNorm} (int rNum) const =0
+\item 
+virtual {\bf BooleanType} {\bf isDiag} () const =0
+\item 
+{\bf Matrix} ()
+\item 
+{\bf BooleanType} {\bf needToFreeMemory} () const 
+\item 
+virtual {\bf returnValue} {\bf print} () const =0
+\item 
+virtual {\bf returnValue} {\bf times} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const =0
+\item 
+virtual {\bf returnValue} {\bf times} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD, {\bf BooleanType} yCompr=BT\_\-TRUE) const =0
+\item 
+virtual {\bf returnValue} {\bf transTimes} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const =0
+\item 
+virtual {\bf returnValue} {\bf transTimes} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const =0
+\item 
+virtual {\bf $\sim$Matrix} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf BooleanType} {\bf freeMemory}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for interfacing tailored matrix-\/vector operations. 
+
+Abstract base matrix class. Supplies interface to matrix vector products, including products with submatrices given by (ordered) working set index lists (see {\itshape \doxyref{SubjectTo}{p.}{classSubjectTo}\/}).
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 120 of file Matrices.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\subsubsection[{Matrix}]{\setlength{\rightskip}{0pt plus 5cm}Matrix::Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMatrix_a2dba13c45127354c9f75ef576f49269b}
+Default constructor. 
+
+Definition at line 124 of file Matrices.hpp.
+
+\index{Matrix@{Matrix}!$\sim$Matrix@{$\sim$Matrix}}
+\index{$\sim$Matrix@{$\sim$Matrix}!Matrix@{Matrix}}
+\subsubsection[{$\sim$Matrix}]{\setlength{\rightskip}{0pt plus 5cm}virtual Matrix::$\sim$Matrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classMatrix_ac8d10e89f7b47ab95a341d70df651554}
+Destructor. 
+
+Definition at line 127 of file Matrices.hpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Matrix@{Matrix}!addToDiag@{addToDiag}}
+\index{addToDiag@{addToDiag}!Matrix@{Matrix}}
+\subsubsection[{addToDiag}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::addToDiag (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a7ee8d1b4ef0d5d5fb34342ea1889382f}
+Adds given offset to diagonal of matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & Diagonal offset. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_ac901971278139a1413ff75d6106aa43b}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a11500e9368167d4c0643fe0cebf2ccd6}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a6feb397255c49e09d2cb25b2b5bef57d}.
+
+\index{Matrix@{Matrix}!diag@{diag}}
+\index{diag@{diag}!Matrix@{Matrix}}
+\subsubsection[{diag}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf real\_\-t} Matrix::diag (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_ab78435722398170cb87b0eb9650d8ca1}
+Returns i-\/th diagonal entry. \begin{DoxyReturn}{Returns}
+i-\/th diagonal entry 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_ae0a1610915e180022f5e2161363be6ae}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_aa0137c38f1856b5b0fbc8a555171a7e6}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a2d7a602f21ac2221d60a4a10c06061b5}.
+
+\index{Matrix@{Matrix}!doFreeMemory@{doFreeMemory}}
+\index{doFreeMemory@{doFreeMemory}!Matrix@{Matrix}}
+\subsubsection[{doFreeMemory}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix::doFreeMemory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMatrix_a9b1c0fc70cad1b88d6e6ab960bda478d}
+Enables de-\/allocation of internal memory. 
+
+Definition at line 242 of file Matrices.hpp.
+
+\index{Matrix@{Matrix}!doNotFreeMemory@{doNotFreeMemory}}
+\index{doNotFreeMemory@{doNotFreeMemory}!Matrix@{Matrix}}
+\subsubsection[{doNotFreeMemory}]{\setlength{\rightskip}{0pt plus 5cm}void Matrix::doNotFreeMemory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMatrix_a1a25e70b54e2101eb2d0c2b8a26c3d97}
+Disables de-\/allocation of internal memory. 
+
+Definition at line 245 of file Matrices.hpp.
+
+\index{Matrix@{Matrix}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!Matrix@{Matrix}}
+\subsubsection[{duplicate}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Matrix}$\ast$ Matrix::duplicate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_abf41d80f7392e9d63e9b2fa4b822d3b9}
+Returns a deep-\/copy of the \doxyref{Matrix}{p.}{classMatrix} object. \begin{DoxyReturn}{Returns}
+Deep-\/copy of \doxyref{Matrix}{p.}{classMatrix} object 
+\end{DoxyReturn}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_af914e214e10c8f9731da75e605dae3ff}, {\bf SymDenseMat} \doxyref{}{p.}{classSymDenseMat_af9544d2c52d356e2830e2d7dc65d9b2d}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a70730929e8ffab371a520574d3afa2e0}, {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_afd8b02e3332e03dc702b9d8c12dbc4a8}, and {\bf SymSparseMat} \doxyref{}{p.}{classSymSparseMat_af125b7a9ba07555c7b6930b21637cc87}.
+
+\index{Matrix@{Matrix}!free@{free}}
+\index{free@{free}!Matrix@{Matrix}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Matrix::free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_ae13ca77389c2eae7b3eba79cb9fefecb}
+Frees all internal memory. 
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_acce63266bde8d6fd4a6c31a78c5e49e8}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a79d5aeb24f1b1184b9fb798144999ea2}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a5295955ae17b29db89b8fc2607bab8c8}.
+
+\index{Matrix@{Matrix}!getCol@{getCol}}
+\index{getCol@{getCol}!Matrix@{Matrix}}
+\subsubsection[{getCol}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::getCol (
+\begin{DoxyParamCaption}
+\item[{int}]{cNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{col}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a7b9f4ce0fe8c2efc34503bb260383d2c}
+Retrieve indexed entries of matrix column multiplied by alpha. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em cNum} & Column number. \\
+\hline
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em col} & Output column vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a01b2a8928dc594099f430b4d4998ec4d}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_ad345ec5f06b26265bd32bb8b845862ae}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a0eda7784ab3fc69e83d5ffb60be7dee9}.
+
+\index{Matrix@{Matrix}!getNorm@{getNorm}}
+\index{getNorm@{getNorm}!Matrix@{Matrix}}
+\subsubsection[{getNorm}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf real\_\-t} Matrix::getNorm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a1cb0da3d4cf9b7c4ae21efbc05f66556}
+Get the two-\/norm of the matrix \begin{DoxyReturn}{Returns}
+Two-\/norm of the matrix 
+\end{DoxyReturn}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a9e1514390cd82704505b9fa34426f7cf}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_ab42c250f99b88c40fe8e6abcb9047865}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_adcdb1c467c3b038453499a045f1a3a01}.
+
+\index{Matrix@{Matrix}!getRow@{getRow}}
+\index{getRow@{getRow}!Matrix@{Matrix}}
+\subsubsection[{getRow}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::getRow (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{row}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_ab67514f6450264a6c8d55b319802099d}
+Retrieve indexed entries of matrix row multiplied by alpha. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rNum} & Row number. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em row} & Output row vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_ab1c12481bf0f6d68776b8497058e72dc}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_ac8315e50425366ea87816e2aa5b125eb}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a9914ef7473337cf15da63e8550a319e2}.
+
+\index{Matrix@{Matrix}!getRowNorm@{getRowNorm}}
+\index{getRowNorm@{getRowNorm}!Matrix@{Matrix}}
+\subsubsection[{getRowNorm}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf real\_\-t} Matrix::getRowNorm (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a44dd9bd45bd8529128b722bce60b6f42}
+Get the two-\/norm of a row \begin{DoxyReturn}{Returns}
+Two-\/norm of row {\itshape rNum\/} 
+\end{DoxyReturn}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a236e8bdbfa298a30ae62740081044295}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a034086f80de8e912cb288d64bea0ad5e}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_ae0ff0f389e1118bfa36d1b98a5664664}.
+
+\index{Matrix@{Matrix}!isDiag@{isDiag}}
+\index{isDiag@{isDiag}!Matrix@{Matrix}}
+\subsubsection[{isDiag}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf BooleanType} Matrix::isDiag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a1f5595f0147658d9f79f92dd283dcbac}
+Checks whether matrix is square and diagonal. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff matrix is square and diagonal; \par
+ BT\_\-FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a305a842a01cf80a33ae26d96e2d981af}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_aeaaaad0a5f3ed5d2c2112a155d1b70cd}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a033dd6a08ab67a871afe9cc2d9ffa2ba}.
+
+\index{Matrix@{Matrix}!needToFreeMemory@{needToFreeMemory}}
+\index{needToFreeMemory@{needToFreeMemory}!Matrix@{Matrix}}
+\subsubsection[{needToFreeMemory}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} Matrix::needToFreeMemory (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMatrix_ac55c39a8a1a512808f0be551be8da13a}
+Returns whether internal memory needs to be de-\/allocated. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff internal memory needs to be de-\/allocated, \par
+ BT\_\-FALSE otherwise 
+\end{DoxyReturn}
+
+
+Definition at line 239 of file Matrices.hpp.
+
+\index{Matrix@{Matrix}!print@{print}}
+\index{print@{print}!Matrix@{Matrix}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_a110943ca5fc5b30a3e8d941622a15f8f}
+Prints matrix to screen. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-NOT\_\-YET\_\-IMPLEMENTED 
+\end{DoxyReturn}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a9e3568219695311edd5911df3da2696b}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a2c4c08afbb55942698238c7a76bcbf42}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_a45cd971f4f2cad552070c569c5a70489}.
+
+\index{Matrix@{Matrix}!times@{times}}
+\index{times@{times}!Matrix@{Matrix}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::times (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD, }
+\item[{{\bf BooleanType}}]{yCompr = {\ttfamily BT\_\-TRUE}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_add63b9303590f022b4aa49278f91f605}
+Evaluate matrix vector product with submatrix given by \doxyref{Indexlist}{p.}{classIndexlist}. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+{\em yCompr} & Compressed storage for y. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a3669612de4d322926bfedc1b85e31c7f}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a45c425e7784421aad1d2d33825a77ca0}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_ad643b60c929d1715ec97b14447e6f23d}.
+
+\index{Matrix@{Matrix}!times@{times}}
+\index{times@{times}!Matrix@{Matrix}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::times (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_aab443ceb9e4e37d3efca65f446872dc2}
+Evaluate Y=alpha$\ast$A$\ast$X + beta$\ast$Y. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a6200952366ece968bce82c9400377b86}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a3a4ef477cce34f59632e3751884f1bbc}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_aa4bea8854c08e8de61ce1fa337e4f5c1}.
+
+\index{Matrix@{Matrix}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!Matrix@{Matrix}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::transTimes (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_aae760f106376a34dfaf0c168fa836d84}
+Evaluate Y=alpha$\ast$A'$\ast$X + beta$\ast$Y. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a5011b924f44dc66be19c2606c9083d5c}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a96ccb53539358686a34d6ef9531694ba}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_ac1b658d2ae14bdb519fa7304e18e3aa5}.
+
+\index{Matrix@{Matrix}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!Matrix@{Matrix}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} Matrix::transTimes (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classMatrix_aa84ec7c391f7478e78ffbaf4f1f5f732}
+Evaluate matrix transpose vector product. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf DenseMatrix} \doxyref{}{p.}{classDenseMatrix_a810893d8ddfd4bfe7d115f1b773cc9e0}, {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a0b0d4d6b377acf0a7cf80e9e0376c905}, and {\bf SparseMatrixRow} \doxyref{}{p.}{classSparseMatrixRow_af4bb1e2407476f0bd19bc95e63928f0d}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Matrix@{Matrix}!freeMemory@{freeMemory}}
+\index{freeMemory@{freeMemory}!Matrix@{Matrix}}
+\subsubsection[{freeMemory}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf Matrix::freeMemory}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMatrix_a4589bd2bde0875fe3ac82f1f97684c67}
+Indicating whether internal memory needs to be de-\/allocated. 
+
+Definition at line 245 of file Matrices.hpp.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\end{DoxyCompactItemize}

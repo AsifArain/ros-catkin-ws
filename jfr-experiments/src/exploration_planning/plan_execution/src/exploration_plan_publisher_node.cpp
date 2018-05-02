@@ -10,11 +10,12 @@
         --> planned traveling path (global)
         --> estimated hotspots center (hcs)
         --> gas sources (gas bottles)
+        --> waste bins (can be a source of gas concentration)
     
     -------------------------------------------------------------------------
     Author:  Asif Arain
-    Date:    07-Jan-2018
-    Version: 0.0
+    Date:    23-Apr-2018
+    Version: 1.0
     -------------------------------------------------------------------------
 
 
@@ -68,11 +69,19 @@ visualization_msgs::Marker gPathStrip;
 typedef pcl::PointCloud<pcl::PointXYZ> PointCloud;
 PointCloud hcsCloud;
 PointCloud sourcesCloud;
+PointCloud wastebinsCloud;
 
 //--- File Variables
 //-------------------------------
 double cell_size;
-std::vector<double> vec_RobotOrigin,vec_gConfs,vec_gPath,vec_lConfs,vec_Hcs,vec_Sources;
+std::vector<double> vec_RobotOrigin, \
+                    vec_gConfs, \
+                    vec_gPath, \
+                    vec_lConfs, \
+                    vec_Hcs, \
+                    vec_Sources, \
+                    vec_Wastebins;
+                    
 std::vector<int> vec_MapSize;
 
 std::string FilePath, \
@@ -84,6 +93,7 @@ std::string FilePath, \
             filenameLocalConfs, \
             filenameHotspots, \
             filenameGasSources, \
+            filenameWastebins, \
             filenameGlobalPath, \
             experimentTitle, \
             explorationStrategy;
@@ -95,6 +105,7 @@ double gPathZ;
 double lConfZ;
 double hcZ;
 double sourcesZ;
+double wastebinsZ;
 
 
 #define DEFAULT_G_CONF_Z   0.300
@@ -102,6 +113,7 @@ double sourcesZ;
 #define DEFAULT_G_PATH_Z   0.280
 #define DEFAULT_HOT_Z      0.200
 #define DEFAULT_SOURCES_Z  0.150
+#define DEFAULT_WASTE_Z    0.150
 
 
 //================================================================================
@@ -119,7 +131,8 @@ void readDataFiles(){
 	                  fileLocalConfs, \
 	                  fileGlobalPath, \
 	                  fileHotspots, \
-	                  fileGasSources;
+	                  fileGasSources, \
+	                  fileWastebins;
         
         
 	    //==============================
@@ -224,6 +237,24 @@ void readDataFiles(){
 	    
 	    
 	    //==============================
+	    //--- Waste bins
+	    //==============================
+	    //ROS_INFO("waste bins... ");
+	    fileWastebins.open((FilePath+filenameWastebins).c_str(),std::ios::app);
+	    //ROS_INFO("Conf file: %s",(FilePath+filenameWastebins).c_str());
+	    double this_waste;
+	    vec_Wastebins.clear();
+	    if (fileWastebins.is_open()){		    
+		    while(fileWastebins >> this_waste){
+			    vec_Wastebins.push_back(this_waste);
+         	}
+		    fileWastebins.close();
+		    //ROS_INFO("Confs: total size %zd",vec_Wastebins.size());
+	    }
+	    else std::cout << "Unable to open waste bins file";
+	    
+	    
+	    //==============================
 	    //--- Read Cell Size
 	    //==============================
 	    //ROS_INFO("Cell size... ");
@@ -288,12 +319,14 @@ int main (int argc, char** argv){
 	    paramHandle.param<std::string>("local_conf_file",filenameLocalConfs,"planned_confs_local.dat");
 	    paramHandle.param<std::string>("hotspots_file",filenameHotspots,"hotspots.dat");
 	    paramHandle.param<std::string>("gas_sources_file",filenameGasSources,"gas_sources.dat");
+	    paramHandle.param<std::string>("waste_bins_file",filenameWastebins,"waste_bins.dat");
         
         paramHandle.param<double>("global_conf_z",gConfZ,DEFAULT_G_CONF_Z);
         paramHandle.param<double>("global_path_z",gPathZ,DEFAULT_G_PATH_Z);
 	    paramHandle.param<double>("local_conf_z",lConfZ,DEFAULT_L_CONF_Z);
 	    paramHandle.param<double>("hotspot_z",hcZ,DEFAULT_HOT_Z);
 	    paramHandle.param<double>("gas_sources_z",sourcesZ,DEFAULT_SOURCES_Z);
+	    paramHandle.param<double>("waste_bins_z",wastebinsZ,DEFAULT_WASTE_Z);
         
         paramHandle.param<double>("hard_offset_x",hard_offset_x,0.0);
         paramHandle.param<double>("hard_offset_y",hard_offset_y,0.0);
@@ -303,7 +336,8 @@ int main (int argc, char** argv){
 	    //----- ROS Topic Publishers
         //============================================
         
-        ros::Publisher sources_pub = n.advertise<sensor_msgs::PointCloud2> ("gas_sources",10);        
+        ros::Publisher wastebins_pub = n.advertise<sensor_msgs::PointCloud2> ("waste_bins",10);
+        ros::Publisher sources_pub = n.advertise<sensor_msgs::PointCloud2> ("gas_sources",10);
         ros::Publisher hcs_pub_cloud = n.advertise<sensor_msgs::PointCloud2> ("hotspots",10);
         //ros::Publisher hcs_pub   = n.advertise<visualization_msgs::Marker>("hotspots",10);
         ros::Publisher gconf_pub = n.advertise<geometry_msgs::PoseArray>("global_confs",10);
@@ -363,6 +397,7 @@ int main (int argc, char** argv){
             //--- read map info
             readDataFiles();
             
+            wastebinsCloud.points.clear();
             sourcesCloud.points.clear();
             //hcsMark.points.clear();
             hcsCloud.points.clear();
@@ -498,6 +533,32 @@ int main (int argc, char** argv){
             //----------------------
             
             
+            
+            
+            //**************************
+            //-- Dust bins
+            //**************************
+            for (size_t i = 0; i<(vec_Wastebins.size()/2); ++i){
+                
+                float x = ((vec_Wastebins[i*2+0]-vec_RobotOrigin[0]+0.5-1.0)*cell_size)+hard_offset_x;
+                float y = ((vec_Wastebins[i*2+1]-vec_RobotOrigin[1]+0.5-1.0)*cell_size)+hard_offset_y;
+                float z = wastebinsZ;
+                
+                pcl::PointXYZ p;                
+                p.x = x; p.y = y; p.z = z;
+                
+                wastebinsCloud.points.push_back(p);
+            }
+            
+            wastebinsCloud.height = 1;
+            wastebinsCloud.width = wastebinsCloud.points.size();
+            wastebinsCloud.header.frame_id = "/map";
+            //----------------------
+            
+            
+            
+            
+            
             //-- update time stamps
             //hcsMark.header.stamp = ros::Time::now();
             //gConfsPoses.header.stamp = ros::Time::now();            
@@ -511,14 +572,17 @@ int main (int argc, char** argv){
             ros::Time time_st = ros::Time::now ();
             
             sourcesCloud.header.stamp = time_st.toNSec()/1e3;
+            wastebinsCloud.header.stamp = time_st.toNSec()/1e3;
             hcsCloud.header.stamp = time_st.toNSec()/1e3;
-            ros::WallDuration(0).sleep();
+            //ros::WallDuration(0).sleep();
             //ROS_INFO("Publishing the new map...");
             
             
             //-- publish 
             //------------------            
             
+            
+            wastebins_pub.publish (wastebinsCloud.makeShared());
             sources_pub.publish (sourcesCloud.makeShared());
             hcs_pub_cloud.publish (hcsCloud.makeShared());
             

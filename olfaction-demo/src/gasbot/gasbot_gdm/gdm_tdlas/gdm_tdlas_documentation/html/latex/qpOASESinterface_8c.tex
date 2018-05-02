@@ -1,0 +1,463 @@
+\section{qpOASESinterface.c File Reference}
+\label{qpOASESinterface_8c}\index{qpOASESinterface.c@{qpOASESinterface.c}}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$scilab/stack-\/c.h$>$}\par
+{\ttfamily \#include $<$scilab/machine.h$>$}\par
+{\ttfamily \#include $<$scilab/sciprint.h$>$}\par
+Include dependency graph for qpOASESinterface.c:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{qpOASESinterface_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int($\ast$ {\bf gate\_\-function} )(char $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf cleanupp} ()
+\item 
+void {\bf cleanupSB} ()
+\item 
+void {\bf cleanupVM} ()
+\item 
+void {\bf hotstart} (double $\ast${\bf g}, double $\ast${\bf lb}, double $\ast${\bf ub}, double $\ast${\bf lbA}, double $\ast${\bf ubA}, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+void {\bf hotstartSB} (double $\ast${\bf g}, double $\ast${\bf lb}, double $\ast${\bf ub}, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+void {\bf hotstartVM} (double $\ast$H, double $\ast${\bf g}, double $\ast$A, double $\ast${\bf lb}, double $\ast${\bf ub}, double $\ast${\bf lbA}, double $\ast${\bf ubA}, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+void {\bf init} (double $\ast$H, double $\ast${\bf g}, double $\ast$A, double $\ast${\bf lb}, double $\ast${\bf ub}, double $\ast${\bf lbA}, double $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+void {\bf initSB} (double $\ast$H, double $\ast${\bf g}, double $\ast${\bf lb}, double $\ast${\bf ub}, int $\ast$nV, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+void {\bf initVM} (double $\ast$H, double $\ast${\bf g}, double $\ast$A, double $\ast${\bf lb}, double $\ast${\bf ub}, double $\ast${\bf lbA}, double $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+int {\bf int\_\-cleanup} (char $\ast$fname)
+\item 
+int {\bf int\_\-cleanupSB} (char $\ast$fname)
+\item 
+int {\bf int\_\-cleanupVM} (char $\ast$fname)
+\item 
+int {\bf int\_\-hotstart} (char $\ast$fname)
+\item 
+int {\bf int\_\-hotstartSB} (char $\ast$fname)
+\item 
+int {\bf int\_\-hotstartVM} (char $\ast$fname)
+\item 
+int {\bf int\_\-init} (char $\ast$fname)
+\item 
+int {\bf int\_\-initSB} (char $\ast$fname)
+\item 
+int {\bf int\_\-initVM} (char $\ast$fname)
+\item 
+int {\bf int\_\-qpOASES} (char $\ast$fname)
+\item 
+int {\bf int\_\-solve} (char $\ast$fname)
+\item 
+int {\bf int\_\-solveSB} (char $\ast$fname)
+\item 
+int {\bf int\_\-solveVM} (char $\ast$fname)
+\item 
+void {\bf qpoases} (double $\ast$H, double $\ast${\bf g}, double $\ast$A, double $\ast${\bf lb}, double $\ast${\bf ub}, double $\ast${\bf lbA}, double $\ast${\bf ubA}, int $\ast$nV, int $\ast$nC, int $\ast$nWSR, double $\ast$x, double $\ast$obj, int $\ast$status, int $\ast$nWSRout, double $\ast$y)
+\item 
+int C2F() {\bf qpOASESgateway} ()
+\item 
+int {\bf sci\_\-gateway} (char $\ast$name, {\bf gate\_\-function} f)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf qp\_\-rowsA} = -\/1
+\item 
+int {\bf qp\_\-rowsH} = -\/1
+\item 
+int {\bf qpb\_\-rowsH} = -\/1
+\item 
+int {\bf sqp\_\-rowsA} = -\/1
+\item 
+int {\bf sqp\_\-rowsH} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Holger Diedam, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Interface that enables to call qpOASES from scilab. (Please excuse a lot of copy and paste...) 
+
+Definition in file {\bf qpOASESinterface.c}.
+
+
+
+\subsection{Typedef Documentation}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!gate\_\-function@{gate\_\-function}}
+\index{gate\_\-function@{gate\_\-function}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{gate\_\-function}]{\setlength{\rightskip}{0pt plus 5cm}typedef int($\ast$ {\bf gate\_\-function})(char $\ast$)}\label{qpOASESinterface_8c_a256e9ca13a078f71e3faacee36ed3d33}
+
+
+Definition at line 61 of file qpOASESinterface.c.
+
+
+
+\subsection{Function Documentation}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!cleanupp@{cleanupp}}
+\index{cleanupp@{cleanupp}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{cleanupp}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupp (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a10388765097b4c4b6ccdc644a4f5b8bb}
+
+
+Definition at line 344 of file qpOASESroutines.cpp.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!cleanupSB@{cleanupSB}}
+\index{cleanupSB@{cleanupSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{cleanupSB}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupSB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a618e0da2f37a7371733d8428639427fe}
+
+
+Definition at line 360 of file qpOASESroutines.cpp.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!cleanupVM@{cleanupVM}}
+\index{cleanupVM@{cleanupVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{cleanupVM}]{\setlength{\rightskip}{0pt plus 5cm}void cleanupVM (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a1c15dd4b1d8c102d2ed2f3b7b69c0338}
+
+
+Definition at line 375 of file qpOASESroutines.cpp.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}void hotstart (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{double $\ast$}]{lbA, }
+\item[{double $\ast$}]{ubA, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_aef070da9ab2bd443ae4efae0c66b751b}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!hotstartSB@{hotstartSB}}
+\index{hotstartSB@{hotstartSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{hotstartSB}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartSB (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_ae2e9e43d79dd93ccfb37a3e91c4521b8}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!hotstartVM@{hotstartVM}}
+\index{hotstartVM@{hotstartVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{hotstartVM}]{\setlength{\rightskip}{0pt plus 5cm}void hotstartVM (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{H, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{A, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{double $\ast$}]{lbA, }
+\item[{double $\ast$}]{ubA, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a9d9746aea2f1d982b30d97283fb39353}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!init@{init}}
+\index{init@{init}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void init (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{H, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{A, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{double $\ast$}]{lbA, }
+\item[{double $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a3fdbb334bc6ee2cde05f82c7a6901ba3}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!initSB@{initSB}}
+\index{initSB@{initSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{initSB}]{\setlength{\rightskip}{0pt plus 5cm}void initSB (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{H, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a90c4551aae8df2cc79dab71d777afd37}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!initVM@{initVM}}
+\index{initVM@{initVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{initVM}]{\setlength{\rightskip}{0pt plus 5cm}void initVM (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{H, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{A, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{double $\ast$}]{lbA, }
+\item[{double $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a8e7918f421514214f653cd910cea380c}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-cleanup@{int\_\-cleanup}}
+\index{int\_\-cleanup@{int\_\-cleanup}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-cleanup}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-cleanup (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_af6f6fffd59f664cbb86696873b2669e2}
+
+
+Definition at line 1039 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-cleanupSB@{int\_\-cleanupSB}}
+\index{int\_\-cleanupSB@{int\_\-cleanupSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-cleanupSB}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-cleanupSB (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_ac00799498b2bb09ff40838617855d4b5}
+
+
+Definition at line 1057 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-cleanupVM@{int\_\-cleanupVM}}
+\index{int\_\-cleanupVM@{int\_\-cleanupVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-cleanupVM}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-cleanupVM (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_af58d5ecc1e60394c1bf19512bc835087}
+
+
+Definition at line 1074 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-hotstart@{int\_\-hotstart}}
+\index{int\_\-hotstart@{int\_\-hotstart}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-hotstart}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-hotstart (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a381cbda325277804925d128dcbd5e38a}
+
+
+Definition at line 649 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-hotstartSB@{int\_\-hotstartSB}}
+\index{int\_\-hotstartSB@{int\_\-hotstartSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-hotstartSB}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-hotstartSB (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a3ac58ff3f392eadb256f9a184c62af46}
+
+
+Definition at line 777 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-hotstartVM@{int\_\-hotstartVM}}
+\index{int\_\-hotstartVM@{int\_\-hotstartVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-hotstartVM}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-hotstartVM (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a456e118dab4c7a4a3211e16f8e107b5f}
+
+
+Definition at line 885 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-init@{int\_\-init}}
+\index{int\_\-init@{int\_\-init}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-init}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-init (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a37fbca67f8bd0080b950cddfedcc17ba}
+
+
+Definition at line 253 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-initSB@{int\_\-initSB}}
+\index{int\_\-initSB@{int\_\-initSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-initSB}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-initSB (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_ab453f5d284a790952c7f266e0a4b0e21}
+
+
+Definition at line 395 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-initVM@{int\_\-initVM}}
+\index{int\_\-initVM@{int\_\-initVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-initVM}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-initVM (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a590b36575a9c418f3643037ad7140904}
+
+
+Definition at line 507 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-qpOASES@{int\_\-qpOASES}}
+\index{int\_\-qpOASES@{int\_\-qpOASES}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-qpOASES}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-qpOASES (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_af014c6b1c6cbd2e58ec6b947b1f0fcf3}
+
+
+Definition at line 115 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-solve@{int\_\-solve}}
+\index{int\_\-solve@{int\_\-solve}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-solve}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-solve (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a0a714924981439e518e0c1f6f619116b}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-solveSB@{int\_\-solveSB}}
+\index{int\_\-solveSB@{int\_\-solveSB}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-solveSB}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-solveSB (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_aa919519eb62231f1d4b5fca836776056}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!int\_\-solveVM@{int\_\-solveVM}}
+\index{int\_\-solveVM@{int\_\-solveVM}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{int\_\-solveVM}]{\setlength{\rightskip}{0pt plus 5cm}int int\_\-solveVM (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{fname}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_abba69ecf0959061b674fff614bff1f05}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!qpoases@{qpoases}}
+\index{qpoases@{qpoases}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{qpoases}]{\setlength{\rightskip}{0pt plus 5cm}void qpoases (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{H, }
+\item[{double $\ast$}]{g, }
+\item[{double $\ast$}]{A, }
+\item[{double $\ast$}]{lb, }
+\item[{double $\ast$}]{ub, }
+\item[{double $\ast$}]{lbA, }
+\item[{double $\ast$}]{ubA, }
+\item[{int $\ast$}]{nV, }
+\item[{int $\ast$}]{nC, }
+\item[{int $\ast$}]{nWSR, }
+\item[{double $\ast$}]{x, }
+\item[{double $\ast$}]{obj, }
+\item[{int $\ast$}]{status, }
+\item[{int $\ast$}]{nWSRout, }
+\item[{double $\ast$}]{y}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a387f86b4a0b0c3a2473736bb2adb8347}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!qpOASESgateway@{qpOASESgateway}}
+\index{qpOASESgateway@{qpOASESgateway}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{qpOASESgateway}]{\setlength{\rightskip}{0pt plus 5cm}int C2F() qpOASESgateway (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_a3f7d3d74679caf861828f011674aec15}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!sci\_\-gateway@{sci\_\-gateway}}
+\index{sci\_\-gateway@{sci\_\-gateway}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{sci\_\-gateway}]{\setlength{\rightskip}{0pt plus 5cm}int sci\_\-gateway (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{name, }
+\item[{{\bf gate\_\-function}}]{f}
+\end{DoxyParamCaption}
+)}\label{qpOASESinterface_8c_aa3d3a77308ddacdc21e3318afcad8c1d}
+
+
+\subsection{Variable Documentation}
+\index{qpOASESinterface.c@{qpOASESinterface.c}!qp\_\-rowsA@{qp\_\-rowsA}}
+\index{qp\_\-rowsA@{qp\_\-rowsA}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{qp\_\-rowsA}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf qp\_\-rowsA} = -\/1}\label{qpOASESinterface_8c_ae48306a4e86d5bded4e5d176e22e3bc4}
+
+
+Definition at line 106 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!qp\_\-rowsH@{qp\_\-rowsH}}
+\index{qp\_\-rowsH@{qp\_\-rowsH}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{qp\_\-rowsH}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf qp\_\-rowsH} = -\/1}\label{qpOASESinterface_8c_a801d3ba4947619f7c0fd9819d18ef408}
+
+
+Definition at line 105 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!qpb\_\-rowsH@{qpb\_\-rowsH}}
+\index{qpb\_\-rowsH@{qpb\_\-rowsH}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{qpb\_\-rowsH}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf qpb\_\-rowsH} = -\/1}\label{qpOASESinterface_8c_aaf396384d57a43eeca9f4af31d92a0a0}
+
+
+Definition at line 107 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!sqp\_\-rowsA@{sqp\_\-rowsA}}
+\index{sqp\_\-rowsA@{sqp\_\-rowsA}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{sqp\_\-rowsA}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf sqp\_\-rowsA} = -\/1}\label{qpOASESinterface_8c_a1c621e63577f6fa2bbfc5facd712f8fa}
+
+
+Definition at line 109 of file qpOASESinterface.c.
+
+\index{qpOASESinterface.c@{qpOASESinterface.c}!sqp\_\-rowsH@{sqp\_\-rowsH}}
+\index{sqp\_\-rowsH@{sqp\_\-rowsH}!qpOASESinterface.c@{qpOASESinterface.c}}
+\subsubsection[{sqp\_\-rowsH}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf sqp\_\-rowsH} = -\/1}\label{qpOASESinterface_8c_a298b6d0fa3b6bc30e9c84da972cd710d}
+
+
+Definition at line 108 of file qpOASESinterface.c.
+

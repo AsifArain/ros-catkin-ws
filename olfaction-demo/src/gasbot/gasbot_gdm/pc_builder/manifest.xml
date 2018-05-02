@@ -1,0 +1,25 @@
+<package>
+  <description brief="pc_builder">
+
+     pc_builder
+
+  </description>
+  <author>Victor</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pc_builder</url>
+  <depend package="roscpp"/>
+  <depend package="std_msgs"/>
+  <depend package="sensor_msgs"/>
+  <depend package="tf"/>
+  <depend package="laser_geometry"/>
+  <depend package="geometry_msgs"/>
+  <depend package="pcl"/>
+  <depend package="pcl_ros"/>
+  <depend package="laser_assembler"/>
+  <depend package="bullet"/>
+  <depend package="visualization_msgs"/>
+
+</package>
+
+

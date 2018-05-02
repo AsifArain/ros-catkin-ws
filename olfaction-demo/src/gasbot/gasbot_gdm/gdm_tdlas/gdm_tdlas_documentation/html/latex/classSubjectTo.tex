@@ -1,0 +1,537 @@
+\section{SubjectTo Class Reference}
+\label{classSubjectTo}\index{SubjectTo@{SubjectTo}}
+
+
+Base class for managing working sets of bounds and constraints.  
+
+
+
+
+{\ttfamily \#include $<$SubjectTo.hpp$>$}
+
+
+
+Inheritance diagram for SubjectTo:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=178pt]{classSubjectTo__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf getNumberOfType} ({\bf SubjectToType} \_\-type) const 
+\item 
+{\bf SubjectToStatus} {\bf getStatus} (int i) const 
+\item 
+{\bf SubjectToType} {\bf getType} (int i) const 
+\item 
+{\bf BooleanType} {\bf hasNoLower} () const 
+\item 
+{\bf BooleanType} {\bf hasNoUpper} () const 
+\item 
+{\bf returnValue} {\bf init} (int \_\-n=0)
+\item 
+{\bf SubjectTo} \& {\bf operator=} (const {\bf SubjectTo} \&rhs)
+\item 
+virtual {\bf returnValue} {\bf rotate} (int offset)=0
+\item 
+void {\bf setNoLower} ({\bf BooleanType} \_\-status)
+\item 
+void {\bf setNoUpper} ({\bf BooleanType} \_\-status)
+\item 
+{\bf returnValue} {\bf setStatus} (int i, {\bf SubjectToStatus} value)
+\item 
+{\bf returnValue} {\bf setType} (int i, {\bf SubjectToType} value)
+\item 
+virtual {\bf returnValue} {\bf shift} (int offset)=0
+\item 
+{\bf SubjectTo} (const {\bf SubjectTo} \&rhs)
+\item 
+{\bf SubjectTo} (int \_\-n)
+\item 
+{\bf SubjectTo} ()
+\item 
+virtual {\bf $\sim$SubjectTo} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf addIndex} ({\bf Indexlist} $\ast$const indexlist, int newnumber, {\bf SubjectToStatus} newstatus)
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+{\bf returnValue} {\bf copy} (const {\bf SubjectTo} \&rhs)
+\item 
+{\bf returnValue} {\bf removeIndex} ({\bf Indexlist} $\ast$const indexlist, int removenumber)
+\item 
+{\bf returnValue} {\bf swapIndex} ({\bf Indexlist} $\ast$const indexlist, int number1, int number2)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf n}
+\item 
+{\bf BooleanType} {\bf noLower}
+\item 
+{\bf BooleanType} {\bf noUpper}
+\item 
+{\bf SubjectToStatus} $\ast$ {\bf status}
+\item 
+{\bf SubjectToType} $\ast$ {\bf type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for managing working sets of bounds and constraints. 
+
+This class manages working sets of bounds and constraints by storing index sets and other status information.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 56 of file SubjectTo.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\subsubsection[{SubjectTo}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES SubjectTo::SubjectTo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSubjectTo_aee0471b99a2f3b87be4c0b5a8f756752}
+Default constructor. 
+
+Definition at line 50 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\subsubsection[{SubjectTo}]{\setlength{\rightskip}{0pt plus 5cm}SubjectTo::SubjectTo (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n}
+\end{DoxyParamCaption}
+)}\label{classSubjectTo_a4b41cc2384d887adbfdf6508ce551208}
+Constructor which takes the number of constraints or bounds. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of constraints or bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 62 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\index{SubjectTo@{SubjectTo}!SubjectTo@{SubjectTo}}
+\subsubsection[{SubjectTo}]{\setlength{\rightskip}{0pt plus 5cm}SubjectTo::SubjectTo (
+\begin{DoxyParamCaption}
+\item[{const {\bf SubjectTo} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSubjectTo_a83bcd729588d53c53dd57505879681eb}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!$\sim$SubjectTo@{$\sim$SubjectTo}}
+\index{$\sim$SubjectTo@{$\sim$SubjectTo}!SubjectTo@{SubjectTo}}
+\subsubsection[{$\sim$SubjectTo}]{\setlength{\rightskip}{0pt plus 5cm}SubjectTo::$\sim$SubjectTo (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSubjectTo_aac46ec3e5c1503400e96952afbb004a1}
+Destructor. 
+
+Definition at line 83 of file SubjectTo.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SubjectTo@{SubjectTo}!addIndex@{addIndex}}
+\index{addIndex@{addIndex}!SubjectTo@{SubjectTo}}
+\subsubsection[{addIndex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::addIndex (
+\begin{DoxyParamCaption}
+\item[{{\bf Indexlist} $\ast$const}]{indexlist, }
+\item[{int}]{newnumber, }
+\item[{{\bf SubjectToStatus}}]{newstatus}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_abe9dc427b9ce86328d94f254fce23faa}
+Adds the index of a new constraint or bound to index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-ADDINDEX\_\-FAILED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em indexlist} & Index list to which the new index shall be added. \\
+\hline
+{\em newnumber} & Number of new constraint or bound. \\
+\hline
+{\em newstatus} & Status of new constraint or bound. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 199 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!clear@{clear}}
+\index{clear@{clear}!SubjectTo@{SubjectTo}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a0b48052eada79f7688475f9bc42b2a0b}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf Bounds} \doxyref{}{p.}{classBounds_ad19e200f0cd0b476f5630d2516eb4d4c}, and {\bf Constraints} \doxyref{}{p.}{classConstraints_a945b4c8e40f28c3a2a56c8aabe3a6d5d}.
+
+
+
+Definition at line 145 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!copy@{copy}}
+\index{copy@{copy}!SubjectTo@{SubjectTo}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf SubjectTo} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a996c9fba06e918ded5cdc87eaffc3a6b}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 166 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!getNumberOfType@{getNumberOfType}}
+\index{getNumberOfType@{getNumberOfType}!SubjectTo@{SubjectTo}}
+\subsubsection[{getNumberOfType}]{\setlength{\rightskip}{0pt plus 5cm}int SubjectTo::getNumberOfType (
+\begin{DoxyParamCaption}
+\item[{{\bf SubjectToType}}]{\_\-type}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a4a0c082cdc42591783829c740bca089a}
+Returns number of constraints/bounds with given \doxyref{SubjectTo}{p.}{classSubjectTo} type. \begin{DoxyReturn}{Returns}
+Number of constraints/bounds with given type. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-type} & Type of (constraints') bound. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!SubjectTo@{SubjectTo}}
+\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectToStatus} SubjectTo::getStatus (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a04ff21190d9a070f886f03918bb90eb8}
+Returns status of (constraints') bound. \begin{DoxyReturn}{Returns}
+Status of (constraints') bound \par
+ ST\_\-UNDEFINED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Number of (constraints') bound. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!getType@{getType}}
+\index{getType@{getType}!SubjectTo@{SubjectTo}}
+\subsubsection[{getType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectToType} SubjectTo::getType (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_ad6f610e6185373fc9483292807575cb1}
+Returns type of (constraints') bound. \begin{DoxyReturn}{Returns}
+Type of (constraints') bound \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Number of (constraints') bound. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!hasNoLower@{hasNoLower}}
+\index{hasNoLower@{hasNoLower}!SubjectTo@{SubjectTo}}
+\subsubsection[{hasNoLower}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} SubjectTo::hasNoLower (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_af4b7739129483c2d7e67048f5f5ed54b}
+Returns status of lower (constraints') bounds. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE if there is no lower (constraints') bound on any variable. 
+\end{DoxyReturn}
+\index{SubjectTo@{SubjectTo}!hasNoUpper@{hasNoUpper}}
+\index{hasNoUpper@{hasNoUpper}!SubjectTo@{SubjectTo}}
+\subsubsection[{hasNoUpper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} SubjectTo::hasNoUpper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a53058aa23ff9f956de32494ae2d3eab2}
+Returns status of upper bounds. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE if there is no upper (constraints') bound on any variable. 
+\end{DoxyReturn}
+\index{SubjectTo@{SubjectTo}!init@{init}}
+\index{init@{init}!SubjectTo@{SubjectTo}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::init (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classSubjectTo_afc63cf1993f2ee007997658013c86566}
+Initialises object with given number of constraints or bounds. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of constraints or bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf Bounds} \doxyref{}{p.}{classBounds_a11440ef91a144d38738d0d979ee8e9e3}, and {\bf Constraints} \doxyref{}{p.}{classConstraints_a953ff0d47d33a2ed94587316a803b978}.
+
+
+
+Definition at line 107 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!operator=@{operator=}}
+\index{operator=@{operator=}!SubjectTo@{SubjectTo}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectTo} \& SubjectTo::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf SubjectTo} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSubjectTo_a9dbd9042783ca87abf3404416e295d7e}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 92 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!removeIndex@{removeIndex}}
+\index{removeIndex@{removeIndex}!SubjectTo@{SubjectTo}}
+\subsubsection[{removeIndex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::removeIndex (
+\begin{DoxyParamCaption}
+\item[{{\bf Indexlist} $\ast$const}]{indexlist, }
+\item[{int}]{removenumber}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a56d16fca8bb2e29a0d2a4ef698b860de}
+Removes the index of a constraint or bound from index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-REMOVEINDEX\_\-FAILED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em indexlist} & Index list from which the new index shall be removed. \\
+\hline
+{\em removenumber} & Number of constraint or bound to be removed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 229 of file SubjectTo.cpp.
+
+\index{SubjectTo@{SubjectTo}!rotate@{rotate}}
+\index{rotate@{rotate}!SubjectTo@{SubjectTo}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} SubjectTo::rotate (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classSubjectTo_a632d97f115810ba91f2b363281216db4}
+Rotates forward type and status of all constraints/bounds by a given offset. This offset has to lie within the range [0,n]. Example for offset = 2: \par
+ rotate( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b1,c/b2\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-ROTATING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Rotation offset within the range [0,n]. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Bounds} \doxyref{}{p.}{classBounds_a977be2e3415aecf530c80fbe6a546791}, and {\bf Constraints} \doxyref{}{p.}{classConstraints_a798ad903f82cfa17a1ba9eee3cf55bca}.
+
+\index{SubjectTo@{SubjectTo}!setNoLower@{setNoLower}}
+\index{setNoLower@{setNoLower}!SubjectTo@{SubjectTo}}
+\subsubsection[{setNoLower}]{\setlength{\rightskip}{0pt plus 5cm}void SubjectTo::setNoLower (
+\begin{DoxyParamCaption}
+\item[{{\bf BooleanType}}]{\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a5c83994df77ef2ef2b8f2bace9ff8a83}
+Sets status of lower (constraints') bounds. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-status} & Status of lower (constraints') bounds. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!setNoUpper@{setNoUpper}}
+\index{setNoUpper@{setNoUpper}!SubjectTo@{SubjectTo}}
+\subsubsection[{setNoUpper}]{\setlength{\rightskip}{0pt plus 5cm}void SubjectTo::setNoUpper (
+\begin{DoxyParamCaption}
+\item[{{\bf BooleanType}}]{\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a3cb48f0d24fc5cdd11697465c5b46f13}
+Sets status of upper (constraints') bounds. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-status} & Status of upper (constraints') bounds. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!setStatus@{setStatus}}
+\index{setStatus@{setStatus}!SubjectTo@{SubjectTo}}
+\subsubsection[{setStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::setStatus (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{{\bf SubjectToStatus}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a5715375aa525eea0fe5ef54b98bc3f4d}
+Sets status of (constraints') bound. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Number of (constraints') bound. \\
+\hline
+{\em value} & Status of (constraints') bound. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!setType@{setType}}
+\index{setType@{setType}!SubjectTo@{SubjectTo}}
+\subsubsection[{setType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::setType (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{{\bf SubjectToType}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSubjectTo_a9ff5234a3584b76063c07339bfd53c31}
+Sets type of (constraints') bound. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Number of (constraints') bound. \\
+\hline
+{\em value} & Type of (constraints') bound. \\
+\hline
+\end{DoxyParams}
+\index{SubjectTo@{SubjectTo}!shift@{shift}}
+\index{shift@{shift}!SubjectTo@{SubjectTo}}
+\subsubsection[{shift}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} SubjectTo::shift (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classSubjectTo_afe3e60938d251b1eae24971179bd99de}
+Shifts forward type and status of all constraints/bounds by a given offset. This offset has to lie within the range [0,n/2] and has to be an integer divisor of the total number of constraints/bounds n. Type and status of the first $<$offset$>$ constraints/bounds is thrown away, type and status of the last $<$offset$>$ constraints/bounds is real\_\-td, e.g. for offset = 2: \par
+ shift( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b5,c/b6\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-SHIFTING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Shift offset within the range [0,n/2] and integer divisor of n. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf Bounds} \doxyref{}{p.}{classBounds_ad17d8dcd3b7dcbd2d43ea79b9fcf774b}, and {\bf Constraints} \doxyref{}{p.}{classConstraints_a8e10a850c1bd160d66f7884f6072520a}.
+
+\index{SubjectTo@{SubjectTo}!swapIndex@{swapIndex}}
+\index{swapIndex@{swapIndex}!SubjectTo@{SubjectTo}}
+\subsubsection[{swapIndex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SubjectTo::swapIndex (
+\begin{DoxyParamCaption}
+\item[{{\bf Indexlist} $\ast$const}]{indexlist, }
+\item[{int}]{number1, }
+\item[{int}]{number2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a1a722fc54ab1edaa76b7164607670e3b}
+Swaps the indices of two constraints or bounds within the index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SWAPINDEX\_\-FAILED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em indexlist} & Index list in which the indices shold be swapped. \\
+\hline
+{\em number1} & Number of first constraint or bound. \\
+\hline
+{\em number2} & Number of second constraint or bound. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 253 of file SubjectTo.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{SubjectTo@{SubjectTo}!n@{n}}
+\index{n@{n}!SubjectTo@{SubjectTo}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf SubjectTo::n}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a4b97c1ff60aa94f67a3b142dabe517bd}
+Total number of constraints/bounds. 
+
+Definition at line 210 of file SubjectTo.hpp.
+
+\index{SubjectTo@{SubjectTo}!noLower@{noLower}}
+\index{noLower@{noLower}!SubjectTo@{SubjectTo}}
+\subsubsection[{noLower}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf SubjectTo::noLower}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a9943eec4a40ae6ff955b7b86adae4afb}
+This flag indicates if there is no lower bound on any variable. 
+
+Definition at line 215 of file SubjectTo.hpp.
+
+\index{SubjectTo@{SubjectTo}!noUpper@{noUpper}}
+\index{noUpper@{noUpper}!SubjectTo@{SubjectTo}}
+\subsubsection[{noUpper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf SubjectTo::noUpper}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a3fd6e5e40b6ff6a568bd029c88a29dc8}
+This flag indicates if there is no upper bound on any variable. 
+
+Definition at line 216 of file SubjectTo.hpp.
+
+\index{SubjectTo@{SubjectTo}!status@{status}}
+\index{status@{status}!SubjectTo@{SubjectTo}}
+\subsubsection[{status}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectToStatus}$\ast$ {\bf SubjectTo::status}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_a704f3dcdc56f92bc5b80fbc77a240824}
+Status of constraints/bounds. 
+
+Definition at line 213 of file SubjectTo.hpp.
+
+\index{SubjectTo@{SubjectTo}!type@{type}}
+\index{type@{type}!SubjectTo@{SubjectTo}}
+\subsubsection[{type}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SubjectToType}$\ast$ {\bf SubjectTo::type}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classSubjectTo_aad4d39d990754d086c85d04f3ec42e68}
+Type of constraints/bounds. 
+
+Definition at line 212 of file SubjectTo.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf SubjectTo.hpp}\item 
+{\bf SubjectTo.cpp}\end{DoxyCompactItemize}

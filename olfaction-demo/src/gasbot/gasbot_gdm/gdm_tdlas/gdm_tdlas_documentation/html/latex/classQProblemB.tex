@@ -1,0 +1,2578 @@
+\section{QProblemB Class Reference}
+\label{classQProblemB}\index{QProblemB@{QProblemB}}
+
+
+Implements the online active set strategy for box-\/constrained QPs.  
+
+
+
+
+{\ttfamily \#include $<$QProblemB.hpp$>$}
+
+
+
+Inheritance diagram for QProblemB:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=110pt]{classQProblemB__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf getBounds} ({\bf Bounds} \&\_\-bounds) const 
+\item 
+virtual {\bf returnValue} {\bf getDualSolution} ({\bf real\_\-t} $\ast$const yOpt) const 
+\item 
+{\bf HessianType} {\bf getHessianType} () const 
+\item 
+int {\bf getNFR} () const 
+\item 
+int {\bf getNFV} () const 
+\item 
+int {\bf getNFX} () const 
+\item 
+int {\bf getNV} () const 
+\item 
+virtual int {\bf getNZ} () const 
+\item 
+{\bf real\_\-t} {\bf getObjVal} () const 
+\item 
+{\bf real\_\-t} {\bf getObjVal} (const {\bf real\_\-t} $\ast$const \_\-x) const 
+\item 
+{\bf Options} {\bf getOptions} () const 
+\item 
+{\bf returnValue} {\bf getPrimalSolution} ({\bf real\_\-t} $\ast$const xOpt) const 
+\item 
+{\bf PrintLevel} {\bf getPrintLevel} () const 
+\item 
+{\bf QProblemStatus} {\bf getStatus} () const 
+\item 
+{\bf returnValue} {\bf hotstart} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} (const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf hotstart} (const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf hotstart} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf init} (const {\bf real\_\-t} $\ast$const \_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf init} (const char $\ast$const H\_\-file, const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf returnValue} {\bf init} ({\bf SymmetricMatrix} $\ast$\_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt, const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf init} (const {\bf real\_\-t} $\ast$const \_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt, const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf init} (const char $\ast$const H\_\-file, const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt, const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf init} ({\bf SymmetricMatrix} $\ast$\_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub, int \&nWSR, {\bf real\_\-t} $\ast$const cputime=0)
+\item 
+{\bf BooleanType} {\bf isInfeasible} () const 
+\item 
+{\bf BooleanType} {\bf isInitialised} () const 
+\item 
+{\bf BooleanType} {\bf isSolved} () const 
+\item 
+{\bf BooleanType} {\bf isUnbounded} () const 
+\item 
+{\bf QProblemB} \& {\bf operator=} (const {\bf QProblemB} \&rhs)
+\item 
+{\bf returnValue} {\bf printOptions} () const 
+\item 
+virtual {\bf returnValue} {\bf printProperties} ()
+\item 
+{\bf QProblemB} (int \_\-nV, {\bf HessianType} \_\-hessianType=HST\_\-UNKNOWN)
+\item 
+{\bf QProblemB} ()
+\item 
+{\bf QProblemB} (const {\bf QProblemB} \&rhs)
+\item 
+virtual {\bf returnValue} {\bf reset} ()
+\item 
+{\bf returnValue} {\bf setHessianType} ({\bf HessianType} \_\-hessianType)
+\item 
+{\bf returnValue} {\bf setOptions} (const {\bf Options} \&\_\-options)
+\item 
+{\bf returnValue} {\bf setPrintLevel} ({\bf PrintLevel} \_\-printlevel)
+\item 
+{\bf BooleanType} {\bf usingRegularisation} () const 
+\item 
+virtual {\bf $\sim$QProblemB} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf applyGivens} ({\bf real\_\-t} c, {\bf real\_\-t} s, {\bf real\_\-t} nu, {\bf real\_\-t} xold, {\bf real\_\-t} yold, {\bf real\_\-t} \&xnew, {\bf real\_\-t} \&ynew) const 
+\item 
+{\bf returnValue} {\bf backsolveR} (const {\bf real\_\-t} $\ast$const b, {\bf BooleanType} transposed, {\bf BooleanType} removingBound, {\bf real\_\-t} $\ast$const a) const 
+\item 
+{\bf returnValue} {\bf backsolveR} (const {\bf real\_\-t} $\ast$const b, {\bf BooleanType} transposed, {\bf real\_\-t} $\ast$const a) const 
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+void {\bf computeGivens} ({\bf real\_\-t} xold, {\bf real\_\-t} yold, {\bf real\_\-t} \&xnew, {\bf real\_\-t} \&ynew, {\bf real\_\-t} \&c, {\bf real\_\-t} \&s) const 
+\item 
+{\bf returnValue} {\bf copy} (const {\bf QProblemB} \&rhs)
+\item 
+{\bf returnValue} {\bf determineDataShift} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, {\bf real\_\-t} $\ast$const delta\_\-g, {\bf real\_\-t} $\ast$const delta\_\-lb, {\bf real\_\-t} $\ast$const delta\_\-ub, {\bf BooleanType} \&Delta\_\-bB\_\-isZero)
+\item 
+{\bf returnValue} {\bf determineHessianType} ()
+\item 
+{\bf BooleanType} {\bf isBlocking} ({\bf real\_\-t} num, {\bf real\_\-t} den, {\bf real\_\-t} epsNum, {\bf real\_\-t} epsDen, {\bf real\_\-t} \&t) const 
+\item 
+{\bf BooleanType} {\bf isCPUtimeLimitExceeded} (const {\bf real\_\-t} $\ast$const cputime, {\bf real\_\-t} starttime, int nWSR) const 
+\item 
+{\bf returnValue} {\bf loadQPvectorsFromFile} (const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file, {\bf real\_\-t} $\ast$const g\_\-new, {\bf real\_\-t} $\ast$const lb\_\-new, {\bf real\_\-t} $\ast$const ub\_\-new) const 
+\item 
+{\bf returnValue} {\bf obtainAuxiliaryWorkingSet} (const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt, const {\bf Bounds} $\ast$const guessedBounds, {\bf Bounds} $\ast$auxiliaryBounds) const 
+\item 
+virtual {\bf returnValue} {\bf performRamping} ()
+\item 
+{\bf returnValue} {\bf performRatioTest} (int nIdx, const int $\ast$const idxList, const {\bf SubjectTo} $\ast$const subjectTo, const {\bf real\_\-t} $\ast$const num, const {\bf real\_\-t} $\ast$const den, {\bf real\_\-t} epsNum, {\bf real\_\-t} epsDen, {\bf real\_\-t} \&t, int \&BC\_\-idx) const 
+\item 
+{\bf returnValue} {\bf regulariseHessian} ()
+\item 
+{\bf real\_\-t} {\bf relativeHomotopyLength} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new)
+\item 
+{\bf returnValue} {\bf setG} (const {\bf real\_\-t} $\ast$const g\_\-new)
+\item 
+{\bf returnValue} {\bf setH} (const {\bf real\_\-t} $\ast$const H\_\-new)
+\item 
+{\bf returnValue} {\bf setH} ({\bf SymmetricMatrix} $\ast$H\_\-new)
+\item 
+{\bf returnValue} {\bf setInfeasibilityFlag} ({\bf returnValue} returnvalue)
+\item 
+{\bf returnValue} {\bf setLB} (const {\bf real\_\-t} $\ast$const lb\_\-new)
+\item 
+{\bf returnValue} {\bf setLB} (int number, {\bf real\_\-t} value)
+\item 
+{\bf returnValue} {\bf setUB} (int number, {\bf real\_\-t} value)
+\item 
+{\bf returnValue} {\bf setUB} (const {\bf real\_\-t} $\ast$const ub\_\-new)
+\item 
+{\bf returnValue} {\bf setupCholeskyDecomposition} ()
+\item 
+{\bf returnValue} {\bf setupQPdata} (const {\bf real\_\-t} $\ast$const \_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub)
+\item 
+{\bf returnValue} {\bf setupQPdata} ({\bf SymmetricMatrix} $\ast$\_\-H, const {\bf real\_\-t} $\ast$const \_\-g, const {\bf real\_\-t} $\ast$const \_\-lb, const {\bf real\_\-t} $\ast$const \_\-ub)
+\item 
+{\bf returnValue} {\bf setupQPdataFromFile} (const char $\ast$const H\_\-file, const char $\ast$const g\_\-file, const char $\ast$const lb\_\-file, const char $\ast$const ub\_\-file)
+\item 
+virtual {\bf returnValue} {\bf setupSubjectToType} (const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new)
+\item 
+virtual {\bf returnValue} {\bf setupSubjectToType} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Bounds} {\bf bounds}
+\item 
+int {\bf count}
+\item 
+{\bf real\_\-t} $\ast$ {\bf delta\_\-xFR\_\-TMP}
+\item 
+{\bf Flipper} {\bf flipper}
+\item 
+{\bf BooleanType} {\bf freeHessian}
+\item 
+{\bf real\_\-t} $\ast$ {\bf g}
+\item 
+{\bf SymmetricMatrix} $\ast$ {\bf H}
+\item 
+{\bf BooleanType} {\bf haveCholesky}
+\item 
+{\bf HessianType} {\bf hessianType}
+\item 
+{\bf BooleanType} {\bf infeasible}
+\item 
+{\bf BooleanType} {\bf isRegularised}
+\item 
+{\bf real\_\-t} $\ast$ {\bf lb}
+\item 
+{\bf Options} {\bf options}
+\item 
+{\bf real\_\-t} $\ast$ {\bf R}
+\item 
+{\bf real\_\-t} {\bf ramp0}
+\item 
+{\bf real\_\-t} {\bf ramp1}
+\item 
+int {\bf rampOffset}
+\item 
+{\bf QProblemStatus} {\bf status}
+\item 
+{\bf real\_\-t} {\bf tau}
+\item 
+{\bf real\_\-t} $\ast$ {\bf ub}
+\item 
+{\bf BooleanType} {\bf unbounded}
+\item 
+{\bf real\_\-t} $\ast$ {\bf x}
+\item 
+{\bf real\_\-t} $\ast$ {\bf y}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf addBound} (int number, {\bf SubjectToStatus} B\_\-status, {\bf BooleanType} updateCholesky)
+\item 
+{\bf returnValue} {\bf changeActiveSet} (int BC\_\-idx, {\bf SubjectToStatus} BC\_\-status)
+\item 
+{\bf returnValue} {\bf determineStepDirection} (const {\bf real\_\-t} $\ast$const delta\_\-g, const {\bf real\_\-t} $\ast$const delta\_\-lb, const {\bf real\_\-t} $\ast$const delta\_\-ub, {\bf BooleanType} Delta\_\-bB\_\-isZero, {\bf real\_\-t} $\ast$const delta\_\-xFX, {\bf real\_\-t} $\ast$const delta\_\-xFR, {\bf real\_\-t} $\ast$const delta\_\-yFX)
+\item 
+{\bf returnValue} {\bf performDriftCorrection} ()
+\item 
+{\bf returnValue} {\bf performStep} (const {\bf real\_\-t} $\ast$const delta\_\-g, const {\bf real\_\-t} $\ast$const delta\_\-lb, const {\bf real\_\-t} $\ast$const delta\_\-ub, const {\bf real\_\-t} $\ast$const delta\_\-xFX, const {\bf real\_\-t} $\ast$const delta\_\-xFR, const {\bf real\_\-t} $\ast$const delta\_\-yFX, int \&BC\_\-idx, {\bf SubjectToStatus} \&BC\_\-status)
+\item 
+{\bf returnValue} {\bf printIteration} (int iteration, int BC\_\-idx, {\bf SubjectToStatus} BC\_\-status)
+\item 
+{\bf returnValue} {\bf removeBound} (int number, {\bf BooleanType} updateCholesky)
+\item 
+{\bf returnValue} {\bf setupAuxiliaryQP} (const {\bf Bounds} $\ast$const guessedBounds)
+\item 
+{\bf returnValue} {\bf setupAuxiliaryQPbounds} ({\bf BooleanType} useRelaxation)
+\item 
+{\bf returnValue} {\bf setupAuxiliaryQPgradient} ()
+\item 
+{\bf returnValue} {\bf setupAuxiliaryQPsolution} (const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt)
+\item 
+{\bf returnValue} {\bf setupAuxiliaryWorkingSet} (const {\bf Bounds} $\ast$const auxiliaryBounds, {\bf BooleanType} setupAfresh)
+\item 
+{\bf BooleanType} {\bf shallRefactorise} (const {\bf Bounds} $\ast$const guessedBounds) const 
+\item 
+{\bf returnValue} {\bf solveInitialQP} (const {\bf real\_\-t} $\ast$const xOpt, const {\bf real\_\-t} $\ast$const yOpt, const {\bf Bounds} $\ast$const guessedBounds, int \&nWSR, {\bf real\_\-t} $\ast$const cputime)
+\item 
+{\bf returnValue} {\bf solveQP} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, int nWSRperformed=0)
+\item 
+{\bf returnValue} {\bf solveRegularisedQP} (const {\bf real\_\-t} $\ast$const g\_\-new, const {\bf real\_\-t} $\ast$const lb\_\-new, const {\bf real\_\-t} $\ast$const ub\_\-new, int \&nWSR, {\bf real\_\-t} $\ast$const cputime, int nWSRperformed=0)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf SolutionAnalysis}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements the online active set strategy for box-\/constrained QPs. 
+
+Class for setting up and solving quadratic programs with bounds (= box constraints) only. The main feature is the possibily to use the newly developed online active set strategy for parametric quadratic programming.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 63 of file QProblemB.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\subsubsection[{QProblemB}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES QProblemB::QProblemB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a130f38af91d808933e0f89948a82d030}
+Default constructor. 
+
+Definition at line 49 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\subsubsection[{QProblemB}]{\setlength{\rightskip}{0pt plus 5cm}QProblemB::QProblemB (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-nV, }
+\item[{{\bf HessianType}}]{\_\-hessianType = {\ttfamily HST\_\-UNKNOWN}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a3c284fc80e399c9d67d2e902755764f5}
+Constructor which takes the QP dimension and Hessian type information. If the Hessian is the zero (i.e. HST\_\-ZERO) or the identity matrix (i.e. HST\_\-IDENTITY), respectively, no memory is allocated for it and a NULL pointer can be passed for it to the \doxyref{init()}{p.}{classQProblemB_ae54b44fbc6c1c37144e25fc201981e55} functions. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-nV} & Number of variables. \\
+\hline
+{\em \_\-hessianType} & Type of Hessian matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 96 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\index{QProblemB@{QProblemB}!QProblemB@{QProblemB}}
+\subsubsection[{QProblemB}]{\setlength{\rightskip}{0pt plus 5cm}QProblemB::QProblemB (
+\begin{DoxyParamCaption}
+\item[{const {\bf QProblemB} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a370995d62be6dbeef2415b3882c00fe7}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 153 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!$\sim$QProblemB@{$\sim$QProblemB}}
+\index{$\sim$QProblemB@{$\sim$QProblemB}!QProblemB@{QProblemB}}
+\subsubsection[{$\sim$QProblemB}]{\setlength{\rightskip}{0pt plus 5cm}QProblemB::$\sim$QProblemB (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classQProblemB_a9b7c6eb715d0d16ff8f3e7882b3982e7}
+Destructor. 
+
+Definition at line 165 of file QProblemB.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{QProblemB@{QProblemB}!addBound@{addBound}}
+\index{addBound@{addBound}!QProblemB@{QProblemB}}
+\subsubsection[{addBound}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::addBound (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf SubjectToStatus}}]{B\_\-status, }
+\item[{{\bf BooleanType}}]{updateCholesky}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a2ae40020546914db0d3349792c415c10}
+Adds a bound to active set (specialised version for the case where no constraints exist). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-ADDBOUND\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of bound to be added to active set. \\
+\hline
+{\em B\_\-status} & Status of new active bound. \\
+\hline
+{\em updateCholesky} & Flag indicating if Cholesky decomposition shall be updated. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3416 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!applyGivens@{applyGivens}}
+\index{applyGivens@{applyGivens}!QProblemB@{QProblemB}}
+\subsubsection[{applyGivens}]{\setlength{\rightskip}{0pt plus 5cm}void QProblemB::applyGivens (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{c, }
+\item[{{\bf real\_\-t}}]{s, }
+\item[{{\bf real\_\-t}}]{nu, }
+\item[{{\bf real\_\-t}}]{xold, }
+\item[{{\bf real\_\-t}}]{yold, }
+\item[{{\bf real\_\-t} \&}]{xnew, }
+\item[{{\bf real\_\-t} \&}]{ynew}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_acd1eae6b1b9fe21d5b9341a64dc82e98}
+Applies Givens matrix determined by c and s (cf. computeGivens). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em c} & Cosine entry of Givens matrix. \\
+\hline
+{\em s} & Sine entry of Givens matrix. \\
+\hline
+{\em nu} & Further factor: s/(1+c). \\
+\hline
+{\em xold} & \doxyref{Matrix}{p.}{classMatrix} entry to be transformed corresponding to the normalised entry of the original matrix. \\
+\hline
+{\em yold} & \doxyref{Matrix}{p.}{classMatrix} entry to be transformed corresponding to the annihilated entry of the original matrix. \\
+\hline
+{\em xnew} & Output: Transformed matrix entry corresponding to the normalised entry of the original matrix. \\
+\hline
+{\em ynew} & Output: Transformed matrix entry corresponding to the annihilated entry of the original matrix. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!backsolveR@{backsolveR}}
+\index{backsolveR@{backsolveR}!QProblemB@{QProblemB}}
+\subsubsection[{backsolveR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::backsolveR (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{b, }
+\item[{{\bf BooleanType}}]{transposed, }
+\item[{{\bf BooleanType}}]{removingBound, }
+\item[{{\bf real\_\-t} $\ast$const}]{a}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a578a21e2b19f6d3cbebbb50d97af8d27}
+Solves the system Ra = b or R$^\wedge$Ta = b where R is an upper triangular matrix. \par
+ Special variant for the case that this function is called from within \char`\"{}removeBound()\char`\"{}. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-DIV\_\-BY\_\-ZERO 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Right hand side vector. \\
+\hline
+{\em transposed} & Indicates if the transposed system shall be solved. \\
+\hline
+{\em removingBound} & Indicates if function is called from \char`\"{}removeBound()\char`\"{}. \\
+\hline
+{\em a} & Output: Solution vector \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1669 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!backsolveR@{backsolveR}}
+\index{backsolveR@{backsolveR}!QProblemB@{QProblemB}}
+\subsubsection[{backsolveR}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::backsolveR (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{b, }
+\item[{{\bf BooleanType}}]{transposed, }
+\item[{{\bf real\_\-t} $\ast$const}]{a}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a95838c30238aac5f614731cd33ceb48e}
+Solves the system Ra = b or R$^\wedge$Ta = b where R is an upper triangular matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-DIV\_\-BY\_\-ZERO 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em b} & Right hand side vector. \\
+\hline
+{\em transposed} & Indicates if the transposed system shall be solved. \\
+\hline
+{\em a} & Output: Solution vector \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1657 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!changeActiveSet@{changeActiveSet}}
+\index{changeActiveSet@{changeActiveSet}!QProblemB@{QProblemB}}
+\subsubsection[{changeActiveSet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::changeActiveSet (
+\begin{DoxyParamCaption}
+\item[{int}]{BC\_\-idx, }
+\item[{{\bf SubjectToStatus}}]{BC\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a3033858c3361c09b7f52629df6f7fdda}
+Updates active set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED \par
+ RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em BC\_\-idx} & Index of blocking constraint. \\
+\hline
+{\em BC\_\-status} & Status of blocking constraint. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3286 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!clear@{clear}}
+\index{clear@{clear}!QProblemB@{QProblemB}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a957104bb5ebd44cd9d37878c2b6e8a52}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a9ccceb2ebb31fca9a6892b3da4286308}.
+
+
+
+Definition at line 1155 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!computeGivens@{computeGivens}}
+\index{computeGivens@{computeGivens}!QProblemB@{QProblemB}}
+\subsubsection[{computeGivens}]{\setlength{\rightskip}{0pt plus 5cm}void QProblemB::computeGivens (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{xold, }
+\item[{{\bf real\_\-t}}]{yold, }
+\item[{{\bf real\_\-t} \&}]{xnew, }
+\item[{{\bf real\_\-t} \&}]{ynew, }
+\item[{{\bf real\_\-t} \&}]{c, }
+\item[{{\bf real\_\-t} \&}]{s}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a736d704a3575d1a4ec4565ddfdf3e6d8}
+Computes parameters for the Givens matrix G for which [x,y]$\ast$G = [z,0] \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xold} & \doxyref{Matrix}{p.}{classMatrix} entry to be normalised. \\
+\hline
+{\em yold} & \doxyref{Matrix}{p.}{classMatrix} entry to be annihilated. \\
+\hline
+{\em xnew} & Output: Normalised matrix entry. \\
+\hline
+{\em ynew} & Output: Annihilated matrix entry. \\
+\hline
+{\em c} & Output: Cosine entry of Givens matrix. \\
+\hline
+{\em s} & Output: Sine entry of Givens matrix. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!copy@{copy}}
+\index{copy@{copy}!QProblemB@{QProblemB}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf QProblemB} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_aeb2920c00630c6643b05c8ee10d717ac}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1212 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!determineDataShift@{determineDataShift}}
+\index{determineDataShift@{determineDataShift}!QProblemB@{QProblemB}}
+\subsubsection[{determineDataShift}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::determineDataShift (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-g, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-lb, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-ub, }
+\item[{{\bf BooleanType} \&}]{Delta\_\-bB\_\-isZero}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a47a5f0abd5846f48f5273def9dbfa292}
+Determines step direction of the shift of the QP data. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & New gradient vector. \\
+\hline
+{\em lb\_\-new} & New lower bounds. \\
+\hline
+{\em ub\_\-new} & New upper bounds. \\
+\hline
+{\em delta\_\-g} & Output: Step direction of gradient vector. \\
+\hline
+{\em delta\_\-lb} & Output: Step direction of lower bounds. \\
+\hline
+{\em delta\_\-ub} & Output: Step direction of upper bounds. \\
+\hline
+{\em Delta\_\-bB\_\-isZero} & Output: Indicates if active bounds are to be shifted. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1728 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!determineHessianType@{determineHessianType}}
+\index{determineHessianType@{determineHessianType}!QProblemB@{QProblemB}}
+\subsubsection[{determineHessianType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::determineHessianType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a05462a04d6ecec9f2f3d32b868ec546b}
+If Hessian type has been set by the user, nothing is done. Otherwise the Hessian type is set to HST\_\-IDENTITY, HST\_\-ZERO, or HST\_\-POSDEF (default), respectively. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HESSIAN\_\-INDEFINITE 
+\end{DoxyReturn}
+
+
+Definition at line 1305 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!determineStepDirection@{determineStepDirection}}
+\index{determineStepDirection@{determineStepDirection}!QProblemB@{QProblemB}}
+\subsubsection[{determineStepDirection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::determineStepDirection (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-ub, }
+\item[{{\bf BooleanType}}]{Delta\_\-bB\_\-isZero, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-xFX, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-xFR, }
+\item[{{\bf real\_\-t} $\ast$const}]{delta\_\-yFX}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a1771725d3ffca6a2f49e72c14935dc6b}
+Determines step direction of the homotopy path. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em delta\_\-g} & Step direction of gradient vector. \\
+\hline
+{\em delta\_\-lb} & Step direction of lower bounds. \\
+\hline
+{\em delta\_\-ub} & Step direction of upper bounds. \\
+\hline
+{\em Delta\_\-bB\_\-isZero} & Indicates if active bounds are to be shifted. \\
+\hline
+{\em delta\_\-xFX} & Output: Primal homotopy step direction of fixed variables. \\
+\hline
+{\em delta\_\-xFR} & Output: Primal homotopy step direction of free variables. \\
+\hline
+{\em delta\_\-yFX} & Output: Dual homotopy step direction of fixed variables' multiplier. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2974 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getBounds@{getBounds}}
+\index{getBounds@{getBounds}!QProblemB@{QProblemB}}
+\subsubsection[{getBounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::getBounds (
+\begin{DoxyParamCaption}
+\item[{{\bf Bounds} \&}]{\_\-bounds}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a77c744c1641b482ded3b5f80d1fcd279}
+Returns current bounds object of the QP (deep copy). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-QPOBJECT\_\-NOT\_\-SETUP 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-bounds} & Output: \doxyref{Bounds}{p.}{classBounds} object. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!getDualSolution@{getDualSolution}}
+\index{getDualSolution@{getDualSolution}!QProblemB@{QProblemB}}
+\subsubsection[{getDualSolution}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::getDualSolution (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$const}]{yOpt}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classQProblemB_ac00fdae764050f708820a38350006f63}
+Returns the dual solution vector. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-QP\_\-NOT\_\-SOLVED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em yOpt} & Output: Dual solution vector (if QP has been solved). \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a51ee667454957cfb4d4ac899aac96527}.
+
+
+
+Definition at line 940 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getHessianType@{getHessianType}}
+\index{getHessianType@{getHessianType}!QProblemB@{QProblemB}}
+\subsubsection[{getHessianType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf HessianType} QProblemB::getHessianType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_acffad5ba74e516c1ebca5e67739bc107}
+Returns Hessian type flag (type is not determined due to this call!). \begin{DoxyReturn}{Returns}
+Hessian type. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getNFR@{getNFR}}
+\index{getNFR@{getNFR}!QProblemB@{QProblemB}}
+\subsubsection[{getNFR}]{\setlength{\rightskip}{0pt plus 5cm}int QProblemB::getNFR (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_af7bd05a4562b10f6abda736cfed019d2}
+Returns the number of free variables. \begin{DoxyReturn}{Returns}
+Number of free variables. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getNFV@{getNFV}}
+\index{getNFV@{getNFV}!QProblemB@{QProblemB}}
+\subsubsection[{getNFV}]{\setlength{\rightskip}{0pt plus 5cm}int QProblemB::getNFV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_af41e7a2ef8f8ad16e8cdf272352f915d}
+Returns the number of implicitly fixed variables. \begin{DoxyReturn}{Returns}
+Number of implicitly fixed variables. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getNFX@{getNFX}}
+\index{getNFX@{getNFX}!QProblemB@{QProblemB}}
+\subsubsection[{getNFX}]{\setlength{\rightskip}{0pt plus 5cm}int QProblemB::getNFX (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a4fabb68b173c50bf9fb66e015d8248d6}
+Returns the number of fixed variables. \begin{DoxyReturn}{Returns}
+Number of fixed variables. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getNV@{getNV}}
+\index{getNV@{getNV}!QProblemB@{QProblemB}}
+\subsubsection[{getNV}]{\setlength{\rightskip}{0pt plus 5cm}int QProblemB::getNV (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a341a93cc01d9a586ae407a6dfa9728bc}
+Returns the number of variables. \begin{DoxyReturn}{Returns}
+Number of variables. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getNZ@{getNZ}}
+\index{getNZ@{getNZ}!QProblemB@{QProblemB}}
+\subsubsection[{getNZ}]{\setlength{\rightskip}{0pt plus 5cm}int QProblemB::getNZ (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classQProblemB_aa14b698cecac984c3084eccdd4de2848}
+Returns the dimension of null space. \begin{DoxyReturn}{Returns}
+Dimension of null space. 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a6b2b50f9dede95dfd6d440c63a0c97e5}.
+
+
+
+Definition at line 831 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getObjVal@{getObjVal}}
+\index{getObjVal@{getObjVal}!QProblemB@{QProblemB}}
+\subsubsection[{getObjVal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} QProblemB::getObjVal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classQProblemB_a3f204b057ad15d9c8eaf79fa8839f750}
+Returns the optimal objective function value. \begin{DoxyReturn}{Returns}
+finite value: Optimal objective function value (QP was solved) \par
+ +infinity: QP was not yet solved 
+\end{DoxyReturn}
+
+
+Definition at line 841 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getObjVal@{getObjVal}}
+\index{getObjVal@{getObjVal}!QProblemB@{QProblemB}}
+\subsubsection[{getObjVal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} QProblemB::getObjVal (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-x}
+\end{DoxyParamCaption}
+) const}\label{classQProblemB_a24399fcd7a7639f9f89cf376e15798ce}
+Returns the objective function value at an arbitrary point x. \begin{DoxyReturn}{Returns}
+Objective function value at point x 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-x} & Point at which the objective function shall be evaluated. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 865 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getOptions@{getOptions}}
+\index{getOptions@{getOptions}!QProblemB@{QProblemB}}
+\subsubsection[{getOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Options} QProblemB::getOptions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a5b956306c4adaadc08d972fe4076ca88}
+Returns current options struct. \begin{DoxyReturn}{Returns}
+Current options struct. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getPrimalSolution@{getPrimalSolution}}
+\index{getPrimalSolution@{getPrimalSolution}!QProblemB@{QProblemB}}
+\subsubsection[{getPrimalSolution}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::getPrimalSolution (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$const}]{xOpt}
+\end{DoxyParamCaption}
+) const}\label{classQProblemB_a607c62c249e783aaafe62035dfa694f7}
+Returns the primal solution vector. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-QP\_\-NOT\_\-SOLVED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xOpt} & Output: Primal solution vector (if QP has been solved). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 915 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!getPrintLevel@{getPrintLevel}}
+\index{getPrintLevel@{getPrintLevel}!QProblemB@{QProblemB}}
+\subsubsection[{getPrintLevel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf PrintLevel} QProblemB::getPrintLevel (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_abaa4a25c9691ea3e10c1cc0c977dd4fe}
+Returns the print level. \begin{DoxyReturn}{Returns}
+Print level. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!QProblemB@{QProblemB}}
+\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblemStatus} QProblemB::getStatus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a6977b3a990bab9268ca1c71e8b0d30cf}
+Returns status of the solution process. \begin{DoxyReturn}{Returns}
+Status of solution process. 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!QProblemB@{QProblemB}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::hotstart (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a4806dbbdca448bc76123b0a7c1b5400b}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} online active set strategy reading QP data from files. Note: This function internally calls solveQP/solveRegularisedQP for solving an initialised QP! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 658 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!QProblemB@{QProblemB}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_aab13eb93ae331a62f72f812d5e42a664}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} using online active set strategy (using an initialised homotopy). Note: This function internally calls solveQP/solveRegularisedQP for solving an initialised QP! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em guessedBounds} & Initial guess for working set of bounds. A null pointer corresponds to an empty working set! \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 716 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!QProblemB@{QProblemB}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::hotstart (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_ae66c51f20ffcb48b09ef1b40cc833095}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} using online active set strategy (using an initialised homotopy) reading QP data from files. Note: This function internally calls solveQP/solveRegularisedQP for solving an initialised QP! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em guessedBounds} & Initial guess for working set of bounds. A null pointer corresponds to an empty working set! \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 770 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!hotstart@{hotstart}}
+\index{hotstart@{hotstart}!QProblemB@{QProblemB}}
+\subsubsection[{hotstart}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::hotstart (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a234b173972e1028023cea210137f3a89}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} using online active set strategy. Note: This function internally calls solveQP/solveRegularisedQP for solving an initialised QP! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 444 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a9f302939834d7d875f7cbc0304e6fd7e}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data and solves it using an initial homotopy with empty working set (at most nWSR iterations). Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation (if pointer passed). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 258 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{H\_\-file, }
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a7729f4af7a6492717d81ae77a60ed5ff}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data to be read from files and solves it depending on the parameter constellation: \par
+ 1. 0, 0, 0 : start with xOpt = 0, yOpt = 0 and IB empty (or all implicit equality bounds), \par
+ 2. xOpt, 0, 0 : start with xOpt, yOpt = 0 and obtain IB by \char`\"{}clipping\char`\"{}, \par
+ 3. 0, yOpt, 0 : start with xOpt = 0, yOpt and obtain IB from yOpt != 0, \par
+ 4. 0, 0, IB: start with xOpt = 0, yOpt = 0 and IB, \par
+ 5. xOpt, yOpt, 0 : start with xOpt, yOpt and obtain IB from yOpt != 0, \par
+ 6. xOpt, 0, IB: start with xOpt, yOpt = 0 and IB, \par
+ 7. xOpt, yOpt, IB: start with xOpt, yOpt and IB (assume them to be consistent!) Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-file} & Name of file where Hessian matrix is stored. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-file} & Name of file where gradient vector is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bound vector. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bound vector. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation. \\
+\hline
+{\em xOpt} & Optimal primal solution vector. A NULL pointer can be passed. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. A NULL pointer can be passed. \\
+\hline
+{\em guessedBounds} & Optimal working set for solution (xOpt,yOpt). A NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 402 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{H\_\-file, }
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a58b2ceae10bff1427de22847dea012f4}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data to be read from files and solves it using an initial homotopy with empty working set (at most nWSR iterations). Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-file} & Name of file where Hessian matrix is stored. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-file} & Name of file where gradient vector is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bound vector. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bound vector. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation (if pointer passed). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 285 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_ae54b44fbc6c1c37144e25fc201981e55}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data and solves it using an initial homotopy with empty working set (at most nWSR iterations). Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation (if pointer passed). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 231 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_aa0098e5825e460380a3211b14f31e232}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data and solves it depending on the parameter constellation: \par
+ 1. 0, 0, 0 : start with xOpt = 0, yOpt = 0 and IB empty (or all implicit equality bounds), \par
+ 2. xOpt, 0, 0 : start with xOpt, yOpt = 0 and obtain IB by \char`\"{}clipping\char`\"{}, \par
+ 3. 0, yOpt, 0 : start with xOpt = 0, yOpt and obtain IB from yOpt != 0, \par
+ 4. 0, 0, IB: start with xOpt = 0, yOpt = 0 and IB, \par
+ 5. xOpt, yOpt, 0 : start with xOpt, yOpt and obtain IB from yOpt != 0, \par
+ 6. xOpt, 0, IB: start with xOpt, yOpt = 0 and IB, \par
+ 7. xOpt, yOpt, IB: start with xOpt, yOpt and IB (assume them to be consistent!) Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation. \\
+\hline
+{\em xOpt} & Optimal primal solution vector. A NULL pointer can be passed. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. A NULL pointer can be passed. \\
+\hline
+{\em guessedBounds} & Optimal working set for solution (xOpt,yOpt). A NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 312 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!init@{init}}
+\index{init@{init}!QProblemB@{QProblemB}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::init (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a2cd4ae459e01c4199fa59ec6b5750db8}
+Initialises a \doxyref{QProblemB}{p.}{classQProblemB} with given QP data and solves it depending on the parameter constellation: \par
+ 1. 0, 0, 0 : start with xOpt = 0, yOpt = 0 and IB empty (or all implicit equality bounds), \par
+ 2. xOpt, 0, 0 : start with xOpt, yOpt = 0 and obtain IB by \char`\"{}clipping\char`\"{}, \par
+ 3. 0, yOpt, 0 : start with xOpt = 0, yOpt and obtain IB from yOpt != 0, \par
+ 4. 0, 0, IB: start with xOpt = 0, yOpt = 0 and IB, \par
+ 5. xOpt, yOpt, 0 : start with xOpt, yOpt and obtain IB from yOpt != 0, \par
+ 6. xOpt, 0, IB: start with xOpt, yOpt = 0 and IB, \par
+ 7. xOpt, yOpt, IB: start with xOpt, yOpt and IB (assume them to be consistent!) Note: This function internally calls solveInitialQP for initialisation! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \par
+ If Hessian matrix is trivial, a NULL pointer can be passed. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations when using initial homotopy. \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP initialisation. \par
+ Output: CPU time spend for QP initialisation. \\
+\hline
+{\em xOpt} & Optimal primal solution vector. A NULL pointer can be passed. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. A NULL pointer can be passed. \\
+\hline
+{\em guessedBounds} & Optimal working set for solution (xOpt,yOpt). A NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 357 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!isBlocking@{isBlocking}}
+\index{isBlocking@{isBlocking}!QProblemB@{QProblemB}}
+\subsubsection[{isBlocking}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isBlocking (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{num, }
+\item[{{\bf real\_\-t}}]{den, }
+\item[{{\bf real\_\-t}}]{epsNum, }
+\item[{{\bf real\_\-t}}]{epsDen, }
+\item[{{\bf real\_\-t} \&}]{t}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a1586927949ceff7c43b8063f81887c0b}
+Checks whether given ratio is blocking, i.e. limits the maximum step length along the homotopy path to a value lower than given one. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em num} & Numerator for performing the ratio test. \\
+\hline
+{\em den} & Denominator for performing the ratio test. \\
+\hline
+{\em epsNum} & Numerator tolerance. \\
+\hline
+{\em epsDen} & Denominator tolerance. \\
+\hline
+{\em t} & Input: Current maximum step length along the homotopy path, Output: Updated maximum possible step length along the homotopy path. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!isCPUtimeLimitExceeded@{isCPUtimeLimitExceeded}}
+\index{isCPUtimeLimitExceeded@{isCPUtimeLimitExceeded}!QProblemB@{QProblemB}}
+\subsubsection[{isCPUtimeLimitExceeded}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isCPUtimeLimitExceeded (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{{\bf real\_\-t}}]{starttime, }
+\item[{int}]{nWSR}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a8b8bda0a6424e244a5d28d4c760cd0a8}
+Determines if next QP iteration can be performed within given CPU time limit. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: CPU time limit is exceeded, stop QP solution. \par
+ BT\_\-FALSE: Sufficient CPU time for next QP iteration. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em cputime} & Maximum CPU time allowed for QP solution. \\
+\hline
+{\em starttime} & Start time of current QP solution. \\
+\hline
+{\em nWSR} & Number of working set recalculations performed so far. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2025 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!isInfeasible@{isInfeasible}}
+\index{isInfeasible@{isInfeasible}!QProblemB@{QProblemB}}
+\subsubsection[{isInfeasible}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isInfeasible (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a0a04b59313783541265e3c32f9782f88}
+Returns if the QP is infeasible. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: QP infeasible \par
+ BT\_\-FALSE: QP feasible (or not known to be infeasible!) 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!isInitialised@{isInitialised}}
+\index{isInitialised@{isInitialised}!QProblemB@{QProblemB}}
+\subsubsection[{isInitialised}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isInitialised (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_ace7ad79b45cadc772e4824523f633e58}
+Returns if the \doxyref{QProblem}{p.}{classQProblem} object is initialised. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: \doxyref{QProblemB}{p.}{classQProblemB} initialised \par
+ BT\_\-FALSE: \doxyref{QProblemB}{p.}{classQProblemB} not initialised 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!isSolved@{isSolved}}
+\index{isSolved@{isSolved}!QProblemB@{QProblemB}}
+\subsubsection[{isSolved}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isSolved (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a8774d18a896787e005874f7d26de8e07}
+Returns if the QP has been solved. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: \doxyref{QProblemB}{p.}{classQProblemB} solved \par
+ BT\_\-FALSE: \doxyref{QProblemB}{p.}{classQProblemB} not solved 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!isUnbounded@{isUnbounded}}
+\index{isUnbounded@{isUnbounded}!QProblemB@{QProblemB}}
+\subsubsection[{isUnbounded}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::isUnbounded (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a7cc69d93266a5b959e668dc0eaf399c6}
+Returns if the QP is unbounded. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: QP unbounded \par
+ BT\_\-FALSE: QP unbounded (or not known to be unbounded!) 
+\end{DoxyReturn}
+\index{QProblemB@{QProblemB}!loadQPvectorsFromFile@{loadQPvectorsFromFile}}
+\index{loadQPvectorsFromFile@{loadQPvectorsFromFile}!QProblemB@{QProblemB}}
+\subsubsection[{loadQPvectorsFromFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::loadQPvectorsFromFile (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file, }
+\item[{{\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{{\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{{\bf real\_\-t} $\ast$const}]{ub\_\-new}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ae259361d8fafaaef726effba9d63c95b}
+Loads new QP vectors from files (internal members are not affected!). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em g\_\-new} & Output: Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Output: Lower bounds of neighbouring QP to be solved \\
+\hline
+{\em ub\_\-new} & Output: Upper bounds of neighbouring QP to be solved \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1949 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!obtainAuxiliaryWorkingSet@{obtainAuxiliaryWorkingSet}}
+\index{obtainAuxiliaryWorkingSet@{obtainAuxiliaryWorkingSet}!QProblemB@{QProblemB}}
+\subsubsection[{obtainAuxiliaryWorkingSet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::obtainAuxiliaryWorkingSet (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds, }
+\item[{{\bf Bounds} $\ast$}]{auxiliaryBounds}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_af91ae892262c4bac8b2388387610eb40}
+Obtains the desired working set for the auxiliary initial QP in accordance with the user specifications \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xOpt} & Optimal primal solution vector. If a NULL pointer is passed, all entries are assumed to be zero. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. If a NULL pointer is passed, all entries are assumed to be zero. \\
+\hline
+{\em guessedBounds} & Guessed working set for solution (xOpt,yOpt). \\
+\hline
+{\em auxiliaryBounds} & Input: Allocated bound object. \par
+ Ouput: Working set for auxiliary QP. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1513 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!operator=@{operator=}}
+\index{operator=@{operator=}!QProblemB@{QProblemB}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblemB} \& QProblemB::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf QProblemB} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_aefdce5618a0c88d7677b5783b6e40578}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 177 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!performDriftCorrection@{performDriftCorrection}}
+\index{performDriftCorrection@{performDriftCorrection}!QProblemB@{QProblemB}}
+\subsubsection[{performDriftCorrection}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::performDriftCorrection (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_ad127c5b219d755bbe8fb6c61fd16bf0e}
+Drift correction at end of each active set iteration \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a3535afaf58904aa56fd17e4e49eb50aa}.
+
+
+
+Definition at line 3335 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!performRamping@{performRamping}}
+\index{performRamping@{performRamping}!QProblemB@{QProblemB}}
+\subsubsection[{performRamping}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::performRamping (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{classQProblemB_aebf3301bb4f788933905b42341cdfa37}
+Ramping Strategy to avoid ties. Modifies homotopy start without changing current active set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a1905b766c096a2dded5927a9e9824b65}.
+
+
+
+Definition at line 2172 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!performRatioTest@{performRatioTest}}
+\index{performRatioTest@{performRatioTest}!QProblemB@{QProblemB}}
+\subsubsection[{performRatioTest}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::performRatioTest (
+\begin{DoxyParamCaption}
+\item[{int}]{nIdx, }
+\item[{const int $\ast$const}]{idxList, }
+\item[{const {\bf SubjectTo} $\ast$const}]{subjectTo, }
+\item[{const {\bf real\_\-t} $\ast$const}]{num, }
+\item[{const {\bf real\_\-t} $\ast$const}]{den, }
+\item[{{\bf real\_\-t}}]{epsNum, }
+\item[{{\bf real\_\-t}}]{epsDen, }
+\item[{{\bf real\_\-t} \&}]{t, }
+\item[{int \&}]{BC\_\-idx}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_afe150f11de090a35ae1bdcc9a00761b6}
+Performs robustified ratio test yield the maximum possible step length along the homotopy path. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em nIdx} & Number of ratios to be checked. \\
+\hline
+{\em idxList} & Array containing the indices of all ratios to be checked. \\
+\hline
+{\em subjectTo} & Bound/Constraint object corresponding to ratios to be checked. \\
+\hline
+{\em num} & Array containing all numerators for performing the ratio test. \\
+\hline
+{\em den} & Array containing all denominators for performing the ratio test. \\
+\hline
+{\em epsNum} & Numerator tolerance. \\
+\hline
+{\em epsDen} & Denominator tolerance. \\
+\hline
+{\em t} & Output: Maximum possible step length along the homotopy path. \\
+\hline
+{\em BC\_\-idx} & Output: Index of blocking constraint. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2085 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!performStep@{performStep}}
+\index{performStep@{performStep}!QProblemB@{QProblemB}}
+\subsubsection[{performStep}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::performStep (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-xFX, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-xFR, }
+\item[{const {\bf real\_\-t} $\ast$const}]{delta\_\-yFX, }
+\item[{int \&}]{BC\_\-idx, }
+\item[{{\bf SubjectToStatus} \&}]{BC\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a4c9323b593af246d693e0052969a7d3b}
+Determines the maximum possible step length along the homotopy path and performs this step (without changing working set). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-QP\_\-INFEASIBLE \par
+ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em delta\_\-g} & Step direction of gradient. \\
+\hline
+{\em delta\_\-lb} & Step direction of lower bounds. \\
+\hline
+{\em delta\_\-ub} & Step direction of upper bounds. \\
+\hline
+{\em delta\_\-xFX} & Primal homotopy step direction of fixed variables. \\
+\hline
+{\em delta\_\-xFR} & Primal homotopy step direction of free variables. \\
+\hline
+{\em delta\_\-yFX} & Dual homotopy step direction of fixed variables' multiplier. \\
+\hline
+{\em BC\_\-idx} & Output: Index of blocking constraint. \\
+\hline
+{\em BC\_\-status} & Output: Status of blocking constraint. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3141 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!printIteration@{printIteration}}
+\index{printIteration@{printIteration}!QProblemB@{QProblemB}}
+\subsubsection[{printIteration}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::printIteration (
+\begin{DoxyParamCaption}
+\item[{int}]{iteration, }
+\item[{int}]{BC\_\-idx, }
+\item[{{\bf SubjectToStatus}}]{BC\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a1f9623a773023031d2de267956e5e4be}
+Prints concise information on the current iteration. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em iteration} & Number of current iteration. \\
+\hline
+{\em BC\_\-idx} & Index of blocking bound. \\
+\hline
+{\em BC\_\-status} & Status of blocking bound. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3607 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!printOptions@{printOptions}}
+\index{printOptions@{printOptions}!QProblemB@{QProblemB}}
+\subsubsection[{printOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::printOptions (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\label{classQProblemB_a9f3516be7c3f59eddee7788172e7a4e6}
+Prints a list of all options and their current values. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ 
+\end{DoxyReturn}
+
+
+Definition at line 1141 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!printProperties@{printProperties}}
+\index{printProperties@{printProperties}!QProblemB@{QProblemB}}
+\subsubsection[{printProperties}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::printProperties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classQProblemB_a587077ee58951d181f89674fd9c15f7b}
+Prints concise list of properties of the current QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a589e2b01326f871820f24d47fa4372e8}.
+
+
+
+Definition at line 1016 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!regulariseHessian@{regulariseHessian}}
+\index{regulariseHessian@{regulariseHessian}!QProblemB@{QProblemB}}
+\subsubsection[{regulariseHessian}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::regulariseHessian (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a8377ea426acc7a7b78a0c78944ded1b4}
+Regularise Hessian matrix by adding a scaled identity matrix to it. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED 
+\end{DoxyReturn}
+
+
+Definition at line 2053 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!relativeHomotopyLength@{relativeHomotopyLength}}
+\index{relativeHomotopyLength@{relativeHomotopyLength}!QProblemB@{QProblemB}}
+\subsubsection[{relativeHomotopyLength}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} QProblemB::relativeHomotopyLength (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ab5f21075b1a4f3edd841a5e76af1cf1d}
+Compute relative length of homotopy in data space for termination criterion. \begin{DoxyReturn}{Returns}
+Relative length in data space. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Final gradient. \\
+\hline
+{\em lb\_\-new} & Final lower variable bounds. \\
+\hline
+{\em ub\_\-new} & Final upper variable bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2133 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!removeBound@{removeBound}}
+\index{removeBound@{removeBound}!QProblemB@{QProblemB}}
+\subsubsection[{removeBound}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::removeBound (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf BooleanType}}]{updateCholesky}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a45a48ffc46ef0d6ca41db087a3f85307}
+Removes a bounds from active set (specialised version for the case where no constraints exist). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HESSIAN\_\-NOT\_\-SPD \par
+ RET\_\-REMOVEBOUND\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of bound to be removed from active set. \\
+\hline
+{\em updateCholesky} & Flag indicating if Cholesky decomposition shall be updated. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3485 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!reset@{reset}}
+\index{reset@{reset}!QProblemB@{QProblemB}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classQProblemB_a975c13e1a8fbe8c3e9c4dfbce9dc9a71}
+Clears all data structures of \doxyref{QProblemB}{p.}{classQProblemB} except for QP data. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-RESET\_\-FAILED 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a2f752d39b6935d929b963363a314b6bd}.
+
+
+
+Definition at line 192 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setG@{setG}}
+\index{setG@{setG}!QProblemB@{QProblemB}}
+\subsubsection[{setG}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setG (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a4a907eb6c1a6ead3bf13335ce71ba069}
+Changes gradient vector of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & New gradient vector (with correct dimension!). \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setH@{setH}}
+\index{setH@{setH}!QProblemB@{QProblemB}}
+\subsubsection[{setH}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setH (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{H\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_ac9ca851c00d04f7f052a306f0f9f74ce}
+Sets Hessian matrix of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & New Hessian matrix. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setH@{setH}}
+\index{setH@{setH}!QProblemB@{QProblemB}}
+\subsubsection[{setH}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setH (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{H\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a5cb41e48d8508f561324a3b2c8155755}
+Sets dense Hessian matrix of the QP. If a null pointer is passed and a) hessianType is HST\_\-IDENTITY, nothing is done, b) hessianType is not HST\_\-IDENTITY, Hessian matrix is set to zero. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-new} & New dense Hessian matrix (with correct dimension!). \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setHessianType@{setHessianType}}
+\index{setHessianType@{setHessianType}!QProblemB@{QProblemB}}
+\subsubsection[{setHessianType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setHessianType (
+\begin{DoxyParamCaption}
+\item[{{\bf HessianType}}]{\_\-hessianType}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a8ad9f3322852e355ac2dc4e549e495e9}
+Changes the print level. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-hessianType} & New Hessian type. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setInfeasibilityFlag@{setInfeasibilityFlag}}
+\index{setInfeasibilityFlag@{setInfeasibilityFlag}!QProblemB@{QProblemB}}
+\subsubsection[{setInfeasibilityFlag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setInfeasibilityFlag (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{returnvalue}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a0ee80a22826580862cc33ca63fe35d23}
+Sets internal infeasibility flag and throws given error in case the far bound strategy is not enabled (as QP might actually not be infeasible in this case). \begin{DoxyReturn}{Returns}
+RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-ENSURELI\_\-FAILED\_\-CYCLING \par
+ RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX 
+\end{DoxyReturn}
+
+
+Definition at line 2010 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setLB@{setLB}}
+\index{setLB@{setLB}!QProblemB@{QProblemB}}
+\subsubsection[{setLB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setLB (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a7d3cb375ddce99f8728a9be54207d542}
+Changes lower bound vector of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em lb\_\-new} & New lower bound vector (with correct dimension!). \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setLB@{setLB}}
+\index{setLB@{setLB}!QProblemB@{QProblemB}}
+\subsubsection[{setLB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setLB (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf real\_\-t}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_aa13b4dee14eaeca6d73d001f466a2d62}
+Changes single entry of lower bound vector of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of entry to be changed. \\
+\hline
+{\em value} & New value for entry of lower bound vector. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setOptions@{setOptions}}
+\index{setOptions@{setOptions}!QProblemB@{QProblemB}}
+\subsubsection[{setOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setOptions (
+\begin{DoxyParamCaption}
+\item[{const {\bf Options} \&}]{\_\-options}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_a5401e252d34757797ce3e913644e8b2c}
+Overrides current options with given ones. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-options} & New options. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setPrintLevel@{setPrintLevel}}
+\index{setPrintLevel@{setPrintLevel}!QProblemB@{QProblemB}}
+\subsubsection[{setPrintLevel}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setPrintLevel (
+\begin{DoxyParamCaption}
+\item[{{\bf PrintLevel}}]{\_\-printlevel}
+\end{DoxyParamCaption}
+)}\label{classQProblemB_a2be2208a1befa1f7fa03f3c11d91ae7b}
+Changes the print level. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-printlevel} & New print level. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 965 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setUB@{setUB}}
+\index{setUB@{setUB}!QProblemB@{QProblemB}}
+\subsubsection[{setUB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setUB (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a529829d8e9a31570bbf11c26d7c3525a}
+Changes upper bound vector of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em ub\_\-new} & New upper bound vector (with correct dimension!). \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setUB@{setUB}}
+\index{setUB@{setUB}!QProblemB@{QProblemB}}
+\subsubsection[{setUB}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setUB (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf real\_\-t}}]{value}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, protected]}}\label{classQProblemB_a8e6890d054a8b8e8416cb1f4e50b1626}
+Changes single entry of upper bound vector of the QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of entry to be changed. \\
+\hline
+{\em value} & New value for entry of upper bound vector. \\
+\hline
+\end{DoxyParams}
+\index{QProblemB@{QProblemB}!setupAuxiliaryQP@{setupAuxiliaryQP}}
+\index{setupAuxiliaryQP@{setupAuxiliaryQP}!QProblemB@{QProblemB}}
+\subsubsection[{setupAuxiliaryQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupAuxiliaryQP (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_aa241e899e7019423ee5bba4edc1f4d23}
+Updates QP vectors, working sets and internal data structures in order to start from an optimal solution corresponding to initial guesses of the working set for bounds \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em guessedBounds} & Initial guess for working set of bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2912 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupAuxiliaryQPbounds@{setupAuxiliaryQPbounds}}
+\index{setupAuxiliaryQPbounds@{setupAuxiliaryQPbounds}!QProblemB@{QProblemB}}
+\subsubsection[{setupAuxiliaryQPbounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupAuxiliaryQPbounds (
+\begin{DoxyParamCaption}
+\item[{{\bf BooleanType}}]{useRelaxation}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_ac30dcd09ba67f2e04023f385e534ef73}
+Setups bounds of the auxiliary initial QP for given optimal primal/dual solution and given initial working set (assumes that members X, Y and BOUNDS have already been initialised!). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNKNOWN\_\-BUG 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em useRelaxation} & Flag indicating if inactive bounds shall be relaxed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2844 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupAuxiliaryQPgradient@{setupAuxiliaryQPgradient}}
+\index{setupAuxiliaryQPgradient@{setupAuxiliaryQPgradient}!QProblemB@{QProblemB}}
+\subsubsection[{setupAuxiliaryQPgradient}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupAuxiliaryQPgradient (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a755a6dc3f2c212179e490b1982f578ef}
+Setups gradient of the auxiliary initial QP for given optimal primal/dual solution and given initial working set (assumes that members X, Y and BOUNDS have already been initialised!). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a20876832f9f362aa98ae9fde45713297}.
+
+
+
+Definition at line 2804 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupAuxiliaryQPsolution@{setupAuxiliaryQPsolution}}
+\index{setupAuxiliaryQPsolution@{setupAuxiliaryQPsolution}!QProblemB@{QProblemB}}
+\subsubsection[{setupAuxiliaryQPsolution}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupAuxiliaryQPsolution (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a7e98ddda9d825e10709f026517a9124b}
+Setups the optimal primal/dual solution of the auxiliary initial QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xOpt} & Optimal primal solution vector. If a NULL pointer is passed, all entries are set to zero. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. If a NULL pointer is passed, all entries are set to zero. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_a393d3526ea02bb6ec26896c857f70bb6}.
+
+
+
+Definition at line 2763 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupAuxiliaryWorkingSet@{setupAuxiliaryWorkingSet}}
+\index{setupAuxiliaryWorkingSet@{setupAuxiliaryWorkingSet}!QProblemB@{QProblemB}}
+\subsubsection[{setupAuxiliaryWorkingSet}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupAuxiliaryWorkingSet (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} $\ast$const}]{auxiliaryBounds, }
+\item[{{\bf BooleanType}}]{setupAfresh}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_aa239f4edd96c04640f9cb81f53966518}
+Setups bound data structure according to auxiliaryBounds. (If the working set shall be setup afresh, make sure that bounds data structure has been resetted!) \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-WORKINGSET\_\-FAILED \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-UNKNOWN\_\-BUG 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em auxiliaryBounds} & Working set for auxiliary QP. \\
+\hline
+{\em setupAfresh} & Flag indicating if given working set shall be setup afresh or by updating the current one. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2696 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupCholeskyDecomposition@{setupCholeskyDecomposition}}
+\index{setupCholeskyDecomposition@{setupCholeskyDecomposition}!QProblemB@{QProblemB}}
+\subsubsection[{setupCholeskyDecomposition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupCholeskyDecomposition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a8f47f2c6e9a5d0eaf78c15fa7eeb91e8}
+Computes the Cholesky decomposition of the (simply projected) Hessian (i.e. R$^\wedge$T$\ast$R = Z$^\wedge$T$\ast$H$\ast$Z). It only works in the case where Z is a simple projection matrix! Note: If Hessian turns out not to be positive definite, the Hessian type is set to HST\_\-SEMIDEF accordingly. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HESSIAN\_\-NOT\_\-SPD \par
+ RET\_\-INDEXLIST\_\-CORRUPTED 
+\end{DoxyReturn}
+
+
+Definition at line 1443 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupQPdata@{setupQPdata}}
+\index{setupQPdata@{setupQPdata}!QProblemB@{QProblemB}}
+\subsubsection[{setupQPdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupQPdata (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a8c54c1a5fdbf94bba199e50a63ae06ce}
+Setups internal QP data. If the current Hessian is trivial (i.e. HST\_\-ZERO or HST\_\-IDENTITY) but a non-\/trivial one is given, memory for Hessian is allocated and it is set to the given one. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-NO\_\-HESSIAN\_\-SPECIFIED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \par
+ If Hessian matrix is trivial,a NULL pointer can be passed. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1830 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupQPdata@{setupQPdata}}
+\index{setupQPdata@{setupQPdata}!QProblemB@{QProblemB}}
+\subsubsection[{setupQPdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupQPdata (
+\begin{DoxyParamCaption}
+\item[{{\bf SymmetricMatrix} $\ast$}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-ub}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ab785215eb0f10994203a19632b715212}
+Setups internal QP data. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-H} & Hessian matrix. \\
+\hline
+{\em \_\-g} & Gradient vector. \\
+\hline
+{\em \_\-lb} & Lower bounds (on variables). \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em \_\-ub} & Upper bounds (on variables). \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1791 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupQPdataFromFile@{setupQPdataFromFile}}
+\index{setupQPdataFromFile@{setupQPdataFromFile}!QProblemB@{QProblemB}}
+\subsubsection[{setupQPdataFromFile}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupQPdataFromFile (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$const}]{H\_\-file, }
+\item[{const char $\ast$const}]{g\_\-file, }
+\item[{const char $\ast$const}]{lb\_\-file, }
+\item[{const char $\ast$const}]{ub\_\-file}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a6ea1dcb60fb520c18f1612b944875160}
+Setups internal QP data by loading it from files. If the current Hessian is trivial (i.e. HST\_\-ZERO or HST\_\-IDENTITY) but a non-\/trivial one is given, memory for Hessian is allocated and it is set to the given one. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-NO\_\-HESSIAN\_\-SPECIFIED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em H\_\-file} & Name of file where Hessian matrix, of neighbouring QP to be solved, is stored. \par
+ If Hessian matrix is trivial,a NULL pointer can be passed. \\
+\hline
+{\em g\_\-file} & Name of file where gradient, of neighbouring QP to be solved, is stored. \\
+\hline
+{\em lb\_\-file} & Name of file where lower bounds, of neighbouring QP to be solved, is stored. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-file} & Name of file where upper bounds, of neighbouring QP to be solved, is stored. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1877 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupSubjectToType@{setupSubjectToType}}
+\index{setupSubjectToType@{setupSubjectToType}!QProblemB@{QProblemB}}
+\subsubsection[{setupSubjectToType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupSubjectToType (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{classQProblemB_a4aa7da7c8454c0e53e65f923cd5c6e21}
+Determines type of existing constraints and bounds (i.e. implicitly fixed, unbounded etc.). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED 
+\end{DoxyReturn}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_af024ebec53f988671f24ee98e71394a1}.
+
+
+
+Definition at line 1360 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!setupSubjectToType@{setupSubjectToType}}
+\index{setupSubjectToType@{setupSubjectToType}!QProblemB@{QProblemB}}
+\subsubsection[{setupSubjectToType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::setupSubjectToType (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected, virtual]}}\label{classQProblemB_a9b170181bd826023ce43c3df3ff463e7}
+Determines type of new constraints and bounds (i.e. implicitly fixed, unbounded etc.). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em lb\_\-new} & New lower bounds. \\
+\hline
+{\em ub\_\-new} & New upper bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 1369 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!shallRefactorise@{shallRefactorise}}
+\index{shallRefactorise@{shallRefactorise}!QProblemB@{QProblemB}}
+\subsubsection[{shallRefactorise}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::shallRefactorise (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a52fa5dafb270b6d6872c4344d14aa529}
+Determines if it is more efficient to refactorise the matrices when hotstarting or not (i.e. better to update the existing factorisations). \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff matrices shall be refactorised afresh 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em guessedBounds} & Guessed new working set. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3388 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!solveInitialQP@{solveInitialQP}}
+\index{solveInitialQP@{solveInitialQP}!QProblemB@{QProblemB}}
+\subsubsection[{solveInitialQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::solveInitialQP (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{xOpt, }
+\item[{const {\bf real\_\-t} $\ast$const}]{yOpt, }
+\item[{const {\bf Bounds} $\ast$const}]{guessedBounds, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a916193fbb03310400784b569f29f6e7b}
+Solves a \doxyref{QProblemB}{p.}{classQProblemB} whose QP data is assumed to be stored in the member variables. A guess for its primal/dual optimal solution vectors and the corresponding optimal working set can be provided. Note: This function is internally called by all init functions! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INIT\_\-FAILED \par
+ RET\_\-INIT\_\-FAILED\_\-CHOLESKY \par
+ RET\_\-INIT\_\-FAILED\_\-HOTSTART \par
+ RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY \par
+ RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xOpt} & Optimal primal solution vector. A NULL pointer can be passed. \\
+\hline
+{\em yOpt} & Optimal dual solution vector. A NULL pointer can be passed. \\
+\hline
+{\em guessedBounds} & Guessed working set for solution (xOpt,yOpt). A NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2216 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!solveQP@{solveQP}}
+\index{solveQP@{solveQP}!QProblemB@{QProblemB}}
+\subsubsection[{solveQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::solveQP (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{int}]{nWSRperformed = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_a5031e8af5df38eca7f5384f0817f97a0}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} using online active set strategy. Note: This function is internally called by all hotstart functions! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em nWSRperformed} & Number of working set recalculations already performed to solve this QP within previous \doxyref{solveQP()}{p.}{classQProblemB_a5031e8af5df38eca7f5384f0817f97a0} calls. This number is always zero, except for successive calls from \doxyref{solveRegularisedQP()}{p.}{classQProblemB_aa33ddd65f2e97695c58dacecf9f39e1e} or when using the far bound strategy. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2357 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!solveRegularisedQP@{solveRegularisedQP}}
+\index{solveRegularisedQP@{solveRegularisedQP}!QProblemB@{QProblemB}}
+\subsubsection[{solveRegularisedQP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} QProblemB::solveRegularisedQP (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{g\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb\_\-new, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub\_\-new, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} $\ast$const}]{cputime, }
+\item[{int}]{nWSRperformed = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [private]}}\label{classQProblemB_aa33ddd65f2e97695c58dacecf9f39e1e}
+Solves an initialised \doxyref{QProblemB}{p.}{classQProblemB} using online active set strategy. Note: This function is internally called by all hotstart functions! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MAX\_\-NWSR\_\-REACHED \par
+ RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED \par
+ RET\_\-HOMOTOPY\_\-STEP\_\-FAILED \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY \par
+ RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em g\_\-new} & Gradient of neighbouring QP to be solved. \\
+\hline
+{\em lb\_\-new} & Lower bounds of neighbouring QP to be solved. \par
+ If no lower bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em ub\_\-new} & Upper bounds of neighbouring QP to be solved. \par
+ If no upper bounds exist, a NULL pointer can be passed. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Number of performed working set recalculations. \\
+\hline
+{\em cputime} & Input: Maximum CPU time allowed for QP solution. \par
+ Output: CPU time spend for QP solution (or to perform nWSR iterations). \\
+\hline
+{\em nWSRperformed} & Number of working set recalculations already performed to solve this QP within previous \doxyref{solveRegularisedQP()}{p.}{classQProblemB_aa33ddd65f2e97695c58dacecf9f39e1e} calls. This number is always zero, except for successive calls when using the far bound strategy. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 2592 of file QProblemB.cpp.
+
+\index{QProblemB@{QProblemB}!usingRegularisation@{usingRegularisation}}
+\index{usingRegularisation@{usingRegularisation}!QProblemB@{QProblemB}}
+\subsubsection[{usingRegularisation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} QProblemB::usingRegularisation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classQProblemB_ad3b0413d59cf68b7ee855561082b60ef}
+Returns if the QP has been internally regularised. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE: Hessian is internally regularised for QP solution \par
+ BT\_\-FALSE: No internal Hessian regularisation is used for QP solution 
+\end{DoxyReturn}
+
+
+\subsection{Friends And Related Function Documentation}
+\index{QProblemB@{QProblemB}!SolutionAnalysis@{SolutionAnalysis}}
+\index{SolutionAnalysis@{SolutionAnalysis}!QProblemB@{QProblemB}}
+\subsubsection[{SolutionAnalysis}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf SolutionAnalysis}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classQProblemB_ab55a166adacbc90da27a86b0010c81d7}
+
+
+Reimplemented in {\bf QProblem} \doxyref{}{p.}{classQProblem_ab55a166adacbc90da27a86b0010c81d7}, and {\bf SQProblem} \doxyref{}{p.}{classSQProblem_ab55a166adacbc90da27a86b0010c81d7}.
+
+
+
+Definition at line 66 of file QProblemB.hpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{QProblemB@{QProblemB}!bounds@{bounds}}
+\index{bounds@{bounds}!QProblemB@{QProblemB}}
+\subsubsection[{bounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounds} {\bf QProblemB::bounds}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_af0822225676e7ca195a0724a8841c4d9}
+Data structure for problem's bounds. 
+
+Definition at line 1004 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!count@{count}}
+\index{count@{count}!QProblemB@{QProblemB}}
+\subsubsection[{count}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf QProblemB::count}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_acd42fb385651070ee34d7ad7802e924b}
+Counts the number of hotstart function calls (internal usage only!). 
+
+Definition at line 1022 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!delta\_\-xFR\_\-TMP@{delta\_\-xFR\_\-TMP}}
+\index{delta\_\-xFR\_\-TMP@{delta\_\-xFR\_\-TMP}!QProblemB@{QProblemB}}
+\subsubsection[{delta\_\-xFR\_\-TMP}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::delta\_\-xFR\_\-TMP}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a06e401f5f0d6f9a9ce2caa81dc5d85b6}
+Temporary for determineStepDirection 
+
+Definition at line 1024 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!flipper@{flipper}}
+\index{flipper@{flipper}!QProblemB@{QProblemB}}
+\subsubsection[{flipper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Flipper} {\bf QProblemB::flipper}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_afc23c08b6cdc0ca93f9c049e9a318744}
+Struct for making a temporary copy of the matrix factorisations. 
+
+Definition at line 1032 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!freeHessian@{freeHessian}}
+\index{freeHessian@{freeHessian}!QProblemB@{QProblemB}}
+\subsubsection[{freeHessian}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf QProblemB::freeHessian}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a289ddec30e99470ebaa44aabd9f2ac7f}
+Flag indicating whether the Hessian matrix needs to be de-\/allocated. 
+
+Definition at line 997 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!g@{g}}
+\index{g@{g}!QProblemB@{QProblemB}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::g}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a3efcc81e7338d5d41c99e58a766315ba}
+Gradient. 
+
+Definition at line 1000 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!H@{H}}
+\index{H@{H}!QProblemB@{QProblemB}}
+\subsubsection[{H}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SymmetricMatrix}$\ast$ {\bf QProblemB::H}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a10b5660ca133fee1cedbb9636cea8431}
+Hessian matrix. 
+
+Definition at line 998 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!haveCholesky@{haveCholesky}}
+\index{haveCholesky@{haveCholesky}!QProblemB@{QProblemB}}
+\subsubsection[{haveCholesky}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf QProblemB::haveCholesky}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a3647c70d0d4fba3f2afe2cca4d289102}
+Flag indicating whether Cholesky decomposition has already been setup. 
+
+Definition at line 1007 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!hessianType@{hessianType}}
+\index{hessianType@{hessianType}!QProblemB@{QProblemB}}
+\subsubsection[{hessianType}]{\setlength{\rightskip}{0pt plus 5cm}{\bf HessianType} {\bf QProblemB::hessianType}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_af288e4e7320b9c47c2c95a230cedcbf4}
+Type of Hessian matrix. 
+
+Definition at line 1019 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!infeasible@{infeasible}}
+\index{infeasible@{infeasible}!QProblemB@{QProblemB}}
+\subsubsection[{infeasible}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf QProblemB::infeasible}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_acfeba7662b0bc3050ae37b857e3ea419}
+QP infeasible? 
+
+Definition at line 1016 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!isRegularised@{isRegularised}}
+\index{isRegularised@{isRegularised}!QProblemB@{QProblemB}}
+\subsubsection[{isRegularised}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf QProblemB::isRegularised}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a2584bbb5ab93f06aa5f3a634ac9076ac}
+Flag indicating whether Hessian matrix has been regularised. 
+
+Definition at line 1020 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!lb@{lb}}
+\index{lb@{lb}!QProblemB@{QProblemB}}
+\subsubsection[{lb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::lb}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a424f1b8c4badffef270a68a461671d44}
+Lower bound vector (on variables). 
+
+Definition at line 1001 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!options@{options}}
+\index{options@{options}!QProblemB@{QProblemB}}
+\subsubsection[{options}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Options} {\bf QProblemB::options}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a59d8ee93443bc8e7ce509a94ff4330e6}
+Struct containing all user-\/defined options for solving QPs. 
+
+Definition at line 1030 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!R@{R}}
+\index{R@{R}!QProblemB@{QProblemB}}
+\subsubsection[{R}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::R}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a8402fb9f4dbfaa9ad433457ba03751f0}
+Cholesky factor of H (i.e. H = R$^\wedge$T$\ast$R). 
+
+Definition at line 1006 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!ramp0@{ramp0}}
+\index{ramp0@{ramp0}!QProblemB@{QProblemB}}
+\subsubsection[{ramp0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf QProblemB::ramp0}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ac26a4dc4501ff1d6249631ea24e98d4c}
+Start value for Ramping Strategy. 
+
+Definition at line 1026 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!ramp1@{ramp1}}
+\index{ramp1@{ramp1}!QProblemB@{QProblemB}}
+\subsubsection[{ramp1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf QProblemB::ramp1}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ac3741a9c8073cbb90b2fa071f10930b6}
+Final value for Ramping Strategy. 
+
+Definition at line 1027 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!rampOffset@{rampOffset}}
+\index{rampOffset@{rampOffset}!QProblemB@{QProblemB}}
+\subsubsection[{rampOffset}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf QProblemB::rampOffset}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ad71bc98142b24dd9de4d6127b56b5f1b}
+Offset index for Ramping. 
+
+Definition at line 1028 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!status@{status}}
+\index{status@{status}!QProblemB@{QProblemB}}
+\subsubsection[{status}]{\setlength{\rightskip}{0pt plus 5cm}{\bf QProblemStatus} {\bf QProblemB::status}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_acc7ad0699dc78f9376ac5d5e84517b47}
+Current status of the solution process. 
+
+Definition at line 1014 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!tau@{tau}}
+\index{tau@{tau}!QProblemB@{QProblemB}}
+\subsubsection[{tau}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} {\bf QProblemB::tau}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a382545a2e9cf4591bf372c9297cac294}
+Last homotopy step length. 
+
+Definition at line 1012 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!ub@{ub}}
+\index{ub@{ub}!QProblemB@{QProblemB}}
+\subsubsection[{ub}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::ub}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_ae7d207471df9894e89e974b252fc341e}
+Upper bound vector (on variables). 
+
+Definition at line 1002 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!unbounded@{unbounded}}
+\index{unbounded@{unbounded}!QProblemB@{QProblemB}}
+\subsubsection[{unbounded}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} {\bf QProblemB::unbounded}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a689fdbbb9231d84e6c653da59d069963}
+QP unbounded? 
+
+Definition at line 1017 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!x@{x}}
+\index{x@{x}!QProblemB@{QProblemB}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::x}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_af5f392cdcebe7abe2fc827929e8cfe3b}
+Primal solution vector. 
+
+Definition at line 1009 of file QProblemB.hpp.
+
+\index{QProblemB@{QProblemB}!y@{y}}
+\index{y@{y}!QProblemB@{QProblemB}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf QProblemB::y}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classQProblemB_a3fcf4f7abdb0189fd304e6bd31431d4f}
+Dual solution vector. 
+
+Definition at line 1010 of file QProblemB.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf QProblemB.hpp}\item 
+{\bf QProblemB.cpp}\end{DoxyCompactItemize}

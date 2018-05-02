@@ -1,0 +1,369 @@
+\section{Flipper Class Reference}
+\label{classFlipper}\index{Flipper@{Flipper}}
+
+
+Auxiliary class for storing a copy of the current matrix factorisations.  
+
+
+
+
+{\ttfamily \#include $<$Flipper.hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Flipper} ()
+\item 
+{\bf Flipper} (int \_\-nV, int \_\-nC=0)
+\item 
+{\bf Flipper} (const {\bf Flipper} \&rhs)
+\item 
+{\bf returnValue} {\bf get} ({\bf Bounds} $\ast$const \_\-bounds, double $\ast$const {\bf R}, {\bf Constraints} $\ast$const \_\-constraints=0, double $\ast$const \_\-Q=0, double $\ast$const \_\-T=0) const 
+\item 
+{\bf returnValue} {\bf init} (int \_\-nV=0, int \_\-nC=0)
+\item 
+{\bf Flipper} \& {\bf operator=} (const {\bf Flipper} \&rhs)
+\item 
+{\bf returnValue} {\bf set} (const {\bf Bounds} $\ast$const \_\-bounds, const double $\ast$const \_\-R, const {\bf Constraints} $\ast$const \_\-constraints=0, const double $\ast$const \_\-Q=0, const double $\ast$const \_\-T=0)
+\item 
+{\bf $\sim$Flipper} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+{\bf returnValue} {\bf copy} (const {\bf Flipper} \&rhs)
+\item 
+int {\bf getDimT} () const 
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Bounds} {\bf bounds}
+\item 
+{\bf Constraints} {\bf constraints}
+\item 
+int {\bf nC}
+\item 
+int {\bf nV}
+\item 
+{\bf real\_\-t} $\ast$ {\bf Q}
+\item 
+{\bf real\_\-t} $\ast$ {\bf R}
+\item 
+{\bf real\_\-t} $\ast$ {\bf T}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf QProblem}
+\item 
+class {\bf QProblemB}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Auxiliary class for storing a copy of the current matrix factorisations. 
+
+This auxiliary class stores a copy of the current matrix factorisations. It is used by the classe \doxyref{QProblemB}{p.}{classQProblemB} and \doxyref{QProblem}{p.}{classQProblem} in case flipping bounds are enabled.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 57 of file Flipper.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\subsubsection[{Flipper}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES Flipper::Flipper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classFlipper_a375f713a471ba59c77da0d5bce22ccbf}
+Default constructor. 
+
+Definition at line 50 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\subsubsection[{Flipper}]{\setlength{\rightskip}{0pt plus 5cm}Flipper::Flipper (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-nV, }
+\item[{int}]{\_\-nC = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classFlipper_a66e869c4103598f856e65c721c106254}
+Constructor which takes the number of bounds and constraints. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-nV} & Number of bounds. \\
+\hline
+{\em \_\-nC} & Number of constraints. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 63 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\index{Flipper@{Flipper}!Flipper@{Flipper}}
+\subsubsection[{Flipper}]{\setlength{\rightskip}{0pt plus 5cm}Flipper::Flipper (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flipper} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classFlipper_a710eaed6aa38f0206f0a57331ce0f28d}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!$\sim$Flipper@{$\sim$Flipper}}
+\index{$\sim$Flipper@{$\sim$Flipper}!Flipper@{Flipper}}
+\subsubsection[{$\sim$Flipper}]{\setlength{\rightskip}{0pt plus 5cm}Flipper::$\sim$Flipper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classFlipper_ae498ab519584627d366565705b5655e3}
+Destructor. 
+
+Definition at line 91 of file Flipper.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Flipper@{Flipper}!clear@{clear}}
+\index{clear@{clear}!Flipper@{Flipper}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Flipper::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a09841cd2ed9e5a18d23b5fd5bf95c211}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 225 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!copy@{copy}}
+\index{copy@{copy}!Flipper@{Flipper}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Flipper::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flipper} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a42dc33c257f037e89b65a923d6d5b093}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 252 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!get@{get}}
+\index{get@{get}!Flipper@{Flipper}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Flipper::get (
+\begin{DoxyParamCaption}
+\item[{{\bf Bounds} $\ast$const}]{\_\-bounds, }
+\item[{double $\ast$const}]{R, }
+\item[{{\bf Constraints} $\ast$const}]{\_\-constraints = {\ttfamily 0}, }
+\item[{double $\ast$const}]{\_\-Q = {\ttfamily 0}, }
+\item[{double $\ast$const}]{\_\-T = {\ttfamily 0}}
+\end{DoxyParamCaption}
+) const}\label{classFlipper_adb66871d1abbf22109618085b9636f26}
+Copies current values to non-\/null arguments (assumed to be allocated with consistent size). \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-bounds} & Pointer to new bounds. \\
+\hline
+{\em R} & New matrix R. \\
+\hline
+{\em \_\-constraints} & Pointer to new constraints. \\
+\hline
+{\em \_\-Q} & New matrix Q. \\
+\hline
+{\em \_\-T} & New matrix T. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 147 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!getDimT@{getDimT}}
+\index{getDimT@{getDimT}!Flipper@{Flipper}}
+\subsubsection[{getDimT}]{\setlength{\rightskip}{0pt plus 5cm}int Flipper::getDimT (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_ad0d97e070761775147263fe8b1711898}
+Returns dimension of matrix T. \begin{DoxyReturn}{Returns}
+Dimension of matrix T. 
+\end{DoxyReturn}
+
+
+Definition at line 259 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!init@{init}}
+\index{init@{init}!Flipper@{Flipper}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Flipper::init (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-nV = {\ttfamily 0}, }
+\item[{int}]{\_\-nC = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classFlipper_ab5e31dfda4904925b0884c6aa14c49dc}
+Initialises object with given number of bounds and constraints. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-nV} & Number of bounds. \\
+\hline
+{\em \_\-nC} & Number of constraints. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 116 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!operator=@{operator=}}
+\index{operator=@{operator=}!Flipper@{Flipper}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Flipper} \& Flipper::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Flipper} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classFlipper_ad1f1f6c3ae1e54a43eb70c9c2d7bb023}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 100 of file Flipper.cpp.
+
+\index{Flipper@{Flipper}!set@{set}}
+\index{set@{set}!Flipper@{Flipper}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Flipper::set (
+\begin{DoxyParamCaption}
+\item[{const {\bf Bounds} $\ast$const}]{\_\-bounds, }
+\item[{const double $\ast$const}]{\_\-R, }
+\item[{const {\bf Constraints} $\ast$const}]{\_\-constraints = {\ttfamily 0}, }
+\item[{const double $\ast$const}]{\_\-Q = {\ttfamily 0}, }
+\item[{const double $\ast$const}]{\_\-T = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classFlipper_a918b42bfc9a7caa375170ffb50ff5708}
+Assigns new values to non-\/null arguments. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-bounds} & Pointer to new bounds. \\
+\hline
+{\em \_\-R} & New matrix R. \\
+\hline
+{\em \_\-constraints} & Pointer to new constraints. \\
+\hline
+{\em \_\-Q} & New matrix Q. \\
+\hline
+{\em \_\-T} & New matrix T. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 176 of file Flipper.cpp.
+
+
+
+\subsection{Friends And Related Function Documentation}
+\index{Flipper@{Flipper}!QProblem@{QProblem}}
+\index{QProblem@{QProblem}!Flipper@{Flipper}}
+\subsubsection[{QProblem}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf QProblem}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classFlipper_a22dd8c6dfcdbb2f56b8b4bd9185322c0}
+
+
+Definition at line 60 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!QProblemB@{QProblemB}}
+\index{QProblemB@{QProblemB}!Flipper@{Flipper}}
+\subsubsection[{QProblemB}]{\setlength{\rightskip}{0pt plus 5cm}friend class {\bf QProblemB}\hspace{0.3cm}{\ttfamily  [friend]}}\label{classFlipper_a3b75e152d72d75f5b515d40a28af177c}
+
+
+Definition at line 59 of file Flipper.hpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Flipper@{Flipper}!bounds@{bounds}}
+\index{bounds@{bounds}!Flipper@{Flipper}}
+\subsubsection[{bounds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Bounds} {\bf Flipper::bounds}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_af6c5ae2f504cc9478ee07d824ba97801}
+Data structure for problem's bounds. 
+
+Definition at line 138 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!constraints@{constraints}}
+\index{constraints@{constraints}!Flipper@{Flipper}}
+\subsubsection[{constraints}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Constraints} {\bf Flipper::constraints}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a13587b75185673eeff26b9b1f5f9d94b}
+Data structure for problem's constraints. 
+
+Definition at line 139 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!nC@{nC}}
+\index{nC@{nC}!Flipper@{Flipper}}
+\subsubsection[{nC}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Flipper::nC}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a7ce559eab24de7f2fcc3c317970ab653}
+Number of constraints. 
+
+Definition at line 136 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!nV@{nV}}
+\index{nV@{nV}!Flipper@{Flipper}}
+\subsubsection[{nV}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Flipper::nV}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a2a4654e2bd29af69634e7751f6541a4e}
+Number of variables. 
+
+Definition at line 135 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!Q@{Q}}
+\index{Q@{Q}!Flipper@{Flipper}}
+\subsubsection[{Q}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf Flipper::Q}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_afae7213a4c38a150512faac9ac572ceb}
+Orthonormal quadratic matrix, A = [0 T]$\ast$Q'. 
+
+Definition at line 142 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!R@{R}}
+\index{R@{R}!Flipper@{Flipper}}
+\subsubsection[{R}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf Flipper::R}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a8d49f4f458ba1b15de596695cd50d5aa}
+Cholesky factor of H (i.e. H = R$^\wedge$T$\ast$R). 
+
+Definition at line 141 of file Flipper.hpp.
+
+\index{Flipper@{Flipper}!T@{T}}
+\index{T@{T}!Flipper@{Flipper}}
+\subsubsection[{T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf Flipper::T}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classFlipper_a5d401205baa5348982119da87a0ef4da}
+Reverse triangular matrix, A = [0 T]$\ast$Q'. 
+
+Definition at line 143 of file Flipper.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Flipper.hpp}\item 
+{\bf Flipper.cpp}\end{DoxyCompactItemize}

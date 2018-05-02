@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!-- Aug 18, 2014 -->
+
+<launch>
+
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- 					GASBOT HISTORIAN					     -->
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+	<node pkg="gasbot_historian" type="historian" name="gasbot_historian_node" output="screen">
+	<param name="threshold" 		value="0.00"/>
+	<param name="operation"			value="3"/>
+	<!--param name="title"			value="Trial2_1_20140916"/--> 
+	<param name="title"			value="ragt"/> 
+	<param name="file"			value="logs"/>
+	<!--param name="path"			value="$(find gasbot_historian)/History/TeknikhusetIndoor/"/-->
+	<!--param name="path"			value="/home/husky/Experiments/TeknikhusetIndoor/Map_20140818_t2_R2/"/-->
+	<!--param name="path"			value="/home/husky/Experiments/StudentgatanForest3/Map_20140926_t1_R1_MapNum_4/"/-->
+	
+	<!--param name="path"			value="/home/husky/Experiments_RAGT_2015/Teknikhuset_20150910/EXP_RAGT_trial2/"/-->
+	<!--param name="path"			value="/home/husky/Experiments_RAGT_2015/Teknikhuset_20150910/SPP_RAGT_trial2/"/-->
+	<param name="path"			value="/home/husky/Arain-ICRA16-Demo/"/>
+	
+	<param name="localization_topic"	value="/ndt_mcl"/>
+    </node>
+</launch>
+

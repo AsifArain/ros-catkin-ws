@@ -1,0 +1,189 @@
+\section{SymSparseMat Class Reference}
+\label{classSymSparseMat}\index{SymSparseMat@{SymSparseMat}}
+
+
+Interfaces matrix-\/vector operations tailored to symmetric sparse matrices.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for SymSparseMat:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classSymSparseMat__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf bilinear} (const {\bf Indexlist} $\ast$const icols, int xN, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf Matrix} $\ast$ {\bf duplicate} () const 
+\item 
+{\bf SymSparseMat} (int nr, int nc, {\bf sparse\_\-int\_\-t} $\ast$r, {\bf sparse\_\-int\_\-t} $\ast$c, {\bf real\_\-t} $\ast$v, {\bf sparse\_\-int\_\-t} $\ast$d=0)
+\item 
+{\bf SymSparseMat} (int nr, int nc, int ld, const {\bf real\_\-t} $\ast$const v)
+\item 
+{\bf SymSparseMat} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces matrix-\/vector operations tailored to symmetric sparse matrices. 
+
+Symmetric sparse matrix class (column compressed format).
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 779 of file Matrices.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\subsubsection[{SymSparseMat}]{\setlength{\rightskip}{0pt plus 5cm}SymSparseMat::SymSparseMat (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSymSparseMat_a8063b880d4656db6e956c0b73259a00d}
+Default constructor. 
+
+Definition at line 783 of file Matrices.hpp.
+
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\subsubsection[{SymSparseMat}]{\setlength{\rightskip}{0pt plus 5cm}SymSparseMat::SymSparseMat (
+\begin{DoxyParamCaption}
+\item[{int}]{nr, }
+\item[{int}]{nc, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{r, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{c, }
+\item[{{\bf real\_\-t} $\ast$}]{v, }
+\item[{{\bf sparse\_\-int\_\-t} $\ast$}]{d = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSymSparseMat_a3295169d74dc2ee99d0e8a8bf5544c90}
+Constructor with arguments. 
+\begin{DoxyParams}{Parameters}
+{\em nr} & Number of rows. \\
+\hline
+{\em nc} & Number of columns. \\
+\hline
+{\em r} & Row indices (length). \\
+\hline
+{\em c} & Indices to first entry of columns (nCols+1). \\
+\hline
+{\em v} & Vector of entries (length). \\
+\hline
+{\em d} & Indices to first entry of lower triangle (including diagonal) (nCols). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 786 of file Matrices.hpp.
+
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\index{SymSparseMat@{SymSparseMat}!SymSparseMat@{SymSparseMat}}
+\subsubsection[{SymSparseMat}]{\setlength{\rightskip}{0pt plus 5cm}SymSparseMat::SymSparseMat (
+\begin{DoxyParamCaption}
+\item[{int}]{nr, }
+\item[{int}]{nc, }
+\item[{int}]{ld, }
+\item[{const {\bf real\_\-t} $\ast$const}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classSymSparseMat_a781e265c45346086299f6b9fd1d3faba}
+Constructor from dense matrix. 
+\begin{DoxyParams}{Parameters}
+{\em nr} & Number of rows. \\
+\hline
+{\em nc} & Number of columns. \\
+\hline
+{\em ld} & Leading dimension. \\
+\hline
+{\em v} & Row major stored matrix elements. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 796 of file Matrices.hpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SymSparseMat@{SymSparseMat}!bilinear@{bilinear}}
+\index{bilinear@{bilinear}!SymSparseMat@{SymSparseMat}}
+\subsubsection[{bilinear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SymSparseMat::bilinear (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSymSparseMat_a881bfc826470c74db2709b95c2de3057}
+Compute bilinear form y = x'$\ast$H$\ast$x using submatrix given by index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em icols} & Index list specifying columns of x. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em x} & Input vector to be multiplied (uncompressed). \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em y} & Output vector of results (compressed). \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SymmetricMatrix} \doxyref{}{p.}{classSymmetricMatrix_a1ff4cc04a2d05ed5765a981c37ae57eb}.
+
+
+
+Definition at line 1751 of file Matrices.cpp.
+
+\index{SymSparseMat@{SymSparseMat}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!SymSparseMat@{SymSparseMat}}
+\subsubsection[{duplicate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix} $\ast$ SymSparseMat::duplicate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classSymSparseMat_af125b7a9ba07555c7b6930b21637cc87}
+Returns a deep-\/copy of the \doxyref{Matrix}{p.}{classMatrix} object. \begin{DoxyReturn}{Returns}
+Deep-\/copy of \doxyref{Matrix}{p.}{classMatrix} object 
+\end{DoxyReturn}
+
+
+Reimplemented from {\bf SparseMatrix} \doxyref{}{p.}{classSparseMatrix_a70730929e8ffab371a520574d3afa2e0}.
+
+
+
+Definition at line 1728 of file Matrices.cpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\item 
+{\bf Matrices.cpp}\end{DoxyCompactItemize}

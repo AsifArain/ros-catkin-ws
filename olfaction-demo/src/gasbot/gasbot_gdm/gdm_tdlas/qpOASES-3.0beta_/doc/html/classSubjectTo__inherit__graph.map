@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" href="$classBounds.html" title="Manages working sets of bounds (= box constraints)." alt="" coords="5,83,69,112"/>
+<area shape="rect" href="$classConstraints.html" title="Manages working sets of constraints." alt="" coords="93,83,181,112"/>
+</map>

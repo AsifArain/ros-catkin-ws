@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv
+END
+Halt.srv
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/Halt.srv
+END
+Home.srv
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/Home.srv
+END
+SetVelocity.srv
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/SetVelocity.srv
+END
+SetPosition.srv
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/SetPosition.srv
+END
+SweepTilt.srv
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/SweepTilt.srv
+END
+TargetAcceleration.srv
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/TargetAcceleration.srv
+END
+Reset.srv
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/Reset.srv
+END
+SweepPan.srv
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/SweepPan.srv
+END
+GetStatus.srv
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/GetStatus.srv
+END
+TargetVelocity.srv
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svnroot/bosch-ros-pkg/!svn/ver/115/trunk/stacks/bosch_drivers/amtec/srv/TargetVelocity.srv
+END

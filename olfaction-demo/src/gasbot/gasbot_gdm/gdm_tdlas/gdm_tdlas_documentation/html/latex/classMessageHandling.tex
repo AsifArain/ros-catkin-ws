@@ -1,0 +1,569 @@
+\section{MessageHandling Class Reference}
+\label{classMessageHandling}\index{MessageHandling@{MessageHandling}}
+
+
+Handles all kind of error messages, warnings and other information.  
+
+
+
+
+{\ttfamily \#include $<$MessageHandling.hpp$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf ReturnValueList}
+\begin{DoxyCompactList}\small\item\em Data structure for entries in global message list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf getErrorCount} () const 
+\item 
+{\bf VisibilityStatus} {\bf getErrorVisibilityStatus} () const 
+\item 
+{\bf VisibilityStatus} {\bf getInfoVisibilityStatus} () const 
+\item 
+FILE $\ast$ {\bf getOutputFile} () const 
+\item 
+{\bf VisibilityStatus} {\bf getWarningVisibilityStatus} () const 
+\item 
+{\bf returnValue} {\bf listAllMessages} ()
+\item 
+{\bf MessageHandling} (FILE $\ast$\_\-outputFile)
+\item 
+{\bf MessageHandling} (FILE $\ast$\_\-outputFile, {\bf VisibilityStatus} \_\-errorVisibility, {\bf VisibilityStatus} \_\-warningVisibility, {\bf VisibilityStatus} \_\-infoVisibility)
+\item 
+{\bf MessageHandling} (const {\bf MessageHandling} \&rhs)
+\item 
+{\bf MessageHandling} ()
+\item 
+{\bf MessageHandling} ({\bf VisibilityStatus} \_\-errorVisibility, {\bf VisibilityStatus} \_\-warningVisibility, {\bf VisibilityStatus} \_\-infoVisibility)
+\item 
+{\bf MessageHandling} \& {\bf operator=} (const {\bf MessageHandling} \&rhs)
+\item 
+{\bf returnValue} {\bf reset} ()
+\item 
+{\bf returnValue} {\bf setErrorCount} (int \_\-errorCount)
+\item 
+void {\bf setErrorVisibilityStatus} ({\bf VisibilityStatus} \_\-errorVisibility)
+\item 
+void {\bf setInfoVisibilityStatus} ({\bf VisibilityStatus} \_\-infoVisibility)
+\item 
+void {\bf setOutputFile} (FILE $\ast$\_\-outputFile)
+\item 
+void {\bf setWarningVisibilityStatus} ({\bf VisibilityStatus} \_\-warningVisibility)
+\item 
+{\bf returnValue} {\bf throwError} ({\bf returnValue} Enumber, const char $\ast$additionaltext, const char $\ast$functionname, const char $\ast$filename, const unsigned long linenumber, {\bf VisibilityStatus} localVisibilityStatus)
+\item 
+{\bf returnValue} {\bf throwInfo} ({\bf returnValue} Inumber, const char $\ast$additionaltext, const char $\ast$functionname, const char $\ast$filename, const unsigned long linenumber, {\bf VisibilityStatus} localVisibilityStatus)
+\item 
+{\bf returnValue} {\bf throwWarning} ({\bf returnValue} Wnumber, const char $\ast$additionaltext, const char $\ast$functionname, const char $\ast$filename, const unsigned long linenumber, {\bf VisibilityStatus} localVisibilityStatus)
+\item 
+{\bf $\sim$MessageHandling} ()
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const char $\ast$ {\bf getErrorCodeMessage} (const {\bf returnValue} \_\-returnValue)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf throwMessage} ({\bf returnValue} RETnumber, const char $\ast$additionaltext, const char $\ast$functionname, const char $\ast$filename, const unsigned long linenumber, {\bf VisibilityStatus} localVisibilityStatus, const char $\ast$RETstring)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf errorCount}
+\item 
+{\bf VisibilityStatus} {\bf errorVisibility}
+\item 
+{\bf VisibilityStatus} {\bf infoVisibility}
+\item 
+FILE $\ast$ {\bf outputFile}
+\item 
+{\bf VisibilityStatus} {\bf warningVisibility}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handles all kind of error messages, warnings and other information. 
+
+This class handles all kinds of messages (errors, warnings, infos) initiated by qpOASES modules and stores the correspoding global preferences.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau (special thanks to Leonard Wirsching) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 217 of file MessageHandling.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::MessageHandling (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a58a64d6d798a87ed2f83092e28e7ee8b}
+Default constructor. 
+
+Definition at line 207 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::MessageHandling (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{\_\-outputFile}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_af5fea91daefd158b856a091fd5dbdae4}
+Constructor which takes the desired output file. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-outputFile} & Output file. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 220 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::MessageHandling (
+\begin{DoxyParamCaption}
+\item[{{\bf VisibilityStatus}}]{\_\-errorVisibility, }
+\item[{{\bf VisibilityStatus}}]{\_\-warningVisibility, }
+\item[{{\bf VisibilityStatus}}]{\_\-infoVisibility}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a65bf868c3aab4d7a29f9d61f235b65e4}
+Constructor which takes the desired visibility states. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-errorVisibility} & Visibility status for error messages. \\
+\hline
+{\em \_\-warningVisibility} & Visibility status for warning messages. \\
+\hline
+{\em \_\-infoVisibility} & Visibility status for info messages. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 233 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::MessageHandling (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{\_\-outputFile, }
+\item[{{\bf VisibilityStatus}}]{\_\-errorVisibility, }
+\item[{{\bf VisibilityStatus}}]{\_\-warningVisibility, }
+\item[{{\bf VisibilityStatus}}]{\_\-infoVisibility}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_aedfc5f9079f5dd454a13700e13e029d7}
+Constructor which takes the desired output file and desired visibility states. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-outputFile} & Output file. \\
+\hline
+{\em \_\-errorVisibility} & Visibility status for error messages. \\
+\hline
+{\em \_\-warningVisibility} & Visibility status for warning messages. \\
+\hline
+{\em \_\-infoVisibility} & Visibility status for info messages. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 249 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\index{MessageHandling@{MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::MessageHandling (
+\begin{DoxyParamCaption}
+\item[{const {\bf MessageHandling} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a9702e58c2dd05e674fc47ed44f92ff30}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 268 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!$\sim$MessageHandling@{$\sim$MessageHandling}}
+\index{$\sim$MessageHandling@{$\sim$MessageHandling}!MessageHandling@{MessageHandling}}
+\subsubsection[{$\sim$MessageHandling}]{\setlength{\rightskip}{0pt plus 5cm}MessageHandling::$\sim$MessageHandling (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a732439c8915c726c29833a335fb60ae7}
+Destructor. 
+
+Definition at line 282 of file MessageHandling.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{MessageHandling@{MessageHandling}!getErrorCodeMessage@{getErrorCodeMessage}}
+\index{getErrorCodeMessage@{getErrorCodeMessage}!MessageHandling@{MessageHandling}}
+\subsubsection[{getErrorCodeMessage}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ MessageHandling::getErrorCodeMessage (
+\begin{DoxyParamCaption}
+\item[{const {\bf returnValue}}]{\_\-returnValue}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [static]}}\label{classMessageHandling_aa6107f3844b0d91478daec1301620560}
+Provides message text corresponding to given {\itshape returnValue\/}. \begin{DoxyReturn}{Returns}
+String containing message text. 
+\end{DoxyReturn}
+
+
+Definition at line 530 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!getErrorCount@{getErrorCount}}
+\index{getErrorCount@{getErrorCount}!MessageHandling@{MessageHandling}}
+\subsubsection[{getErrorCount}]{\setlength{\rightskip}{0pt plus 5cm}int MessageHandling::getErrorCount (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a9b5aaeda8506e708c78aa1e4ae0a5ae1}
+Returns error count value. \begin{DoxyReturn}{Returns}
+Error count value. 
+\end{DoxyReturn}
+\index{MessageHandling@{MessageHandling}!getErrorVisibilityStatus@{getErrorVisibilityStatus}}
+\index{getErrorVisibilityStatus@{getErrorVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{getErrorVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} MessageHandling::getErrorVisibilityStatus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_ac0aa0041e157271d1a08623e795c333e}
+Returns visibility status for error messages. \begin{DoxyReturn}{Returns}
+Visibility status for error messages. 
+\end{DoxyReturn}
+\index{MessageHandling@{MessageHandling}!getInfoVisibilityStatus@{getInfoVisibilityStatus}}
+\index{getInfoVisibilityStatus@{getInfoVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{getInfoVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} MessageHandling::getInfoVisibilityStatus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_ae9eaf40fc69f2f8e339d59fcba54c8f3}
+Returns visibility status for info messages. \begin{DoxyReturn}{Returns}
+Visibility status for info messages. 
+\end{DoxyReturn}
+\index{MessageHandling@{MessageHandling}!getOutputFile@{getOutputFile}}
+\index{getOutputFile@{getOutputFile}!MessageHandling@{MessageHandling}}
+\subsubsection[{getOutputFile}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ MessageHandling::getOutputFile (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a5bebdda93df04994caced3c553594e3d}
+Returns pointer to output file. \begin{DoxyReturn}{Returns}
+Pointer to output file. 
+\end{DoxyReturn}
+\index{MessageHandling@{MessageHandling}!getWarningVisibilityStatus@{getWarningVisibilityStatus}}
+\index{getWarningVisibilityStatus@{getWarningVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{getWarningVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} MessageHandling::getWarningVisibilityStatus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a96631494d02e2bc6db47375697de698e}
+Returns visibility status for warning messages. \begin{DoxyReturn}{Returns}
+Visibility status for warning messages. 
+\end{DoxyReturn}
+\index{MessageHandling@{MessageHandling}!listAllMessages@{listAllMessages}}
+\index{listAllMessages@{listAllMessages}!MessageHandling@{MessageHandling}}
+\subsubsection[{listAllMessages}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::listAllMessages (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a8b6ff3603352ace1322188f156983c44}
+Prints a complete list of all messages to output file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 399 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!operator=@{operator=}}
+\index{operator=@{operator=}!MessageHandling@{MessageHandling}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MessageHandling} \& MessageHandling::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf MessageHandling} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a5bdc56ea0f2ba7d70b9c47a3403692a1}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 292 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!reset@{reset}}
+\index{reset@{reset}!MessageHandling@{MessageHandling}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_aee146336fc1d08ae20ea00498aee471f}
+Resets all preferences to default values. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Definition at line 383 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!setErrorCount@{setErrorCount}}
+\index{setErrorCount@{setErrorCount}!MessageHandling@{MessageHandling}}
+\subsubsection[{setErrorCount}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::setErrorCount (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-errorCount}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a8e098ad6661d636e584565b58d2fe42a}
+Changes error count. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENT 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-errorCount} & New error count value. \\
+\hline
+\end{DoxyParams}
+\index{MessageHandling@{MessageHandling}!setErrorVisibilityStatus@{setErrorVisibilityStatus}}
+\index{setErrorVisibilityStatus@{setErrorVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{setErrorVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}void MessageHandling::setErrorVisibilityStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf VisibilityStatus}}]{\_\-errorVisibility}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a31f12baabf23d05c97e2da9dbd8adf6e}
+Changes visibility status for error messages. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-errorVisibility} & New visibility status for error messages. \\
+\hline
+\end{DoxyParams}
+\index{MessageHandling@{MessageHandling}!setInfoVisibilityStatus@{setInfoVisibilityStatus}}
+\index{setInfoVisibilityStatus@{setInfoVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{setInfoVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}void MessageHandling::setInfoVisibilityStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf VisibilityStatus}}]{\_\-infoVisibility}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_ac1f2497e237ab552f408db52e7ba6359}
+Changes visibility status for info messages. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-infoVisibility} & New visibility status for info messages. \\
+\hline
+\end{DoxyParams}
+\index{MessageHandling@{MessageHandling}!setOutputFile@{setOutputFile}}
+\index{setOutputFile@{setOutputFile}!MessageHandling@{MessageHandling}}
+\subsubsection[{setOutputFile}]{\setlength{\rightskip}{0pt plus 5cm}void MessageHandling::setOutputFile (
+\begin{DoxyParamCaption}
+\item[{FILE $\ast$}]{\_\-outputFile}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_a91cf9df3e66b84d4fb6039b39de32390}
+Changes output file for messages. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-outputFile} & New output file for messages. \\
+\hline
+\end{DoxyParams}
+\index{MessageHandling@{MessageHandling}!setWarningVisibilityStatus@{setWarningVisibilityStatus}}
+\index{setWarningVisibilityStatus@{setWarningVisibilityStatus}!MessageHandling@{MessageHandling}}
+\subsubsection[{setWarningVisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}void MessageHandling::setWarningVisibilityStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf VisibilityStatus}}]{\_\-warningVisibility}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMessageHandling_aaa411b35b599fe59c57b94e0eb0f2728}
+Changes visibility status for warning messages. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-warningVisibility} & New visibility status for warning messages. \\
+\hline
+\end{DoxyParams}
+\index{MessageHandling@{MessageHandling}!throwError@{throwError}}
+\index{throwError@{throwError}!MessageHandling@{MessageHandling}}
+\subsubsection[{throwError}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::throwError (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{Enumber, }
+\item[{const char $\ast$}]{additionaltext, }
+\item[{const char $\ast$}]{functionname, }
+\item[{const char $\ast$}]{filename, }
+\item[{const unsigned long}]{linenumber, }
+\item[{{\bf VisibilityStatus}}]{localVisibilityStatus}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a257d3209e0efcb245753be9d9f89e4cf}
+Prints an error message(a simplified macro THROWERROR is also provided). \par
+ Errors are definied as abnormal events which cause an immediate termination of the current (sub) function. Errors of a sub function should be commented by the calling function by means of a warning message (if this error does not cause an error of the calling function, either)! \begin{DoxyReturn}{Returns}
+Error number returned by sub function call 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em Enumber} & Error number returned by sub function call. \\
+\hline
+{\em additionaltext} & Additional error text (0, if none). \\
+\hline
+{\em functionname} & Name of function which caused the error. \\
+\hline
+{\em filename} & Name of file which caused the error. \\
+\hline
+{\em linenumber} & Number of line which caused the error.incompatible binary file \\
+\hline
+{\em localVisibilityStatus} & Determines (locally) if error message can be printed to stderr. If GLOBAL visibility status of the message is set to VS\_\-HIDDEN, no message is printed, anyway! \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 311 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!throwInfo@{throwInfo}}
+\index{throwInfo@{throwInfo}!MessageHandling@{MessageHandling}}
+\subsubsection[{throwInfo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::throwInfo (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{Inumber, }
+\item[{const char $\ast$}]{additionaltext, }
+\item[{const char $\ast$}]{functionname, }
+\item[{const char $\ast$}]{filename, }
+\item[{const unsigned long}]{linenumber, }
+\item[{{\bf VisibilityStatus}}]{localVisibilityStatus}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a57fafea776d1d7be7a36676a7396aabe}
+Prints a info message (a simplified macro THROWINFO is also provided). \begin{DoxyReturn}{Returns}
+Info number returned by sub function call 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em Inumber} & Info number returned by sub function call. \\
+\hline
+{\em additionaltext} & Additional warning text (0, if none). \\
+\hline
+{\em functionname} & Name of function which submitted the info. \\
+\hline
+{\em filename} & Name of file which submitted the info. \\
+\hline
+{\em linenumber} & Number of line which submitted the info. \\
+\hline
+{\em localVisibilityStatus} & Determines (locally) if info message can be printed to stderr. If GLOBAL visibility status of the message is set to VS\_\-HIDDEN, no message is printed, anyway! \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 359 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!throwMessage@{throwMessage}}
+\index{throwMessage@{throwMessage}!MessageHandling@{MessageHandling}}
+\subsubsection[{throwMessage}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::throwMessage (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{RETnumber, }
+\item[{const char $\ast$}]{additionaltext, }
+\item[{const char $\ast$}]{functionname, }
+\item[{const char $\ast$}]{filename, }
+\item[{const unsigned long}]{linenumber, }
+\item[{{\bf VisibilityStatus}}]{localVisibilityStatus, }
+\item[{const char $\ast$}]{RETstring}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_ab7eff297de539c158ed8583f2146a352}
+Prints a info message to stderr (auxiliary function). \begin{DoxyReturn}{Returns}
+Error/warning/info number returned by sub function call 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em RETnumber} & Error/warning/info number returned by sub function call. \\
+\hline
+{\em additionaltext} & Additional warning text (0, if none). \\
+\hline
+{\em functionname} & Name of function which caused the error/warning/info. \\
+\hline
+{\em filename} & Name of file which caused the error/warning/info. \\
+\hline
+{\em linenumber} & Number of line which caused the error/warning/info. \\
+\hline
+{\em localVisibilityStatus} & Determines (locally) if info message can be printed to stderr. If GLOBAL visibility status of the message is set to VS\_\-HIDDEN, no message is printed, anyway! \\
+\hline
+{\em RETstring} & Leading string of error/warning/info message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 428 of file MessageHandling.cpp.
+
+\index{MessageHandling@{MessageHandling}!throwWarning@{throwWarning}}
+\index{throwWarning@{throwWarning}!MessageHandling@{MessageHandling}}
+\subsubsection[{throwWarning}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} MessageHandling::throwWarning (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{Wnumber, }
+\item[{const char $\ast$}]{additionaltext, }
+\item[{const char $\ast$}]{functionname, }
+\item[{const char $\ast$}]{filename, }
+\item[{const unsigned long}]{linenumber, }
+\item[{{\bf VisibilityStatus}}]{localVisibilityStatus}
+\end{DoxyParamCaption}
+)}\label{classMessageHandling_a20916177fb0e5a55e1cc74df22e53795}
+Prints a warning message (a simplified macro THROWWARNING is also provided). Warnings are definied as abnormal events which does NOT cause an immediate termination of the current (sub) function. \begin{DoxyReturn}{Returns}
+Warning number returned by sub function call 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em Wnumber} & Warning number returned by sub function call. \\
+\hline
+{\em additionaltext} & Additional warning text (0, if none). \\
+\hline
+{\em functionname} & Name of function which caused the warning. \\
+\hline
+{\em filename} & Name of file which caused the warning. \\
+\hline
+{\em linenumber} & Number of line which caused the warning. \\
+\hline
+{\em localVisibilityStatus} & Determines (locally) if warning message can be printed to stderr. If GLOBAL visibility status of the message is set to VS\_\-HIDDEN, no message is printed, anyway! \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 335 of file MessageHandling.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{MessageHandling@{MessageHandling}!errorCount@{errorCount}}
+\index{errorCount@{errorCount}!MessageHandling@{MessageHandling}}
+\subsubsection[{errorCount}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MessageHandling::errorCount}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_a3ac4bf299eed3c527b021630b77eee55}
+Counts number of errors (for nicer output only). 
+
+Definition at line 407 of file MessageHandling.hpp.
+
+\index{MessageHandling@{MessageHandling}!errorVisibility@{errorVisibility}}
+\index{errorVisibility@{errorVisibility}!MessageHandling@{MessageHandling}}
+\subsubsection[{errorVisibility}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} {\bf MessageHandling::errorVisibility}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_af75a2fd3122cc2a9793c5ad491b04325}
+Error messages visible? 
+
+Definition at line 401 of file MessageHandling.hpp.
+
+\index{MessageHandling@{MessageHandling}!infoVisibility@{infoVisibility}}
+\index{infoVisibility@{infoVisibility}!MessageHandling@{MessageHandling}}
+\subsubsection[{infoVisibility}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} {\bf MessageHandling::infoVisibility}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_a6a630fa427803cf4e1e0f54d8fb14a1b}
+Info messages visible? 
+
+Definition at line 403 of file MessageHandling.hpp.
+
+\index{MessageHandling@{MessageHandling}!outputFile@{outputFile}}
+\index{outputFile@{outputFile}!MessageHandling@{MessageHandling}}
+\subsubsection[{outputFile}]{\setlength{\rightskip}{0pt plus 5cm}FILE$\ast$ {\bf MessageHandling::outputFile}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_a2a40cbdfced701a18da281f7a4e910ee}
+Output file for messages. 
+
+Definition at line 405 of file MessageHandling.hpp.
+
+\index{MessageHandling@{MessageHandling}!warningVisibility@{warningVisibility}}
+\index{warningVisibility@{warningVisibility}!MessageHandling@{MessageHandling}}
+\subsubsection[{warningVisibility}]{\setlength{\rightskip}{0pt plus 5cm}{\bf VisibilityStatus} {\bf MessageHandling::warningVisibility}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMessageHandling_af715e377af244418a8003b172c8bdf91}
+Warning messages visible? 
+
+Definition at line 402 of file MessageHandling.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf MessageHandling.hpp}\item 
+{\bf MessageHandling.cpp}\end{DoxyCompactItemize}

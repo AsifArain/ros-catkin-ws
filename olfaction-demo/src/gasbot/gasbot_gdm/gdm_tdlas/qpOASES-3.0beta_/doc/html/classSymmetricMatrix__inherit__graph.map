@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" href="$classSymDenseMat.html" title="Interfaces matrix&#45;vector operations tailored to symmetric dense matrices." alt="" coords="5,160,112,189"/>
+<area shape="rect" href="$classSymSparseMat.html" title="Interfaces matrix&#45;vector operations tailored to symmetric sparse matrices." alt="" coords="136,160,245,189"/>
+<area shape="rect" href="$classMatrix.html" title="Abstract base class for interfacing tailored matrix&#45;vector operations." alt="" coords="96,5,152,35"/>
+</map>

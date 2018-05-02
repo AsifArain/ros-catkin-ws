@@ -1,0 +1,174 @@
+\section{MyConstraintProduct Class Reference}
+\label{classMyConstraintProduct}\index{MyConstraintProduct@{MyConstraintProduct}}
+
+
+Example illustrating the use of the {\itshape \doxyref{ConstraintProduct}{p.}{classConstraintProduct}\/} class.  
+
+
+
+
+Inheritance diagram for MyConstraintProduct:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classMyConstraintProduct__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MyConstraintProduct} ()
+\item 
+{\bf MyConstraintProduct} (int \_\-nV, int \_\-nC, {\bf real\_\-t} $\ast$\_\-A)
+\item 
+{\bf MyConstraintProduct} (const {\bf MyConstraintProduct} \&rhs)
+\item 
+virtual int {\bf operator()} (int constrIndex, const {\bf real\_\-t} $\ast$const x, {\bf real\_\-t} $\ast$const constrValue) const 
+\item 
+{\bf MyConstraintProduct} \& {\bf operator=} (const {\bf MyConstraintProduct} \&rhs)
+\item 
+virtual {\bf $\sim$MyConstraintProduct} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf real\_\-t} $\ast$ {\bf A}
+\item 
+int {\bf nC}
+\item 
+int {\bf nV}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Example illustrating the use of the {\itshape \doxyref{ConstraintProduct}{p.}{classConstraintProduct}\/} class. 
+
+Example illustrating the use of the {\itshape \doxyref{ConstraintProduct}{p.}{classConstraintProduct}\/} class.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 47 of file example4CP.cpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{MyConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}MyConstraintProduct::MyConstraintProduct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMyConstraintProduct_a670ac34e0d2147f7be90334c51c280b1}
+
+
+Definition at line 50 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{MyConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}MyConstraintProduct::MyConstraintProduct (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-nV, }
+\item[{int}]{\_\-nC, }
+\item[{{\bf real\_\-t} $\ast$}]{\_\-A}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMyConstraintProduct_a025e4752ea75b5ce64c21672847251b9}
+
+
+Definition at line 52 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\index{MyConstraintProduct@{MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{MyConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}MyConstraintProduct::MyConstraintProduct (
+\begin{DoxyParamCaption}
+\item[{const {\bf MyConstraintProduct} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMyConstraintProduct_a8713cbd57754373bb7b882b18a6dda3b}
+
+
+Definition at line 62 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!$\sim$MyConstraintProduct@{$\sim$MyConstraintProduct}}
+\index{$\sim$MyConstraintProduct@{$\sim$MyConstraintProduct}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{$\sim$MyConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}virtual MyConstraintProduct::$\sim$MyConstraintProduct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classMyConstraintProduct_a91575bc7f737462aef210acec28b322e}
+
+
+Definition at line 70 of file example4CP.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{MyConstraintProduct@{MyConstraintProduct}!operator()@{operator()}}
+\index{operator()@{operator()}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}virtual int MyConstraintProduct::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{constrIndex, }
+\item[{const {\bf real\_\-t} $\ast$const}]{x, }
+\item[{{\bf real\_\-t} $\ast$const}]{constrValue}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classMyConstraintProduct_ac967b02d33098635e411e6edef2ef460}
+Evaluates the product of a given constraint with the current iterate. This function needs to be implemented in a derived class for the user-\/defined constraint product function. \begin{DoxyReturn}{Returns}
+0: successful \par
+ otherwise: not successful 
+\end{DoxyReturn}
+
+
+Implements {\bf ConstraintProduct} \doxyref{}{p.}{classConstraintProduct_a1da981e12cd8d7411bcdf43b827c5c1d}.
+
+
+
+Definition at line 85 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!operator=@{operator=}}
+\index{operator=@{operator=}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MyConstraintProduct}\& MyConstraintProduct::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf MyConstraintProduct} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classMyConstraintProduct_a782959ec14624f774582d954b8ab9a70}
+
+
+Definition at line 72 of file example4CP.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{MyConstraintProduct@{MyConstraintProduct}!A@{A}}
+\index{A@{A}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{A}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf MyConstraintProduct::A}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMyConstraintProduct_a654d468b76949a46fc92d3c0fae8b8f7}
+
+
+Definition at line 101 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!nC@{nC}}
+\index{nC@{nC}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{nC}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MyConstraintProduct::nC}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMyConstraintProduct_ad0ea0a6261ec03ac8dc7068f034f0594}
+
+
+Definition at line 100 of file example4CP.cpp.
+
+\index{MyConstraintProduct@{MyConstraintProduct}!nV@{nV}}
+\index{nV@{nV}!MyConstraintProduct@{MyConstraintProduct}}
+\subsubsection[{nV}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf MyConstraintProduct::nV}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classMyConstraintProduct_ae9c0d2fe4871fd239b1c500b3f78a746}
+
+
+Definition at line 96 of file example4CP.cpp.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+{\bf example4CP.cpp}\end{DoxyCompactItemize}

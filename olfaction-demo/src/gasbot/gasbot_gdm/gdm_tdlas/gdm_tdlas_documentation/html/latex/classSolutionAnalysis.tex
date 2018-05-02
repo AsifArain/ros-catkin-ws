@@ -1,0 +1,276 @@
+\section{SolutionAnalysis Class Reference}
+\label{classSolutionAnalysis}\index{SolutionAnalysis@{SolutionAnalysis}}
+
+
+Provides additional tools for analysing QP solutions.  
+
+
+
+
+{\ttfamily \#include $<$SolutionAnalysis.hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf getMaxKKTviolation} ({\bf QProblemB} $\ast${\bf qp}, {\bf real\_\-t} \&maxKKTviolation) const 
+\item 
+{\bf returnValue} {\bf getMaxKKTviolation} ({\bf QProblem} $\ast${\bf qp}, {\bf real\_\-t} \&maxKKTviolation) const 
+\item 
+{\bf returnValue} {\bf getMaxKKTviolation} ({\bf SQProblem} $\ast${\bf qp}, {\bf real\_\-t} \&maxKKTviolation) const 
+\item 
+{\bf returnValue} {\bf getVarianceCovariance} ({\bf QProblemB} $\ast${\bf qp}, {\bf real\_\-t} $\ast$g\_\-b\_\-bA\_\-VAR, {\bf real\_\-t} $\ast$Primal\_\-Dual\_\-VAR) const 
+\item 
+{\bf returnValue} {\bf getVarianceCovariance} ({\bf QProblem} $\ast${\bf qp}, {\bf real\_\-t} $\ast$g\_\-b\_\-bA\_\-VAR, {\bf real\_\-t} $\ast$Primal\_\-Dual\_\-VAR) const 
+\item 
+{\bf returnValue} {\bf getVarianceCovariance} ({\bf SQProblem} $\ast${\bf qp}, {\bf real\_\-t} $\ast$g\_\-b\_\-bA\_\-VAR, {\bf real\_\-t} $\ast$Primal\_\-Dual\_\-VAR) const 
+\item 
+{\bf SolutionAnalysis} \& {\bf operator=} (const {\bf SolutionAnalysis} \&rhs)
+\item 
+{\bf SolutionAnalysis} (const {\bf SolutionAnalysis} \&rhs)
+\item 
+{\bf SolutionAnalysis} ()
+\item 
+{\bf $\sim$SolutionAnalysis} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Provides additional tools for analysing QP solutions. 
+
+This class is intended to provide additional tools for analysing a QP solution obtained with qpOASES.
+
+\begin{DoxyAuthor}{Author}
+Boris Houska, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2011 
+\end{DoxyDate}
+
+
+Definition at line 56 of file SolutionAnalysis.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{SolutionAnalysis@{SolutionAnalysis}!SolutionAnalysis@{SolutionAnalysis}}
+\index{SolutionAnalysis@{SolutionAnalysis}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{SolutionAnalysis}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES SolutionAnalysis::SolutionAnalysis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSolutionAnalysis_a8c1dcc27cb1adc87c518984350d9d97b}
+Default constructor. 
+
+Definition at line 51 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!SolutionAnalysis@{SolutionAnalysis}}
+\index{SolutionAnalysis@{SolutionAnalysis}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{SolutionAnalysis}]{\setlength{\rightskip}{0pt plus 5cm}SolutionAnalysis::SolutionAnalysis (
+\begin{DoxyParamCaption}
+\item[{const {\bf SolutionAnalysis} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSolutionAnalysis_aade7aa6f4702f7417c0c2c4d836b52e1}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 60 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!$\sim$SolutionAnalysis@{$\sim$SolutionAnalysis}}
+\index{$\sim$SolutionAnalysis@{$\sim$SolutionAnalysis}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{$\sim$SolutionAnalysis}]{\setlength{\rightskip}{0pt plus 5cm}SolutionAnalysis::$\sim$SolutionAnalysis (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classSolutionAnalysis_a742aea657f600946f614d7531ea19846}
+Destructor. 
+
+Definition at line 69 of file SolutionAnalysis.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SolutionAnalysis@{SolutionAnalysis}!getMaxKKTviolation@{getMaxKKTviolation}}
+\index{getMaxKKTviolation@{getMaxKKTviolation}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getMaxKKTviolation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getMaxKKTviolation (
+\begin{DoxyParamCaption}
+\item[{{\bf QProblemB} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} \&}]{maxKKTviolation}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a6b136e587c7c78a09d33ecb8b020381a}
+Determines the maximum violation of the KKT optimality conditions of the current iterate within the \doxyref{QProblemB}{p.}{classQProblemB} object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{QProblemB}{p.}{classQProblemB} to be analysed. \\
+\hline
+{\em maxKKTviolation} & OUTPUT: maximum violation of the KKT conditions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 93 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!getMaxKKTviolation@{getMaxKKTviolation}}
+\index{getMaxKKTviolation@{getMaxKKTviolation}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getMaxKKTviolation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getMaxKKTviolation (
+\begin{DoxyParamCaption}
+\item[{{\bf SQProblem} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} \&}]{maxKKTviolation}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a98de0fbd475377a01e7709266a34cee2}
+Determines the maximum violation of the KKT optimality conditions of the current iterate within the \doxyref{SQProblem}{p.}{classSQProblem} object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{SQProblem}{p.}{classSQProblem} to be analysed. \\
+\hline
+{\em maxKKTviolation} & OUTPUT: maximum violation of the KKT conditions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 302 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!getMaxKKTviolation@{getMaxKKTviolation}}
+\index{getMaxKKTviolation@{getMaxKKTviolation}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getMaxKKTviolation}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getMaxKKTviolation (
+\begin{DoxyParamCaption}
+\item[{{\bf QProblem} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} \&}]{maxKKTviolation}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a9e126fbddc6a3f1394e2d54bba055bb4}
+Determines the maximum violation of the KKT optimality conditions of the current iterate within the \doxyref{QProblem}{p.}{classQProblem} object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{QProblem}{p.}{classQProblem} to be analysed. \\
+\hline
+{\em maxKKTviolation} & OUTPUT: maximum violation of the KKT conditions. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 175 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!getVarianceCovariance@{getVarianceCovariance}}
+\index{getVarianceCovariance@{getVarianceCovariance}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getVarianceCovariance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getVarianceCovariance (
+\begin{DoxyParamCaption}
+\item[{{\bf QProblemB} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} $\ast$}]{g\_\-b\_\-bA\_\-VAR, }
+\item[{{\bf real\_\-t} $\ast$}]{Primal\_\-Dual\_\-VAR}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a5b6d7076163fa9ae55f8ccc3b708777b}
+Computes the variance-\/covariance matrix of the QP output for uncertain \par
+ inputs. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{QProblemB}{p.}{classQProblemB} to be analysed. \\
+\hline
+{\em g\_\-b\_\-bA\_\-VAR} & INPUT : Variance-\/covariance of g, the bounds lb and ub, and lbA and ubA respectively. Dimension: 2nV x 2nV \\
+\hline
+{\em Primal\_\-Dual\_\-VAR} & OUTPUT: The result for the variance-\/covariance of the primal and dual variables. Dimension: 2nV x 2nV \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 312 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!getVarianceCovariance@{getVarianceCovariance}}
+\index{getVarianceCovariance@{getVarianceCovariance}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getVarianceCovariance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getVarianceCovariance (
+\begin{DoxyParamCaption}
+\item[{{\bf SQProblem} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} $\ast$}]{g\_\-b\_\-bA\_\-VAR, }
+\item[{{\bf real\_\-t} $\ast$}]{Primal\_\-Dual\_\-VAR}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a3954b99b583abb6ec734e80c223e6d4d}
+Computes the variance-\/covariance matrix of the QP output for uncertain \par
+ inputs. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{SQProblem}{p.}{classSQProblem} to be analysed. \\
+\hline
+{\em g\_\-b\_\-bA\_\-VAR} & INPUT : Variance-\/covariance of g, the bounds lb and ub, and lbA and ubA respectively. Dimension: (2nV+nC) x (2nV+nC) \\
+\hline
+{\em Primal\_\-Dual\_\-VAR} & OUTPUT: The result for the variance-\/covariance of the primal and dual variables. Dimension: (2nV+nC) x (2nV+nC) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 555 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!getVarianceCovariance@{getVarianceCovariance}}
+\index{getVarianceCovariance@{getVarianceCovariance}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{getVarianceCovariance}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} SolutionAnalysis::getVarianceCovariance (
+\begin{DoxyParamCaption}
+\item[{{\bf QProblem} $\ast$}]{qp, }
+\item[{{\bf real\_\-t} $\ast$}]{g\_\-b\_\-bA\_\-VAR, }
+\item[{{\bf real\_\-t} $\ast$}]{Primal\_\-Dual\_\-VAR}
+\end{DoxyParamCaption}
+) const}\label{classSolutionAnalysis_a8fe06b1813c7ab73cfb69eec47ca7532}
+Computes the variance-\/covariance matrix of the QP output for uncertain \par
+ inputs. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-HOTSTART\_\-FAILED \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ \par
+ RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em qp} & \doxyref{QProblem}{p.}{classQProblem} to be analysed. \\
+\hline
+{\em g\_\-b\_\-bA\_\-VAR} & INPUT : Variance-\/covariance of g, the bounds lb and ub, and lbA and ubA respectively. Dimension: (2nV+nC) x (2nV+nC) \\
+\hline
+{\em Primal\_\-Dual\_\-VAR} & OUTPUT: The result for the variance-\/covariance of the primal and dual variables. Dimension: (2nV+nC) x (2nV+nC) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 321 of file SolutionAnalysis.cpp.
+
+\index{SolutionAnalysis@{SolutionAnalysis}!operator=@{operator=}}
+\index{operator=@{operator=}!SolutionAnalysis@{SolutionAnalysis}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf SolutionAnalysis} \& SolutionAnalysis::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf SolutionAnalysis} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classSolutionAnalysis_ad4194a997bcae34263cec94f161b3409}
+Copy asingment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file SolutionAnalysis.cpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf SolutionAnalysis.hpp}\item 
+{\bf SolutionAnalysis.cpp}\end{DoxyCompactItemize}

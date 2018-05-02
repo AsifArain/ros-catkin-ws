@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- =========  XXX CUSTOMIZED FOR HUSKY XXX ========== -->
+
+<launch>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find husky_description)/urdf/base.urdf.xacro'" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+	     <rosparam param="source_list">[/amtec/joint_states]</rosparam>
+	</node> 
+</launch>

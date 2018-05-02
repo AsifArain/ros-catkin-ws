@@ -1,0 +1,14 @@
+<launch>
+<!-- <param name="use_sim_time" value="true" /> -->
+
+<!-- <node type="gdm_tdlas" pkg="gdm_tdlas"
+        name="gdm_tdlas" output="screen"> 
+<remap from="localized_RMLD/rmld_data" to="localized_RMLD/rmld_data2"/> 
+  </node>-->
+
+<node pkg="tf" type="static_transform_publisher" name="rmld_frame" args="0 0 0 0 0 0 map pcl_model 100"/>
+
+<!--<node pkg="rosbag" type="rosbag" name="rosbag" args="play clock  /home/mti/ros_workspace/basement_test02_2012-05-18-20-54-39.bag -i" /> -->
+
+
+</launch>

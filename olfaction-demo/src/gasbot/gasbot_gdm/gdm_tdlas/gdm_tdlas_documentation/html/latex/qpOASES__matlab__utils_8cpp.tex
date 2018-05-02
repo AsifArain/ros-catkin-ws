@@ -1,0 +1,157 @@
+\section{qpOASES\_\-matlab\_\-utils.cpp File Reference}
+\label{qpOASES__matlab__utils_8cpp}\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+{\ttfamily \#include \char`\"{}mex.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}matrix.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}string.h\char`\"{}}\par
+Include dependency graph for qpOASES\_\-matlab\_\-utils.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=224pt]{qpOASES__matlab__utils_8cpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{qpOASES__matlab__utils_8cpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf allocateOutputs} (int nlhs, mxArray $\ast$plhs[$\,$], int nV, int nC=0, int nP=1)
+\item 
+{\bf returnValue} {\bf convertFortranToC} (const {\bf real\_\-t} $\ast$const A\_\-for, int nV, int nC, {\bf real\_\-t} $\ast$const A)
+\item 
+{\bf real\_\-t} {\bf getStatus} ({\bf returnValue} returnvalue)
+\item 
+{\bf BooleanType} {\bf hasOptionsValue} (const mxArray $\ast$optionsPtr, const char $\ast$const optionString, double $\ast$$\ast$optionValue)
+\item 
+void {\bf obtainOutputs} (int k, {\bf QProblemB} $\ast${\bf qp}, {\bf returnValue} returnvalue, int nWSRin, int nlhs, mxArray $\ast$plhs[$\,$], int nV, int nC=0)
+\item 
+{\bf returnValue} {\bf setupOptions} ({\bf Options} $\ast$options, const mxArray $\ast$optionsPtr, int \&nWSRin)
+\item 
+{\bf returnValue} {\bf smartDimensionCheck} ({\bf real\_\-t} $\ast$$\ast$input, unsigned int m, unsigned int n, {\bf BooleanType} emptyAllowed, const mxArray $\ast$prhs[$\,$], int idx)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Collects utility functions for Interface to Matlab(R) that enables to call qpOASES as a MEX function. 
+
+Definition in file {\bf qpOASES\_\-matlab\_\-utils.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!allocateOutputs@{allocateOutputs}}
+\index{allocateOutputs@{allocateOutputs}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{allocateOutputs}]{\setlength{\rightskip}{0pt plus 5cm}void allocateOutputs (
+\begin{DoxyParamCaption}
+\item[{int}]{nlhs, }
+\item[{mxArray $\ast$}]{plhs[$\,$], }
+\item[{int}]{nV, }
+\item[{int}]{nC = {\ttfamily 0}, }
+\item[{int}]{nP = {\ttfamily 1}}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_a7d69ee376b3cb621d708f348f9e3fb9a}
+
+
+Definition at line 295 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!convertFortranToC@{convertFortranToC}}
+\index{convertFortranToC@{convertFortranToC}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{convertFortranToC}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} convertFortranToC (
+\begin{DoxyParamCaption}
+\item[{const {\bf real\_\-t} $\ast$const}]{A\_\-for, }
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{{\bf real\_\-t} $\ast$const}]{A}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_af2754b37443e9e181654277c674a15a8}
+
+
+Definition at line 126 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!getStatus@{getStatus}}
+\index{getStatus@{getStatus}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{getStatus}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} getStatus (
+\begin{DoxyParamCaption}
+\item[{{\bf returnValue}}]{returnvalue}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_af4fc5137e7b28364c2bce1a3eb574708}
+
+
+Definition at line 45 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!hasOptionsValue@{hasOptionsValue}}
+\index{hasOptionsValue@{hasOptionsValue}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{hasOptionsValue}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} hasOptionsValue (
+\begin{DoxyParamCaption}
+\item[{const mxArray $\ast$}]{optionsPtr, }
+\item[{const char $\ast$const}]{optionString, }
+\item[{double $\ast$$\ast$}]{optionValue}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_ae55fc6145143ed4b0ab53517b014a4f2}
+
+
+Definition at line 141 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!obtainOutputs@{obtainOutputs}}
+\index{obtainOutputs@{obtainOutputs}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{obtainOutputs}]{\setlength{\rightskip}{0pt plus 5cm}void obtainOutputs (
+\begin{DoxyParamCaption}
+\item[{int}]{k, }
+\item[{{\bf QProblemB} $\ast$}]{qp, }
+\item[{{\bf returnValue}}]{returnvalue, }
+\item[{int}]{nWSRin, }
+\item[{int}]{nlhs, }
+\item[{mxArray $\ast$}]{plhs[$\,$], }
+\item[{int}]{nV, }
+\item[{int}]{nC = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_a8bb1df94da8ef1963e5f0daae1ba2847}
+
+
+Definition at line 326 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!setupOptions@{setupOptions}}
+\index{setupOptions@{setupOptions}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{setupOptions}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} setupOptions (
+\begin{DoxyParamCaption}
+\item[{{\bf Options} $\ast$}]{options, }
+\item[{const mxArray $\ast$}]{optionsPtr, }
+\item[{int \&}]{nWSRin}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_a5e4cf2645aa9f1e9904b7af83c579d7b}
+
+
+Definition at line 161 of file qpOASES\_\-matlab\_\-utils.cpp.
+
+\index{qpOASES\_\-matlab\_\-utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}!smartDimensionCheck@{smartDimensionCheck}}
+\index{smartDimensionCheck@{smartDimensionCheck}!qpOASES_matlab_utils.cpp@{qpOASES\_\-matlab\_\-utils.cpp}}
+\subsubsection[{smartDimensionCheck}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} smartDimensionCheck (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{input, }
+\item[{unsigned int}]{m, }
+\item[{unsigned int}]{n, }
+\item[{{\bf BooleanType}}]{emptyAllowed, }
+\item[{const mxArray $\ast$}]{prhs[$\,$], }
+\item[{int}]{idx}
+\end{DoxyParamCaption}
+)}\label{qpOASES__matlab__utils_8cpp_aa1068fa2e4adbc9f5736d2f8e49a12b6}
+
+
+Definition at line 73 of file qpOASES\_\-matlab\_\-utils.cpp.
+

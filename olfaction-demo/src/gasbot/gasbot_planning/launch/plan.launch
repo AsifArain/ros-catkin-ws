@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<!-- Aug 10, 2014 -->
+
+<launch>
+
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- 					GASBOT PLANNING 					     -->
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+	<node pkg="gasbot_planning" type="plan_execution" name="gasbot_plan_execution_node" output="screen">
+	<!--param name="min_pan_angle" 	value="-10.00"/>
+	<param name="max_pan_angle"	value=" 10.00"/>
+	<param name="min_tilt_angle"	value=" -3.45"/> 
+	<param name="max_tilt_angle"	value=" -3.45"/-->
+	<param name="field_of_view"	value="    90.0"/>
+	<param name="sensing_range"	value="    10.0"/> <!-- FIXME 8.25 is 10 meter in real -->
+
+	<param name="num_pan_sweeps"	value="    1"/>
+	<param name="num_tilt_sweeps"	value="    1"/>
+	<param name="sample_delay"	value="  0.1"/>
+
+	<!--param name="file_name"		value="plan.txt"/-->
+	<!--param name="file_name"		value="plan_experts_solution.txt"/-->
+	<!--param name="file_name"		value="plan_spp.txt"/-->
+	<!--param name="file_name"		value="plan_template_matching.txt"/-->
+	<param name="file_name"		value="plan-ragd-icra2016demo.txt"/>
+	<param name="file_path"		value="$(find gasbot_planning)"/>
+
+    </node>
+</launch>
+
+
+<!-- NOTES:
+
+rosservice call /ptu_control/sweep "{min_pan: -45.0, max_pan: 45.0, min_tilt: -10.0, max_tilt: -10.0, n_pan: 1, n_tilt: 1, samp_delay: 0.1}"
+
+For sensing range 10m: tilt angle= -5.1655
+For sensing range 15m: tilt angle= -3.45
+For sensing range 30m: tilt angle= -1.73
+
+
+
+
+-->

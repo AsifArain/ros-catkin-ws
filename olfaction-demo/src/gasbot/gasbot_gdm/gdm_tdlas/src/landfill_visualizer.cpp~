@@ -1,0 +1,487 @@
+#include "demo_visualizer.h"
+void handle_rmld_msg(const localized_RMLD::rmld_msg::ConstPtr& msg_in){
+
+	if(!rmld_data_arrived){
+		origin_x=msg_in->origin_x;
+		origin_y=msg_in->origin_y;
+		origin_z=msg_in->origin_z;
+		end_x=msg_in->end_x;
+		end_y=msg_in->end_y;
+		end_z=msg_in->end_z;
+		concentration_ppmm=msg_in->concentration_ppmm;
+		rmld_data_arrived=true;
+		
+	}
+}
+
+
+int main(int argc, char** argv)
+	{
+	ros::init (argc, argv, NODE_NAME);
+	ros::NodeHandle nh;
+	// (1) Parameters
+	
+	char param_name[40];
+
+	std::string 	param_value;
+	
+	sprintf(param_name,"%s/",NODE_NAME);
+	
+	
+	//(1.1)		Point cloud model
+	if(nh.getParam(param_name,param_value)){
+		point_cloud_model=param_value.c_str();
+		
+	}
+	else {
+		point_cloud_model=DEFAULT_POINT_CLOUD_MODEL;
+	}
+
+	
+	typedef pcl::PointCloud<pcl::PointXYZ> PCLCloud;
+	
+	
+	ros::Publisher cloud_pub 			=	nh.advertise<sensor_msgs::PointCloud2>("visualization/pc", 50);
+	ros::Publisher	rmld_ray_pub		=	nh.advertise<visualization_msgs::Marker>("visualization/rmld_ray",50);
+	
+	
+	ros::Subscriber rmld_conc 			=	nh.subscribe("/localized_RMLD/rmld_data", 100, handle_rmld_msg);
+	ros::Publisher	robot_position_pub	=	nh.advertise<visualization_msgs::Marker>("visualization/robot_position",50);
+	
+	
+	ros::Rate loop_rate(VIS_REFRESH_FREQ);
+
+	pcl::PointCloud<pcl::PointXYZ>::Ptr cloudpcl (new pcl::PointCloud<pcl::PointXYZ>);
+
+
+	//(2) Loads the base point cloud ///
+	if (pcl::io::loadPCDFile<pcl::PointXYZ> (point_cloud_model, *cloudpcl) == -1) //* load the file
+		{
+			ROS_ERROR("Couldn't read file test_pcd.pcd \n");
+				//return (-1);
+		}
+	
+	//(4) Initializations
+	int n_cycles_cloud=0;
+	int n_cycles_robot=0;
+	rmld_data_arrived=false;
+	tf::StampedTransform current_transform;
+	tf::TransformListener listener;
+	
+	//(3) MAIN loop
+	while (nh.ok()){
+		ROS_INFO("Spinning");
+		ros::spinOnce ();
+		loop_rate.sleep ();
+		
+		if (rmld_data_arrived){
+			if (concentration_ppmm > -1) {
+				publish_RMLD_Ray(rmld_ray_pub);
+				ROS_INFO("RMLD");
+			}
+			rmld_data_arrived=false;
+		}
+		
+		//Publish the robot position
+		n_cycles_robot++;
+		if(n_cycles_robot > N_CYCLES_ROBOT){
+			bool	tf_flag=true;
+    		try{
+      			listener.lookupTransform(GLOBAL_FRAME,BASE_FRAME,ros::Time(0), current_transform);
+    		}
+    	
+			catch (tf::TransformException ex){
+					ROS_ERROR("%s",ex.what());
+					tf_flag=false;
+    		}
+
+			if (tf_flag) {
+				publishRobotPosition(robot_position_pub,current_transform);
+			}
+			n_cycles_robot=0;
+		}
+		
+		
+		//Publish the point cloud;
+		n_cycles_cloud++;
+		if(n_cycles_cloud > N_CYCLES_CLOUD){
+			sensor_msgs::PointCloud2 cloud_msg;
+			pcl::PointCloud<pcl::PointXYZ> published_cloud;
+			published_cloud=*cloudpcl;
+			pcl::toROSMsg(published_cloud, cloud_msg);	 
+			cloud_msg.header.frame_id="pcl_model";
+			//cloud_pub.publish(cloud_msg);
+			n_cycles_cloud=0;
+		}
+		
+	}
+}
+
+
+void	publish_RMLD_Ray(ros::Publisher	rmld_ray_pub){
+		visualization_msgs::Marker line_list;
+		line_list.header.frame_id = GLOBAL_FRAME;
+		line_list.header.stamp = ros::Time::now();
+		line_list.ns = NODE_NAME;
+		line_list.id = 2;
+		line_list.scale.x = 0.05;
+		line_list.scale.y = 0.05;
+		line_list.scale.z = 0.05;
+
+	
+		line_list.pose.orientation.x = 0;
+		line_list.pose.orientation.y = 0;
+		line_list.pose.orientation.z = 0;
+		line_list.pose.orientation.w = 1.0;
+		line_list.type = visualization_msgs::Marker::LINE_LIST;
+					
+		line_list.color.r = 0.0;
+		line_list.color.g = 1;
+		line_list.color.b = 0.93;
+    	line_list.color.a = 1.0;
+    	line_list.lifetime = ros::Duration(2);
+    	
+    	line_list.action = visualization_msgs::Marker::ADD;						
+		geometry_msgs::Point p;
+		p.x = origin_x;
+      	p.y = origin_y;
+		p.z = origin_z+0.25;
+		line_list.points.push_back(p);
+		p.x = end_x;
+      	p.y = end_y;
+		p.z = end_z+0.25;
+		line_list.points.push_back(p);
+		
+		rmld_ray_pub.publish(line_list);
+    	
+}
+
+void	publishRobotPosition(ros::Publisher robot_pub,tf::StampedTransform current_transform) {
+	
+	
+
+	visualization_msgs::Marker robot_position;
+	robot_position.header.frame_id = GLOBAL_FRAME;
+	robot_position.header.stamp = ros::Time::now();
+	robot_position.ns = NODE_NAME;
+	robot_position.id = 2;
+	robot_position.scale.x = 1;
+	robot_position.scale.y = 0.6;
+	robot_position.scale.z = 0.3;
+
+	robot_position.pose.position.x = current_transform.getOrigin().x();
+	robot_position.pose.position.y = current_transform.getOrigin().y();
+	robot_position.pose.position.z = current_transform.getOrigin().z()+0.25;
+	
+	robot_position.pose.orientation.x = current_transform.getRotation().x();
+	robot_position.pose.orientation.y = current_transform.getRotation().y();
+	robot_position.pose.orientation.z = current_transform.getRotation().z();
+	robot_position.pose.orientation.w = current_transform.getRotation().w();
+
+	
+					
+	
+	robot_position.type = visualization_msgs::Marker::CUBE;
+	robot_position.color.r = 0.0;
+	robot_position.color.g = 0.0;
+	robot_position.color.b = 1;
+	robot_position.color.a = 1.0;
+	robot_pub.publish(robot_position);
+
+	robot_position.id = 3;
+	robot_position.scale.x = 0.8;
+	robot_position.scale.y = 0.4;
+	robot_position.scale.z = 0.3;
+
+
+	robot_position.pose.position.x = current_transform.getOrigin().x();
+	robot_position.pose.position.y = current_transform.getOrigin().y();
+	robot_position.pose.position.z = current_transform.getOrigin().z()+0.3+0.25;
+	
+	robot_position.pose.orientation.x = current_transform.getRotation().x();
+	robot_position.pose.orientation.y = current_transform.getRotation().y();
+	robot_position.pose.orientation.z = current_transform.getRotation().z();
+	robot_position.pose.orientation.w = current_transform.getRotation().w();
+	robot_position.type = visualization_msgs::Marker::CUBE;
+					
+	robot_position.color.r = 0.1;
+	robot_position.color.g = 0.1;
+	robot_position.color.b = 0.5;
+	robot_position.color.a = 1.0;
+	robot_pub.publish(robot_position);
+
+	/*robot_position.id = 4;
+	robot_position.text="Gasbot";
+
+	robot_position.color.r = 1;
+	robot_position.color.g = 0;
+	robot_position.color.b = 0;
+	robot_position.color.a = 1.0;
+
+	robot_position.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+	robot_position.pose.position.x = current_transform.getOrigin().x();
+	robot_position.pose.position.y = current_transform.getOrigin().y();
+	robot_position.pose.position.z = current_transform.getOrigin().z()+1.8+0.25;
+	
+	robot_position.scale.x = 1;
+	robot_position.scale.y = 1;
+	robot_position.scale.z = 0.8;
+
+	robot_pub.publish(robot_position);	*/
+
+	robot_position.id = 5;
+	robot_position.type = visualization_msgs::Marker::CYLINDER;
+	robot_position.color.r = 0;
+	robot_position.color.g = 0;
+	robot_position.color.b = 1;
+	robot_position.color.a = 1.0;
+
+	robot_position.pose.position.x = current_transform.getOrigin().x();
+	robot_position.pose.position.y = current_transform.getOrigin().y();
+	robot_position.pose.position.z = current_transform.getOrigin().z()+0.6+0.25;
+
+	robot_position.scale.x = 0.1;
+	robot_position.scale.y = 0.1;
+	robot_position.scale.z = 0.5;
+
+	robot_pub.publish(robot_position);
+
+
+		//Corners
+		double latitude,longitude,x,y;
+		x=0; y=0;
+		latitude=59.29386;
+		longitude=15.25836;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+
+		visualization_msgs::Marker landmark;
+		landmark.header.frame_id = GLOBAL_FRAME;
+		landmark.header.stamp = ros::Time::now();
+		landmark.ns = NODE_NAME;
+		landmark.id = 1;
+
+
+		landmark.color.r = 0;
+		landmark.color.g = 1;
+		landmark.color.b = 0;
+		landmark.color.a = 1.0;
+
+		landmark.scale.x = 1;
+		landmark.scale.y = 1;
+		landmark.scale.z = 4;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 2;
+	
+		landmark.pose.orientation.x = 0;
+		landmark.pose.orientation.y = 0;
+		landmark.pose.orientation.z = 0;
+		landmark.pose.orientation.w = 1;
+
+		landmark.type = visualization_msgs::Marker::CYLINDER;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		latitude=59.29303;
+		longitude=15.257;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 2;
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 2;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+
+
+		latitude=59.29414;
+		longitude=15.25781;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 3;
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 2;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		//Command center
+
+		landmark.type = visualization_msgs::Marker::CUBE;
+		latitude=59.29397;
+		longitude=15.25794;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 4;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 0.2;
+		landmark.color.r = 0;
+		landmark.color.g = 0;
+		landmark.color.b = 1;
+		landmark.color.a = 1.0;
+		landmark.scale.x = 2;
+		landmark.scale.y = 2;
+		landmark.scale.z = 0.4;
+
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		landmark.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		landmark.id =5;
+		landmark.text="Control center";
+
+		landmark.color.r = 1;
+		landmark.color.g = 0;
+		landmark.color.b = 0;
+		landmark.color.a = 1.0;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 1;
+
+		landmark.scale.x = 1;
+		landmark.scale.y = 1;
+		landmark.scale.z = 0.8;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+	
+
+
+
+		//Rocks
+
+		landmark.type = visualization_msgs::Marker::CYLINDER;
+
+		latitude=59.29375;
+		longitude=15.25825;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 6;
+
+		landmark.color.r = 1;
+		landmark.color.g = 1;
+		landmark.color.b = 1;
+		landmark.color.a = 1.0;
+
+		landmark.scale.x = 15;
+		landmark.scale.y = 15;
+		landmark.scale.z = 0.6;
+
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 0.3;
+		robot_pub.publish(landmark); 		//<----------------- Publish object
+
+		landmark.id = 7;
+
+		landmark.scale.x = 10;
+		landmark.scale.y = 10;
+		landmark.scale.z = 0.6;
+
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 0.9;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+
+		landmark.id = 8;
+
+		landmark.scale.x = 5;
+		landmark.scale.y = 5;
+		landmark.scale.z = 0.6;
+
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 1.5;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		latitude=59.29356;
+		longitude=15.25781;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 9;
+
+		landmark.color.r = 1;
+		landmark.color.g = 1;
+		landmark.color.b = 1;
+		landmark.color.a = 1.0;
+
+		landmark.scale.x = 15;
+		landmark.scale.y = 15;
+		landmark.scale.z = 0.6;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 0.3;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		landmark.id = 10;
+
+		landmark.scale.x = 10;
+		landmark.scale.y = 10;
+		landmark.scale.z = 0.6;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 0.9;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+
+		landmark.id = 11;
+
+		landmark.scale.x = 5;
+		landmark.scale.y = 5;
+		landmark.scale.z = 0.6;
+
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = y;
+		landmark.pose.position.z = 1.5;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+		// Gas source
+		latitude=59.29389;
+		longitude=15.25778;
+		gps2cart(latitude, longitude, LATITUDE0, LONGITUDE0, x, y);
+		landmark.id = 12;
+		landmark.color.r = 1;
+		landmark.color.g = 1;
+		landmark.color.b = 0;
+		landmark.color.a = 1.0;
+
+		landmark.scale.x = 0.5;
+		landmark.scale.y = 0.5;
+		landmark.scale.z = 0.5;
+
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = 1;
+		landmark.pose.position.z = 0.25;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+
+		landmark.type = visualization_msgs::Marker::TEXT_VIEW_FACING;
+		landmark.id =13;
+		landmark.text="Methane source";
+
+		landmark.color.r = 1;
+		landmark.color.g = 0;
+		landmark.color.b = 0;
+		landmark.color.a = 1.0;
+
+		landmark.pose.position.x = x;
+		landmark.pose.position.y = 1;
+		landmark.pose.position.z = 1;
+
+		landmark.scale.x = 1;
+		landmark.scale.y = 1;
+		landmark.scale.z = 0.8;
+		robot_pub.publish(landmark);			//<----------------- Publish object
+
+
+
+
+}
+
+
+
+
+
+

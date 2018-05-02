@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!-- Jul 10, 2015 -->
+
+<launch>
+
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+<!-- 					GASBOT HISTORIAN					     -->
+<!-- ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+	<node pkg="gasbot_historian" type="historian" name="gasbot_historian_node" output="screen">
+	<param name="threshold" 		value="100.00"/>
+	<param name="operation"			value="3"/>
+	<!--param name="title"			value="Trial2_1_20140916"/--> 
+	<param name="title"			value="Trial_corr"/> 
+	<param name="file"			value="logs"/>
+	<!--param name="path"			value="$(find gasbot_historian)/History/TeknikhusetIndoor/"/-->
+	<!--param name="path"			value="/home/husky/Experiments/TeknikhusetIndoor/Map_20140818_t2_R2/"/-->
+	<param name="path"			value="/home/husky/MCDM_Exploration/test"/>
+	<param name="localization_topic"	value="/ndt_mcl"/>
+    </node>
+</launch>
+

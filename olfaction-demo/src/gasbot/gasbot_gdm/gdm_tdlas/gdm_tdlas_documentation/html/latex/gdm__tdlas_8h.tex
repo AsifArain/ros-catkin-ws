@@ -1,0 +1,184 @@
+\section{gdm\_\-tdlas.h File Reference}
+\label{gdm__tdlas_8h}\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}}
+{\ttfamily \#include \char`\"{}rmld\_\-msg.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}ros/ros.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}std\_\-msgs/String.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}map.h\char`\"{}}\par
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$geometry\_\-msgs/Point.h$>$}\par
+{\ttfamily \#include $<$boost/thread/mutex.hpp$>$}\par
+{\ttfamily \#include $<$boost/math/constants/constants.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES.hpp$>$}\par
+Include dependency graph for gdm\_\-tdlas.h:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{gdm__tdlas_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=124pt]{gdm__tdlas_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf LOOP\_\-RATE\_\-HZ}~50
+\item 
+\#define {\bf NODE\_\-NAME}~\char`\"{}gdm\_\-tdlas\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double {\bf CELL\_\-SIZE} = 1
+\item 
+std::string {\bf FIXED\_\-FRAME} = \char`\"{}/map\char`\"{}
+\item 
+{\bf GdmTDLAS::GasMap} $\ast$ {\bf gas\_\-map}
+\item 
+geometry\_\-msgs::Point {\bf lastPoint\_\-End}
+\item 
+geometry\_\-msgs::Point {\bf lastPoint\_\-Origin}
+\item 
+double {\bf MAX\_\-CONC} = 100
+\item 
+double {\bf MAX\_\-X} = 6.00
+\item 
+double {\bf MAX\_\-Y} = 15.00
+\item 
+float {\bf measurementPPMM}
+\item 
+double {\bf MIN\_\-X} = -\/5.30
+\item 
+double {\bf MIN\_\-Y} = -\/3.09
+\item 
+boost::mutex {\bf mutex\_\-rmld}
+\item 
+bool {\bf new\_\-data\_\-arrived}
+\item 
+std::string {\bf RMLD\_\-TOPIC} = \char`\"{}localized\_\-RMLD/rmld\_\-data\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\subsection{Define Documentation}
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!LOOP\_\-RATE\_\-HZ@{LOOP\_\-RATE\_\-HZ}}
+\index{LOOP\_\-RATE\_\-HZ@{LOOP\_\-RATE\_\-HZ}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{LOOP\_\-RATE\_\-HZ}]{\setlength{\rightskip}{0pt plus 5cm}\#define LOOP\_\-RATE\_\-HZ~50}\label{gdm__tdlas_8h_acd97b33c4ed6a53a3c744ea2f76bd378}
+
+
+Definition at line 51 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!NODE\_\-NAME@{NODE\_\-NAME}}
+\index{NODE\_\-NAME@{NODE\_\-NAME}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{NODE\_\-NAME}]{\setlength{\rightskip}{0pt plus 5cm}\#define NODE\_\-NAME~\char`\"{}gdm\_\-tdlas\char`\"{}}\label{gdm__tdlas_8h_a8cc8d559acdd2f74085b20977182d5b7}
+
+
+Definition at line 52 of file gdm\_\-tdlas.h.
+
+
+
+\subsection{Variable Documentation}
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!CELL\_\-SIZE@{CELL\_\-SIZE}}
+\index{CELL\_\-SIZE@{CELL\_\-SIZE}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{CELL\_\-SIZE}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf CELL\_\-SIZE} = 1}\label{gdm__tdlas_8h_a4cf9ff51a66312cba25005de9de38c30}
+
+
+Definition at line 60 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!FIXED\_\-FRAME@{FIXED\_\-FRAME}}
+\index{FIXED\_\-FRAME@{FIXED\_\-FRAME}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{FIXED\_\-FRAME}]{\setlength{\rightskip}{0pt plus 5cm}std::string {\bf FIXED\_\-FRAME} = \char`\"{}/map\char`\"{}}\label{gdm__tdlas_8h_ae723813911dffa4fe96261e3bc59c131}
+
+
+Definition at line 64 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!gas\_\-map@{gas\_\-map}}
+\index{gas\_\-map@{gas\_\-map}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{gas\_\-map}]{\setlength{\rightskip}{0pt plus 5cm}{\bf GdmTDLAS::GasMap}$\ast$ {\bf gas\_\-map}}\label{gdm__tdlas_8h_ade0f976bd45ebb046e717c19f8361b8a}
+
+
+Definition at line 82 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!lastPoint\_\-End@{lastPoint\_\-End}}
+\index{lastPoint\_\-End@{lastPoint\_\-End}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{lastPoint\_\-End}]{\setlength{\rightskip}{0pt plus 5cm}geometry\_\-msgs::Point {\bf lastPoint\_\-End}}\label{gdm__tdlas_8h_aa9e3139dbb4679af2b6dfab4559ac517}
+
+
+Definition at line 78 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!lastPoint\_\-Origin@{lastPoint\_\-Origin}}
+\index{lastPoint\_\-Origin@{lastPoint\_\-Origin}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{lastPoint\_\-Origin}]{\setlength{\rightskip}{0pt plus 5cm}geometry\_\-msgs::Point {\bf lastPoint\_\-Origin}}\label{gdm__tdlas_8h_a8b43179bdb67e5ec9b19d23667f3ab38}
+
+
+Definition at line 77 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!MAX\_\-CONC@{MAX\_\-CONC}}
+\index{MAX\_\-CONC@{MAX\_\-CONC}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{MAX\_\-CONC}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MAX\_\-CONC} = 100}\label{gdm__tdlas_8h_aeef37ba19f1932a31b8448cc54397c54}
+
+
+Definition at line 61 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!MAX\_\-X@{MAX\_\-X}}
+\index{MAX\_\-X@{MAX\_\-X}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{MAX\_\-X}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MAX\_\-X} = 6.00}\label{gdm__tdlas_8h_a902cb51b772cd4387192501e97bd7198}
+
+
+Definition at line 57 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!MAX\_\-Y@{MAX\_\-Y}}
+\index{MAX\_\-Y@{MAX\_\-Y}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{MAX\_\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MAX\_\-Y} = 15.00}\label{gdm__tdlas_8h_a143bc3c46d0e3fb1e70a2e7da2186b92}
+
+
+Definition at line 59 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!measurementPPMM@{measurementPPMM}}
+\index{measurementPPMM@{measurementPPMM}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{measurementPPMM}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf measurementPPMM}}\label{gdm__tdlas_8h_a3e354c17f76d0f236627d5285272e653}
+
+
+Definition at line 81 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!MIN\_\-X@{MIN\_\-X}}
+\index{MIN\_\-X@{MIN\_\-X}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{MIN\_\-X}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MIN\_\-X} = -\/5.30}\label{gdm__tdlas_8h_a3e390754b32f87824ad96ec0888958d3}
+
+
+Definition at line 56 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!MIN\_\-Y@{MIN\_\-Y}}
+\index{MIN\_\-Y@{MIN\_\-Y}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{MIN\_\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double {\bf MIN\_\-Y} = -\/3.09}\label{gdm__tdlas_8h_a188814c015e92c2bd4daa2f823f07b75}
+
+
+Definition at line 58 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!mutex\_\-rmld@{mutex\_\-rmld}}
+\index{mutex\_\-rmld@{mutex\_\-rmld}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{mutex\_\-rmld}]{\setlength{\rightskip}{0pt plus 5cm}boost::mutex {\bf mutex\_\-rmld}}\label{gdm__tdlas_8h_ae711d53dd6a1e1c200e3b57589cbad0a}
+
+
+Definition at line 84 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!new\_\-data\_\-arrived@{new\_\-data\_\-arrived}}
+\index{new\_\-data\_\-arrived@{new\_\-data\_\-arrived}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{new\_\-data\_\-arrived}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf new\_\-data\_\-arrived}}\label{gdm__tdlas_8h_aa2d37e3128a894269a8f288fe34f9002}
+
+
+Definition at line 80 of file gdm\_\-tdlas.h.
+
+\index{gdm\_\-tdlas.h@{gdm\_\-tdlas.h}!RMLD\_\-TOPIC@{RMLD\_\-TOPIC}}
+\index{RMLD\_\-TOPIC@{RMLD\_\-TOPIC}!gdm_tdlas.h@{gdm\_\-tdlas.h}}
+\subsubsection[{RMLD\_\-TOPIC}]{\setlength{\rightskip}{0pt plus 5cm}std::string {\bf RMLD\_\-TOPIC} = \char`\"{}localized\_\-RMLD/rmld\_\-data\char`\"{}}\label{gdm__tdlas_8h_af39580a9f105347cdb67f69321780bb8}
+
+
+Definition at line 63 of file gdm\_\-tdlas.h.
+

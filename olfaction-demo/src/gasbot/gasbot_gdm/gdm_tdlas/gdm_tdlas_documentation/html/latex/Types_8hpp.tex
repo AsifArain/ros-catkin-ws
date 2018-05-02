@@ -1,0 +1,351 @@
+\section{Types.hpp File Reference}
+\label{Types_8hpp}\index{Types.hpp@{Types.hpp}}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{Types_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-}
+\item 
+\#define {\bf BEGIN\_\-NAMESPACE\_\-QPOASES}~namespace qpOASES \{
+\item 
+\#define {\bf END\_\-NAMESPACE\_\-QPOASES}~\}
+\item 
+\#define {\bf QQ}(I, J)~Q[(I)+nV$\ast$(J)]
+\item 
+\#define {\bf REFER\_\-NAMESPACE\_\-QPOASES}~qpOASES::
+\item 
+\#define {\bf RR}(I, J)~R[(I)+nV$\ast$(J)]
+\item 
+\#define {\bf TT}(I, J)~T[(I)$\ast$sizeT+(J)]
+\item 
+\#define {\bf USING\_\-NAMESPACE\_\-QPOASES}~using namespace qpOASES;
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf BooleanType} \{ {\bf BT\_\-FALSE}, 
+{\bf BT\_\-TRUE}
+ \}
+\item 
+enum {\bf HessianType} \{ \par
+{\bf HST\_\-ZERO}, 
+{\bf HST\_\-IDENTITY}, 
+{\bf HST\_\-POSDEF}, 
+{\bf HST\_\-POSDEF\_\-NULLSPACE}, 
+\par
+{\bf HST\_\-SEMIDEF}, 
+{\bf HST\_\-UNKNOWN}
+ \}
+\item 
+enum {\bf PrintLevel} \{ \par
+{\bf PL\_\-TABULAR} =  -\/1, 
+{\bf PL\_\-NONE}, 
+{\bf PL\_\-LOW}, 
+{\bf PL\_\-MEDIUM}, 
+\par
+{\bf PL\_\-HIGH}
+ \}
+\item 
+enum {\bf QProblemStatus} \{ \par
+{\bf QPS\_\-NOTINITIALISED}, 
+{\bf QPS\_\-PREPARINGAUXILIARYQP}, 
+{\bf QPS\_\-AUXILIARYQPSOLVED}, 
+{\bf QPS\_\-PERFORMINGHOMOTOPY}, 
+\par
+{\bf QPS\_\-HOMOTOPYQPSOLVED}, 
+{\bf QPS\_\-SOLVED}
+ \}
+\item 
+enum {\bf SubjectToStatus} \{ \par
+{\bf ST\_\-INACTIVE}, 
+{\bf ST\_\-LOWER}, 
+{\bf ST\_\-UPPER}, 
+{\bf ST\_\-INFEASIBLE\_\-LOWER}, 
+\par
+{\bf ST\_\-INFEASIBLE\_\-UPPER}, 
+{\bf ST\_\-UNDEFINED}
+ \}
+\item 
+enum {\bf SubjectToType} \{ \par
+{\bf ST\_\-UNBOUNDED}, 
+{\bf ST\_\-BOUNDED}, 
+{\bf ST\_\-EQUALITY}, 
+{\bf ST\_\-DISABLED}, 
+\par
+{\bf ST\_\-UNKNOWN}
+ \}
+\item 
+enum {\bf VisibilityStatus} \{ {\bf VS\_\-HIDDEN}, 
+{\bf VS\_\-VISIBLE}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+BEGIN\_\-NAMESPACE\_\-QPOASES typedef double {\bf real\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Declaration of all non-\/built-\/in types (except for classes). 
+
+Definition in file {\bf Types.hpp}.
+
+
+
+\subsection{Define Documentation}
+\index{Types.hpp@{Types.hpp}!\_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-@{\_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-}}
+\index{\_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-@{\_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-}!Types.hpp@{Types.hpp}}
+\subsubsection[{\_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-ALWAYS\_\-INITIALISE\_\-WITH\_\-ALL\_\-EQUALITIES\_\-\_\-}\label{Types_8hpp_ab6630e773fabc8537024e8f29a6c2bfb}
+Forces to always include all implicitly fixed bounds and all equality constraints into the initial working set when setting up an auxiliary QP. 
+
+Definition at line 63 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!BEGIN\_\-NAMESPACE\_\-QPOASES@{BEGIN\_\-NAMESPACE\_\-QPOASES}}
+\index{BEGIN\_\-NAMESPACE\_\-QPOASES@{BEGIN\_\-NAMESPACE\_\-QPOASES}!Types.hpp@{Types.hpp}}
+\subsubsection[{BEGIN\_\-NAMESPACE\_\-QPOASES}]{\setlength{\rightskip}{0pt plus 5cm}\#define BEGIN\_\-NAMESPACE\_\-QPOASES~namespace qpOASES \{}\label{Types_8hpp_afd127fcb3c8f47975e9fa0ec2bacde52}
+Macro for switching on/off the beginning of the qpOASES namespace definition. 
+
+Definition at line 114 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!END\_\-NAMESPACE\_\-QPOASES@{END\_\-NAMESPACE\_\-QPOASES}}
+\index{END\_\-NAMESPACE\_\-QPOASES@{END\_\-NAMESPACE\_\-QPOASES}!Types.hpp@{Types.hpp}}
+\subsubsection[{END\_\-NAMESPACE\_\-QPOASES}]{\setlength{\rightskip}{0pt plus 5cm}\#define END\_\-NAMESPACE\_\-QPOASES~\}}\label{Types_8hpp_adee2e4c0805d76ae74d10597f96dd70f}
+Macro for switching on/off the end of the qpOASES namespace definition. 
+
+Definition at line 117 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!QQ@{QQ}}
+\index{QQ@{QQ}!Types.hpp@{Types.hpp}}
+\subsubsection[{QQ}]{\setlength{\rightskip}{0pt plus 5cm}\#define QQ(
+\begin{DoxyParamCaption}
+\item[{}]{I, }
+\item[{}]{J}
+\end{DoxyParamCaption}
+)~Q[(I)+nV$\ast$(J)]}\label{Types_8hpp_a8c3eb8c289a88e534b934306375b9b41}
+Macro for accessing the orthonormal matrix Q of the QT factorisation. 
+
+Definition at line 132 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!REFER\_\-NAMESPACE\_\-QPOASES@{REFER\_\-NAMESPACE\_\-QPOASES}}
+\index{REFER\_\-NAMESPACE\_\-QPOASES@{REFER\_\-NAMESPACE\_\-QPOASES}!Types.hpp@{Types.hpp}}
+\subsubsection[{REFER\_\-NAMESPACE\_\-QPOASES}]{\setlength{\rightskip}{0pt plus 5cm}\#define REFER\_\-NAMESPACE\_\-QPOASES~qpOASES::}\label{Types_8hpp_a72a7d4e5cc3a3416b55f7b41f4db8273}
+Macro for switching on/off references to the qpOASES namespace. 
+
+Definition at line 123 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!RR@{RR}}
+\index{RR@{RR}!Types.hpp@{Types.hpp}}
+\subsubsection[{RR}]{\setlength{\rightskip}{0pt plus 5cm}\#define RR(
+\begin{DoxyParamCaption}
+\item[{}]{I, }
+\item[{}]{J}
+\end{DoxyParamCaption}
+)~R[(I)+nV$\ast$(J)]}\label{Types_8hpp_ad1a7cec2a5fe530a76ed5d03ea25ef66}
+Macro for accessing the Cholesky factor R. 
+
+Definition at line 129 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!TT@{TT}}
+\index{TT@{TT}!Types.hpp@{Types.hpp}}
+\subsubsection[{TT}]{\setlength{\rightskip}{0pt plus 5cm}\#define TT(
+\begin{DoxyParamCaption}
+\item[{}]{I, }
+\item[{}]{J}
+\end{DoxyParamCaption}
+)~T[(I)$\ast$sizeT+(J)]}\label{Types_8hpp_a92d9bf9531eedeecf42d4ca9e09e9293}
+Macro for accessing the triangular matrix T of the QT factorisation. 
+
+Definition at line 135 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!USING\_\-NAMESPACE\_\-QPOASES@{USING\_\-NAMESPACE\_\-QPOASES}}
+\index{USING\_\-NAMESPACE\_\-QPOASES@{USING\_\-NAMESPACE\_\-QPOASES}!Types.hpp@{Types.hpp}}
+\subsubsection[{USING\_\-NAMESPACE\_\-QPOASES}]{\setlength{\rightskip}{0pt plus 5cm}\#define USING\_\-NAMESPACE\_\-QPOASES~using namespace qpOASES;}\label{Types_8hpp_a51ef5fc7000fda5b09a4bc7f26c817d8}
+Macro for switching on/off the use of the qpOASES namespace. 
+
+Definition at line 120 of file Types.hpp.
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{Types.hpp@{Types.hpp}!BooleanType@{BooleanType}}
+\index{BooleanType@{BooleanType}!Types.hpp@{Types.hpp}}
+\subsubsection[{BooleanType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf BooleanType}}\label{Types_8hpp_a20f82124c82b6f5686a7fce454ef9089}
+Summarises all possible logical values. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{BT\_\-FALSE@{BT\_\-FALSE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!BT\_\-FALSE@{BT\_\-FALSE}}\item[{\em 
+BT\_\-FALSE\label{Types_8hpp_a20f82124c82b6f5686a7fce454ef9089a85b8a20e72a8bea5dd10a6007fe3071e}
+}]Logical value for \char`\"{}false\char`\"{}. \index{BT\_\-TRUE@{BT\_\-TRUE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!BT\_\-TRUE@{BT\_\-TRUE}}\item[{\em 
+BT\_\-TRUE\label{Types_8hpp_a20f82124c82b6f5686a7fce454ef9089a34c57965bfb07125b09326a69019f9c6}
+}]Logical value for \char`\"{}true\char`\"{}. \end{description}
+\end{Desc}
+
+
+
+Definition at line 151 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!HessianType@{HessianType}}
+\index{HessianType@{HessianType}!Types.hpp@{Types.hpp}}
+\subsubsection[{HessianType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf HessianType}}\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9}
+Summarises all possible types of the QP's Hessian matrix. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{HST\_\-ZERO@{HST\_\-ZERO}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-ZERO@{HST\_\-ZERO}}\item[{\em 
+HST\_\-ZERO\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9aa41daece61bf96c425863731850060bb}
+}]Hessian is zero matrix (i.e. LP formulation). \index{HST\_\-IDENTITY@{HST\_\-IDENTITY}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-IDENTITY@{HST\_\-IDENTITY}}\item[{\em 
+HST\_\-IDENTITY\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9a801323f9ac1f4bd78ea51fef79d7d975}
+}]Hessian is identity matrix. \index{HST\_\-POSDEF@{HST\_\-POSDEF}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-POSDEF@{HST\_\-POSDEF}}\item[{\em 
+HST\_\-POSDEF\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9a920b0622e0d6bc3e2f659ca878480bd2}
+}]Hessian is (strictly) positive definite. \index{HST\_\-POSDEF\_\-NULLSPACE@{HST\_\-POSDEF\_\-NULLSPACE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-POSDEF\_\-NULLSPACE@{HST\_\-POSDEF\_\-NULLSPACE}}\item[{\em 
+HST\_\-POSDEF\_\-NULLSPACE\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9a1e75e5ed8d1cfded9c619586b046ba2b}
+}]Hessian is positive definite on null space of active bounds/constraints. \index{HST\_\-SEMIDEF@{HST\_\-SEMIDEF}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-SEMIDEF@{HST\_\-SEMIDEF}}\item[{\em 
+HST\_\-SEMIDEF\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9a4bd6c8ccecaaf211801db7381f2361ec}
+}]Hessian is positive semi-\/definite. \index{HST\_\-UNKNOWN@{HST\_\-UNKNOWN}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!HST\_\-UNKNOWN@{HST\_\-UNKNOWN}}\item[{\em 
+HST\_\-UNKNOWN\label{Types_8hpp_a604cad5cda14e378ce4a77ab28ee9fd9a3479cf4e632ae731d4da9bf57a9f8907}
+}]Hessian type is unknown. \end{description}
+\end{Desc}
+
+
+
+Definition at line 195 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!PrintLevel@{PrintLevel}}
+\index{PrintLevel@{PrintLevel}!Types.hpp@{Types.hpp}}
+\subsubsection[{PrintLevel}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf PrintLevel}}\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5}
+Summarises all possible print levels. Print levels are used to describe the desired amount of output during runtime of qpOASES. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{PL\_\-TABULAR@{PL\_\-TABULAR}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PL\_\-TABULAR@{PL\_\-TABULAR}}\item[{\em 
+PL\_\-TABULAR\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5adc65f3981990b7c1d51fe94a776a6b70}
+}]Tabular output. \index{PL\_\-NONE@{PL\_\-NONE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PL\_\-NONE@{PL\_\-NONE}}\item[{\em 
+PL\_\-NONE\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5a8f8368df28c91ba1e51b3977a7ea8ac8}
+}]No output. \index{PL\_\-LOW@{PL\_\-LOW}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PL\_\-LOW@{PL\_\-LOW}}\item[{\em 
+PL\_\-LOW\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5aa88c0e6f4348323d414d5153a13187be}
+}]Print error messages only. \index{PL\_\-MEDIUM@{PL\_\-MEDIUM}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PL\_\-MEDIUM@{PL\_\-MEDIUM}}\item[{\em 
+PL\_\-MEDIUM\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5ad4184c636ebb71d54bd55080e3e5a4a4}
+}]Print error and warning messages as well as concise info messages. \index{PL\_\-HIGH@{PL\_\-HIGH}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!PL\_\-HIGH@{PL\_\-HIGH}}\item[{\em 
+PL\_\-HIGH\label{Types_8hpp_a83ff212f474e3669d8fac2d727f65de5a7c08272588ef93a63665031fe77a4cb2}
+}]Print all messages with full details. \end{description}
+\end{Desc}
+
+
+
+Definition at line 160 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!QProblemStatus@{QProblemStatus}}
+\index{QProblemStatus@{QProblemStatus}!Types.hpp@{Types.hpp}}
+\subsubsection[{QProblemStatus}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf QProblemStatus}}\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abd}
+Summarises all possible states of the (S)QProblem(B) object during the solution process of a QP sequence. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{QPS\_\-NOTINITIALISED@{QPS\_\-NOTINITIALISED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-NOTINITIALISED@{QPS\_\-NOTINITIALISED}}\item[{\em 
+QPS\_\-NOTINITIALISED\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abda5ce84ee8a93fc7e780e2c1e9440c95ed}
+}]\doxyref{QProblem}{p.}{classQProblem} object is freshly instantiated or reset. \index{QPS\_\-PREPARINGAUXILIARYQP@{QPS\_\-PREPARINGAUXILIARYQP}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-PREPARINGAUXILIARYQP@{QPS\_\-PREPARINGAUXILIARYQP}}\item[{\em 
+QPS\_\-PREPARINGAUXILIARYQP\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abdac5afc0889e446a94b965bff2b1e823d6}
+}]An auxiliary problem is currently setup, either at the very beginning via an initial homotopy or after changing the QP matrices. \index{QPS\_\-AUXILIARYQPSOLVED@{QPS\_\-AUXILIARYQPSOLVED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-AUXILIARYQPSOLVED@{QPS\_\-AUXILIARYQPSOLVED}}\item[{\em 
+QPS\_\-AUXILIARYQPSOLVED\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abda1ace398d1f8eddff294c06c72bc58fdb}
+}]An auxilary problem was solved, either at the very beginning via an initial homotopy or after changing the QP matrices. \index{QPS\_\-PERFORMINGHOMOTOPY@{QPS\_\-PERFORMINGHOMOTOPY}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-PERFORMINGHOMOTOPY@{QPS\_\-PERFORMINGHOMOTOPY}}\item[{\em 
+QPS\_\-PERFORMINGHOMOTOPY\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abdac817378114b9a25537c55a7b70bb0a4f}
+}]A homotopy according to the main idea of the online active set strategy is performed. \index{QPS\_\-HOMOTOPYQPSOLVED@{QPS\_\-HOMOTOPYQPSOLVED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-HOMOTOPYQPSOLVED@{QPS\_\-HOMOTOPYQPSOLVED}}\item[{\em 
+QPS\_\-HOMOTOPYQPSOLVED\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abda6f8af598b9b98f5a3582f8063f3b3ecb}
+}]An intermediate QP along the homotopy path was solved. \index{QPS\_\-SOLVED@{QPS\_\-SOLVED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!QPS\_\-SOLVED@{QPS\_\-SOLVED}}\item[{\em 
+QPS\_\-SOLVED\label{Types_8hpp_a8d5ce5a92124dc0106a5720f6d9a5abdaeaeec92065e112d99b1f82851e069bd3}
+}]The solution of the actual QP was found. \end{description}
+\end{Desc}
+
+
+
+Definition at line 180 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!SubjectToStatus@{SubjectToStatus}}
+\index{SubjectToStatus@{SubjectToStatus}!Types.hpp@{Types.hpp}}
+\subsubsection[{SubjectToStatus}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf SubjectToStatus}}\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4}
+Summarises all possible states of bounds and constraints. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{ST\_\-INACTIVE@{ST\_\-INACTIVE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-INACTIVE@{ST\_\-INACTIVE}}\item[{\em 
+ST\_\-INACTIVE\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4a830e6b358e8a1fe88b26cb221883eacf}
+}]Bound/constraint is inactive. \index{ST\_\-LOWER@{ST\_\-LOWER}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-LOWER@{ST\_\-LOWER}}\item[{\em 
+ST\_\-LOWER\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4ab8aabf121d848d6194b580b25848bdc1}
+}]Bound/constraint is at its lower bound. \index{ST\_\-UPPER@{ST\_\-UPPER}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-UPPER@{ST\_\-UPPER}}\item[{\em 
+ST\_\-UPPER\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4a75adc57fce7eec5df99c4e3d373e204b}
+}]Bound/constraint is at its upper bound. \index{ST\_\-INFEASIBLE\_\-LOWER@{ST\_\-INFEASIBLE\_\-LOWER}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-INFEASIBLE\_\-LOWER@{ST\_\-INFEASIBLE\_\-LOWER}}\item[{\em 
+ST\_\-INFEASIBLE\_\-LOWER\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4ac8720c8c1c59b164e2661101ef805887}
+}]\index{ST\_\-INFEASIBLE\_\-UPPER@{ST\_\-INFEASIBLE\_\-UPPER}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-INFEASIBLE\_\-UPPER@{ST\_\-INFEASIBLE\_\-UPPER}}\item[{\em 
+ST\_\-INFEASIBLE\_\-UPPER\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4aba6d460c0037c0df179a4f3843317e9a}
+}]\index{ST\_\-UNDEFINED@{ST\_\-UNDEFINED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-UNDEFINED@{ST\_\-UNDEFINED}}\item[{\em 
+ST\_\-UNDEFINED\label{Types_8hpp_a70a6a40d261a015ead8d43aa589383a4af5b09f89acd9d344989c2e5eed019ccb}
+}]Status of bound/constraint undefined. \end{description}
+\end{Desc}
+
+
+
+Definition at line 218 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!SubjectToType@{SubjectToType}}
+\index{SubjectToType@{SubjectToType}!Types.hpp@{Types.hpp}}
+\subsubsection[{SubjectToType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf SubjectToType}}\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3}
+Summarises all possible types of bounds and constraints. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{ST\_\-UNBOUNDED@{ST\_\-UNBOUNDED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-UNBOUNDED@{ST\_\-UNBOUNDED}}\item[{\em 
+ST\_\-UNBOUNDED\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3a9dd4eea536b458dbd9fb66950c52eb87}
+}]Bound/constraint is unbounded. \index{ST\_\-BOUNDED@{ST\_\-BOUNDED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-BOUNDED@{ST\_\-BOUNDED}}\item[{\em 
+ST\_\-BOUNDED\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3ad2ba0f85d1cc4d5ee72baabed496af36}
+}]Bound/constraint is bounded but not fixed. \index{ST\_\-EQUALITY@{ST\_\-EQUALITY}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-EQUALITY@{ST\_\-EQUALITY}}\item[{\em 
+ST\_\-EQUALITY\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3a083507944ba3aedb928a8e625459aae0}
+}]Bound/constraint is fixed (implicit equality bound/constraint). \index{ST\_\-DISABLED@{ST\_\-DISABLED}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-DISABLED@{ST\_\-DISABLED}}\item[{\em 
+ST\_\-DISABLED\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3a0dee93bdee24d1a0823663359cb5f448}
+}]\index{ST\_\-UNKNOWN@{ST\_\-UNKNOWN}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!ST\_\-UNKNOWN@{ST\_\-UNKNOWN}}\item[{\em 
+ST\_\-UNKNOWN\label{Types_8hpp_a3e65c061dde41562d1aeb2c4453bf1d3a795a8c4151ff34f7ec9fb9d39b419064}
+}]Type of bound/constraint unknown. \end{description}
+\end{Desc}
+
+
+
+Definition at line 207 of file Types.hpp.
+
+\index{Types.hpp@{Types.hpp}!VisibilityStatus@{VisibilityStatus}}
+\index{VisibilityStatus@{VisibilityStatus}!Types.hpp@{Types.hpp}}
+\subsubsection[{VisibilityStatus}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf VisibilityStatus}}\label{Types_8hpp_a36503475bb1fea0a7fd7087259ee63c1}
+Defines visibility status of a message. \begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{VS\_\-HIDDEN@{VS\_\-HIDDEN}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!VS\_\-HIDDEN@{VS\_\-HIDDEN}}\item[{\em 
+VS\_\-HIDDEN\label{Types_8hpp_a36503475bb1fea0a7fd7087259ee63c1acc5dfba7e128cac462925a6564a55a97}
+}]Message not visible. \index{VS\_\-VISIBLE@{VS\_\-VISIBLE}!Types.hpp@{Types.hpp}}\index{Types.hpp@{Types.hpp}!VS\_\-VISIBLE@{VS\_\-VISIBLE}}\item[{\em 
+VS\_\-VISIBLE\label{Types_8hpp_a36503475bb1fea0a7fd7087259ee63c1a3ff036f60aca3f1da826be88496d219b}
+}]Message visible. \end{description}
+\end{Desc}
+
+
+
+Definition at line 171 of file Types.hpp.
+
+
+
+\subsection{Variable Documentation}
+\index{Types.hpp@{Types.hpp}!real\_\-t@{real\_\-t}}
+\index{real\_\-t@{real\_\-t}!Types.hpp@{Types.hpp}}
+\subsubsection[{real\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES typedef double {\bf real\_\-t}}\label{Types_8hpp_acfbb1546e581bff0de2fa030397dc14d}
+Defines real\_\-t for facilitating switching between double and float. 
+
+Definition at line 146 of file Types.hpp.
+

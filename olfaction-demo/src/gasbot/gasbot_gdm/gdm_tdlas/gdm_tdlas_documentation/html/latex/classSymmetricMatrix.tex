@@ -1,0 +1,88 @@
+\section{SymmetricMatrix Class Reference}
+\label{classSymmetricMatrix}\index{SymmetricMatrix@{SymmetricMatrix}}
+
+
+Abstract base class for interfacing matrix-\/vector operations tailored to symmetric matrices.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for SymmetricMatrix:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{classSymmetricMatrix__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf bilinear} (const {\bf Indexlist} $\ast$const icols, int xN, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} $\ast$y, int yLD) const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract base class for interfacing matrix-\/vector operations tailored to symmetric matrices. 
+
+Abstract base class for symmetric matrices. Extends \doxyref{Matrix}{p.}{classMatrix} interface with bilinear form evaluation.
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 264 of file Matrices.hpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{SymmetricMatrix@{SymmetricMatrix}!bilinear@{bilinear}}
+\index{bilinear@{bilinear}!SymmetricMatrix@{SymmetricMatrix}}
+\subsubsection[{bilinear}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf returnValue} SymmetricMatrix::bilinear (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classSymmetricMatrix_a1ff4cc04a2d05ed5765a981c37ae57eb}
+Compute bilinear form y = x'$\ast$H$\ast$x using submatrix given by index list. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em icols} & Index list specifying columns of x. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em x} & Input vector to be multiplied (uncompressed). \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em y} & Output vector of results (compressed). \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf SymDenseMat} \doxyref{}{p.}{classSymDenseMat_af7d89e70ee0a2b15c5884a1aadc441ef}, and {\bf SymSparseMat} \doxyref{}{p.}{classSymSparseMat_a881bfc826470c74db2709b95c2de3057}.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\end{DoxyCompactItemize}

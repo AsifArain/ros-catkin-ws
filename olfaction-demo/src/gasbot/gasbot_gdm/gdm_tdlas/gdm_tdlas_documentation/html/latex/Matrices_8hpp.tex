@@ -1,0 +1,250 @@
+\section{Matrices.hpp File Reference}
+\label{Matrices_8hpp}\index{Matrices.hpp@{Matrices.hpp}}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{Matrices_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf DenseMatrix}
+\begin{DoxyCompactList}\small\item\em Interfaces matrix-\/vector operations tailored to general dense matrices. \end{DoxyCompactList}\item 
+class {\bf Matrix}
+\begin{DoxyCompactList}\small\item\em Abstract base class for interfacing tailored matrix-\/vector operations. \end{DoxyCompactList}\item 
+class {\bf SparseMatrix}
+\begin{DoxyCompactList}\small\item\em Interfaces matrix-\/vector operations tailored to general sparse matrices. \end{DoxyCompactList}\item 
+class {\bf SparseMatrixRow}
+\begin{DoxyCompactList}\small\item\em Interfaces matrix-\/vector operations tailored to general sparse matrices. \end{DoxyCompactList}\item 
+class {\bf SymDenseMat}
+\begin{DoxyCompactList}\small\item\em Interfaces matrix-\/vector operations tailored to symmetric dense matrices. \end{DoxyCompactList}\item 
+class {\bf SymmetricMatrix}
+\begin{DoxyCompactList}\small\item\em Abstract base class for interfacing matrix-\/vector operations tailored to symmetric matrices. \end{DoxyCompactList}\item 
+class {\bf SymSparseMat}
+\begin{DoxyCompactList}\small\item\em Interfaces matrix-\/vector operations tailored to symmetric sparse matrices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf GEMM}~dgemm\_\-
+\item 
+\#define {\bf POTRF}~dpotrf\_\-
+\item 
+\#define {\bf SYR}~dsyr\_\-
+\item 
+\#define {\bf SYR2}~dsyr2\_\-
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf dgemm\_\-} (const char $\ast$, const char $\ast$, const unsigned long $\ast$, const unsigned long $\ast$, const unsigned long $\ast$, const double $\ast$, const double $\ast$, const unsigned long $\ast$, const double $\ast$, const unsigned long $\ast$, const double $\ast$, double $\ast$, const unsigned long $\ast$)
+\item 
+void {\bf dpotrf\_\-} (const char $\ast$, const unsigned long $\ast$, double $\ast$, const unsigned long $\ast$, long $\ast$)
+\item 
+void {\bf dsyr2\_\-} (const char $\ast$, const unsigned long $\ast$, const double $\ast$, const double $\ast$, const unsigned long $\ast$, const double $\ast$, const unsigned long $\ast$, double $\ast$, const unsigned long $\ast$)
+\item 
+void {\bf dsyr\_\-} (const char $\ast$, const unsigned long $\ast$, const double $\ast$, const double $\ast$, const unsigned long $\ast$, double $\ast$, const unsigned long $\ast$)
+\item 
+void {\bf sgemm\_\-} (const char $\ast$, const char $\ast$, const unsigned long $\ast$, const unsigned long $\ast$, const unsigned long $\ast$, const float $\ast$, const float $\ast$, const unsigned long $\ast$, const float $\ast$, const unsigned long $\ast$, const float $\ast$, float $\ast$, const unsigned long $\ast$)
+\item 
+void {\bf spotrf\_\-} (const char $\ast$, const unsigned long $\ast$, float $\ast$, const unsigned long $\ast$, long $\ast$)
+\item 
+void {\bf ssyr2\_\-} (const char $\ast$, const unsigned long $\ast$, const float $\ast$, const float $\ast$, const unsigned long $\ast$, const float $\ast$, const unsigned long $\ast$, float $\ast$, const unsigned long $\ast$)
+\item 
+void {\bf ssyr\_\-} (const char $\ast$, const unsigned long $\ast$, const float $\ast$, const float $\ast$, const unsigned long $\ast$, float $\ast$, const unsigned long $\ast$)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+BEGIN\_\-NAMESPACE\_\-QPOASES typedef int {\bf sparse\_\-int\_\-t}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2009-\/2012
+\end{DoxyDate}
+Various matrix classes: Abstract base matrix class, dense and sparse matrices, including symmetry exploiting specializations. 
+
+Definition in file {\bf Matrices.hpp}.
+
+
+
+\subsection{Define Documentation}
+\index{Matrices.hpp@{Matrices.hpp}!GEMM@{GEMM}}
+\index{GEMM@{GEMM}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{GEMM}]{\setlength{\rightskip}{0pt plus 5cm}\#define GEMM~dgemm\_\-}\label{Matrices_8hpp_a68c6925602a91b3f1b335f64f533350c}
+Macro for calling level 3 BLAS operation in double precision. 
+
+Definition at line 55 of file Matrices.hpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!POTRF@{POTRF}}
+\index{POTRF@{POTRF}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{POTRF}]{\setlength{\rightskip}{0pt plus 5cm}\#define POTRF~dpotrf\_\-}\label{Matrices_8hpp_a39fd888b29dc1aba3c780981acdd7f62}
+Macro for calling level 3 BLAS operation in double precision. 
+
+Definition at line 61 of file Matrices.hpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!SYR@{SYR}}
+\index{SYR@{SYR}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{SYR}]{\setlength{\rightskip}{0pt plus 5cm}\#define SYR~dsyr\_\-}\label{Matrices_8hpp_a5ee0a497d3653585eb12da8940842993}
+Macro for calling level 3 BLAS operation in double precision. 
+
+Definition at line 57 of file Matrices.hpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!SYR2@{SYR2}}
+\index{SYR2@{SYR2}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{SYR2}]{\setlength{\rightskip}{0pt plus 5cm}\#define SYR2~dsyr2\_\-}\label{Matrices_8hpp_a5f81ee60143e803bb030c1180cd8ec5a}
+Macro for calling level 3 BLAS operation in double precision. 
+
+Definition at line 59 of file Matrices.hpp.
+
+
+
+\subsection{Function Documentation}
+\index{Matrices.hpp@{Matrices.hpp}!dgemm\_\-@{dgemm\_\-}}
+\index{dgemm\_\-@{dgemm\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{dgemm\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void dgemm\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_abc759a939c9e9258abfc2f558f78c87f}
+Performs one of the matrix-\/matrix operation in double precision. 
+
+Definition at line 36 of file BLASReplacement.cpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!dpotrf\_\-@{dpotrf\_\-}}
+\index{dpotrf\_\-@{dpotrf\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{dpotrf\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void dpotrf\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a5bad6f61c16311987c9286e9bb161006}
+Calculates the Cholesky factorization of a real symmetric positive definite matrix in double precision. 
+
+Definition at line 38 of file LAPACKReplacement.cpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!dsyr2\_\-@{dsyr2\_\-}}
+\index{dsyr2\_\-@{dsyr2\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{dsyr2\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void dsyr2\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a706f3b03c33ac58d31c681d7faf6fedf}
+Performs a symmetric rank 2 operation in double precision. \index{Matrices.hpp@{Matrices.hpp}!dsyr\_\-@{dsyr\_\-}}
+\index{dsyr\_\-@{dsyr\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{dsyr\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void dsyr\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{double $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_aa487bf28ac0323a6b12c5ad95b69a5a2}
+Performs a symmetric rank 1 operation in double precision. \index{Matrices.hpp@{Matrices.hpp}!sgemm\_\-@{sgemm\_\-}}
+\index{sgemm\_\-@{sgemm\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{sgemm\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void sgemm\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a2d0404fd005dbb78f314e48e46dc14f2}
+Performs one of the matrix-\/matrix operation in single precision. 
+
+Definition at line 90 of file BLASReplacement.cpp.
+
+\index{Matrices.hpp@{Matrices.hpp}!spotrf\_\-@{spotrf\_\-}}
+\index{spotrf\_\-@{spotrf\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{spotrf\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void spotrf\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a519c3855d35f97aeeb2b8e583846c2f0}
+Calculates the Cholesky factorization of a real symmetric positive definite matrix in single precision. \index{Matrices.hpp@{Matrices.hpp}!ssyr2\_\-@{ssyr2\_\-}}
+\index{ssyr2\_\-@{ssyr2\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{ssyr2\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void ssyr2\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a42495df75d1c4859ee2f7a4a3d7f57ca}
+Performs a symmetric rank 2 operation in single precision. \index{Matrices.hpp@{Matrices.hpp}!ssyr\_\-@{ssyr\_\-}}
+\index{ssyr\_\-@{ssyr\_\-}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{ssyr\_\-}]{\setlength{\rightskip}{0pt plus 5cm}void ssyr\_\- (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{, }
+\item[{float $\ast$}]{, }
+\item[{const unsigned long $\ast$}]{}
+\end{DoxyParamCaption}
+)}\label{Matrices_8hpp_a8c9fdafb90f8718c2ce7febbb4c72f2f}
+Performs a symmetric rank 1 operation in single precision. 
+
+\subsection{Variable Documentation}
+\index{Matrices.hpp@{Matrices.hpp}!sparse\_\-int\_\-t@{sparse\_\-int\_\-t}}
+\index{sparse\_\-int\_\-t@{sparse\_\-int\_\-t}!Matrices.hpp@{Matrices.hpp}}
+\subsubsection[{sparse\_\-int\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES typedef int {\bf sparse\_\-int\_\-t}}\label{Matrices_8hpp_a0cc0f6e829c2163b8479d91190252d7d}
+
+
+Definition at line 106 of file Matrices.hpp.
+

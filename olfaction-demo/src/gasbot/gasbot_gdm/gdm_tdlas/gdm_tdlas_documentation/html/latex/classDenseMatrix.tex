@@ -1,0 +1,579 @@
+\section{DenseMatrix Class Reference}
+\label{classDenseMatrix}\index{DenseMatrix@{DenseMatrix}}
+
+
+Interfaces matrix-\/vector operations tailored to general dense matrices.  
+
+
+
+
+{\ttfamily \#include $<$Matrices.hpp$>$}
+
+
+
+Inheritance diagram for DenseMatrix:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=126pt]{classDenseMatrix__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bf returnValue} {\bf addToDiag} ({\bf real\_\-t} alpha)
+\item 
+{\bf DenseMatrix} ()
+\item 
+{\bf DenseMatrix} (int m, int n, int lD, {\bf real\_\-t} $\ast$v)
+\item 
+virtual {\bf real\_\-t} {\bf diag} (int i) const 
+\item 
+virtual {\bf Matrix} $\ast$ {\bf duplicate} () const 
+\item 
+virtual void {\bf free} ()
+\item 
+virtual {\bf returnValue} {\bf getCol} (int cNum, const {\bf Indexlist} $\ast$const irows, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$col) const 
+\item 
+virtual {\bf real\_\-t} {\bf getNorm} () const 
+\item 
+virtual {\bf returnValue} {\bf getRow} (int rNum, const {\bf Indexlist} $\ast$const icols, {\bf real\_\-t} alpha, {\bf real\_\-t} $\ast$row) const 
+\item 
+virtual {\bf real\_\-t} {\bf getRowNorm} (int rNum) const 
+\item 
+virtual {\bf BooleanType} {\bf isDiag} () const 
+\item 
+virtual {\bf returnValue} {\bf print} () const 
+\item 
+virtual {\bf returnValue} {\bf times} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD, {\bf BooleanType} yCompr=BT\_\-TRUE) const 
+\item 
+{\bf returnValue} {\bf times} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+{\bf returnValue} {\bf transTimes} (int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf returnValue} {\bf transTimes} (const {\bf Indexlist} $\ast$const irows, const {\bf Indexlist} $\ast$const icols, int xN, {\bf real\_\-t} alpha, const {\bf real\_\-t} $\ast$x, int xLD, {\bf real\_\-t} beta, {\bf real\_\-t} $\ast$y, int yLD) const 
+\item 
+virtual {\bf $\sim$DenseMatrix} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bf leaDim}
+\item 
+int {\bf nCols}
+\item 
+int {\bf nRows}
+\item 
+{\bf real\_\-t} $\ast$ {\bf val}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interfaces matrix-\/vector operations tailored to general dense matrices. 
+
+Dense matrix class (row major format).
+
+\begin{DoxyAuthor}{Author}
+Andreas Potschka, Christian Kirches, Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2011 
+\end{DoxyDate}
+
+
+Definition at line 291 of file Matrices.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{DenseMatrix@{DenseMatrix}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{DenseMatrix}]{\setlength{\rightskip}{0pt plus 5cm}DenseMatrix::DenseMatrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classDenseMatrix_a962f1cca43a07753de96c8b9e413db06}
+Default constructor. 
+
+Definition at line 295 of file Matrices.hpp.
+
+\index{DenseMatrix@{DenseMatrix}!DenseMatrix@{DenseMatrix}}
+\index{DenseMatrix@{DenseMatrix}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{DenseMatrix}]{\setlength{\rightskip}{0pt plus 5cm}DenseMatrix::DenseMatrix (
+\begin{DoxyParamCaption}
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{int}]{lD, }
+\item[{{\bf real\_\-t} $\ast$}]{v}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classDenseMatrix_a60971ce3f56d4b6dd162343b7ee99343}
+Constructor from vector of values. Caution: Data pointer must be valid throughout lifetime 
+\begin{DoxyParams}{Parameters}
+{\em m} & Number of rows. \\
+\hline
+{\em n} & Number of columns. \\
+\hline
+{\em lD} & Leading dimension. \\
+\hline
+{\em v} & Values. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 300 of file Matrices.hpp.
+
+\index{DenseMatrix@{DenseMatrix}!$\sim$DenseMatrix@{$\sim$DenseMatrix}}
+\index{$\sim$DenseMatrix@{$\sim$DenseMatrix}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{$\sim$DenseMatrix}]{\setlength{\rightskip}{0pt plus 5cm}DenseMatrix::$\sim$DenseMatrix (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a7c920f60470d6a862624c7632fec5e4b}
+Destructor. 
+
+Definition at line 54 of file Matrices.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{DenseMatrix@{DenseMatrix}!addToDiag@{addToDiag}}
+\index{addToDiag@{addToDiag}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{addToDiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::addToDiag (
+\begin{DoxyParamCaption}
+\item[{{\bf real\_\-t}}]{alpha}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_ac901971278139a1413ff75d6106aa43b}
+Adds given offset to diagonal of matrix. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em alpha} & Diagonal offset. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a7ee8d1b4ef0d5d5fb34342ea1889382f}.
+
+
+
+Definition at line 429 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!diag@{diag}}
+\index{diag@{diag}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{diag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} DenseMatrix::diag (
+\begin{DoxyParamCaption}
+\item[{int}]{i}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_ae0a1610915e180022f5e2161363be6ae}
+Returns i-\/th diagonal entry. \begin{DoxyReturn}{Returns}
+i-\/th diagonal entry 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Index. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ab78435722398170cb87b0eb9650d8ca1}.
+
+
+
+Definition at line 86 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!duplicate@{duplicate}}
+\index{duplicate@{duplicate}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{duplicate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Matrix} $\ast$ DenseMatrix::duplicate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_af914e214e10c8f9731da75e605dae3ff}
+Returns a deep-\/copy of the \doxyref{Matrix}{p.}{classMatrix} object. \begin{DoxyReturn}{Returns}
+Deep-\/copy of \doxyref{Matrix}{p.}{classMatrix} object 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_abf41d80f7392e9d63e9b2fa4b822d3b9}.
+
+
+
+Reimplemented in {\bf SymDenseMat} \doxyref{}{p.}{classSymDenseMat_af9544d2c52d356e2830e2d7dc65d9b2d}.
+
+
+
+Definition at line 67 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!free@{free}}
+\index{free@{free}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{free}]{\setlength{\rightskip}{0pt plus 5cm}void DenseMatrix::free (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_acce63266bde8d6fd4a6c31a78c5e49e8}
+Frees all internal memory. 
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ae13ca77389c2eae7b3eba79cb9fefecb}.
+
+
+
+Definition at line 60 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!getCol@{getCol}}
+\index{getCol@{getCol}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{getCol}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::getCol (
+\begin{DoxyParamCaption}
+\item[{int}]{cNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{col}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a01b2a8928dc594099f430b4d4998ec4d}
+Retrieve indexed entries of matrix column multiplied by alpha. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em cNum} & Column number. \\
+\hline
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em col} & Output column vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a7b9f4ce0fe8c2efc34503bb260383d2c}.
+
+
+
+Definition at line 157 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!getNorm@{getNorm}}
+\index{getNorm@{getNorm}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{getNorm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} DenseMatrix::getNorm (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a9e1514390cd82704505b9fa34426f7cf}
+Get the two-\/norm of the matrix \begin{DoxyReturn}{Returns}
+Two-\/norm of the matrix 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a1cb0da3d4cf9b7c4ae21efbc05f66556}.
+
+
+
+Definition at line 108 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!getRow@{getRow}}
+\index{getRow@{getRow}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{getRow}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::getRow (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{{\bf real\_\-t} $\ast$}]{row}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_ab1c12481bf0f6d68776b8497058e72dc}
+Retrieve indexed entries of matrix row multiplied by alpha. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rNum} & Row number. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em alpha} & Scalar factor. \\
+\hline
+{\em row} & Output row vector. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_ab67514f6450264a6c8d55b319802099d}.
+
+
+
+Definition at line 127 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!getRowNorm@{getRowNorm}}
+\index{getRowNorm@{getRowNorm}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{getRowNorm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t} DenseMatrix::getRowNorm (
+\begin{DoxyParamCaption}
+\item[{int}]{rNum}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a236e8bdbfa298a30ae62740081044295}
+Get the two-\/norm of a row \begin{DoxyReturn}{Returns}
+Two-\/norm of row {\itshape rNum\/} 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a44dd9bd45bd8529128b722bce60b6f42}.
+
+
+
+Definition at line 118 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!isDiag@{isDiag}}
+\index{isDiag@{isDiag}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{isDiag}]{\setlength{\rightskip}{0pt plus 5cm}{\bf BooleanType} DenseMatrix::isDiag (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a305a842a01cf80a33ae26d96e2d981af}
+Checks whether matrix is square and diagonal. \begin{DoxyReturn}{Returns}
+BT\_\-TRUE iff matrix is square and diagonal; \par
+ BT\_\-FALSE otherwise. 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a1f5595f0147658d9f79f92dd283dcbac}.
+
+
+
+Definition at line 92 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!print@{print}}
+\index{print@{print}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a9e3568219695311edd5911df3da2696b}
+Prints matrix to screen. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_a110943ca5fc5b30a3e8d941622a15f8f}.
+
+
+
+Definition at line 439 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!times@{times}}
+\index{times@{times}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::times (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD, }
+\item[{{\bf BooleanType}}]{yCompr = {\ttfamily BT\_\-TRUE}}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a3669612de4d322926bfedc1b85e31c7f}
+Evaluate matrix vector product with submatrix given by \doxyref{Indexlist}{p.}{classIndexlist}. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+{\em yCompr} & Compressed storage for y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_add63b9303590f022b4aa49278f91f605}.
+
+
+
+Definition at line 190 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!times@{times}}
+\index{times@{times}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{times}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::times (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a6200952366ece968bce82c9400377b86}
+Evaluate Y=alpha$\ast$A$\ast$X + beta$\ast$Y. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aab443ceb9e4e37d3efca65f446872dc2}.
+
+
+
+Definition at line 174 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::transTimes (
+\begin{DoxyParamCaption}
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a5011b924f44dc66be19c2606c9083d5c}
+Evaluate Y=alpha$\ast$A'$\ast$X + beta$\ast$Y. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN. 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aae760f106376a34dfaf0c168fa836d84}.
+
+
+
+Definition at line 182 of file Matrices.cpp.
+
+\index{DenseMatrix@{DenseMatrix}!transTimes@{transTimes}}
+\index{transTimes@{transTimes}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{transTimes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} DenseMatrix::transTimes (
+\begin{DoxyParamCaption}
+\item[{const {\bf Indexlist} $\ast$const}]{irows, }
+\item[{const {\bf Indexlist} $\ast$const}]{icols, }
+\item[{int}]{xN, }
+\item[{{\bf real\_\-t}}]{alpha, }
+\item[{const {\bf real\_\-t} $\ast$}]{x, }
+\item[{int}]{xLD, }
+\item[{{\bf real\_\-t}}]{beta, }
+\item[{{\bf real\_\-t} $\ast$}]{y, }
+\item[{int}]{yLD}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classDenseMatrix_a810893d8ddfd4bfe7d115f1b773cc9e0}
+Evaluate matrix transpose vector product. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em irows} & Index list specifying rows. \\
+\hline
+{\em icols} & Index list specifying columns. \\
+\hline
+{\em xN} & Number of vectors to multiply. \\
+\hline
+{\em alpha} & Scalar factor for matrix vector product. \\
+\hline
+{\em x} & Input vector to be multiplied. \\
+\hline
+{\em xLD} & Leading dimension of input x. \\
+\hline
+{\em beta} & Scalar factor for y. \\
+\hline
+{\em y} & Output vector of results. \\
+\hline
+{\em yLD} & Leading dimension of output y. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf Matrix} \doxyref{}{p.}{classMatrix_aa84ec7c391f7478e78ffbaf4f1f5f732}.
+
+
+
+Definition at line 374 of file Matrices.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{DenseMatrix@{DenseMatrix}!leaDim@{leaDim}}
+\index{leaDim@{leaDim}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{leaDim}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf DenseMatrix::leaDim}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classDenseMatrix_a8dc0c40ac7f7cfbb7b75644afc3704fa}
+Leading dimension. 
+
+Definition at line 418 of file Matrices.hpp.
+
+\index{DenseMatrix@{DenseMatrix}!nCols@{nCols}}
+\index{nCols@{nCols}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{nCols}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf DenseMatrix::nCols}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classDenseMatrix_a85333252208b2f8c166fc68b402b880e}
+Number of columns. 
+
+Definition at line 417 of file Matrices.hpp.
+
+\index{DenseMatrix@{DenseMatrix}!nRows@{nRows}}
+\index{nRows@{nRows}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{nRows}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf DenseMatrix::nRows}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classDenseMatrix_abd8c8f8c4a8f6b587c1f96266d953b0f}
+Number of rows. 
+
+Definition at line 416 of file Matrices.hpp.
+
+\index{DenseMatrix@{DenseMatrix}!val@{val}}
+\index{val@{val}!DenseMatrix@{DenseMatrix}}
+\subsubsection[{val}]{\setlength{\rightskip}{0pt plus 5cm}{\bf real\_\-t}$\ast$ {\bf DenseMatrix::val}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classDenseMatrix_a7de2a860c753fae01ba92b2d204d71bd}
+Vector of entries. 
+
+Definition at line 419 of file Matrices.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Matrices.hpp}\item 
+{\bf Matrices.cpp}\end{DoxyCompactItemize}

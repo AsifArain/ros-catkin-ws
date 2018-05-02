@@ -1,0 +1,179 @@
+\section{GdmTDLAS::Cell Class Reference}
+\label{classGdmTDLAS_1_1Cell}\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+
+
+{\ttfamily \#include $<$cell.h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Cell} (float {\bf x}, float {\bf y}, float {\bf size})
+\item 
+void {\bf print} ()
+\item 
+void {\bf publish} (visualization\_\-msgs::Marker \&marker)
+\item 
+int {\bf setColor} (float {\bf r}, float {\bf g}, float {\bf b})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf b}
+\item 
+float {\bf g}
+\item 
+float {\bf r}
+\item 
+float {\bf size}
+\item 
+geometry\_\-msgs::Point {\bf vertex} [4]
+\item 
+float {\bf x}
+\item 
+float {\bf y}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 19 of file cell.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!Cell@{Cell}}
+\index{Cell@{Cell}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{Cell}]{\setlength{\rightskip}{0pt plus 5cm}Cell::Cell (
+\begin{DoxyParamCaption}
+\item[{float}]{x, }
+\item[{float}]{y, }
+\item[{float}]{size}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1Cell_a39297b6f76b95be75da869010e580df8}
+Constructor 
+\begin{DoxyParams}{Parameters}
+{\em x} & x position (metrical coordinates) \\
+\hline
+{\em y} & y position (metrical coordinates) \\
+\hline
+{\em size} & size of the cell \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 21 of file cell.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!print@{print}}
+\index{print@{print}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}void Cell::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1Cell_ad85f38ac8740c33451866c8af37b8240}
+Printing function 
+
+Definition at line 8 of file cell.cpp.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!publish@{publish}}
+\index{publish@{publish}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{publish}]{\setlength{\rightskip}{0pt plus 5cm}void Cell::publish (
+\begin{DoxyParamCaption}
+\item[{visualization\_\-msgs::Marker \&}]{marker}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1Cell_aefe7d51a5ec5005594276b189f3c42a2}
+Publishes the square associated to the cell 
+\begin{DoxyParams}{Parameters}
+{\em marker} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file cell.cpp.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!setColor@{setColor}}
+\index{setColor@{setColor}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{setColor}]{\setlength{\rightskip}{0pt plus 5cm}int Cell::setColor (
+\begin{DoxyParamCaption}
+\item[{float}]{r, }
+\item[{float}]{g, }
+\item[{float}]{b}
+\end{DoxyParamCaption}
+)}\label{classGdmTDLAS_1_1Cell_a8153eaab53b66cdbd093a772bf6f35ca}
+Sets the color of the cell to be visualized 
+\begin{DoxyParams}{Parameters}
+{\em r} & red component \\
+\hline
+{\em g} & green component \\
+\hline
+{\em b} & blue component \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer code, typically zero 
+\end{DoxyReturn}
+
+
+Definition at line 43 of file cell.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!b@{b}}
+\index{b@{b}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::b}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_a446f9765f7729ed793df79ad8ec95752}
+
+
+Definition at line 26 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!g@{g}}
+\index{g@{g}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::g}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_a0a633b311d2e94f3804ec356193b1df7}
+
+
+Definition at line 25 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!r@{r}}
+\index{r@{r}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::r}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_adbad1b0d3d8d4cc5d635dd5369ad1cb0}
+
+
+Definition at line 24 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!size@{size}}
+\index{size@{size}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{size}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::size}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_aa830b04bef76ced51b6d0333e3d395b5}
+
+
+Definition at line 21 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!vertex@{vertex}}
+\index{vertex@{vertex}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{vertex}]{\setlength{\rightskip}{0pt plus 5cm}geometry\_\-msgs::Point {\bf GdmTDLAS::Cell::vertex}[4]\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_acaed9a4f38691b7fb5905193adb56985}
+
+
+Definition at line 28 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!x@{x}}
+\index{x@{x}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::x}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_a89be096c43989a37b66debd709446bae}
+
+
+Definition at line 22 of file cell.h.
+
+\index{GdmTDLAS::Cell@{GdmTDLAS::Cell}!y@{y}}
+\index{y@{y}!GdmTDLAS::Cell@{GdmTDLAS::Cell}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf GdmTDLAS::Cell::y}\hspace{0.3cm}{\ttfamily  [private]}}\label{classGdmTDLAS_1_1Cell_adbc128996c4b2f15df20a15d8a310f0b}
+
+
+Definition at line 23 of file cell.h.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf cell.h}\item 
+{\bf cell.cpp}\end{DoxyCompactItemize}

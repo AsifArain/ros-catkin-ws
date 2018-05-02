@@ -1,0 +1,565 @@
+\section{Constraints Class Reference}
+\label{classConstraints}\index{Constraints@{Constraints}}
+
+
+Manages working sets of constraints.  
+
+
+
+
+{\ttfamily \#include $<$Constraints.hpp$>$}
+
+
+
+Inheritance diagram for Constraints:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=110pt]{classConstraints__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Constraints} ()
+\item 
+{\bf Constraints} (int \_\-n)
+\item 
+{\bf Constraints} (const {\bf Constraints} \&rhs)
+\item 
+{\bf returnValue} {\bf flipFixed} (int number)
+\item 
+{\bf Indexlist} $\ast$ {\bf getActive} ()
+\item 
+{\bf Indexlist} $\ast$ {\bf getInactive} ()
+\item 
+int {\bf getNAC} () const 
+\item 
+int {\bf getNC} () const 
+\item 
+int {\bf getNEC} () const 
+\item 
+int {\bf getNIAC} () const 
+\item 
+int {\bf getNIC} () const 
+\item 
+int {\bf getNUC} () const 
+\item 
+{\bf returnValue} {\bf init} (int \_\-n=0)
+\item 
+{\bf returnValue} {\bf moveActiveToInactive} (int number)
+\item 
+{\bf returnValue} {\bf moveInactiveToActive} (int number, {\bf SubjectToStatus} \_\-status)
+\item 
+{\bf Constraints} \& {\bf operator=} (const {\bf Constraints} \&rhs)
+\item 
+{\bf returnValue} {\bf print} ()
+\item 
+virtual {\bf returnValue} {\bf rotate} (int offset)
+\item 
+{\bf returnValue} {\bf setupAllInactive} ()
+\item 
+{\bf returnValue} {\bf setupAllLower} ()
+\item 
+{\bf returnValue} {\bf setupAllUpper} ()
+\item 
+{\bf returnValue} {\bf setupConstraint} (int number, {\bf SubjectToStatus} \_\-status)
+\item 
+virtual {\bf returnValue} {\bf shift} (int offset)
+\item 
+virtual {\bf $\sim$Constraints} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf clear} ()
+\item 
+{\bf returnValue} {\bf copy} (const {\bf Constraints} \&rhs)
+\item 
+{\bf returnValue} {\bf setupAll} ({\bf SubjectToStatus} \_\-status)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf Indexlist} {\bf active}
+\item 
+{\bf Indexlist} {\bf inactive}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manages working sets of constraints. 
+
+This class manages working sets of constraints by storing index sets and other status information.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 56 of file Constraints.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\subsubsection[{Constraints}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES Constraints::Constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a9c677de63278cf243c9a9d9afcfd0877}
+Default constructor. 
+
+Definition at line 50 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\subsubsection[{Constraints}]{\setlength{\rightskip}{0pt plus 5cm}Constraints::Constraints (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a4c2b8254e24f8f0494b69902440b383a}
+Constructor which takes the number of constraints. 
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of constraints. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 58 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\index{Constraints@{Constraints}!Constraints@{Constraints}}
+\subsubsection[{Constraints}]{\setlength{\rightskip}{0pt plus 5cm}Constraints::Constraints (
+\begin{DoxyParamCaption}
+\item[{const {\bf Constraints} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classConstraints_aeb433ff1018134588275911c6acf0f8e}
+Copy constructor (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 67 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!$\sim$Constraints@{$\sim$Constraints}}
+\index{$\sim$Constraints@{$\sim$Constraints}!Constraints@{Constraints}}
+\subsubsection[{$\sim$Constraints}]{\setlength{\rightskip}{0pt plus 5cm}Constraints::$\sim$Constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classConstraints_a61f155a69191e07c32a4a1e9e60067e9}
+Destructor. 
+
+Definition at line 76 of file Constraints.cpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{Constraints@{Constraints}!clear@{clear}}
+\index{clear@{clear}!Constraints@{Constraints}}
+\subsubsection[{clear}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::clear (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classConstraints_a945b4c8e40f28c3a2a56c8aabe3a6d5d}
+Frees all allocated memory. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+
+Reimplemented from {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_a0b48052eada79f7688475f9bc42b2a0b}.
+
+
+
+Definition at line 423 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!copy@{copy}}
+\index{copy@{copy}!Constraints@{Constraints}}
+\subsubsection[{copy}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::copy (
+\begin{DoxyParamCaption}
+\item[{const {\bf Constraints} \&}]{rhs}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classConstraints_aecbc863137db2de818bbd8c365027d2b}
+Copies all members from given rhs object. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 432 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!flipFixed@{flipFixed}}
+\index{flipFixed@{flipFixed}!Constraints@{Constraints}}
+\subsubsection[{flipFixed}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::flipFixed (
+\begin{DoxyParamCaption}
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a20c83fc0fac5e0d0167569ddda86b184}
+Flip fixed constraint. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS 
+\end{DoxyReturn}
+
+
+Definition at line 227 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!getActive@{getActive}}
+\index{getActive@{getActive}!Constraints@{Constraints}}
+\subsubsection[{getActive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist}$\ast$ Constraints::getActive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_a91743d77bd6720905b9ba75c9fe9c4cf}
+Returns a pointer to active constraints index list. \begin{DoxyReturn}{Returns}
+Pointer to active constraints index list. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getInactive@{getInactive}}
+\index{getInactive@{getInactive}!Constraints@{Constraints}}
+\subsubsection[{getInactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist}$\ast$ Constraints::getInactive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_ab4d19324b973e26a90f1a406b2dcfc1d}
+Returns a pointer to inactive constraints index list. \begin{DoxyReturn}{Returns}
+Pointer to inactive constraints index list. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNAC@{getNAC}}
+\index{getNAC@{getNAC}!Constraints@{Constraints}}
+\subsubsection[{getNAC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNAC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_afb090a720deae4d9342e86abf45699d6}
+Returns the number of active constraints. \begin{DoxyReturn}{Returns}
+Number of active constraints. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNC@{getNC}}
+\index{getNC@{getNC}!Constraints@{Constraints}}
+\subsubsection[{getNC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_a6a9ec51f7d4f1fcb4ba8bb976cce033b}
+Returns the number of constraints. \begin{DoxyReturn}{Returns}
+Number of constraints. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNEC@{getNEC}}
+\index{getNEC@{getNEC}!Constraints@{Constraints}}
+\subsubsection[{getNEC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNEC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_a282354f6128de5bec60c08e030814891}
+Returns the number of implicit equality constraints. \begin{DoxyReturn}{Returns}
+Number of implicit equality constraints. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNIAC@{getNIAC}}
+\index{getNIAC@{getNIAC}!Constraints@{Constraints}}
+\subsubsection[{getNIAC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNIAC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_ad96cf2a4b2d6c14dec8c6a8713cac0f3}
+Returns the number of inactive constraints. \begin{DoxyReturn}{Returns}
+Number of inactive constraints. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNIC@{getNIC}}
+\index{getNIC@{getNIC}!Constraints@{Constraints}}
+\subsubsection[{getNIC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNIC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_a63e96323ee85b635008925229ac0d58f}
+Returns the number of \char`\"{}real\char`\"{} inequality constraints. \begin{DoxyReturn}{Returns}
+Number of \char`\"{}real\char`\"{} inequality constraints. 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!getNUC@{getNUC}}
+\index{getNUC@{getNUC}!Constraints@{Constraints}}
+\subsubsection[{getNUC}]{\setlength{\rightskip}{0pt plus 5cm}int Constraints::getNUC (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraints_a5e0c6d64167bdf3602093ed26b4cfeaf}
+Returns the number of unbounded constraints (i.e. without any bounds). \begin{DoxyReturn}{Returns}
+Number of unbounded constraints (i.e. without any bounds). 
+\end{DoxyReturn}
+\index{Constraints@{Constraints}!init@{init}}
+\index{init@{init}!Constraints@{Constraints}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::init (
+\begin{DoxyParamCaption}
+\item[{int}]{\_\-n = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a953ff0d47d33a2ed94587316a803b978}
+Initialises object with given number of constraints. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-n} & Number of constraints. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_afc63cf1993f2ee007997658013c86566}.
+
+
+
+Definition at line 101 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!moveActiveToInactive@{moveActiveToInactive}}
+\index{moveActiveToInactive@{moveActiveToInactive}!Constraints@{Constraints}}
+\subsubsection[{moveActiveToInactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::moveActiveToInactive (
+\begin{DoxyParamCaption}
+\item[{int}]{number}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a255ceba7c9460781c6e21b417304cedf}
+Moves index of a constraint from index list of active to that of inactive constraints. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of constraint to become inactive. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 186 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!moveInactiveToActive@{moveInactiveToActive}}
+\index{moveInactiveToActive@{moveInactiveToActive}!Constraints@{Constraints}}
+\subsubsection[{moveInactiveToActive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::moveInactiveToActive (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a6a21e8c620229f44ebb2cfc7a892a31f}
+Moves index of a constraint from index list of inactive to that of active constraints. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of constraint to become active. \\
+\hline
+{\em \_\-status} & Status of constraint to become active. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 206 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!operator=@{operator=}}
+\index{operator=@{operator=}!Constraints@{Constraints}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Constraints} \& Constraints::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf Constraints} \&}]{rhs}
+\end{DoxyParamCaption}
+)}\label{classConstraints_add013b3e2480cf830eef39123e7afd6e}
+Assignment operator (deep copy). 
+\begin{DoxyParams}{Parameters}
+{\em rhs} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 85 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!print@{print}}
+\index{print@{print}!Constraints@{Constraints}}
+\subsubsection[{print}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::print (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classConstraints_abf7172e93fd13af99c76ec8f822b921e}
+Prints information on constraints object (in particular, lists of inactive and active constraints. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEXLIST\_\-CORRUPTED 
+\end{DoxyReturn}
+
+
+Definition at line 384 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!rotate@{rotate}}
+\index{rotate@{rotate}!Constraints@{Constraints}}
+\subsubsection[{rotate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::rotate (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classConstraints_a798ad903f82cfa17a1ba9eee3cf55bca}
+Rotates forward type and status of all constraints by a given offset. This offset has to lie within the range [0,n]. Example for offset = 2: \par
+ rotate( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b1,c/b2\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-ROTATING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Rotation offset within the range [0,n]. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_a632d97f115810ba91f2b363281216db4}.
+
+
+
+Definition at line 309 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!setupAll@{setupAll}}
+\index{setupAll@{setupAll}!Constraints@{Constraints}}
+\subsubsection[{setupAll}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::setupAll (
+\begin{DoxyParamCaption}
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [protected]}}\label{classConstraints_aeeee62fed6ea53444f370f6d4e3596d6}
+Initially adds all numbers of new (i.e. not yet in the list) bounds to to the index set corresponding to the desired status; the order depends on the SujectToType of each index. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em \_\-status} & Desired initial status for all bounds. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 446 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!setupAllInactive@{setupAllInactive}}
+\index{setupAllInactive@{setupAllInactive}!Constraints@{Constraints}}
+\subsubsection[{setupAllInactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::setupAllInactive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classConstraints_ac49c5bae8433f8c6623e55088f33d226}
+Initially adds all enabled numbers of new (i.e. not yet in the list) constraints to to the index set of inactive constraints; the order depends on the SujectToType of each index. Only disabled constraints are added to index set of disabled constraints! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 159 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!setupAllLower@{setupAllLower}}
+\index{setupAllLower@{setupAllLower}!Constraints@{Constraints}}
+\subsubsection[{setupAllLower}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::setupAllLower (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a0bc777ba851991829a569edcc444d004}
+Initially adds all enabled numbers of new (i.e. not yet in the list) constraints to to the index set of active constraints (on their lower bounds); the order depends on the SujectToType of each index. Only disabled constraints are added to index set of disabled constraints! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 168 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!setupAllUpper@{setupAllUpper}}
+\index{setupAllUpper@{setupAllUpper}!Constraints@{Constraints}}
+\subsubsection[{setupAllUpper}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::setupAllUpper (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classConstraints_a883220c48c6ae8d5ff0ef056547f288b}
+Initially adds all enabled numbers of new (i.e. not yet in the list) constraints to to the index set of active constraints (on their upper bounds); the order depends on the SujectToType of each index. Only disabled constraints are added to index set of disabled constraints! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED 
+\end{DoxyReturn}
+
+
+Definition at line 177 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!setupConstraint@{setupConstraint}}
+\index{setupConstraint@{setupConstraint}!Constraints@{Constraints}}
+\subsubsection[{setupConstraint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::setupConstraint (
+\begin{DoxyParamCaption}
+\item[{int}]{number, }
+\item[{{\bf SubjectToStatus}}]{\_\-status}
+\end{DoxyParamCaption}
+)}\label{classConstraints_adf491114415cbbad8f1a0af0f832ccf6}
+Initially adds number of a new (i.e. not yet in the list) constraint to a given index set. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-INVALID\_\-ARGUMENTS 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em number} & Number of new constraint. \\
+\hline
+{\em \_\-status} & Status of new constraint. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 123 of file Constraints.cpp.
+
+\index{Constraints@{Constraints}!shift@{shift}}
+\index{shift@{shift}!Constraints@{Constraints}}
+\subsubsection[{shift}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} Constraints::shift (
+\begin{DoxyParamCaption}
+\item[{int}]{offset}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [virtual]}}\label{classConstraints_a8e10a850c1bd160d66f7884f6072520a}
+Shifts forward type and status of all constraints by a given offset. This offset has to lie within the range [0,n/2] and has to be an integer divisor of the total number of constraints n. Type and status of the first $<$offset$>$ constraints is thrown away, type and status of the last $<$offset$>$ constraints is real\_\-td, e.g. for offset = 2: \par
+ shift( \{c/b1,c/b2,c/b3,c/b4,c/b5,c/b6\} ) = \{c/b3,c/b4,c/b5,c/b6,c/b5,c/b6\} \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-SHIFTING\_\-FAILED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & Shift offset within the range [0,n/2] and integer divisor of n. \\
+\hline
+\end{DoxyParams}
+
+
+Implements {\bf SubjectTo} \doxyref{}{p.}{classSubjectTo_afe3e60938d251b1eae24971179bd99de}.
+
+
+
+Definition at line 248 of file Constraints.cpp.
+
+
+
+\subsection{Member Data Documentation}
+\index{Constraints@{Constraints}!active@{active}}
+\index{active@{active}!Constraints@{Constraints}}
+\subsubsection[{active}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist} {\bf Constraints::active}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classConstraints_a2fdcb864fec70473725bde4667d7923a}
+Index list of active constraints. 
+
+Definition at line 233 of file Constraints.hpp.
+
+\index{Constraints@{Constraints}!inactive@{inactive}}
+\index{inactive@{inactive}!Constraints@{Constraints}}
+\subsubsection[{inactive}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Indexlist} {\bf Constraints::inactive}\hspace{0.3cm}{\ttfamily  [protected]}}\label{classConstraints_a4679ab5910823e575bb70ccd1c08fd25}
+Index list of inactive constraints. 
+
+Definition at line 234 of file Constraints.hpp.
+
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+{\bf Constraints.hpp}\item 
+{\bf Constraints.cpp}\end{DoxyCompactItemize}

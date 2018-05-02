@@ -1,0 +1,145 @@
+\section{ConstraintProduct Class Reference}
+\label{classConstraintProduct}\index{ConstraintProduct@{ConstraintProduct}}
+
+
+Interface for specifying user-\/defined evaluations of constraint products.  
+
+
+
+
+{\ttfamily \#include $<$ConstraintProduct.hpp$>$}
+
+
+
+Inheritance diagram for ConstraintProduct:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classConstraintProduct__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf ConstraintProduct} ()
+\item 
+{\bf ConstraintProduct} (const {\bf ConstraintProduct} \&toCopy)
+\item 
+virtual int {\bf operator()} (int constrIndex, const {\bf real\_\-t} $\ast$const x, {\bf real\_\-t} $\ast$const constrValue) const =0
+\item 
+{\bf ConstraintProduct} \& {\bf operator=} (const {\bf ConstraintProduct} \&toCopy)
+\item 
+virtual {\bf $\sim$ConstraintProduct} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface for specifying user-\/defined evaluations of constraint products. 
+
+A class which allows to specify a user-\/defined function for evaluating the constraint product at the current iterate to speed-\/up QP solution in case of a specially structured constraint matrix.
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2009-\/2012 
+\end{DoxyDate}
+
+
+Definition at line 57 of file ConstraintProduct.hpp.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{ConstraintProduct@{ConstraintProduct}!ConstraintProduct@{ConstraintProduct}}
+\index{ConstraintProduct@{ConstraintProduct}!ConstraintProduct@{ConstraintProduct}}
+\subsubsection[{ConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}ConstraintProduct::ConstraintProduct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraintProduct_a0ebfb337c4d8f8a562263f29d40cb7d3}
+Default constructor. 
+
+Definition at line 61 of file ConstraintProduct.hpp.
+
+\index{ConstraintProduct@{ConstraintProduct}!ConstraintProduct@{ConstraintProduct}}
+\index{ConstraintProduct@{ConstraintProduct}!ConstraintProduct@{ConstraintProduct}}
+\subsubsection[{ConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}ConstraintProduct::ConstraintProduct (
+\begin{DoxyParamCaption}
+\item[{const {\bf ConstraintProduct} \&}]{toCopy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraintProduct_ac12f0cd2dfa2ad122e69435d868753cb}
+Copy constructor. 
+\begin{DoxyParams}{Parameters}
+{\em toCopy} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 64 of file ConstraintProduct.hpp.
+
+\index{ConstraintProduct@{ConstraintProduct}!$\sim$ConstraintProduct@{$\sim$ConstraintProduct}}
+\index{$\sim$ConstraintProduct@{$\sim$ConstraintProduct}!ConstraintProduct@{ConstraintProduct}}
+\subsubsection[{$\sim$ConstraintProduct}]{\setlength{\rightskip}{0pt plus 5cm}virtual ConstraintProduct::$\sim$ConstraintProduct (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline, virtual]}}\label{classConstraintProduct_aed57ccadc2d93bc14ead078e22912df3}
+Destructor. 
+
+Definition at line 68 of file ConstraintProduct.hpp.
+
+
+
+\subsection{Member Function Documentation}
+\index{ConstraintProduct@{ConstraintProduct}!operator()@{operator()}}
+\index{operator()@{operator()}!ConstraintProduct@{ConstraintProduct}}
+\subsubsection[{operator()}]{\setlength{\rightskip}{0pt plus 5cm}virtual int ConstraintProduct::operator() (
+\begin{DoxyParamCaption}
+\item[{int}]{constrIndex, }
+\item[{const {\bf real\_\-t} $\ast$const}]{x, }
+\item[{{\bf real\_\-t} $\ast$const}]{constrValue}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily  [pure virtual]}}\label{classConstraintProduct_a1da981e12cd8d7411bcdf43b827c5c1d}
+Evaluates the product of a given constraint with the current iterate. This function needs to be implemented in a derived class for the user-\/defined constraint product function. \begin{DoxyReturn}{Returns}
+0: successful \par
+ otherwise: not successful 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em constrIndex} & Number of constraint to be evaluated. \\
+\hline
+{\em x} & Array containing current primal iterate. \\
+\hline
+{\em constrValue} & Output: Scalar value of the evaluated constraint. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in {\bf MyConstraintProduct} \doxyref{}{p.}{classMyConstraintProduct_ac967b02d33098635e411e6edef2ef460}.
+
+\index{ConstraintProduct@{ConstraintProduct}!operator=@{operator=}}
+\index{operator=@{operator=}!ConstraintProduct@{ConstraintProduct}}
+\subsubsection[{operator=}]{\setlength{\rightskip}{0pt plus 5cm}{\bf ConstraintProduct}\& ConstraintProduct::operator= (
+\begin{DoxyParamCaption}
+\item[{const {\bf ConstraintProduct} \&}]{toCopy}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily  [inline]}}\label{classConstraintProduct_a228861b89ad8f6403f307d3110862f62}
+Assignment operator. 
+\begin{DoxyParams}{Parameters}
+{\em toCopy} & Rhs object. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 71 of file ConstraintProduct.hpp.
+
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+{\bf ConstraintProduct.hpp}\end{DoxyCompactItemize}

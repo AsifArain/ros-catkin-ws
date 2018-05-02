@@ -1,0 +1,12 @@
+<launch>
+	<node pkg="gdm_tdlas" type="gdm_tdlas" name="gdm_tdlas">
+		<param name="MIN_X" value="-6.30" />
+		<param name="MAX_X" value="5.00" />
+		<param name="MIN_Y" value="-4.09" />
+		<param name="MAX_Y" value="16.00" />
+		<param name="CELL_SIZE" value="1" />
+		<param name="MAX_CONC" value="100" />
+		<param name="FIXED_FRAME" value="/map" />
+		<param name="RMLD_TOPIC" value="subscribed_from_launch_file" />
+	</node>
+</launch>

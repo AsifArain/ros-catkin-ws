@@ -1,0 +1,313 @@
+\section{OQPinterface.cpp File Reference}
+\label{OQPinterface_8cpp}\index{OQPinterface.cpp@{OQPinterface.cpp}}
+{\ttfamily \#include $<$qpOASES/extras/OQPinterface.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES/QProblem.hpp$>$}\par
+Include dependency graph for OQPinterface.cpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{OQPinterface_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf returnValue} {\bf readOQPdata} (const char $\ast$path, int \&nQP, int \&nV, int \&nC, int \&nEC, {\bf real\_\-t} $\ast$$\ast$H, {\bf real\_\-t} $\ast$$\ast${\bf g}, {\bf real\_\-t} $\ast$$\ast$A, {\bf real\_\-t} $\ast$$\ast${\bf lb}, {\bf real\_\-t} $\ast$$\ast${\bf ub}, {\bf real\_\-t} $\ast$$\ast${\bf lbA}, {\bf real\_\-t} $\ast$$\ast${\bf ubA}, {\bf real\_\-t} $\ast$$\ast$xOpt, {\bf real\_\-t} $\ast$$\ast$yOpt, {\bf real\_\-t} $\ast$$\ast$objOpt)
+\item 
+BEGIN\_\-NAMESPACE\_\-QPOASES {\bf returnValue} {\bf readOQPdimensions} (const char $\ast$path, int \&nQP, int \&nV, int \&nC, int \&nEC)
+\item 
+{\bf returnValue} {\bf runOQPbenchmark} (const char $\ast$path, {\bf BooleanType} isSparse, const {\bf Options} \&options, int \&nWSR, {\bf real\_\-t} \&maxCPUtime, {\bf real\_\-t} \&maxStationarity, {\bf real\_\-t} \&maxFeasibility, {\bf real\_\-t} \&maxComplementarity)
+\item 
+{\bf returnValue} {\bf solveOQPbenchmark} (int nQP, int nV, int nC, int nEC, const {\bf real\_\-t} $\ast$const \_\-H, const {\bf real\_\-t} $\ast$const {\bf g}, const {\bf real\_\-t} $\ast$const \_\-A, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, const {\bf real\_\-t} $\ast$const {\bf lbA}, const {\bf real\_\-t} $\ast$const {\bf ubA}, {\bf BooleanType} isSparse, const {\bf Options} \&options, int \&nWSR, {\bf real\_\-t} \&maxCPUtime, {\bf real\_\-t} \&maxStationarity, {\bf real\_\-t} \&maxFeasibility, {\bf real\_\-t} \&maxComplementarity)
+\item 
+{\bf returnValue} {\bf solveOQPbenchmark} (int nQP, int nV, const {\bf real\_\-t} $\ast$const \_\-H, const {\bf real\_\-t} $\ast$const {\bf g}, const {\bf real\_\-t} $\ast$const {\bf lb}, const {\bf real\_\-t} $\ast$const {\bf ub}, {\bf BooleanType} isSparse, const {\bf Options} \&options, int \&nWSR, {\bf real\_\-t} \&maxCPUtime, {\bf real\_\-t} \&maxStationarity, {\bf real\_\-t} \&maxFeasibility, {\bf real\_\-t} \&maxComplementarity)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2008-\/2012
+\end{DoxyDate}
+Implementation of an interface comprising several utility functions for solving test problems from the Online QP Benchmark Collection (see {\tt http://homes.esat.kuleuven.be/$\sim$optec/software/onlineQP/}). 
+
+Definition in file {\bf OQPinterface.cpp}.
+
+
+
+\subsection{Function Documentation}
+\index{OQPinterface.cpp@{OQPinterface.cpp}!readOQPdata@{readOQPdata}}
+\index{readOQPdata@{readOQPdata}!OQPinterface.cpp@{OQPinterface.cpp}}
+\subsubsection[{readOQPdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} readOQPdata (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path, }
+\item[{int \&}]{nQP, }
+\item[{int \&}]{nV, }
+\item[{int \&}]{nC, }
+\item[{int \&}]{nEC, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{H, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{g, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{A, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{lb, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{ub, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{lbA, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{ubA, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{xOpt, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{yOpt, }
+\item[{{\bf real\_\-t} $\ast$$\ast$}]{objOpt}
+\end{DoxyParamCaption}
+)}\label{OQPinterface_8cpp_a1a235217bfb0aec92cc6228ed07b2cc0}
+Reads data of an Online QP Benchmark problem from file. This function allocates the required memory for all data; after successfully calling it, you have to free this memory yourself! \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-INVALID\_\-ARGUMENTS \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-FILEDATA\_\-INCONSISTENT 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Full path of the data files (without trailing slash!). \\
+\hline
+{\em nQP} & Output: Number of QPs. \\
+\hline
+{\em nV} & Output: Number of variables. \\
+\hline
+{\em nC} & Output: Number of constraints. \\
+\hline
+{\em nEC} & Output: Number of equality constraints. \\
+\hline
+{\em H} & Output: Hessian matrix. \\
+\hline
+{\em g} & Output: Sequence of gradient vectors. \\
+\hline
+{\em A} & Output: Constraint matrix. \\
+\hline
+{\em lb} & Output: Sequence of lower bound vectors (on variables). \\
+\hline
+{\em ub} & Output: Sequence of upper bound vectors (on variables). \\
+\hline
+{\em lbA} & Output: Sequence of lower constraints' bound vectors. \\
+\hline
+{\em ubA} & Output: Sequence of upper constraints' bound vectors. \\
+\hline
+{\em xOpt} & Output: Sequence of primal solution vectors (not read if a null pointer is passed). \\
+\hline
+{\em yOpt} & Output: Sequence of dual solution vectors (not read if a null pointer is passed). \\
+\hline
+{\em objOpt} & Output: Sequence of optimal objective function values (not read if a null pointer is passed). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 78 of file OQPinterface.cpp.
+
+\index{OQPinterface.cpp@{OQPinterface.cpp}!readOQPdimensions@{readOQPdimensions}}
+\index{readOQPdimensions@{readOQPdimensions}!OQPinterface.cpp@{OQPinterface.cpp}}
+\subsubsection[{readOQPdimensions}]{\setlength{\rightskip}{0pt plus 5cm}BEGIN\_\-NAMESPACE\_\-QPOASES {\bf returnValue} readOQPdimensions (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path, }
+\item[{int \&}]{nQP, }
+\item[{int \&}]{nV, }
+\item[{int \&}]{nC, }
+\item[{int \&}]{nEC}
+\end{DoxyParamCaption}
+)}\label{OQPinterface_8cpp_a8a3ca00abfd5e3354b850e95224e6ef5}
+Reads dimensions of an Online QP Benchmark problem from file. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE \par
+ RET\_\-FILEDATA\_\-INCONSISTENT 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Full path of the data files (without trailing slash!). \\
+\hline
+{\em nQP} & Output: Number of QPs. \\
+\hline
+{\em nV} & Output: Number of variables. \\
+\hline
+{\em nC} & Output: Number of constraints. \\
+\hline
+{\em nEC} & Output: Number of equality constraints. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 48 of file OQPinterface.cpp.
+
+\index{OQPinterface.cpp@{OQPinterface.cpp}!runOQPbenchmark@{runOQPbenchmark}}
+\index{runOQPbenchmark@{runOQPbenchmark}!OQPinterface.cpp@{OQPinterface.cpp}}
+\subsubsection[{runOQPbenchmark}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} runOQPbenchmark (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{path, }
+\item[{{\bf BooleanType}}]{isSparse, }
+\item[{const {\bf Options} \&}]{options, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} \&}]{maxCPUtime, }
+\item[{{\bf real\_\-t} \&}]{maxStationarity, }
+\item[{{\bf real\_\-t} \&}]{maxFeasibility, }
+\item[{{\bf real\_\-t} \&}]{maxComplementarity}
+\end{DoxyParamCaption}
+)}\label{OQPinterface_8cpp_a75e4d15cda846bfdf21113ae4ab7a449}
+Runs an Online QP Benchmark problem and determines the maximum deviations from the given optimal solution as well as the maximum CPU time to solve each QP. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK \par
+ RET\_\-BENCHMARK\_\-ABORTED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Full path of the benchmark files (without trailing slash!). \\
+\hline
+{\em isSparse} & Shall convert matrices to sparse format before solution? \\
+\hline
+{\em options} & QP solver options to be used while solving benchmark problems. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Maximum number of performed working set recalculations. \\
+\hline
+{\em maxCPUtime} & Output: Maximum CPU time required for solving each QP. \\
+\hline
+{\em maxStationarity} & Output: Maximum residual of stationarity condition. \\
+\hline
+{\em maxFeasibility} & Output: Maximum residual of primal feasibility condition. \\
+\hline
+{\em maxComplementarity} & Output: Maximum residual of complementarity condition. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 472 of file OQPinterface.cpp.
+
+\index{OQPinterface.cpp@{OQPinterface.cpp}!solveOQPbenchmark@{solveOQPbenchmark}}
+\index{solveOQPbenchmark@{solveOQPbenchmark}!OQPinterface.cpp@{OQPinterface.cpp}}
+\subsubsection[{solveOQPbenchmark}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} solveOQPbenchmark (
+\begin{DoxyParamCaption}
+\item[{int}]{nQP, }
+\item[{int}]{nV, }
+\item[{int}]{nC, }
+\item[{int}]{nEC, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-A, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lbA, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ubA, }
+\item[{{\bf BooleanType}}]{isSparse, }
+\item[{const {\bf Options} \&}]{options, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} \&}]{maxCPUtime, }
+\item[{{\bf real\_\-t} \&}]{maxStationarity, }
+\item[{{\bf real\_\-t} \&}]{maxFeasibility, }
+\item[{{\bf real\_\-t} \&}]{maxComplementarity}
+\end{DoxyParamCaption}
+)}\label{OQPinterface_8cpp_a5fa6c0a978b92b5c429e6dd7284d660d}
+Solves an Online QP Benchmark problem as specified by the arguments. The maximum deviations from the given optimal solution as well as the maximum CPU time to solve each QP are determined. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-BENCHMARK\_\-ABORTED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em nQP} & Number of QPs. \\
+\hline
+{\em nV} & Number of variables. \\
+\hline
+{\em nC} & Number of constraints. \\
+\hline
+{\em nEC} & Number of equality constraints. \\
+\hline
+{\em \_\-H} & Hessian matrix. \\
+\hline
+{\em g} & Sequence of gradient vectors. \\
+\hline
+{\em \_\-A} & Constraint matrix. \\
+\hline
+{\em lb} & Sequence of lower bound vectors (on variables). \\
+\hline
+{\em ub} & Sequence of upper bound vectors (on variables). \\
+\hline
+{\em lbA} & Sequence of lower constraints' bound vectors. \\
+\hline
+{\em ubA} & Sequence of upper constraints' bound vectors. \\
+\hline
+{\em isSparse} & Shall convert matrices to sparse format before solution? \\
+\hline
+{\em options} & QP solver options to be used while solving benchmark problems. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Maximum number of performed working set recalculations. \\
+\hline
+{\em maxCPUtime} & Output: Maximum CPU time required for solving each QP. \\
+\hline
+{\em maxStationarity} & Output: Maximum residual of stationarity condition. \\
+\hline
+{\em maxFeasibility} & Output: Maximum residual of primal feasibility condition. \\
+\hline
+{\em maxComplementarity} & Output: Maximum residual of complementarity condition. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 229 of file OQPinterface.cpp.
+
+\index{OQPinterface.cpp@{OQPinterface.cpp}!solveOQPbenchmark@{solveOQPbenchmark}}
+\index{solveOQPbenchmark@{solveOQPbenchmark}!OQPinterface.cpp@{OQPinterface.cpp}}
+\subsubsection[{solveOQPbenchmark}]{\setlength{\rightskip}{0pt plus 5cm}{\bf returnValue} solveOQPbenchmark (
+\begin{DoxyParamCaption}
+\item[{int}]{nQP, }
+\item[{int}]{nV, }
+\item[{const {\bf real\_\-t} $\ast$const}]{\_\-H, }
+\item[{const {\bf real\_\-t} $\ast$const}]{g, }
+\item[{const {\bf real\_\-t} $\ast$const}]{lb, }
+\item[{const {\bf real\_\-t} $\ast$const}]{ub, }
+\item[{{\bf BooleanType}}]{isSparse, }
+\item[{const {\bf Options} \&}]{options, }
+\item[{int \&}]{nWSR, }
+\item[{{\bf real\_\-t} \&}]{maxCPUtime, }
+\item[{{\bf real\_\-t} \&}]{maxStationarity, }
+\item[{{\bf real\_\-t} \&}]{maxFeasibility, }
+\item[{{\bf real\_\-t} \&}]{maxComplementarity}
+\end{DoxyParamCaption}
+)}\label{OQPinterface_8cpp_ae5e79307dbf37e4d78684baa94c8d7e5}
+Solves an Online QP Benchmark problem (without constraints) as specified by the arguments. The maximum deviations from the given optimal solution as well as the maximum CPU time to solve each QP are determined. \begin{DoxyReturn}{Returns}
+SUCCESSFUL\_\-RETURN \par
+ RET\_\-BENCHMARK\_\-ABORTED 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em nQP} & Number of QPs. \\
+\hline
+{\em nV} & Number of variables. \\
+\hline
+{\em \_\-H} & Hessian matrix. \\
+\hline
+{\em g} & Sequence of gradient vectors. \\
+\hline
+{\em lb} & Sequence of lower bound vectors (on variables). \\
+\hline
+{\em ub} & Sequence of upper bound vectors (on variables). \\
+\hline
+{\em isSparse} & Shall convert matrices to sparse format before solution? \\
+\hline
+{\em options} & QP solver options to be used while solving benchmark problems. \\
+\hline
+{\em nWSR} & Input: Maximum number of working set recalculations; \par
+ Output: Maximum number of performed working set recalculations. \\
+\hline
+{\em maxCPUtime} & Output: Maximum CPU time required for solving each QP. \\
+\hline
+{\em maxStationarity} & Output: Maximum residual of stationarity condition. \\
+\hline
+{\em maxFeasibility} & Output: Maximum residual of primal feasibility condition. \\
+\hline
+{\em maxComplementarity} & Output: Maximum residual of complementarity condition. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 355 of file OQPinterface.cpp.
+

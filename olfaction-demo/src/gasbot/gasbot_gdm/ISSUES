@@ -1,0 +1,342 @@
+
+-- Could not find the required component 'move_base_msgs'. The following CMake error indicates that you either need to install the package with the same name or change your environment so that it can be found.
+CMake Error at /opt/ros/indigo/share/catkin/cmake/catkinConfig.cmake:83 (find_package):
+  Could not find a package configuration file provided by "move_base_msgs"
+  with any of the following names:
+
+    move_base_msgsConfig.cmake
+    move_base_msgs-config.cmake
+
+  Add the installation prefix of "move_base_msgs" to CMAKE_PREFIX_PATH or set
+  "move_base_msgs_DIR" to a directory containing one of the above files.  If
+  "move_base_msgs" provides a separate development package or SDK, be sure it
+  has been installed.
+
+
+Solution: install move_base <sudo apt-get install ros-indigo-move_base>
+
+---------------------------------------------------------------------------
+
+-- Could not find the required component 'octomap'. The following CMake error indicates that you either need to install the package with the same name or change your environment so that it can be found.
+CMake Error at /opt/ros/indigo/share/catkin/cmake/catkinConfig.cmake:83 (find_package):
+  Could not find a package configuration file provided by "octomap" with any
+  of the following names:
+
+    octomapConfig.cmake
+    octomap-config.cmake
+
+
+
+------------------------------------------------------------------------------------
+ImportError: No module named wx
+
+
+asif@arain:~$ locate wx.py
+/home/asif/SALOME/SALOME-7.7.1-OPENSOURCE-UB14/PREREQUISITES/INSTALL/matplotlib-1.4.3/FROM_Cython-0.23.2_Python-2.7.10_dateutil-2.4.0_distribute-0.6.28_freetype-2.4.11_lapack-3.5.0_numpy-1.9.2_pyparsing-1.5.6_pytz-2014.10_setuptools-0.6c11_six-1.9.0/lib/python2.7/site-packages/matplotlib-1.4.3-py2.7-linux-x86_64.egg/matplotlib/backends/backend_wx.py
+/home/asif/anaconda2/lib/python2.7/site-packages/IPython/lib/inputhookwx.py
+/home/asif/anaconda2/lib/python2.7/site-packages/IPython/lib/inputhookwx.pyc
+/home/asif/anaconda2/lib/python2.7/site-packages/matplotlib/backends/backend_wx.py
+/home/asif/anaconda2/lib/python2.7/site-packages/matplotlib/backends/backend_wx.pyc
+/home/asif/anaconda2/pkgs/ipython-4.0.1-py27_0/lib/python2.7/site-packages/IPython/lib/inputhookwx.py
+/home/asif/anaconda2/pkgs/ipython-4.0.1-py27_0/lib/python2.7/site-packages/IPython/lib/inputhookwx.pyc
+/home/asif/anaconda2/pkgs/matplotlib-1.5.0-np110py27_0/lib/python2.7/site-packages/matplotlib/backends/backend_wx.py
+/home/asif/anaconda2/pkgs/matplotlib-1.5.0-np110py27_0/lib/python2.7/site-packages/matplotlib/backends/backend_wx.pyc
+/usr/lib/pymodules/python2.7/matplotlib/backends/backend_wx.py
+/usr/lib/pymodules/python2.7/matplotlib/backends/backend_wx.pyc
+/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/_wx.pyc
+/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/wxPython/_wx.py
+/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode/wxPython/_wx.pyc
+/usr/share/pyshared/matplotlib/backends/backend_wx.py
+asif@arain:~$ python 
+Python 2.7.11 |Anaconda 2.4.1 (64-bit)| (default, Dec  6 2015, 18:08:32) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+Anaconda is brought to you by Continuum Analytics.
+Please check out: http://continuum.io/thanks and https://anaconda.org
+>>> import wx
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ImportError: No module named wx
+>>> quit()
+asif@arain:~$ sudo apt-get install python-wxgtk2.8
+[sudo] password for asif: 
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+python-wxgtk2.8 is already the newest version.
+The following packages were automatically installed and are no longer required:
+  collada-dom-dev collada-dom2.4-dp-base collada-dom2.4-dp-dev fltk1.3-doc
+  fluid gazebo2 hddtemp kde-l10n-engb kde-l10n-sv liballegro4.4
+  liballegro4.4-plugin-alsa libcegui-mk2-0.7.6 libcegui-mk2-dev libdevil-dev
+  libdevil1c2 libfltk-cairo1.3 libfltk-forms1.3 libfltk1.1 libfltk1.3-dev
+  libgeos-3.4.2 libgeos-c1 libkactivities-models1 liblcms1 liblcms1-dev
+  liblcms2-dev liblodo3.0 liblua5.1-0-dev libmng-dev libntdb1
+  liboce-ocaf-lite8 liboce-ocaf8 liboce-visualization8 libois-1.3.0
+  libplayerc++3.0 libplayerc3.0 libplayercommon3.0 libplayercore3.0
+  libplayerdrivers3.0 libplayerinterface3.0 libplayerjpeg3.0 libplayertcp3.0
+  libplayerwkb3.0 libpmap3.0 libprotobuf-dev libprotobuf-lite8 libprotoc8
+  libqwt-dev libqwt5-qt4 libqwt6 libsdformat-dev libsdformat1 libsilly
+  libstatgrab9 libtbb-dev linux-headers-3.19.0-25
+  linux-headers-3.19.0-25-generic linux-headers-generic-lts-vivid
+  linux-image-3.19.0-25-generic linux-image-extra-3.19.0-25-generic
+  linux-image-generic-lts-vivid python-ntdb python-opengl python-ply
+  python-psutil python-pydot python-qwt5-qt4 robot-player
+  ros-indigo-actionlib-tutorials ros-indigo-bond-core ros-indigo-bondpy
+  ros-indigo-camera-calibration ros-indigo-camera-calibration-parsers
+  ros-indigo-camera-info-manager ros-indigo-collada-parser
+  ros-indigo-collada-urdf ros-indigo-common-msgs ros-indigo-common-tutorials
+  ros-indigo-compressed-depth-image-transport
+  ros-indigo-compressed-image-transport ros-indigo-control-msgs
+  ros-indigo-cv-bridge ros-indigo-depth-image-proc
+  ros-indigo-diagnostic-aggregator ros-indigo-diagnostic-analysis
+  ros-indigo-diagnostic-common-diagnostics ros-indigo-diagnostic-msgs
+  ros-indigo-diagnostic-updater ros-indigo-diagnostics ros-indigo-driver-base
+  ros-indigo-eigen-conversions ros-indigo-eigen-stl-containers
+  ros-indigo-executive-smach ros-indigo-filters ros-indigo-gazebo-msgs
+  ros-indigo-gazebo-plugins ros-indigo-gazebo-ros ros-indigo-gazebo-ros-pkgs
+  ros-indigo-geometric-shapes ros-indigo-geometry
+  ros-indigo-geometry-tutorials ros-indigo-image-common
+  ros-indigo-image-pipeline ros-indigo-image-proc ros-indigo-image-rotate
+  ros-indigo-image-transport-plugins ros-indigo-image-view
+  ros-indigo-interactive-marker-tutorials ros-indigo-joint-state-publisher
+  ros-indigo-kdl-conversions ros-indigo-kdl-parser ros-indigo-laser-assembler
+  ros-indigo-laser-filters ros-indigo-laser-pipeline
+  ros-indigo-librviz-tutorial ros-indigo-mk ros-indigo-nodelet-core
+  ros-indigo-nodelet-tutorial-math ros-indigo-perception
+  ros-indigo-perception-pcl ros-indigo-pluginlib-tutorials
+  ros-indigo-pointcloud-to-laserscan ros-indigo-polled-camera
+  ros-indigo-qt-dotgraph ros-indigo-qt-gui ros-indigo-qt-gui-cpp
+  ros-indigo-qt-gui-py-common ros-indigo-random-numbers ros-indigo-robot-model
+  ros-indigo-robot-state-publisher ros-indigo-ros ros-indigo-ros-base
+  ros-indigo-ros-comm ros-indigo-ros-core ros-indigo-ros-tutorials
+  ros-indigo-rosbag-migration-rule ros-indigo-rosbash ros-indigo-rosboost-cfg
+  ros-indigo-roscpp-core ros-indigo-roscpp-tutorials ros-indigo-roscreate
+  ros-indigo-roslang ros-indigo-roslint ros-indigo-roslisp ros-indigo-rosmake
+  ros-indigo-rospy-tutorials ros-indigo-rqt-action ros-indigo-rqt-bag
+  ros-indigo-rqt-bag-plugins ros-indigo-rqt-common-plugins
+  ros-indigo-rqt-console ros-indigo-rqt-dep ros-indigo-rqt-graph
+  ros-indigo-rqt-gui ros-indigo-rqt-gui-cpp ros-indigo-rqt-gui-py
+  ros-indigo-rqt-image-view ros-indigo-rqt-launch ros-indigo-rqt-logger-level
+  ros-indigo-rqt-moveit ros-indigo-rqt-msg ros-indigo-rqt-nav-view
+  ros-indigo-rqt-plot ros-indigo-rqt-pose-view ros-indigo-rqt-publisher
+  ros-indigo-rqt-py-common ros-indigo-rqt-py-console
+  ros-indigo-rqt-reconfigure ros-indigo-rqt-robot-dashboard
+  ros-indigo-rqt-robot-monitor ros-indigo-rqt-robot-plugins
+  ros-indigo-rqt-robot-steering ros-indigo-rqt-runtime-monitor
+  ros-indigo-rqt-rviz ros-indigo-rqt-service-caller ros-indigo-rqt-shell
+  ros-indigo-rqt-srv ros-indigo-rqt-tf-tree ros-indigo-rqt-top
+  ros-indigo-rqt-topic ros-indigo-rqt-web ros-indigo-rviz-plugin-tutorials
+  ros-indigo-rviz-python-tutorial ros-indigo-self-test ros-indigo-shape-msgs
+  ros-indigo-smach ros-indigo-smach-msgs ros-indigo-smach-ros ros-indigo-stage
+  ros-indigo-stage-ros ros-indigo-stereo-image-proc ros-indigo-stereo-msgs
+  ros-indigo-tf-conversions ros-indigo-theora-image-transport
+  ros-indigo-trajectory-msgs ros-indigo-turtle-actionlib ros-indigo-turtle-tf
+  ros-indigo-turtle-tf2 ros-indigo-turtlesim ros-indigo-vision-opencv
+  ros-indigo-visualization-marker-tutorials ros-indigo-visualization-tutorials
+  ros-indigo-viz sbcl tango-icon-theme thermald
+Use 'apt-get autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 25 not upgraded.
+asif@arain:~$ sudo apt-get remove python-wxgtk2.8
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  collada-dom-dev collada-dom2.4-dp-base collada-dom2.4-dp-dev fltk1.3-doc
+  fluid gazebo2 hddtemp kde-l10n-engb kde-l10n-sv liballegro4.4
+  liballegro4.4-plugin-alsa libcegui-mk2-0.7.6 libcegui-mk2-dev libdevil-dev
+  libdevil1c2 libfltk-cairo1.3 libfltk-forms1.3 libfltk1.1 libfltk1.3-dev
+  libgeos-3.4.2 libgeos-c1 libkactivities-models1 liblcms1 liblcms1-dev
+  liblcms2-dev liblodo3.0 liblua5.1-0-dev libmng-dev libntdb1
+  liboce-ocaf-lite8 liboce-ocaf8 liboce-visualization8 libois-1.3.0
+  libplayerc++3.0 libplayerc3.0 libplayercommon3.0 libplayercore3.0
+  libplayerdrivers3.0 libplayerinterface3.0 libplayerjpeg3.0 libplayertcp3.0
+  libplayerwkb3.0 libpmap3.0 libprotobuf-dev libprotobuf-lite8 libprotoc8
+  libqwt-dev libqwt5-qt4 libqwt6 libsdformat-dev libsdformat1 libsilly
+  libstatgrab9 libtbb-dev liburdfdom-tools linux-headers-3.19.0-25
+  linux-headers-3.19.0-25-generic linux-headers-generic-lts-vivid
+  linux-image-3.19.0-25-generic linux-image-extra-3.19.0-25-generic
+  linux-image-generic-lts-vivid python-ntdb python-opengl python-ply
+  python-psutil python-pydot python-qwt5-qt4 robot-player
+  ros-indigo-actionlib-tutorials ros-indigo-bond-core ros-indigo-bondpy
+  ros-indigo-camera-calibration ros-indigo-camera-calibration-parsers
+  ros-indigo-camera-info-manager ros-indigo-collada-parser
+  ros-indigo-collada-urdf ros-indigo-common-msgs ros-indigo-common-tutorials
+  ros-indigo-compressed-depth-image-transport
+  ros-indigo-compressed-image-transport ros-indigo-control-msgs
+  ros-indigo-cv-bridge ros-indigo-depth-image-proc
+  ros-indigo-diagnostic-aggregator ros-indigo-diagnostic-analysis
+  ros-indigo-diagnostic-common-diagnostics ros-indigo-diagnostic-msgs
+  ros-indigo-diagnostic-updater ros-indigo-diagnostics ros-indigo-driver-base
+  ros-indigo-eigen-conversions ros-indigo-eigen-stl-containers
+  ros-indigo-executive-smach ros-indigo-filters ros-indigo-gazebo-msgs
+  ros-indigo-gazebo-plugins ros-indigo-gazebo-ros ros-indigo-gazebo-ros-pkgs
+  ros-indigo-geometric-shapes ros-indigo-geometry
+  ros-indigo-geometry-tutorials ros-indigo-image-common
+  ros-indigo-image-pipeline ros-indigo-image-proc ros-indigo-image-rotate
+  ros-indigo-image-transport-plugins ros-indigo-image-view
+  ros-indigo-interactive-marker-tutorials ros-indigo-kdl-conversions
+  ros-indigo-kdl-parser ros-indigo-laser-assembler ros-indigo-laser-filters
+  ros-indigo-laser-pipeline ros-indigo-librviz-tutorial ros-indigo-mk
+  ros-indigo-nodelet-core ros-indigo-nodelet-tutorial-math
+  ros-indigo-perception ros-indigo-perception-pcl
+  ros-indigo-pluginlib-tutorials ros-indigo-pointcloud-to-laserscan
+  ros-indigo-polled-camera ros-indigo-qt-dotgraph ros-indigo-qt-gui
+  ros-indigo-qt-gui-cpp ros-indigo-qt-gui-py-common ros-indigo-random-numbers
+  ros-indigo-robot-state-publisher ros-indigo-ros ros-indigo-ros-base
+  ros-indigo-ros-comm ros-indigo-ros-core ros-indigo-ros-tutorials
+  ros-indigo-rosbag-migration-rule ros-indigo-rosbash ros-indigo-rosboost-cfg
+  ros-indigo-roscpp-core ros-indigo-roscpp-tutorials ros-indigo-roscreate
+  ros-indigo-roslang ros-indigo-roslint ros-indigo-roslisp ros-indigo-rosmake
+  ros-indigo-rospy-tutorials ros-indigo-rqt-action ros-indigo-rqt-bag
+  ros-indigo-rqt-bag-plugins ros-indigo-rqt-common-plugins
+  ros-indigo-rqt-console ros-indigo-rqt-dep ros-indigo-rqt-graph
+  ros-indigo-rqt-gui ros-indigo-rqt-gui-cpp ros-indigo-rqt-gui-py
+  ros-indigo-rqt-image-view ros-indigo-rqt-launch ros-indigo-rqt-logger-level
+  ros-indigo-rqt-moveit ros-indigo-rqt-msg ros-indigo-rqt-nav-view
+  ros-indigo-rqt-plot ros-indigo-rqt-pose-view ros-indigo-rqt-publisher
+  ros-indigo-rqt-py-common ros-indigo-rqt-py-console
+  ros-indigo-rqt-reconfigure ros-indigo-rqt-robot-dashboard
+  ros-indigo-rqt-robot-monitor ros-indigo-rqt-robot-plugins
+  ros-indigo-rqt-robot-steering ros-indigo-rqt-runtime-monitor
+  ros-indigo-rqt-rviz ros-indigo-rqt-service-caller ros-indigo-rqt-shell
+  ros-indigo-rqt-srv ros-indigo-rqt-tf-tree ros-indigo-rqt-top
+  ros-indigo-rqt-topic ros-indigo-rqt-web ros-indigo-rviz-plugin-tutorials
+  ros-indigo-rviz-python-tutorial ros-indigo-self-test ros-indigo-shape-msgs
+  ros-indigo-smach ros-indigo-smach-msgs ros-indigo-smach-ros ros-indigo-stage
+  ros-indigo-stage-ros ros-indigo-stereo-image-proc ros-indigo-stereo-msgs
+  ros-indigo-tf-conversions ros-indigo-theora-image-transport
+  ros-indigo-trajectory-msgs ros-indigo-turtle-actionlib ros-indigo-turtle-tf
+  ros-indigo-turtle-tf2 ros-indigo-turtlesim ros-indigo-vision-opencv
+  ros-indigo-visualization-marker-tutorials ros-indigo-visualization-tutorials
+  ros-indigo-viz sbcl tango-icon-theme thermald
+Use 'apt-get autoremove' to remove them.
+The following extra packages will be installed:
+  liburdfdom-tools
+The following packages will be REMOVED:
+  mayavi2 python-apptools python-envisage python-pyface python-traitsui
+  python-wxgtk2.8 python-wxtools ros-indigo-joint-state-publisher
+  ros-indigo-robot-model
+The following NEW packages will be installed:
+  liburdfdom-tools
+0 upgraded, 1 newly installed, 9 to remove and 24 not upgraded.
+Need to get 11.0 kB of archives.
+After this operation, 61.2 MB disk space will be freed.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe liburdfdom-tools amd64 0.2.10+dfsg-1 [11.0 kB]
+Fetched 11.0 kB in 0s (43.7 kB/s)           
+(Reading database ... 646400 files and directories currently installed.)
+Removing mayavi2 (4.1.0-1) ...
+Removing python-envisage (4.1.0-2) ...
+Removing python-apptools (4.1.0-0ubuntu1) ...
+Removing python-traitsui (4.1.0-1ubuntu3) ...
+Removing python-pyface (4.1.0-1ubuntu3) ...
+Removing ros-indigo-robot-model (1.11.8-0trusty-20160113-164112-0800) ...
+Removing ros-indigo-joint-state-publisher (1.11.10-0trusty-20160419-215829-0700) ...
+Removing python-wxtools (2.8.12.1+dfsg-2ubuntu2) ...
+Removing python-wxgtk2.8 (2.8.12.1+dfsg-2ubuntu2) ...
+dpkg: warning: while removing python-wxgtk2.8, directory '/usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode' not empty so not removed
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for gnome-menus (3.10.1-0ubuntu2) ...
+Processing triggers for desktop-file-utils (0.22-1ubuntu1) ...
+Processing triggers for bamfdaemon (0.5.1+14.04.20140409-0ubuntu1) ...
+Rebuilding /usr/share/applications/bamf-2.index...
+Processing triggers for mime-support (3.54ubuntu1.1) ...
+Selecting previously unselected package liburdfdom-tools.
+(Reading database ... 641467 files and directories currently installed.)
+Preparing to unpack .../liburdfdom-tools_0.2.10+dfsg-1_amd64.deb ...
+Unpacking liburdfdom-tools (0.2.10+dfsg-1) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Setting up liburdfdom-tools (0.2.10+dfsg-1) ...
+asif@arain:~$ 
+asif@arain:~$ sudo apt-get install python-wxgtk2.8
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  collada-dom-dev collada-dom2.4-dp-base collada-dom2.4-dp-dev fltk1.3-doc
+  fluid gazebo2 hddtemp kde-l10n-engb kde-l10n-sv liballegro4.4
+  liballegro4.4-plugin-alsa libcegui-mk2-0.7.6 libcegui-mk2-dev libdevil-dev
+  libdevil1c2 libfltk-cairo1.3 libfltk-forms1.3 libfltk1.1 libfltk1.3-dev
+  libgeos-3.4.2 libgeos-c1 libkactivities-models1 liblcms1 liblcms1-dev
+  liblcms2-dev liblodo3.0 liblua5.1-0-dev libmng-dev libntdb1
+  liboce-ocaf-lite8 liboce-ocaf8 liboce-visualization8 libois-1.3.0
+  libplayerc++3.0 libplayerc3.0 libplayercommon3.0 libplayercore3.0
+  libplayerdrivers3.0 libplayerinterface3.0 libplayerjpeg3.0 libplayertcp3.0
+  libplayerwkb3.0 libpmap3.0 libprotobuf-dev libprotobuf-lite8 libprotoc8
+  libqwt-dev libqwt5-qt4 libqwt6 libsdformat-dev libsdformat1 libsilly
+  libstatgrab9 libtbb-dev liburdfdom-tools linux-headers-3.19.0-25
+  linux-headers-3.19.0-25-generic linux-headers-generic-lts-vivid
+  linux-image-3.19.0-25-generic linux-image-extra-3.19.0-25-generic
+  linux-image-generic-lts-vivid python-ntdb python-opengl python-ply
+  python-psutil python-pydot python-qwt5-qt4 robot-player
+  ros-indigo-actionlib-tutorials ros-indigo-bond-core ros-indigo-bondpy
+  ros-indigo-camera-calibration ros-indigo-camera-calibration-parsers
+  ros-indigo-camera-info-manager ros-indigo-collada-parser
+  ros-indigo-collada-urdf ros-indigo-common-msgs ros-indigo-common-tutorials
+  ros-indigo-compressed-depth-image-transport
+  ros-indigo-compressed-image-transport ros-indigo-control-msgs
+  ros-indigo-cv-bridge ros-indigo-depth-image-proc
+  ros-indigo-diagnostic-aggregator ros-indigo-diagnostic-analysis
+  ros-indigo-diagnostic-common-diagnostics ros-indigo-diagnostic-msgs
+  ros-indigo-diagnostic-updater ros-indigo-diagnostics ros-indigo-driver-base
+  ros-indigo-eigen-conversions ros-indigo-eigen-stl-containers
+  ros-indigo-executive-smach ros-indigo-filters ros-indigo-gazebo-msgs
+  ros-indigo-gazebo-plugins ros-indigo-gazebo-ros ros-indigo-gazebo-ros-pkgs
+  ros-indigo-geometric-shapes ros-indigo-geometry
+  ros-indigo-geometry-tutorials ros-indigo-image-common
+  ros-indigo-image-pipeline ros-indigo-image-proc ros-indigo-image-rotate
+  ros-indigo-image-transport-plugins ros-indigo-image-view
+  ros-indigo-interactive-marker-tutorials ros-indigo-kdl-conversions
+  ros-indigo-kdl-parser ros-indigo-laser-assembler ros-indigo-laser-filters
+  ros-indigo-laser-pipeline ros-indigo-librviz-tutorial ros-indigo-mk
+  ros-indigo-nodelet-core ros-indigo-nodelet-tutorial-math
+  ros-indigo-perception ros-indigo-perception-pcl
+  ros-indigo-pluginlib-tutorials ros-indigo-pointcloud-to-laserscan
+  ros-indigo-polled-camera ros-indigo-qt-dotgraph ros-indigo-qt-gui
+  ros-indigo-qt-gui-cpp ros-indigo-qt-gui-py-common ros-indigo-random-numbers
+  ros-indigo-robot-state-publisher ros-indigo-ros ros-indigo-ros-base
+  ros-indigo-ros-comm ros-indigo-ros-core ros-indigo-ros-tutorials
+  ros-indigo-rosbag-migration-rule ros-indigo-rosbash ros-indigo-rosboost-cfg
+  ros-indigo-roscpp-core ros-indigo-roscpp-tutorials ros-indigo-roscreate
+  ros-indigo-roslang ros-indigo-roslint ros-indigo-roslisp ros-indigo-rosmake
+  ros-indigo-rospy-tutorials ros-indigo-rqt-action ros-indigo-rqt-bag
+  ros-indigo-rqt-bag-plugins ros-indigo-rqt-common-plugins
+  ros-indigo-rqt-console ros-indigo-rqt-dep ros-indigo-rqt-graph
+  ros-indigo-rqt-gui ros-indigo-rqt-gui-cpp ros-indigo-rqt-gui-py
+  ros-indigo-rqt-image-view ros-indigo-rqt-launch ros-indigo-rqt-logger-level
+  ros-indigo-rqt-moveit ros-indigo-rqt-msg ros-indigo-rqt-nav-view
+  ros-indigo-rqt-plot ros-indigo-rqt-pose-view ros-indigo-rqt-publisher
+  ros-indigo-rqt-py-common ros-indigo-rqt-py-console
+  ros-indigo-rqt-reconfigure ros-indigo-rqt-robot-dashboard
+  ros-indigo-rqt-robot-monitor ros-indigo-rqt-robot-plugins
+  ros-indigo-rqt-robot-steering ros-indigo-rqt-runtime-monitor
+  ros-indigo-rqt-rviz ros-indigo-rqt-service-caller ros-indigo-rqt-shell
+  ros-indigo-rqt-srv ros-indigo-rqt-tf-tree ros-indigo-rqt-top
+  ros-indigo-rqt-topic ros-indigo-rqt-web ros-indigo-rviz-plugin-tutorials
+  ros-indigo-rviz-python-tutorial ros-indigo-self-test ros-indigo-shape-msgs
+  ros-indigo-smach ros-indigo-smach-msgs ros-indigo-smach-ros ros-indigo-stage
+  ros-indigo-stage-ros ros-indigo-stereo-image-proc ros-indigo-stereo-msgs
+  ros-indigo-tf-conversions ros-indigo-theora-image-transport
+  ros-indigo-trajectory-msgs ros-indigo-turtle-actionlib ros-indigo-turtle-tf
+  ros-indigo-turtle-tf2 ros-indigo-turtlesim ros-indigo-vision-opencv
+  ros-indigo-visualization-marker-tutorials ros-indigo-visualization-tutorials
+  ros-indigo-viz sbcl tango-icon-theme thermald
+Use 'apt-get autoremove' to remove them.
+Suggested packages:
+  wx2.8-doc wx2.8-examples editra
+The following NEW packages will be installed:
+  python-wxgtk2.8
+0 upgraded, 1 newly installed, 0 to remove and 24 not upgraded.
+Need to get 3,773 kB of archives.
+After this operation, 22.4 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty/universe python-wxgtk2.8 amd64 2.8.12.1+dfsg-2ubuntu2 [3,773 kB]
+Fetched 3,773 kB in 1s (2,512 kB/s)          
+Selecting previously unselected package python-wxgtk2.8.
+(Reading database ... 641474 files and directories currently installed.)
+Preparing to unpack .../python-wxgtk2.8_2.8.12.1+dfsg-2ubuntu2_amd64.deb ...
+Unpacking python-wxgtk2.8 (2.8.12.1+dfsg-2ubuntu2) ...
+Setting up python-wxgtk2.8 (2.8.12.1+dfsg-2ubuntu2) ...
+update-alternatives: using /usr/lib/wx/python/wx2.8.pth to provide /usr/lib/wx/python/wx.pth (wx.pth) in auto mode
+asif@arain:~$ 
+
+

@@ -1,0 +1,8 @@
+float64 min_pan
+float64 min_tilt
+float64 max_pan             
+float64 max_tilt
+int16 n_pan
+int16 n_tilt
+---
+

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<package>
+  <name>husky_description</name>
+  <version>0.0.2</version>
+  <description>URDF description for Husky</description>
+
+  <maintainer email="mpurvis@clearpathrobotics.com">Mike Purvis</maintainer>
+  <author email="rgariepy@clearpathrobotics.com">Ryan Gariepy</author>
+
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>urdf</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>genmsg</run_depend>
+  <run_depend>gazebo</run_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>genmsg</build_depend>
+  <build_depend>gazebo</build_depend>
+
+	<!--ROS specific-->
+	<run_depend> package="std_msgs"</run_depend>
+	<run_depend> package="roscpp"</run_depend>
+	<run_depend> package="rospy"</run_depend>
+	<!--URDF specific-->
+	<run_depend> package="urdf" </run_depend>
+	<run_depend> package="xacro" </run_depend>
+	<!--Gazebo specific-->
+	<run_depend> package="gazebo" </run_depend>
+	<run_depend> package="gazebo_tools" </run_depend>
+	<run_depend> package="gazebo_worlds"</run_depend>
+	<run_depend> package="gazebo_plugins"</run_depend>
+
+	<run_depend> package="robot_state_publisher"</run_depend>
+	<run_depend> package="joint_state_publisher"</run_depend>
+	<export>
+        <gazebo plugin_path="${prefix}/lib" />
+
+	</export>
+
+
+</package>

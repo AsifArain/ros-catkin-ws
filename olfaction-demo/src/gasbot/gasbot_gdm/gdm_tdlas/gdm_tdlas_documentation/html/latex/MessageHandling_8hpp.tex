@@ -1,0 +1,611 @@
+\section{MessageHandling.hpp File Reference}
+\label{MessageHandling_8hpp}\index{MessageHandling.hpp@{MessageHandling.hpp}}
+{\ttfamily \#include $<$stdio.h$>$}\par
+{\ttfamily \#include $<$string.h$>$}\par
+{\ttfamily \#include $<$qpOASES/Constants.hpp$>$}\par
+{\ttfamily \#include $<$qpOASES/MessageHandling.ipp$>$}\par
+Include dependency graph for MessageHandling.hpp:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{MessageHandling_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=400pt]{MessageHandling_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf MessageHandling}
+\begin{DoxyCompactList}\small\item\em Handles all kind of error messages, warnings and other information. \end{DoxyCompactList}\item 
+struct {\bf MessageHandling::ReturnValueList}
+\begin{DoxyCompactList}\small\item\em Data structure for entries in global message list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf \_\-\_\-FILE\_\-\_\-}~0
+\item 
+\#define {\bf \_\-\_\-FUNCTION\_\-\_\-}~0
+\item 
+\#define {\bf \_\-\_\-LINE\_\-\_\-}~0
+\item 
+\#define {\bf THROWERROR}(retval)~( getGlobalMessageHandler( )-\/$>$throwError((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )
+\item 
+\#define {\bf THROWINFO}(retval)~( getGlobalMessageHandler( )-\/$>$throwInfo((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )
+\item 
+\#define {\bf THROWWARNING}(retval)~( getGlobalMessageHandler( )-\/$>$throwWarning((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf returnValue} \{ \par
+{\bf TERMINAL\_\-LIST\_\-ELEMENT} =  -\/1, 
+{\bf SUCCESSFUL\_\-RETURN} =  0, 
+{\bf RET\_\-DIV\_\-BY\_\-ZERO}, 
+{\bf RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS}, 
+\par
+{\bf RET\_\-INVALID\_\-ARGUMENTS}, 
+{\bf RET\_\-ERROR\_\-UNDEFINED}, 
+{\bf RET\_\-WARNING\_\-UNDEFINED}, 
+{\bf RET\_\-INFO\_\-UNDEFINED}, 
+\par
+{\bf RET\_\-EWI\_\-UNDEFINED}, 
+{\bf RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY}, 
+{\bf RET\_\-UNKNOWN\_\-BUG}, 
+{\bf RET\_\-PRINTLEVEL\_\-CHANGED}, 
+\par
+{\bf RET\_\-NOT\_\-YET\_\-IMPLEMENTED}, 
+{\bf RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD}, 
+{\bf RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH}, 
+{\bf RET\_\-INDEXLIST\_\-CORRUPTED}, 
+\par
+{\bf RET\_\-INDEXLIST\_\-OUTOFBOUNDS}, 
+{\bf RET\_\-INDEXLIST\_\-ADD\_\-FAILED}, 
+{\bf RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED}, 
+{\bf RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS}, 
+\par
+{\bf RET\_\-ADDINDEX\_\-FAILED}, 
+{\bf RET\_\-REMOVEINDEX\_\-FAILED}, 
+{\bf RET\_\-SWAPINDEX\_\-FAILED}, 
+{\bf RET\_\-NOTHING\_\-TO\_\-DO}, 
+\par
+{\bf RET\_\-SETUP\_\-BOUND\_\-FAILED}, 
+{\bf RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED}, 
+{\bf RET\_\-MOVING\_\-BOUND\_\-FAILED}, 
+{\bf RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED}, 
+\par
+{\bf RET\_\-SHIFTING\_\-FAILED}, 
+{\bf RET\_\-ROTATING\_\-FAILED}, 
+{\bf RET\_\-QPOBJECT\_\-NOT\_\-SETUP}, 
+{\bf RET\_\-QP\_\-ALREADY\_\-INITIALISED}, 
+\par
+{\bf RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER}, 
+{\bf RET\_\-RESET\_\-FAILED}, 
+{\bf RET\_\-INIT\_\-FAILED}, 
+{\bf RET\_\-INIT\_\-FAILED\_\-TQ}, 
+\par
+{\bf RET\_\-INIT\_\-FAILED\_\-CHOLESKY}, 
+{\bf RET\_\-INIT\_\-FAILED\_\-HOTSTART}, 
+{\bf RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY}, 
+{\bf RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS}, 
+\par
+{\bf RET\_\-INIT\_\-FAILED\_\-REGULARISATION}, 
+{\bf RET\_\-INIT\_\-SUCCESSFUL}, 
+{\bf RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED}, 
+{\bf RET\_\-SETUP\_\-WORKINGSET\_\-FAILED}, 
+\par
+{\bf RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED}, 
+{\bf RET\_\-NO\_\-EXTERN\_\-SOLVER}, 
+{\bf RET\_\-QP\_\-UNBOUNDED}, 
+{\bf RET\_\-QP\_\-INFEASIBLE}, 
+\par
+{\bf RET\_\-QP\_\-NOT\_\-SOLVED}, 
+{\bf RET\_\-QP\_\-SOLVED}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP}, 
+{\bf RET\_\-INITIALISATION\_\-STARTED}, 
+\par
+{\bf RET\_\-HOTSTART\_\-FAILED}, 
+{\bf RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT}, 
+{\bf RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED}, 
+{\bf RET\_\-ITERATION\_\-STARTED}, 
+\par
+{\bf RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED}, 
+{\bf RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED}, 
+{\bf RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED}, 
+{\bf RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND}, 
+\par
+{\bf RET\_\-HOMOTOPY\_\-STEP\_\-FAILED}, 
+{\bf RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY}, 
+{\bf RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS}, 
+{\bf RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED}, 
+\par
+{\bf RET\_\-MAX\_\-NWSR\_\-REACHED}, 
+{\bf RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED}, 
+{\bf RET\_\-INVALID\_\-FACTORISATION\_\-FLAG}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA}, 
+\par
+{\bf RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ}, 
+{\bf RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY}, 
+{\bf RET\_\-CYCLING\_\-DETECTED}, 
+{\bf RET\_\-CYCLING\_\-NOT\_\-RESOLVED}, 
+\par
+{\bf RET\_\-CYCLING\_\-RESOLVED}, 
+{\bf RET\_\-STEPSIZE}, 
+{\bf RET\_\-STEPSIZE\_\-NONPOSITIVE}, 
+{\bf RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED}, 
+\par
+{\bf RET\_\-ADDCONSTRAINT\_\-FAILED}, 
+{\bf RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY}, 
+{\bf RET\_\-ADDBOUND\_\-FAILED}, 
+{\bf RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY}, 
+\par
+{\bf RET\_\-REMOVECONSTRAINT\_\-FAILED}, 
+{\bf RET\_\-REMOVEBOUND\_\-FAILED}, 
+{\bf RET\_\-REMOVE\_\-FROM\_\-ACTIVESET}, 
+{\bf RET\_\-ADD\_\-TO\_\-ACTIVESET}, 
+\par
+{\bf RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED}, 
+{\bf RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED}, 
+{\bf RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE}, 
+{\bf RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE}, 
+\par
+{\bf RET\_\-LINEARLY\_\-DEPENDENT}, 
+{\bf RET\_\-LINEARLY\_\-INDEPENDENT}, 
+{\bf RET\_\-LI\_\-RESOLVED}, 
+{\bf RET\_\-ENSURELI\_\-FAILED}, 
+\par
+{\bf RET\_\-ENSURELI\_\-FAILED\_\-TQ}, 
+{\bf RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX}, 
+{\bf RET\_\-ENSURELI\_\-FAILED\_\-CYCLING}, 
+{\bf RET\_\-BOUND\_\-ALREADY\_\-ACTIVE}, 
+\par
+{\bf RET\_\-ALL\_\-BOUNDS\_\-ACTIVE}, 
+{\bf RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE}, 
+{\bf RET\_\-BOUND\_\-NOT\_\-ACTIVE}, 
+{\bf RET\_\-HESSIAN\_\-NOT\_\-SPD}, 
+\par
+{\bf RET\_\-HESSIAN\_\-INDEFINITE}, 
+{\bf RET\_\-MATRIX\_\-SHIFT\_\-FAILED}, 
+{\bf RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED}, 
+{\bf RET\_\-PRINT\_\-ITERATION\_\-FAILED}, 
+\par
+{\bf RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE}, 
+{\bf RET\_\-DISABLECONSTRAINTS\_\-FAILED}, 
+{\bf RET\_\-ENABLECONSTRAINTS\_\-FAILED}, 
+{\bf RET\_\-ALREADY\_\-ENABLED}, 
+\par
+{\bf RET\_\-ALREADY\_\-DISABLED}, 
+{\bf RET\_\-NO\_\-HESSIAN\_\-SPECIFIED}, 
+{\bf RET\_\-USING\_\-REGULARISATION}, 
+{\bf RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE}, 
+\par
+{\bf RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE}, 
+{\bf RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED}, 
+{\bf RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY}, 
+{\bf RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE}, 
+\par
+{\bf RET\_\-NO\_\-REGSTEP\_\-NWSR}, 
+{\bf RET\_\-FEWER\_\-REGSTEPS\_\-NWSR}, 
+{\bf RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN}, 
+{\bf RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED}, 
+\par
+{\bf RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT}, 
+{\bf RET\_\-UPDATEMATRICES\_\-FAILED}, 
+{\bf RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE}, 
+\par
+{\bf RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE}, 
+{\bf RET\_\-FILEDATA\_\-INCONSISTENT}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM}, 
+\par
+{\bf RET\_\-NWSR\_\-SET\_\-TO\_\-ONE}, 
+{\bf RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK}, 
+{\bf RET\_\-BENCHMARK\_\-ABORTED}, 
+{\bf RET\_\-INITIAL\_\-QP\_\-SOLVED}, 
+\par
+{\bf RET\_\-QP\_\-SOLUTION\_\-STARTED}, 
+{\bf RET\_\-BENCHMARK\_\-SUCCESSFUL}, 
+{\bf RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE}, 
+{\bf RET\_\-ENSURELI\_\-DROPPED}
+ \}
+\begin{DoxyCompactList}\small\item\em Defines all symbols for global return values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bf MessageHandling} $\ast$ {\bf getGlobalMessageHandler} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau, Andreas Potschka, Christian Kirches 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+3.0beta 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2007-\/2012
+\end{DoxyDate}
+Declaration of the \doxyref{MessageHandling}{p.}{classMessageHandling} class including global return values. 
+
+Definition in file {\bf MessageHandling.hpp}.
+
+
+
+\subsection{Define Documentation}
+\index{MessageHandling.hpp@{MessageHandling.hpp}!\_\-\_\-FILE\_\-\_\-@{\_\-\_\-FILE\_\-\_\-}}
+\index{\_\-\_\-FILE\_\-\_\-@{\_\-\_\-FILE\_\-\_\-}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{\_\-\_\-FILE\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-FILE\_\-\_\-~0}\label{MessageHandling_8hpp_a2f6bd616afd004b1ce994c2ba2ac9937}
+Ensures that \_\-\_\-FILE\_\-\_\- macro is defined. 
+
+Definition at line 418 of file MessageHandling.hpp.
+
+\index{MessageHandling.hpp@{MessageHandling.hpp}!\_\-\_\-FUNCTION\_\-\_\-@{\_\-\_\-FUNCTION\_\-\_\-}}
+\index{\_\-\_\-FUNCTION\_\-\_\-@{\_\-\_\-FUNCTION\_\-\_\-}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{\_\-\_\-FUNCTION\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-FUNCTION\_\-\_\-~0}\label{MessageHandling_8hpp_a828bb1dfda1afd67ca795075903d227d}
+Ensures that \_\-\_\-FUNCTION\_\-\_\- macro is defined. 
+
+Definition at line 413 of file MessageHandling.hpp.
+
+\index{MessageHandling.hpp@{MessageHandling.hpp}!\_\-\_\-LINE\_\-\_\-@{\_\-\_\-LINE\_\-\_\-}}
+\index{\_\-\_\-LINE\_\-\_\-@{\_\-\_\-LINE\_\-\_\-}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{\_\-\_\-LINE\_\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}\#define \_\-\_\-LINE\_\-\_\-~0}\label{MessageHandling_8hpp_adbfa1be789063f1c21478696be51bb70}
+Ensures that \_\-\_\-LINE\_\-\_\- macro is defined. 
+
+Definition at line 423 of file MessageHandling.hpp.
+
+\index{MessageHandling.hpp@{MessageHandling.hpp}!THROWERROR@{THROWERROR}}
+\index{THROWERROR@{THROWERROR}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{THROWERROR}]{\setlength{\rightskip}{0pt plus 5cm}\#define THROWERROR(
+\begin{DoxyParamCaption}
+\item[{}]{retval}
+\end{DoxyParamCaption}
+)~( getGlobalMessageHandler( )-\/$>$throwError((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )}\label{MessageHandling_8hpp_a8bc2bee847b74e80aeb52a1375945ed4}
+Short version of throwError with default values, only returnValue is needed 
+
+Definition at line 428 of file MessageHandling.hpp.
+
+\index{MessageHandling.hpp@{MessageHandling.hpp}!THROWINFO@{THROWINFO}}
+\index{THROWINFO@{THROWINFO}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{THROWINFO}]{\setlength{\rightskip}{0pt plus 5cm}\#define THROWINFO(
+\begin{DoxyParamCaption}
+\item[{}]{retval}
+\end{DoxyParamCaption}
+)~( getGlobalMessageHandler( )-\/$>$throwInfo((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )}\label{MessageHandling_8hpp_a0ef7741d67176593da953e5baa206ce9}
+Short version of throwInfo with default values, only returnValue is needed 
+
+Definition at line 434 of file MessageHandling.hpp.
+
+\index{MessageHandling.hpp@{MessageHandling.hpp}!THROWWARNING@{THROWWARNING}}
+\index{THROWWARNING@{THROWWARNING}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{THROWWARNING}]{\setlength{\rightskip}{0pt plus 5cm}\#define THROWWARNING(
+\begin{DoxyParamCaption}
+\item[{}]{retval}
+\end{DoxyParamCaption}
+)~( getGlobalMessageHandler( )-\/$>$throwWarning((retval),0,\_\-\_\-FUNCTION\_\-\_\-,\_\-\_\-FILE\_\-\_\-,\_\-\_\-LINE\_\-\_\-,VS\_\-VISIBLE) )}\label{MessageHandling_8hpp_a733e8e8f13934b6799f96a6dc8185439}
+Short version of throwWarning with default values, only returnValue is needed 
+
+Definition at line 431 of file MessageHandling.hpp.
+
+
+
+\subsection{Enumeration Type Documentation}
+\index{MessageHandling.hpp@{MessageHandling.hpp}!returnValue@{returnValue}}
+\index{returnValue@{returnValue}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{returnValue}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf returnValue}}\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865e}
+
+
+Defines all symbols for global return values. 
+
+The enumeration returnValueType defines all symbols for global return values. Important: All return values are assumed to be nonnegative!
+
+\begin{DoxyAuthor}{Author}
+Hans Joachim Ferreau 
+\end{DoxyAuthor}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{TERMINAL\_\-LIST\_\-ELEMENT@{TERMINAL\_\-LIST\_\-ELEMENT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!TERMINAL\_\-LIST\_\-ELEMENT@{TERMINAL\_\-LIST\_\-ELEMENT}}\item[{\em 
+TERMINAL\_\-LIST\_\-ELEMENT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea1c71b2df82bcc7afd6e966d85b082bdc}
+}]Terminal list element, internal usage only! \index{SUCCESSFUL\_\-RETURN@{SUCCESSFUL\_\-RETURN}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!SUCCESSFUL\_\-RETURN@{SUCCESSFUL\_\-RETURN}}\item[{\em 
+SUCCESSFUL\_\-RETURN\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaec77507a25a637aa3a6650ba26875984}
+}]Successful return. \index{RET\_\-DIV\_\-BY\_\-ZERO@{RET\_\-DIV\_\-BY\_\-ZERO}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-DIV\_\-BY\_\-ZERO@{RET\_\-DIV\_\-BY\_\-ZERO}}\item[{\em 
+RET\_\-DIV\_\-BY\_\-ZERO\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5e533c7f28abfed7d3e11d76f298cd9d}
+}]Division by zero. \index{RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS@{RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS@{RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS}}\item[{\em 
+RET\_\-INDEX\_\-OUT\_\-OF\_\-BOUNDS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ead043e15a047a1583d8fc80574fd330ed}
+}]Index out of bounds. \index{RET\_\-INVALID\_\-ARGUMENTS@{RET\_\-INVALID\_\-ARGUMENTS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INVALID\_\-ARGUMENTS@{RET\_\-INVALID\_\-ARGUMENTS}}\item[{\em 
+RET\_\-INVALID\_\-ARGUMENTS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea85fb8027157a2c6713c2f7c9b9d93bc6}
+}]At least one of the arguments is invalid. \index{RET\_\-ERROR\_\-UNDEFINED@{RET\_\-ERROR\_\-UNDEFINED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ERROR\_\-UNDEFINED@{RET\_\-ERROR\_\-UNDEFINED}}\item[{\em 
+RET\_\-ERROR\_\-UNDEFINED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eabe82f80cd5e55855a15fbff49ccb1d2c}
+}]Error number undefined. \index{RET\_\-WARNING\_\-UNDEFINED@{RET\_\-WARNING\_\-UNDEFINED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-WARNING\_\-UNDEFINED@{RET\_\-WARNING\_\-UNDEFINED}}\item[{\em 
+RET\_\-WARNING\_\-UNDEFINED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea6e1e6e7d8bab4ae3995970dec1eae73a}
+}]Warning number undefined. \index{RET\_\-INFO\_\-UNDEFINED@{RET\_\-INFO\_\-UNDEFINED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INFO\_\-UNDEFINED@{RET\_\-INFO\_\-UNDEFINED}}\item[{\em 
+RET\_\-INFO\_\-UNDEFINED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea118a53820e7b4fc990b0f9fbb04b46e3}
+}]Info number undefined. \index{RET\_\-EWI\_\-UNDEFINED@{RET\_\-EWI\_\-UNDEFINED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-EWI\_\-UNDEFINED@{RET\_\-EWI\_\-UNDEFINED}}\item[{\em 
+RET\_\-EWI\_\-UNDEFINED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf52f597acbe99c86fa744a54771907a4}
+}]Error/warning/info number undefined. \index{RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY@{RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY@{RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY}}\item[{\em 
+RET\_\-AVAILABLE\_\-WITH\_\-LINUX\_\-ONLY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf94d876dec07376b2aadcb146ceb9e79}
+}]This function is available under Linux only. \index{RET\_\-UNKNOWN\_\-BUG@{RET\_\-UNKNOWN\_\-BUG}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNKNOWN\_\-BUG@{RET\_\-UNKNOWN\_\-BUG}}\item[{\em 
+RET\_\-UNKNOWN\_\-BUG\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaee57058f3b42d5e58c701115a79c38a0}
+}]The error occured is not yet known. \index{RET\_\-PRINTLEVEL\_\-CHANGED@{RET\_\-PRINTLEVEL\_\-CHANGED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-PRINTLEVEL\_\-CHANGED@{RET\_\-PRINTLEVEL\_\-CHANGED}}\item[{\em 
+RET\_\-PRINTLEVEL\_\-CHANGED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaecbac7749bbe727bec1ead039a59c1a5}
+}]Print level changed. \index{RET\_\-NOT\_\-YET\_\-IMPLEMENTED@{RET\_\-NOT\_\-YET\_\-IMPLEMENTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NOT\_\-YET\_\-IMPLEMENTED@{RET\_\-NOT\_\-YET\_\-IMPLEMENTED}}\item[{\em 
+RET\_\-NOT\_\-YET\_\-IMPLEMENTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea7a59c28cf64a85e177436d1c19ee8e18}
+}]Requested function is not yet implemented in this version of qpOASES. \index{RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD@{RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD@{RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD}}\item[{\em 
+RET\_\-INDEXLIST\_\-MUST\_\-BE\_\-REORDERD\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae061c25f78c8a5b2fb2773d3c6ed0c18}
+}]Index list has to be reordered. (12) \index{RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH@{RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH@{RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH}}\item[{\em 
+RET\_\-INDEXLIST\_\-EXCEEDS\_\-MAX\_\-LENGTH\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eab45d506ea2b7910e5ef57abd79ef4ce6}
+}]Index list exceeds its maximal physical length. \index{RET\_\-INDEXLIST\_\-CORRUPTED@{RET\_\-INDEXLIST\_\-CORRUPTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-CORRUPTED@{RET\_\-INDEXLIST\_\-CORRUPTED}}\item[{\em 
+RET\_\-INDEXLIST\_\-CORRUPTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea02a025b066cd6f22ff6751c167749a88}
+}]Index list corrupted. \index{RET\_\-INDEXLIST\_\-OUTOFBOUNDS@{RET\_\-INDEXLIST\_\-OUTOFBOUNDS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-OUTOFBOUNDS@{RET\_\-INDEXLIST\_\-OUTOFBOUNDS}}\item[{\em 
+RET\_\-INDEXLIST\_\-OUTOFBOUNDS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea78ea3821f8b2203666bc7fd806f53c90}
+}]Physical index is out of bounds. \index{RET\_\-INDEXLIST\_\-ADD\_\-FAILED@{RET\_\-INDEXLIST\_\-ADD\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-ADD\_\-FAILED@{RET\_\-INDEXLIST\_\-ADD\_\-FAILED}}\item[{\em 
+RET\_\-INDEXLIST\_\-ADD\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea884ae76f0e145483c287d7ac9b8562e7}
+}]Adding indices from another index set failed. \index{RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED@{RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED@{RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED}}\item[{\em 
+RET\_\-INDEXLIST\_\-INTERSECT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5b363b942bebcdcf1d6a798658cdabec}
+}]Intersection with another index set failed. \index{RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS@{RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS@{RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS}}\item[{\em 
+RET\_\-INDEX\_\-ALREADY\_\-OF\_\-DESIRED\_\-STATUS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae74df12517eb44aa392d3c902ce16a19}
+}]Index is already of desired status. (18) \index{RET\_\-ADDINDEX\_\-FAILED@{RET\_\-ADDINDEX\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADDINDEX\_\-FAILED@{RET\_\-ADDINDEX\_\-FAILED}}\item[{\em 
+RET\_\-ADDINDEX\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea4ac73e7167cc8e905a52b8db6710c743}
+}]Adding index to index set failed. \index{RET\_\-REMOVEINDEX\_\-FAILED@{RET\_\-REMOVEINDEX\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REMOVEINDEX\_\-FAILED@{RET\_\-REMOVEINDEX\_\-FAILED}}\item[{\em 
+RET\_\-REMOVEINDEX\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea6d55b68d3e8633931a1d6452099ae0e8}
+}]Removing index from index set failed. \index{RET\_\-SWAPINDEX\_\-FAILED@{RET\_\-SWAPINDEX\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SWAPINDEX\_\-FAILED@{RET\_\-SWAPINDEX\_\-FAILED}}\item[{\em 
+RET\_\-SWAPINDEX\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea99ad2433de4fd99643f8c344adce6f14}
+}]Cannot swap between different indexsets. \index{RET\_\-NOTHING\_\-TO\_\-DO@{RET\_\-NOTHING\_\-TO\_\-DO}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NOTHING\_\-TO\_\-DO@{RET\_\-NOTHING\_\-TO\_\-DO}}\item[{\em 
+RET\_\-NOTHING\_\-TO\_\-DO\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa939b626f9a91c535be69563cba3ea0c}
+}]Nothing to do. \index{RET\_\-SETUP\_\-BOUND\_\-FAILED@{RET\_\-SETUP\_\-BOUND\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SETUP\_\-BOUND\_\-FAILED@{RET\_\-SETUP\_\-BOUND\_\-FAILED}}\item[{\em 
+RET\_\-SETUP\_\-BOUND\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea1dc9969660335954fb976a4f171dbe8a}
+}]Setting up bound index failed. \index{RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED@{RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED@{RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED}}\item[{\em 
+RET\_\-SETUP\_\-CONSTRAINT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea774f876e8813674e5af0f8b9ebfa0376}
+}]Setting up constraint index failed. \index{RET\_\-MOVING\_\-BOUND\_\-FAILED@{RET\_\-MOVING\_\-BOUND\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-MOVING\_\-BOUND\_\-FAILED@{RET\_\-MOVING\_\-BOUND\_\-FAILED}}\item[{\em 
+RET\_\-MOVING\_\-BOUND\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eab3a33d8e827abc7dc3c89a4a3ff8bc53}
+}]Moving bound between index sets failed. \index{RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED@{RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED@{RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED}}\item[{\em 
+RET\_\-MOVING\_\-CONSTRAINT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae2f0c2fcc019914578285885c0f87c95}
+}]Moving constraint between index sets failed. \index{RET\_\-SHIFTING\_\-FAILED@{RET\_\-SHIFTING\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SHIFTING\_\-FAILED@{RET\_\-SHIFTING\_\-FAILED}}\item[{\em 
+RET\_\-SHIFTING\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea9509df1a9f84368b8a2a04817ad951e2}
+}]Shifting of bounds/constraints failed. \index{RET\_\-ROTATING\_\-FAILED@{RET\_\-ROTATING\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ROTATING\_\-FAILED@{RET\_\-ROTATING\_\-FAILED}}\item[{\em 
+RET\_\-ROTATING\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea97c7b874c8dc2262ffb4719db0f3a9ea}
+}]Rotating of bounds/constraints failed. \index{RET\_\-QPOBJECT\_\-NOT\_\-SETUP@{RET\_\-QPOBJECT\_\-NOT\_\-SETUP}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QPOBJECT\_\-NOT\_\-SETUP@{RET\_\-QPOBJECT\_\-NOT\_\-SETUP}}\item[{\em 
+RET\_\-QPOBJECT\_\-NOT\_\-SETUP\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea149376c1abe7c87dc927566e4e60af10}
+}]The QP object has not been setup correctly, use another constructor. (29) \index{RET\_\-QP\_\-ALREADY\_\-INITIALISED@{RET\_\-QP\_\-ALREADY\_\-INITIALISED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-ALREADY\_\-INITIALISED@{RET\_\-QP\_\-ALREADY\_\-INITIALISED}}\item[{\em 
+RET\_\-QP\_\-ALREADY\_\-INITIALISED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea37e621bb9516e08bd37c3767e0fbe168}
+}]\doxyref{QProblem}{p.}{classQProblem} has already been initialised. \index{RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER@{RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER@{RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER}}\item[{\em 
+RET\_\-NO\_\-INIT\_\-WITH\_\-STANDARD\_\-SOLVER\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eab7c63e31c084efd324b422b23a107ffa}
+}]Initialisation via extern QP solver is not yet implemented. \index{RET\_\-RESET\_\-FAILED@{RET\_\-RESET\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-RESET\_\-FAILED@{RET\_\-RESET\_\-FAILED}}\item[{\em 
+RET\_\-RESET\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eafe6cfacaa204a0d5e63ec9635cc7d80d}
+}]Reset failed. \index{RET\_\-INIT\_\-FAILED@{RET\_\-INIT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED@{RET\_\-INIT\_\-FAILED}}\item[{\em 
+RET\_\-INIT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eadb8ab9888977627abbebc017e9dcd083}
+}]Initialisation failed. \index{RET\_\-INIT\_\-FAILED\_\-TQ@{RET\_\-INIT\_\-FAILED\_\-TQ}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-TQ@{RET\_\-INIT\_\-FAILED\_\-TQ}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-TQ\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea3db2e79e0cc5bbf0c890d4858afa6e11}
+}]Initialisation failed due to TQ factorisation. \index{RET\_\-INIT\_\-FAILED\_\-CHOLESKY@{RET\_\-INIT\_\-FAILED\_\-CHOLESKY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-CHOLESKY@{RET\_\-INIT\_\-FAILED\_\-CHOLESKY}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-CHOLESKY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea3768850ebfac736764b93f14b4872a93}
+}]Initialisation failed due to Cholesky decomposition. \index{RET\_\-INIT\_\-FAILED\_\-HOTSTART@{RET\_\-INIT\_\-FAILED\_\-HOTSTART}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-HOTSTART@{RET\_\-INIT\_\-FAILED\_\-HOTSTART}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-HOTSTART\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea929a85f3bd16d5f7520c4c5ba529e374}
+}]Initialisation failed! QP could not be solved! \index{RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY@{RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY@{RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-INFEASIBILITY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea040d013f3f6fb6b8b7f4d934b6ab6e3b}
+}]Initial QP could not be solved due to infeasibility! \index{RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS@{RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS@{RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-UNBOUNDEDNESS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaee1adc69a219c67785b374e183b469c8}
+}]Initial QP could not be solved due to unboundedness! \index{RET\_\-INIT\_\-FAILED\_\-REGULARISATION@{RET\_\-INIT\_\-FAILED\_\-REGULARISATION}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-FAILED\_\-REGULARISATION@{RET\_\-INIT\_\-FAILED\_\-REGULARISATION}}\item[{\em 
+RET\_\-INIT\_\-FAILED\_\-REGULARISATION\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae5b4905ad0f9a6a0334de5b06d22ed78}
+}]Initialisation failed as Hessian matrix could not be regularised. \index{RET\_\-INIT\_\-SUCCESSFUL@{RET\_\-INIT\_\-SUCCESSFUL}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INIT\_\-SUCCESSFUL@{RET\_\-INIT\_\-SUCCESSFUL}}\item[{\em 
+RET\_\-INIT\_\-SUCCESSFUL\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5d73a0655025d8630405f6dcabffe6b6}
+}]Initialisation done. \index{RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED@{RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED@{RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED}}\item[{\em 
+RET\_\-OBTAINING\_\-WORKINGSET\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea8561f367ac14ea033be8c63da8a54615}
+}]Failed to obtain working set for auxiliary QP. (40) \index{RET\_\-SETUP\_\-WORKINGSET\_\-FAILED@{RET\_\-SETUP\_\-WORKINGSET\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SETUP\_\-WORKINGSET\_\-FAILED@{RET\_\-SETUP\_\-WORKINGSET\_\-FAILED}}\item[{\em 
+RET\_\-SETUP\_\-WORKINGSET\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaec83b172cd94f03da12758baad7c25af}
+}]Failed to setup working set for auxiliary QP. \index{RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED@{RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED@{RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED}}\item[{\em 
+RET\_\-SETUP\_\-AUXILIARYQP\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5f98321449f88fd725b91988f83da87a}
+}]Failed to setup auxiliary QP for initialised homotopy. \index{RET\_\-NO\_\-EXTERN\_\-SOLVER@{RET\_\-NO\_\-EXTERN\_\-SOLVER}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-EXTERN\_\-SOLVER@{RET\_\-NO\_\-EXTERN\_\-SOLVER}}\item[{\em 
+RET\_\-NO\_\-EXTERN\_\-SOLVER\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea0ce3eb781d758f5c8d60bb67b9efd69f}
+}]No extern QP solver available. \index{RET\_\-QP\_\-UNBOUNDED@{RET\_\-QP\_\-UNBOUNDED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-UNBOUNDED@{RET\_\-QP\_\-UNBOUNDED}}\item[{\em 
+RET\_\-QP\_\-UNBOUNDED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea518de97c5a34f15fa0c2521a68d73ff1}
+}]QP is unbounded. \index{RET\_\-QP\_\-INFEASIBLE@{RET\_\-QP\_\-INFEASIBLE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-INFEASIBLE@{RET\_\-QP\_\-INFEASIBLE}}\item[{\em 
+RET\_\-QP\_\-INFEASIBLE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eabcd8e232b02f19cfc0401b9b77a6167e}
+}]QP is infeasible. \index{RET\_\-QP\_\-NOT\_\-SOLVED@{RET\_\-QP\_\-NOT\_\-SOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-NOT\_\-SOLVED@{RET\_\-QP\_\-NOT\_\-SOLVED}}\item[{\em 
+RET\_\-QP\_\-NOT\_\-SOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea287dca546b474635c6d5622e921569c4}
+}]Problems occured while solving QP with standard solver. \index{RET\_\-QP\_\-SOLVED@{RET\_\-QP\_\-SOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-SOLVED@{RET\_\-QP\_\-SOLVED}}\item[{\em 
+RET\_\-QP\_\-SOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaff6f094cbeb65a0f1aff032257ef3968}
+}]QP successfully solved. \index{RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP@{RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP@{RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-SOLVE\_\-QP\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf56f2ad7ac7d63c69eae87e75b3698b1}
+}]Problems occured while solving QP. \index{RET\_\-INITIALISATION\_\-STARTED@{RET\_\-INITIALISATION\_\-STARTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INITIALISATION\_\-STARTED@{RET\_\-INITIALISATION\_\-STARTED}}\item[{\em 
+RET\_\-INITIALISATION\_\-STARTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea68ccfc864d8dc91dceea36a6457cbf7c}
+}]Starting problem initialisation. \index{RET\_\-HOTSTART\_\-FAILED@{RET\_\-HOTSTART\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOTSTART\_\-FAILED@{RET\_\-HOTSTART\_\-FAILED}}\item[{\em 
+RET\_\-HOTSTART\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea1c9fe897988e88507265cac330960522}
+}]Unable to perform homotopy due to internal error. (50) \index{RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT@{RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT@{RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT}}\item[{\em 
+RET\_\-HOTSTART\_\-FAILED\_\-TO\_\-INIT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaef44f4962937ec0500f8f49ff604afd1}
+}]Unable to initialise problem. \index{RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED@{RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED@{RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED}}\item[{\em 
+RET\_\-HOTSTART\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-INITIALISED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea8ff62a8229d187900326a9ca1afac60b}
+}]Unable to perform homotopy as previous QP is not solved. \index{RET\_\-ITERATION\_\-STARTED@{RET\_\-ITERATION\_\-STARTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ITERATION\_\-STARTED@{RET\_\-ITERATION\_\-STARTED}}\item[{\em 
+RET\_\-ITERATION\_\-STARTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea369fb8c9dc2a77a1e72f4eb103ed771b}
+}]Iteration... \index{RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED@{RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED@{RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED}}\item[{\em 
+RET\_\-SHIFT\_\-DETERMINATION\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea966bff668a8504f53f05a3d74acb7e4d}
+}]Determination of shift of the QP data failed. \index{RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED@{RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED@{RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED}}\item[{\em 
+RET\_\-STEPDIRECTION\_\-DETERMINATION\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea63adec4d91330be7334d9a6b1fa2441a}
+}]Determination of step direction failed. \index{RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED@{RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED@{RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED}}\item[{\em 
+RET\_\-STEPLENGTH\_\-DETERMINATION\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa9223fc5e1a3d4223ab825c39bdd45d7}
+}]Determination of step direction failed. \index{RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND@{RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND@{RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND}}\item[{\em 
+RET\_\-OPTIMAL\_\-SOLUTION\_\-FOUND\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea0da5fbbcc17e08d9f65123a69051a817}
+}]Optimal solution of neighbouring QP found. \index{RET\_\-HOMOTOPY\_\-STEP\_\-FAILED@{RET\_\-HOMOTOPY\_\-STEP\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOMOTOPY\_\-STEP\_\-FAILED@{RET\_\-HOMOTOPY\_\-STEP\_\-FAILED}}\item[{\em 
+RET\_\-HOMOTOPY\_\-STEP\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea536775f52bbc0a9fa4e2d0ddfee3be6f}
+}]Unable to perform homotopy step. \index{RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY@{RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY@{RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY}}\item[{\em 
+RET\_\-HOTSTART\_\-STOPPED\_\-INFEASIBILITY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa14167098be18a37cb7dd01f271d9c9c}
+}]Premature homotopy termination because QP is infeasible. \index{RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS@{RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS@{RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS}}\item[{\em 
+RET\_\-HOTSTART\_\-STOPPED\_\-UNBOUNDEDNESS\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eadfc914d50d132f250df763ba5908246e}
+}]Premature homotopy termination because QP is unbounded. (60) \index{RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED@{RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED@{RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED}}\item[{\em 
+RET\_\-WORKINGSET\_\-UPDATE\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea86517caab2618f679b0344657c106497}
+}]Unable to update working sets according to initial guesses. \index{RET\_\-MAX\_\-NWSR\_\-REACHED@{RET\_\-MAX\_\-NWSR\_\-REACHED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-MAX\_\-NWSR\_\-REACHED@{RET\_\-MAX\_\-NWSR\_\-REACHED}}\item[{\em 
+RET\_\-MAX\_\-NWSR\_\-REACHED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaae4f4541f015531f0d19acc9810665ba}
+}]Maximum number of working set recalculations performed. \index{RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED@{RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED@{RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED}}\item[{\em 
+RET\_\-CONSTRAINTS\_\-NOT\_\-SPECIFIED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea0cc1d6f983d2a4e868f3ddf825c6219b}
+}]Problem does comprise constraints! You also have to specify new constraints' bounds. \index{RET\_\-INVALID\_\-FACTORISATION\_\-FLAG@{RET\_\-INVALID\_\-FACTORISATION\_\-FLAG}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INVALID\_\-FACTORISATION\_\-FLAG@{RET\_\-INVALID\_\-FACTORISATION\_\-FLAG}}\item[{\em 
+RET\_\-INVALID\_\-FACTORISATION\_\-FLAG\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea6c5a6fd9fcf73ceb8027e14ca520b6f0}
+}]Invalid factorisation flag. \index{RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA@{RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA@{RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-SAVE\_\-QPDATA\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea7886d451bea019cfd79d4214e456d9c3}
+}]Unable to save QP data. \index{RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ@{RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ@{RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ}}\item[{\em 
+RET\_\-STEPDIRECTION\_\-FAILED\_\-TQ\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf47a87065fef6a209a317624116ea210}
+}]Abnormal termination due to TQ factorisation. \index{RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY@{RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY@{RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY}}\item[{\em 
+RET\_\-STEPDIRECTION\_\-FAILED\_\-CHOLESKY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea66c9c26f584341bd30d86c0f48c5a006}
+}]Abnormal termination due to Cholesky factorisation. \index{RET\_\-CYCLING\_\-DETECTED@{RET\_\-CYCLING\_\-DETECTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CYCLING\_\-DETECTED@{RET\_\-CYCLING\_\-DETECTED}}\item[{\em 
+RET\_\-CYCLING\_\-DETECTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae3421a5893dca63291ba7618a2f17e11}
+}]Cycling detected. \index{RET\_\-CYCLING\_\-NOT\_\-RESOLVED@{RET\_\-CYCLING\_\-NOT\_\-RESOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CYCLING\_\-NOT\_\-RESOLVED@{RET\_\-CYCLING\_\-NOT\_\-RESOLVED}}\item[{\em 
+RET\_\-CYCLING\_\-NOT\_\-RESOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ead256ac496e378d4b690f611e0241cccc}
+}]Cycling cannot be resolved, QP probably infeasible. \index{RET\_\-CYCLING\_\-RESOLVED@{RET\_\-CYCLING\_\-RESOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CYCLING\_\-RESOLVED@{RET\_\-CYCLING\_\-RESOLVED}}\item[{\em 
+RET\_\-CYCLING\_\-RESOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea629dc65731bb6e0d52519260343e50ad}
+}]Cycling probably resolved. (70) \index{RET\_\-STEPSIZE@{RET\_\-STEPSIZE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPSIZE@{RET\_\-STEPSIZE}}\item[{\em 
+RET\_\-STEPSIZE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea6e31912b4cbd2f653ff795896707fd41}
+}]For displaying performed stepsize. \index{RET\_\-STEPSIZE\_\-NONPOSITIVE@{RET\_\-STEPSIZE\_\-NONPOSITIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-STEPSIZE\_\-NONPOSITIVE@{RET\_\-STEPSIZE\_\-NONPOSITIVE}}\item[{\em 
+RET\_\-STEPSIZE\_\-NONPOSITIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae69f81d8a36bcb7389dbea1da59f84a1}
+}]For displaying non-\/positive stepsize. \index{RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED@{RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED@{RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED}}\item[{\em 
+RET\_\-SETUPSUBJECTTOTYPE\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ead8cfe81eac7ddb75ab04d1c1e933e8e4}
+}]Setup of SubjectToTypes failed. \index{RET\_\-ADDCONSTRAINT\_\-FAILED@{RET\_\-ADDCONSTRAINT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADDCONSTRAINT\_\-FAILED@{RET\_\-ADDCONSTRAINT\_\-FAILED}}\item[{\em 
+RET\_\-ADDCONSTRAINT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea72eaec3d8a89591844970202800ec637}
+}]Addition of constraint to working set failed. \index{RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY@{RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY@{RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY}}\item[{\em 
+RET\_\-ADDCONSTRAINT\_\-FAILED\_\-INFEASIBILITY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea953528526fd257edbe17b3965b43d236}
+}]Addition of constraint to working set failed (due to QP infeasibility). \index{RET\_\-ADDBOUND\_\-FAILED@{RET\_\-ADDBOUND\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADDBOUND\_\-FAILED@{RET\_\-ADDBOUND\_\-FAILED}}\item[{\em 
+RET\_\-ADDBOUND\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea74695b25879d843bc327dbc24b6b7894}
+}]Addition of bound to working set failed. \index{RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY@{RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY@{RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY}}\item[{\em 
+RET\_\-ADDBOUND\_\-FAILED\_\-INFEASIBILITY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa05e2c81a7cd42017cb24d782c14fcaf}
+}]Addition of bound to working set failed (due to QP infeasibility). \index{RET\_\-REMOVECONSTRAINT\_\-FAILED@{RET\_\-REMOVECONSTRAINT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REMOVECONSTRAINT\_\-FAILED@{RET\_\-REMOVECONSTRAINT\_\-FAILED}}\item[{\em 
+RET\_\-REMOVECONSTRAINT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5fc42134f421c9bd4d84642049efe873}
+}]Removal of constraint from working set failed. \index{RET\_\-REMOVEBOUND\_\-FAILED@{RET\_\-REMOVEBOUND\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REMOVEBOUND\_\-FAILED@{RET\_\-REMOVEBOUND\_\-FAILED}}\item[{\em 
+RET\_\-REMOVEBOUND\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eac2eeb585c861a7dd1f953d3ccfc82761}
+}]Removal of bound from working set failed. \index{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET@{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REMOVE\_\-FROM\_\-ACTIVESET@{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET}}\item[{\em 
+RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea0f461fcae9d87e4b1334401a3be6eb46}
+}]Removing from active set... (80) \index{RET\_\-ADD\_\-TO\_\-ACTIVESET@{RET\_\-ADD\_\-TO\_\-ACTIVESET}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADD\_\-TO\_\-ACTIVESET@{RET\_\-ADD\_\-TO\_\-ACTIVESET}}\item[{\em 
+RET\_\-ADD\_\-TO\_\-ACTIVESET\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea586818f37876f1823e68e0dbbc944811}
+}]Adding to active set... \index{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED@{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED@{RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED}}\item[{\em 
+RET\_\-REMOVE\_\-FROM\_\-ACTIVESET\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaddb537678cb9d40290ba4e0ef5514a37}
+}]Removing from active set failed. \index{RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED@{RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED@{RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED}}\item[{\em 
+RET\_\-ADD\_\-TO\_\-ACTIVESET\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea80918441c8f157b07cd0b40ed5cd9bd8}
+}]Adding to active set failed. \index{RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE@{RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE@{RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE}}\item[{\em 
+RET\_\-CONSTRAINT\_\-ALREADY\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea970b860d0fec1c9f992101b59232c856}
+}]Constraint is already active. \index{RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE@{RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE@{RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE}}\item[{\em 
+RET\_\-ALL\_\-CONSTRAINTS\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa3d2059b1bc79e01f6043249475b8860}
+}]All constraints are active, no further constraint can be added. \index{RET\_\-LINEARLY\_\-DEPENDENT@{RET\_\-LINEARLY\_\-DEPENDENT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-LINEARLY\_\-DEPENDENT@{RET\_\-LINEARLY\_\-DEPENDENT}}\item[{\em 
+RET\_\-LINEARLY\_\-DEPENDENT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea50bd78d9856144c5df0c5e2b5615e92d}
+}]New bound/constraint is linearly dependent. \index{RET\_\-LINEARLY\_\-INDEPENDENT@{RET\_\-LINEARLY\_\-INDEPENDENT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-LINEARLY\_\-INDEPENDENT@{RET\_\-LINEARLY\_\-INDEPENDENT}}\item[{\em 
+RET\_\-LINEARLY\_\-INDEPENDENT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea2b543ec23d472ec6632a4b70281bf616}
+}]New bound/constraint is linearly independent. \index{RET\_\-LI\_\-RESOLVED@{RET\_\-LI\_\-RESOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-LI\_\-RESOLVED@{RET\_\-LI\_\-RESOLVED}}\item[{\em 
+RET\_\-LI\_\-RESOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea18e98f249c6e5b6f5345620a7ae041c7}
+}]Linear indepence of active contraint matrix successfully resolved. \index{RET\_\-ENSURELI\_\-FAILED@{RET\_\-ENSURELI\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENSURELI\_\-FAILED@{RET\_\-ENSURELI\_\-FAILED}}\item[{\em 
+RET\_\-ENSURELI\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf56d4e19751ab0b0b237ac494a974eb3}
+}]Failed to ensure linear indepence of active contraint matrix. \index{RET\_\-ENSURELI\_\-FAILED\_\-TQ@{RET\_\-ENSURELI\_\-FAILED\_\-TQ}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENSURELI\_\-FAILED\_\-TQ@{RET\_\-ENSURELI\_\-FAILED\_\-TQ}}\item[{\em 
+RET\_\-ENSURELI\_\-FAILED\_\-TQ\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea25f01dc1c5b356ea0b163826d763211e}
+}]Abnormal termination due to TQ factorisation. (90) \index{RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX@{RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX@{RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX}}\item[{\em 
+RET\_\-ENSURELI\_\-FAILED\_\-NOINDEX\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eafc49ac2285671f1bd6a1962baa9dcbf4}
+}]QP is infeasible. \index{RET\_\-ENSURELI\_\-FAILED\_\-CYCLING@{RET\_\-ENSURELI\_\-FAILED\_\-CYCLING}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENSURELI\_\-FAILED\_\-CYCLING@{RET\_\-ENSURELI\_\-FAILED\_\-CYCLING}}\item[{\em 
+RET\_\-ENSURELI\_\-FAILED\_\-CYCLING\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea709d155801b880ababc7f4ea77f5950a}
+}]QP is infeasible. \index{RET\_\-BOUND\_\-ALREADY\_\-ACTIVE@{RET\_\-BOUND\_\-ALREADY\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-BOUND\_\-ALREADY\_\-ACTIVE@{RET\_\-BOUND\_\-ALREADY\_\-ACTIVE}}\item[{\em 
+RET\_\-BOUND\_\-ALREADY\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea010df9423c62996aead62ece942ab2c6}
+}]Bound is already active. \index{RET\_\-ALL\_\-BOUNDS\_\-ACTIVE@{RET\_\-ALL\_\-BOUNDS\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ALL\_\-BOUNDS\_\-ACTIVE@{RET\_\-ALL\_\-BOUNDS\_\-ACTIVE}}\item[{\em 
+RET\_\-ALL\_\-BOUNDS\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea21e794b0d8f6cc195e16fb95371dfdec}
+}]All bounds are active, no further bound can be added. \index{RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE@{RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE@{RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE}}\item[{\em 
+RET\_\-CONSTRAINT\_\-NOT\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eab5e9882293ca4d4cea8d8b2473c2a8e1}
+}]Constraint is not active. \index{RET\_\-BOUND\_\-NOT\_\-ACTIVE@{RET\_\-BOUND\_\-NOT\_\-ACTIVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-BOUND\_\-NOT\_\-ACTIVE@{RET\_\-BOUND\_\-NOT\_\-ACTIVE}}\item[{\em 
+RET\_\-BOUND\_\-NOT\_\-ACTIVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eabc45ece4ce89b5f1099909a2fb7cdedd}
+}]Bound is not active. \index{RET\_\-HESSIAN\_\-NOT\_\-SPD@{RET\_\-HESSIAN\_\-NOT\_\-SPD}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HESSIAN\_\-NOT\_\-SPD@{RET\_\-HESSIAN\_\-NOT\_\-SPD}}\item[{\em 
+RET\_\-HESSIAN\_\-NOT\_\-SPD\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea02db76e7e6badd1b34350674562e9284}
+}]Projected Hessian matrix not positive definite. \index{RET\_\-HESSIAN\_\-INDEFINITE@{RET\_\-HESSIAN\_\-INDEFINITE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HESSIAN\_\-INDEFINITE@{RET\_\-HESSIAN\_\-INDEFINITE}}\item[{\em 
+RET\_\-HESSIAN\_\-INDEFINITE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaec16874d8365647fc35c727b2bbde803}
+}]Hessian matrix is indefinite. \index{RET\_\-MATRIX\_\-SHIFT\_\-FAILED@{RET\_\-MATRIX\_\-SHIFT\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-MATRIX\_\-SHIFT\_\-FAILED@{RET\_\-MATRIX\_\-SHIFT\_\-FAILED}}\item[{\em 
+RET\_\-MATRIX\_\-SHIFT\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea11735d95a2c1484f297b90783b9255ce}
+}]Unable to update matrices or to transform vectors. \index{RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED@{RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED@{RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED}}\item[{\em 
+RET\_\-MATRIX\_\-FACTORISATION\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eac45616f9d1ebb8cc5b534bf59a8ee8c9}
+}]Unable to calculate new matrix factorisations. (100) \index{RET\_\-PRINT\_\-ITERATION\_\-FAILED@{RET\_\-PRINT\_\-ITERATION\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-PRINT\_\-ITERATION\_\-FAILED@{RET\_\-PRINT\_\-ITERATION\_\-FAILED}}\item[{\em 
+RET\_\-PRINT\_\-ITERATION\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eadbb2b76be2af017a285a3f42e0b0ee3f}
+}]Unable to print information on current iteration. \index{RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE@{RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE@{RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE}}\item[{\em 
+RET\_\-NO\_\-GLOBAL\_\-MESSAGE\_\-OUTPUTFILE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea226f832336f9402fb102b6823914e4b3}
+}]No global message output file initialised. \index{RET\_\-DISABLECONSTRAINTS\_\-FAILED@{RET\_\-DISABLECONSTRAINTS\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-DISABLECONSTRAINTS\_\-FAILED@{RET\_\-DISABLECONSTRAINTS\_\-FAILED}}\item[{\em 
+RET\_\-DISABLECONSTRAINTS\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea9e0d60957770545f0efa1e34ba1e3a89}
+}]Unable to disbable constraints. \index{RET\_\-ENABLECONSTRAINTS\_\-FAILED@{RET\_\-ENABLECONSTRAINTS\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENABLECONSTRAINTS\_\-FAILED@{RET\_\-ENABLECONSTRAINTS\_\-FAILED}}\item[{\em 
+RET\_\-ENABLECONSTRAINTS\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea6afa5f783daf9e4b04366a4f4042c030}
+}]Unable to enbable constraints. \index{RET\_\-ALREADY\_\-ENABLED@{RET\_\-ALREADY\_\-ENABLED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ALREADY\_\-ENABLED@{RET\_\-ALREADY\_\-ENABLED}}\item[{\em 
+RET\_\-ALREADY\_\-ENABLED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea40332f305189aa3b244a94a6aa30bb36}
+}]Bound or constraint is already enabled. \index{RET\_\-ALREADY\_\-DISABLED@{RET\_\-ALREADY\_\-DISABLED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ALREADY\_\-DISABLED@{RET\_\-ALREADY\_\-DISABLED}}\item[{\em 
+RET\_\-ALREADY\_\-DISABLED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eac6203c0f23b41af1cff346ce3bf1a8d2}
+}]Bound or constraint is already disabled. \index{RET\_\-NO\_\-HESSIAN\_\-SPECIFIED@{RET\_\-NO\_\-HESSIAN\_\-SPECIFIED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-HESSIAN\_\-SPECIFIED@{RET\_\-NO\_\-HESSIAN\_\-SPECIFIED}}\item[{\em 
+RET\_\-NO\_\-HESSIAN\_\-SPECIFIED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea11603f4af9c0fa452619223361aa2687}
+}]No Hessian matrix has been specified. \index{RET\_\-USING\_\-REGULARISATION@{RET\_\-USING\_\-REGULARISATION}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-USING\_\-REGULARISATION@{RET\_\-USING\_\-REGULARISATION}}\item[{\em 
+RET\_\-USING\_\-REGULARISATION\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea75c73ef826f1237867456e7db8fdee36}
+}]Using regularisation as Hessian matrix is not positive definite. \index{RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE@{RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE@{RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE}}\item[{\em 
+RET\_\-EPS\_\-MUST\_\-BE\_\-POSITVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea08057a14c3b187f81d00c78047aee40f}
+}]Eps for regularisation must be sufficiently positive. \index{RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE@{RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE@{RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE}}\item[{\em 
+RET\_\-REGSTEPS\_\-MUST\_\-BE\_\-POSITVE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea988ae8355e388e13e5480206ca61a710}
+}]Maximum number of regularisation steps must be non-\/negative. (110) \index{RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED@{RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED@{RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED}}\item[{\em 
+RET\_\-HESSIAN\_\-ALREADY\_\-REGULARISED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eade28ffbdc237b9eea7984f9b1528d0dc}
+}]Hessian has been already regularised. \index{RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY@{RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY@{RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY}}\item[{\em 
+RET\_\-CANNOT\_\-REGULARISE\_\-IDENTITY\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea5ac263d3f3d58b21ad5a7d8acf0d0f1a}
+}]Identity Hessian matrix cannot be regularised. \index{RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE@{RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE@{RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE}}\item[{\em 
+RET\_\-CANNOT\_\-REGULARISE\_\-SPARSE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea79e1878fd21c0218dc663c3952a2f067}
+}]Sparse matrix cannot be regularised as diagonal entry is missing. \index{RET\_\-NO\_\-REGSTEP\_\-NWSR@{RET\_\-NO\_\-REGSTEP\_\-NWSR}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-REGSTEP\_\-NWSR@{RET\_\-NO\_\-REGSTEP\_\-NWSR}}\item[{\em 
+RET\_\-NO\_\-REGSTEP\_\-NWSR\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea9938f74eaab66668ea4fb5fb1ccf8588}
+}]No additional regularisation step could be performed due to limits. \index{RET\_\-FEWER\_\-REGSTEPS\_\-NWSR@{RET\_\-FEWER\_\-REGSTEPS\_\-NWSR}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-FEWER\_\-REGSTEPS\_\-NWSR@{RET\_\-FEWER\_\-REGSTEPS\_\-NWSR}}\item[{\em 
+RET\_\-FEWER\_\-REGSTEPS\_\-NWSR\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eae37f70d6c492aea2915ea9b3d4aaa46e}
+}]Fewer additional regularisation steps have been performed due to limits. \index{RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN@{RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN@{RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN}}\item[{\em 
+RET\_\-CHOLESKY\_\-OF\_\-ZERO\_\-HESSIAN\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eac010883bce1404389f9ab873fd54b132}
+}]Cholesky decomposition of (unregularised) zero Hessian matrix. \index{RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED@{RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED@{RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED}}\item[{\em 
+RET\_\-CONSTRAINTS\_\-ARE\_\-NOT\_\-SCALED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea90ed48a04d457af36fa04e65d38533b5}
+}]When defining \_\-\_\-MANY\_\-CONSTRAINTS\_\-\_\-, l1 norm of each constraint must be not greater than one. \index{RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT@{RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT@{RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT}}\item[{\em 
+RET\_\-ERROR\_\-IN\_\-CONSTRAINTPRODUCT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea698539f14e8cb2874a3862519e67f93c}
+}]Error in user-\/defined constraint product function. \index{RET\_\-UPDATEMATRICES\_\-FAILED@{RET\_\-UPDATEMATRICES\_\-FAILED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UPDATEMATRICES\_\-FAILED@{RET\_\-UPDATEMATRICES\_\-FAILED}}\item[{\em 
+RET\_\-UPDATEMATRICES\_\-FAILED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea34d68759ba33f215174a3fbd40baf0c4}
+}]Unable to update QP matrices. \index{RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED@{RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED@{RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED}}\item[{\em 
+RET\_\-UPDATEMATRICES\_\-FAILED\_\-AS\_\-QP\_\-NOT\_\-SOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea736dbb833d0fe204a8d507d22c764d31}
+}]Unable to update matrices as previous QP is not solved. \index{RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-OPEN\_\-FILE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea46b8f741e1888dad9a582fa53599d625}
+}]Unable to open file. (120) \index{RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-WRITE\_\-FILE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea44f305ee17dd9f6524d931bdb6a93ab6}
+}]Unable to write into file. \index{RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE@{RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-READ\_\-FILE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea75a82ee30ebf002f5f8092258bafa76a}
+}]Unable to read from file. \index{RET\_\-FILEDATA\_\-INCONSISTENT@{RET\_\-FILEDATA\_\-INCONSISTENT}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-FILEDATA\_\-INCONSISTENT@{RET\_\-FILEDATA\_\-INCONSISTENT}}\item[{\em 
+RET\_\-FILEDATA\_\-INCONSISTENT\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eabbb1dbfde697d8592e37f6cbac6d3424}
+}]File contains inconsistent data. \index{RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM@{RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM@{RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-ANALYSE\_\-QPROBLEM\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea110e696a59bffc19e19c35a91630ad97}
+}]Unable to analyse (S)QProblem(B) object. \index{RET\_\-NWSR\_\-SET\_\-TO\_\-ONE@{RET\_\-NWSR\_\-SET\_\-TO\_\-ONE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NWSR\_\-SET\_\-TO\_\-ONE@{RET\_\-NWSR\_\-SET\_\-TO\_\-ONE}}\item[{\em 
+RET\_\-NWSR\_\-SET\_\-TO\_\-ONE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaf9620c4848966544460f8391fd0229ee}
+}]Maximum number of working set changes was set to 1. \index{RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK@{RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK@{RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK}}\item[{\em 
+RET\_\-UNABLE\_\-TO\_\-READ\_\-BENCHMARK\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea1ff12ebfed37603e4fcf9bb613505143}
+}]Unable to read benchmark data. \index{RET\_\-BENCHMARK\_\-ABORTED@{RET\_\-BENCHMARK\_\-ABORTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-BENCHMARK\_\-ABORTED@{RET\_\-BENCHMARK\_\-ABORTED}}\item[{\em 
+RET\_\-BENCHMARK\_\-ABORTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865eaa81e1c02ae521497818d96ad7c389dd4}
+}]Benchmark aborted. \index{RET\_\-INITIAL\_\-QP\_\-SOLVED@{RET\_\-INITIAL\_\-QP\_\-SOLVED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-INITIAL\_\-QP\_\-SOLVED@{RET\_\-INITIAL\_\-QP\_\-SOLVED}}\item[{\em 
+RET\_\-INITIAL\_\-QP\_\-SOLVED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea13c1b793ac31428bf7fb2ab541256ebb}
+}]Initial QP solved. \index{RET\_\-QP\_\-SOLUTION\_\-STARTED@{RET\_\-QP\_\-SOLUTION\_\-STARTED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-QP\_\-SOLUTION\_\-STARTED@{RET\_\-QP\_\-SOLUTION\_\-STARTED}}\item[{\em 
+RET\_\-QP\_\-SOLUTION\_\-STARTED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ead9f3a9326b295905d7855726aee50ea1}
+}]Solving QP... \index{RET\_\-BENCHMARK\_\-SUCCESSFUL@{RET\_\-BENCHMARK\_\-SUCCESSFUL}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-BENCHMARK\_\-SUCCESSFUL@{RET\_\-BENCHMARK\_\-SUCCESSFUL}}\item[{\em 
+RET\_\-BENCHMARK\_\-SUCCESSFUL\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea037ffa79e7212ffaffee481a1788ba55}
+}]Benchmark terminated successfully. (130) \index{RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE@{RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE@{RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE}}\item[{\em 
+RET\_\-NO\_\-DIAGONAL\_\-AVAILABLE\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea8943a9c79dedf9ec98017d4e5e6f5c54}
+}]Sparse matrix does not have entries on full diagonal. \index{RET\_\-ENSURELI\_\-DROPPED@{RET\_\-ENSURELI\_\-DROPPED}!MessageHandling.hpp@{MessageHandling.hpp}}\index{MessageHandling.hpp@{MessageHandling.hpp}!RET\_\-ENSURELI\_\-DROPPED@{RET\_\-ENSURELI\_\-DROPPED}}\item[{\em 
+RET\_\-ENSURELI\_\-DROPPED\label{MessageHandling_8hpp_a81d556f613bfbabd0b1f9488c0fa865ea0671c4114677051c98f8b9ac29df192a}
+}]\end{description}
+\end{Desc}
+
+
+
+Definition at line 56 of file MessageHandling.hpp.
+
+
+
+\subsection{Function Documentation}
+\index{MessageHandling.hpp@{MessageHandling.hpp}!getGlobalMessageHandler@{getGlobalMessageHandler}}
+\index{getGlobalMessageHandler@{getGlobalMessageHandler}!MessageHandling.hpp@{MessageHandling.hpp}}
+\subsubsection[{getGlobalMessageHandler}]{\setlength{\rightskip}{0pt plus 5cm}{\bf MessageHandling}$\ast$ getGlobalMessageHandler (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{MessageHandling_8hpp_aaa22c4eae12c4dd65bdb0459ba26e372}
+Returns a pointer to global message handler. \begin{DoxyReturn}{Returns}
+Pointer to global message handler. 
+\end{DoxyReturn}
+
+
+Definition at line 565 of file MessageHandling.cpp.
+
